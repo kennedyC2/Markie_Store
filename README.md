@@ -1,2 +1,4 @@
 # Markie_Store
-Ecommerce
+Ecommerce Store: 
+For sale of medical stuffs
+
