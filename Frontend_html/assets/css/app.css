@@ -25,5 +25,60 @@
 
 /* XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) {
-    /*  */
+    .ext_cnt,
+    .header_top {
+        border: 1px solid red;
+        max-width: 1200px;
+    }
+
+    .header_bottom {
+        height: 35px;
+        background-color: #000000;
+    }
+
+    .logo > h4 {
+        font-size: 45px;
+        font-weight: 500;
+    }
+
+    .ht_wrapper > div:nth-child(2) {
+        width: 80%;
+    }
+
+    .social > div {
+        padding-left: 0.8rem;
+    }
+
+    .ln_0 > p {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .d_search_bar {
+        width: 50%;
+    }
+
+    .d_search_bar .form-control {
+        border-right: 0;
+    }
+
+    .d_search_bar .input-group-text {
+        padding: 0.2rem 0.3rem;
+        background-color: transparent;
+        border-left: 0;
+    }
+
+    .d_search_bar .form-control:focus,
+    .d_search_bar .form-control:active {
+        background-color: transparent;
+        border-color: #ced4da !important;
+        box-shadow: none !important;
+        outline: 0;
+    }
+
+    .ln_1 p {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0;
+    }
 }
