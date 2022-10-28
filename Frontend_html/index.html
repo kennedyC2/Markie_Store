@@ -21,7 +21,7 @@
                         </div>
                         <div class="text-end">
                             <!-- Social Media Icons -->
-                            <div class="social d-flex justify-content-end py-2">
+                            <div class="social d-flex justify-content-end py-3">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="1.59em" height="1.59em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.04c-5.5 0-10 4.49-10 10.02c0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89c1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02Z" /></svg>
                                 </div>
@@ -39,7 +39,7 @@
                             <div class="ln_0 py-2">
                                 <p class="m-0">FREE SHIPPING ON ALL ORDERS. NO MINIMUM PURCHASE</p>
                             </div>
-                            <div class="d-flex justify-content-end ln_1 py-2">
+                            <div class="d-flex justify-content-end ln_1 py-3">
                                 <!-- Desktop Search Bar -->
                                 <div class="d_search_bar">
                                     <div class="input-group">
@@ -66,28 +66,132 @@
                         </div>
                     </div>
                 </div>
-                <div class="header_bottom">
-                    <!-- Leave Blank -->
+                <div class="header_bottom mt-1">
+                    <!-- Menu -->
+                    <ul class="container m-auto d-flex">
+                        <li class="menu me-5">Wardcoats</li>
+                        <li class="menu me-5">Scrubs</li>
+                        <li class="menu me-5">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" id="footwear_menu" data-bs-toggle="dropdown" aria-expanded="false">Footwears</a>
+                                <ul class="dropdown-menu" aria-labelledby="footwear_menu">
+                                    <li><a class="dropdown-item" href="#">Crocs</a></li>
+                                    <li><a class="dropdown-item" href="#">Sneakers</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu me-5">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" id="accessory_menu" data-bs-toggle="dropdown" aria-expanded="false">Accessories</a>
+                                <ul class="dropdown-menu" aria-labelledby="accessory_menu">
+                                    <li><a class="dropdown-item" href="#">Pen Torch</a></li>
+                                    <li><a class="dropdown-item" href="#">ID Card holder</a></li>
+                                    <li><a class="dropdown-item" href="#">Medical Brooches</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </header>
-            <div class="container body m-auto d-flex justify-content-between pt-3">
+            <div class="container body m-auto d-flex justify-content-between pt-4">
                 <div class="lft">
+                    <h4>Filter By:</h4>
+                    <!-- Brand Selector -->
                     <div>
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion accordion-flush" id="brand_select">
                             <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">CATEGORIES</button>
+                                <h2 class="accordion-header" id="brand_hd">
+                                    <button class="accordion-button text-uppercase" type="button" data-bs-toggle="collapse" data-bs-target="#flush_brand" aria-expanded="false" aria-controls="flush_brand">Brand</button>
                                 </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                                <div id="flush_brand" class="accordion-collapse collapse show" aria-labelledby="brand_hd" data-bs-parent="#brand_select">
+                                    <div class="accordion-body">
+                                        <ul class="b_list">
+                                            <li>D&G</li>
+                                            <li>Nike</li>
+                                            <li>Louis Vuitton</li>
+                                            <li>Prada</li>
+                                            <li>Adidas</li>
+                                            <li>Medico</li>
+                                            <li>levenc</li>
+                                            <li>Anna</li>
+                                            <li>Chanel</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <!-- Colour Selector -->
+                    <div>
+                        <div class="accordion accordion-flush" id="color_select">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="colour_hd">
+                                    <button class="accordion-button text-uppercase" type="button" data-bs-toggle="collapse" data-bs-target="#flush-colour" aria-expanded="false" aria-controls="flush-colour">Colour</button>
+                                </h2>
+                                <div id="flush-colour" class="accordion-collapse collapse show" aria-labelledby="colour_hd" data-bs-parent="#color_select">
+                                    <div class="accordion-body">
+                                        <ul class="c_list">
+                                            <li style="background-color: silver"></li>
+                                            <li style="background-color: purple"></li>
+                                            <li style="background-color: pink"></li>
+                                            <li style="background-color: yellow"></li>
+                                            <li style="background-color: mediumseagreen"></li>
+                                            <li style="background-color: black"></li>
+                                            <li style="background-color: navy"></li>
+                                            <li style="background-color: orchid"></li>
+                                            <li style="background-color: blueviolet"></li>
+                                            <li style="background-color: brown"></li>
+                                            <li style="background-color: orange"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Size Selector -->
+                    <div>
+                        <div class="accordion accordion-flush" id="size_select">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="size_hd">
+                                    <button class="accordion-button text-uppercase" type="button" data-bs-toggle="collapse" data-bs-target="#flush-size" aria-expanded="false" aria-controls="flush-size">Size</button>
+                                </h2>
+                                <div id="flush-size" class="accordion-collapse collapse show" aria-labelledby="size_hd" data-bs-parent="#size_select">
+                                    <div class="accordion-body">
+                                        <ul class="s_list">
+                                            <li>XS</li>
+                                            <li>S</li>
+                                            <li>M</li>
+                                            <li>L</li>
+                                            <li>XL</li>
+                                            <li>XXL</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Availability -->
+                    <div>
+                        <div class="accordion accordion-flush" id="avail_select">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="avail_hd">
+                                    <button class="accordion-button text-uppercase" type="button" data-bs-toggle="collapse" data-bs-target="#flush-avail" aria-expanded="false" aria-controls="flush-avail">Availability</button>
+                                </h2>
+                                <div id="flush-avail" class="accordion-collapse collapse show" aria-labelledby="avail_hd" data-bs-parent="#avail_select">
+                                    <div class="accordion-body">
+                                        <div class="form-check py-1">
+                                            <input class="form-check-input" type="checkbox" value="" id="i_stock" />
+                                            <label class="form-check-label" for="i_stock"> In Stock </label>
+                                        </div>
+                                        <div class="form-check py-1">
+                                            <input class="form-check-input" type="checkbox" value="" id="o_stock" />
+                                            <label class="form-check-label" for="o_stock"> Out of Stock </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="rgt"></div>
             </div>
