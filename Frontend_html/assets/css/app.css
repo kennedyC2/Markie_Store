@@ -76,7 +76,7 @@ input[type="number"] {
     }
 
     .header_bottom {
-        background-color: #d63384;
+        background-color: #002d72;
         padding: 0.6rem 0;
     }
 
@@ -151,7 +151,6 @@ input[type="number"] {
 
     .lft {
         width: 19%;
-        /* border: 1px solid black; */
     }
 
     .lft .accordion {
@@ -182,7 +181,6 @@ input[type="number"] {
 
     .rgt {
         width: 79%;
-        border: 1px solid black;
     }
 
     .b_list,
@@ -224,7 +222,7 @@ input[type="number"] {
     }
 
     .b_list li:hover {
-        background-color: #d63384;
+        background-color: #002d72;
         color: #fff;
     }
 
@@ -232,5 +230,11 @@ input[type="number"] {
         font-size: 0.8rem !important;
         font-weight: 500 !important;
         font-family: "Poppins", sans-serif !important;
+    }
+
+    #hd_banner {
+        width: 100%;
+        height: 56%;
+        margin-top: 2.24rem;
     }
 }
