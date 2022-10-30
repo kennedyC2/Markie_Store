@@ -76,7 +76,7 @@ input[type="number"] {
     }
 
     .header_bottom {
-        background-color: #002d72;
+        background-color: #003e9c;
         padding: 0.6rem 0;
     }
 
@@ -146,7 +146,7 @@ input[type="number"] {
     .ln_1 p {
         margin: 0;
         padding-top: 0.08rem;
-        font-size: 1rem;
+        font-size: 1rem !important;
     }
 
     .lft {
@@ -222,7 +222,7 @@ input[type="number"] {
     }
 
     .b_list li:hover {
-        background-color: #002d72;
+        background-color: #005de8;
         color: #fff;
     }
 
