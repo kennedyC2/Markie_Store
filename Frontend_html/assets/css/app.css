@@ -234,7 +234,18 @@ input[type="number"] {
 
     #hd_banner {
         width: 100%;
-        height: 56%;
+        height: 70vh;
         margin-top: 2.24rem;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+    }
+
+    .card {
+        padding: 0.2rem 0.3rem;
+        margin-bottom: 2.5rem;
+        border: 0;
     }
 }
