@@ -152,7 +152,12 @@ input[type="number"] {
 
     .ad1 {
         flex-basis: calc((100% / 3) - 1rem);
-        height: 150px;
+        height: 165px;
+        border-radius: 10px;
+    }
+
+    .ad1 img {
+        border-radius: 10px;
     }
 
     .intro {
@@ -172,7 +177,7 @@ input[type="number"] {
 
     .lft,
     .cat {
-        width: 21%;
+        width: 19%;
     }
 
     .lft .accordion {
@@ -203,21 +208,37 @@ input[type="number"] {
 
     .rgt,
     #hm_banner {
-        width: 79%;
+        width: 80%;
     }
 
     .b_list,
     .c_list,
     .s_list,
-    .h_list {
+    .h_list,
+    .f_list {
         list-style: none;
         padding: 0;
         margin: 0;
     }
 
-    .h_list li {
-        margin-bottom: 0.5rem;
-        padding: 0.4rem 0.3rem;
+    .h_list li,
+    .f_list li {
+        padding: 0.43rem 0.5rem;
+    }
+
+    .h_list li:hover {
+        background-color: rgba(3, 0, 31, 0.8);
+        color: #ffffff;
+        border-radius: 10px 0 0 10px;
+    }
+
+    .f_list li:hover {
+        text-decoration: underline;
+    }
+
+    .cat .accordion-button::after {
+        background-image: url("./../images/menu.svg");
+        transform: none;
     }
 
     .lv_1 .accordion-body {
@@ -225,7 +246,7 @@ input[type="number"] {
     }
 
     .lv_1 {
-        height: 27.5rem;
+        height: 30rem;
     }
 
     .b_list li {
@@ -290,10 +311,13 @@ input[type="number"] {
         background-color: transparent;
     }
 
-    .grid a:hover svg,
     .grid a:hover {
-        background-color: rgba(3, 0, 31, 0.783);
+        background-color: rgba(3, 0, 31, 0.8);
         color: #ffffff;
+        fill: #ffffff;
+    }
+
+    .grid a:hover svg {
         fill: #ffffff;
     }
 
@@ -310,12 +334,61 @@ input[type="number"] {
 
     .banner {
         width: 100%;
-        height: 350px;
+        height: 360px;
         background-image: linear-gradient(to right, #03001e, #7303c0, #ec38bc, #fdeff9);
     }
 
     footer {
-        height: 500px;
-        background-color: rgba(3, 0, 31, 0.783);
+        min-height: 400px;
+        background-color: rgba(3, 0, 31, 0.8);
+    }
+
+    footer * {
+        color: #ffffff !important;
+    }
+
+    .f-top > div {
+        width: calc((100% / 3) - 2rem);
+        /* border: 1px solid white; */
+    }
+
+    .f-top h2 {
+        font-size: 1.2rem !important;
+        position: relative;
+    }
+
+    .f1::after {
+        content: " ";
+        width: 90px;
+        height: 1.5px;
+        background-color: red;
+        position: absolute;
+        bottom: -6px;
+        left: 0.5rem;
+    }
+
+    .f2::after {
+        content: " ";
+        width: 100px;
+        height: 1.5px;
+        background-color: red;
+        position: absolute;
+        bottom: -6px;
+        left: 1rem;
+    }
+
+    .f3::after {
+        content: " ";
+        width: 220px;
+        height: 1.5px;
+        background-color: red;
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+    }
+
+    .f-bottom {
+        background-color: #03001e;
+        height: 50px;
     }
 }
