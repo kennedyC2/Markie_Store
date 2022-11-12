@@ -37,7 +37,7 @@
                             </div>
                             <!-- Message Below Social Media Icons -->
                             <div class="ln_0 py-2">
-                                <p class="m-0">Delivery Within 2-Days To All 36 States Of Nigeria.</p>
+                                <p class="m-0">Delivery Within 2-Days To All 36 States Of Nigeria</p>
                             </div>
                             <div class="d-flex justify-content-end ln_1 py-3">
                                 <!-- Desktop Search Bar -->
@@ -59,13 +59,100 @@
                                 </div>
                                 <!-- Cart Icon -->
                                 <div class="d-flex mt-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 me-2" width="1.35em" height="1.14em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill="#03001e" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607L1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479l9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2a1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2a1 1 0 0 1 0-2z" /></svg>
-                                    <p>Cart</p>
+                                    <button class="border border-0 bg-transparent p-1 d-inline-flex" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartlist" aria-controls="cartlist">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.14em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill="#03001e" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607L1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479l9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2a1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2a1 1 0 0 1 0-2z" /></svg>
+                                        <span class="d-block">Cart</span>
+                                    </button>
+
+                                    <div class="offcanvas offcanvas-end ps-2" tabindex="-1" id="cartlist" aria-labelledby="cartlistLabel">
+                                        <div class="offcanvas-header pb-0 px-4 mt-2">
+                                            <h5 id="cartlistLabel pb-1 ps-3">SHOPPING CART</h5>
+                                            <button type="button" class="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                        </div>
+                                        <div class="offcanvas-body py-0">
+                                            <!-- Top -->
+                                            <div class="item_count text-start c-top px-4">
+                                                <span>5</span>
+                                                <span>Items</span>
+                                            </div>
+                                            <!-- Scrollable Mid -->
+                                            <div class="pt-3 ps-1 c-mid px-4">
+                                                <div>
+                                                    <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                        <div class="col-3">
+                                                            <img src="./assets/images/pic 1.png" class="d-block w-100 h-100" alt="..." />
+                                                        </div>
+                                                        <div class="col-5 text-start ps-2 m-auto">
+                                                            <p class="px-3 pb-1">Scrub Top</p>
+                                                            <p class="px-3 pb-1">Purple / XXL</p>
+                                                            <p class="px-3 pb-1">&#x20A6; 5800</p>
+                                                        </div>
+                                                        <div class="col-1 pt-2 m-auto">
+                                                            <button type="button" class="btn-close text-reset"></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                        <div class="col-3">
+                                                            <img src="./assets/images/pic 2.jpg" class="d-block w-100 h-100" alt="..." />
+                                                        </div>
+                                                        <div class="col-5 text-start ps-2 m-auto">
+                                                            <p class="px-3 pb-1">Scrub Top</p>
+                                                            <p class="px-3 pb-1">Lemon Green / L</p>
+                                                            <p class="px-3 pb-1">&#x20A6; 8000</p>
+                                                        </div>
+                                                        <div class="col-1 pt-2 m-auto">
+                                                            <button type="button" class="btn-close text-reset"></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                        <div class="col-3">
+                                                            <img src="./assets/images/pic 8.png" class="d-block w-100 h-100" alt="..." />
+                                                        </div>
+                                                        <div class="col-5 text-start ps-2 m-auto">
+                                                            <p class="px-3 pb-1">Scrub Top</p>
+                                                            <p class="px-3 pb-1">Brown / SM</p>
+                                                            <p class="px-3 pb-1">&#x20A6; 7000</p>
+                                                        </div>
+                                                        <div class="col-1 pt-2 m-auto">
+                                                            <button type="button" class="btn-close text-reset"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Bottom -->
+                                            <div class="c-btm px-4">
+                                                <div class="w-100 d-flex justify-content-between py-2">
+                                                    <p>Total:</p>
+                                                    <p>&#x20A6; 20,800</p>
+                                                </div>
+                                                <div class="pt-2 pb-3">
+                                                    <div class="form-check text-start">
+                                                        <input class="form-check-input me-3" type="checkbox" value="" id="T&C" checked />
+                                                        <label class="form-check-label" for="T&C"> I Agree With The Terms and Conditions </label>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-md btn-secondary w-100 py-2 mb-3">Checkout</button> <br />
+                                                    <button class="btn btn-md btn-outline-dark w-100 py-2">Sign in</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- Wish list Icon -->
                                 <div class="d-flex mt-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 me-2" width="1.35em" height="1.14em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z" /></svg>
-                                    <p>Wishlist</p>
+                                    <button class="border-0 bg-transparent p-1 d-inline-flex" type="button" data-bs-toggle="offcanvas" data-bs-target="#wishlist" aria-controls="wishlist">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.25em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z" /></svg>
+                                        <span class="d-block space">Wishlist</span>
+                                    </button>
+
+                                    <div class="offcanvas offcanvas-end" tabindex="-1" id="wishlist" aria-labelledby="wishlistLabel">
+                                        <div class="offcanvas-header">
+                                            <h5 id="wishlistLabel">WISHLIST</h5>
+                                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                        </div>
+                                        <div class="offcanvas-body">...</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
