@@ -77,7 +77,7 @@ input[type="number"] {
 
     .header_bottom {
         background-image: linear-gradient(to right, #03001e, #7303c0, #ec38bc, #fdeff9);
-        padding: 0.5rem 0;
+        padding: 0.55rem 0;
     }
 
     .header_bottom > ul {
@@ -216,7 +216,8 @@ input[type="number"] {
     .s_list,
     .h_list,
     .f_list,
-    .cp_list {
+    .cp_list,
+    .wp_list {
         list-style: none;
         padding: 0;
         margin: 0;
@@ -245,11 +246,11 @@ input[type="number"] {
 
     .cp_list li {
         width: 100%;
-        height: 170px;
+        height: 138px;
     }
 
     .cat .accordion-button::after {
-        background-image: url("./../images/menu.svg");
+        background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='19' fill='currentColor' class='bi bi-list' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z'/%3E%3C/svg%3E") center no-repeat;
         transform: none;
     }
 
@@ -328,7 +329,8 @@ input[type="number"] {
     .c-btm a,
     .c-btm button,
     .w-btm a,
-    .cp_list button:not(.btn-close) {
+    .cp_list button:not(.btn-close),
+    .wp_list button:not(.btn-close) {
         border-color: #adc0cf;
         color: #adc0cf;
         fill: #adc0cf;
@@ -340,7 +342,8 @@ input[type="number"] {
     .c-btm a:hover,
     .c-btm button:hover,
     .w-btm a:hover,
-    .cp_list button:not(.btn-close):hover {
+    .cp_list button:not(.btn-close):hover,
+    .wp_list button:not(.btn-close):hover {
         background-color: rgba(3, 0, 31, 0.8);
         color: #ffffff;
         fill: #ffffff;
@@ -438,13 +441,15 @@ input[type="number"] {
     }
 
     .c-mid p,
-    .w-mid p {
+    .w-mid p,
+    .cp_list li p {
         font-size: 0.9rem !important;
         font-weight: 400 !important;
     }
 
     .c-mid p:first-child,
-    .w-mid p:first-child {
+    .w-mid p:first-child,
+    .cp_list li p:first-child {
         font-size: 0.95rem !important;
         font-weight: 500 !important;
     }
@@ -452,6 +457,7 @@ input[type="number"] {
     .c-mid > div > div,
     .w-mid > div > div {
         border-bottom: 1px solid #ced4daba;
+        height: 8.75rem;
     }
 
     .c-top,
@@ -486,13 +492,16 @@ input[type="number"] {
 
     .wishlist > div li {
         border: 1px solid rgba(128, 128, 128, 0.3);
-        border-radius: 10px;
     }
 
     .heading {
-        font-size: 1.1rem !important;
+        font-size: 1.05rem !important;
         text-transform: uppercase;
         font-weight: 600 !important;
         font-family: "Poppins", sans-serif !important;
+    }
+
+    .wishlist .input-group > .form-control {
+        flex: 0.1 1 auto;
     }
 }
