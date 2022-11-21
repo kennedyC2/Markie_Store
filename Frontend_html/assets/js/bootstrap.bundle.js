@@ -2507,8 +2507,8 @@
                       y: y,
                   };
 
-        x = _ref4.x - 20;
-        y = _ref4.y + 12.3;
+        x = _ref4.x;
+        y = _ref4.y;
 
         if (gpuAcceleration) {
             var _Object$assign;

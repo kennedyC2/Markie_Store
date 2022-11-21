@@ -228,57 +228,50 @@
                         </div>
                     </div>
                 </div>
-                <div class="header_bottom mt-1"></div>
+                <div class="header_bottom mt-1">
+                    <!-- Menu -->
+                    <div class="cat container w_1200">
+                        <ul class="h_list d-flex">
+                            <li class="menu">
+                                <a href="./category.html">Wardcoats</a>
+                            </li>
+                            <li class="menu">
+                                <a href="./category.html">Scrubs</a>
+                            </li>
+                            <li class="menu">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">Footwears</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="./category.html">Crocs</a></li>
+                                        <li><a class="dropdown-item" href="./category.html">Sneakers</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu">
+                                <a href="./category.html">Inscription T-Shirts</a>
+                            </li>
+                            <li class="menu">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">Accessories</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="./category.html">Pen Torch</a></li>
+                                        <li><a class="dropdown-item" href="./category.html">Scrub Caps</a></li>
+                                        <li><a class="dropdown-item" href="./category.html">ID Card Holder</a></li>
+                                        <li><a class="dropdown-item" href="./category.html">Medical Brooches</a></li>
+                                        <li><a class="dropdown-item" href="./category.html">Scrub Inner T-Shirt</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- <li class="menu">
+                                <a href="./category.html">hhhh</a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
             </header>
             <div class="home body m-auto pt-4">
                 <!-- Level One -->
-                <div class="lv_1 w_1200 pt-3 d-flex flex-row justify-content-between">
-                    <!-- Menu -->
-                    <div class="cat">
-                        <div class="accordion accordion-flush" id="category_select">
-                            <div class="accordion-item px-3">
-                                <h2 class="accordion-header" id="category_hd">
-                                    <button class="accordion-button text-uppercase" type="button" data-bs-toggle="collapse" data-bs-target="" aria-expanded="false" aria-controls="flush_category">category</button>
-                                </h2>
-                                <div id="flush_category" class="accordion-collapse collapse show" aria-labelledby="category_hd" data-bs-parent="#category_select">
-                                    <div class="accordion-body">
-                                        <ul class="container h_list mt-1">
-                                            <li class="menu">
-                                                <a href="./product.html">Wardcoats</a>
-                                            </li>
-                                            <li class="menu">
-                                                <a href="./product.html">Medical Scrubs</a>
-                                            </li>
-                                            <li class="menu">
-                                                <a href="./product.html">Crocs</a>
-                                            </li>
-                                            <li class="menu">
-                                                <a href="./product.html">Sneakers</a>
-                                            </li>
-                                            <li class="menu">
-                                                <a href="./product.html">Pen Torch</a>
-                                            </li>
-                                            <li class="menu">
-                                                <a href="./product.html">Scrub Caps</a>
-                                            </li>
-                                            <li class="menu">
-                                                <a href="./product.html">ID Card Holder</a>
-                                            </li>
-                                            <li class="menu">
-                                                <a href="./product.html">Medical Brooches</a>
-                                            </li>
-                                            <li class="menu">
-                                                <a href="./product.html">Inscription T-Shirt</a>
-                                            </li>
-                                            <li class="menu">
-                                                <a href="./product.html">Scrub Inner T-Shirt</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="lv_1 container w_1200 pt-3 d-flex flex-row justify-content-between">
                     <!-- Banner Carousel -->
                     <div id="hm_banner" class="carousel slide carousel-fade" data-bs-ride="carousel">
                         <div class="carousel-indicators">
@@ -302,18 +295,18 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Level Two -->
-                <div class="lv_2 w_1200 mt-4 d-flex flex-row justify-content-between">
-                    <div class="ad1">
-                        <img src="./assets//images/scrub 4.jpg" class="d-block w-100 h-100" alt="..." />
-                    </div>
-                    <div class="ad1">
-                        <img src="./assets//images/scrub 1.jpg" class="d-block w-100 h-100" alt="..." />
-                    </div>
-                    <div class="ad1">
-                        <img src="./assets//images/scrub 5.jpg" class="d-block w-100 h-100" alt="..." />
+                    <!-- Banner left -->
+                    <div class="ad1 d-flex flex-column justify-content-between">
+                        <div>
+                            <img src="./assets//images/scrub 4.jpg" class="d-block w-100 h-100" alt="..." />
+                        </div>
+                        <div>
+                            <img src="./assets//images/scrub 1.jpg" class="d-block w-100 h-100" alt="..." />
+                        </div>
+                        <div>
+                            <img src="./assets//images/scrub 5.jpg" class="d-block w-100 h-100" alt="..." />
+                        </div>
                     </div>
                 </div>
 
@@ -326,93 +319,126 @@
                     </div>
 
                     <!-- Cards -->
-                    <div class="grid">
-                        <div class="card">
-                            <div class="imgcont">
-                                <img src="./assets/images/pic 1.png" width="100%" height="100%" class="card-img-top" alt="..." />
+
+                    <div id="newArr" class="carousel slide m-auto" data-bs-ride="carousel">
+                        <div class="carousel-inner w-100 h-100">
+                            <div class="carousel-item active w-100 h-100">
+                                <div class="grid">
+                                    <div class="card">
+                                        <div class="imgcont">
+                                            <img src="./assets/images/pic 1.png" width="100%" height="100%" class="card-img-top" alt="..." />
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title ps-2">Purple Scrub Top</h5>
+                                            <p class="card-text ps-2">&#x20A6; 5000</p>
+                                            <div class="d-flex justify-content-between">
+                                                <a href="#" class="btn col-9 shadow">ADD TO CART</a>
+                                                <a href="#" class="btn px-1 wl col-2 shadow"
+                                                    ><svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title ps-2">Purple Scrub Top</h5>
-                                <p class="card-text ps-2">&#x20A6; 5000</p>
-                                <div class="d-flex justify-content-between">
-                                    <a href="#" class="btn col-9 shadow">ADD TO CART</a>
-                                    <a href="#" class="btn px-1 wl col-2 shadow"
-                                        ><svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                                        </svg>
-                                    </a>
+                            <div class="carousel-item w-100 h-100">
+                                <div class="grid">
+                                    <div class="card">
+                                        <div class="imgcont">
+                                            <img src="./assets/images/pic 1.png" width="100%" height="100%" class="card-img-top" alt="..." />
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title ps-2">Purple Scrub Top</h5>
+                                            <p class="card-text ps-2">&#x20A6; 5000</p>
+                                            <div class="d-flex justify-content-between">
+                                                <a href="#" class="btn col-9 shadow">ADD TO CART</a>
+                                                <a href="#" class="btn px-1 wl col-2 shadow"
+                                                    ><svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item w-100 h-100">
+                                <div class="grid">
+                                    <div class="card">
+                                        <div class="imgcont">
+                                            <img src="./assets/images/pic 1.png" width="100%" height="100%" class="card-img-top" alt="..." />
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title ps-2">Purple Scrub Top</h5>
+                                            <p class="card-text ps-2">&#x20A6; 5000</p>
+                                            <div class="d-flex justify-content-between">
+                                                <a href="#" class="btn col-9 shadow">ADD TO CART</a>
+                                                <a href="#" class="btn px-1 wl col-2 shadow"
+                                                    ><svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item w-100 h-100">
+                                <div class="grid">
+                                    <div class="card">
+                                        <div class="imgcont">
+                                            <img src="./assets/images/pic 1.png" width="100%" height="100%" class="card-img-top" alt="..." />
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title ps-2">Purple Scrub Top</h5>
+                                            <p class="card-text ps-2">&#x20A6; 5000</p>
+                                            <div class="d-flex justify-content-between">
+                                                <a href="#" class="btn col-9 shadow">ADD TO CART</a>
+                                                <a href="#" class="btn px-1 wl col-2 shadow"
+                                                    ><svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item w-100 h-100">
+                                <div class="grid">
+                                    <div class="card">
+                                        <div class="imgcont">
+                                            <img src="./assets/images/pic 1.png" width="100%" height="100%" class="card-img-top" alt="..." />
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title ps-2">Purple Scrub Top</h5>
+                                            <p class="card-text ps-2">&#x20A6; 5000</p>
+                                            <div class="d-flex justify-content-between">
+                                                <a href="#" class="btn col-9 shadow">ADD TO CART</a>
+                                                <a href="#" class="btn px-1 wl col-2 shadow"
+                                                    ><svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="imgcont">
-                                <img src="./assets/images/pic 1.png" width="100%" height="100%" class="card-img-top" alt="..." />
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title ps-2">Purple Scrub Top</h5>
-                                <p class="card-text ps-2">&#x20A6; 5000</p>
-                                <div class="d-flex justify-content-between">
-                                    <a href="#" class="btn col-9 shadow">ADD TO CART</a>
-                                    <a href="#" class="btn px-1 wl col-2 shadow"
-                                        ><svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="imgcont">
-                                <img src="./assets/images/pic 1.png" width="100%" height="100%" class="card-img-top" alt="..." />
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title ps-2">Purple Scrub Top</h5>
-                                <p class="card-text ps-2">&#x20A6; 5000</p>
-                                <div class="d-flex justify-content-between">
-                                    <a href="#" class="btn col-9 shadow">ADD TO CART</a>
-                                    <a href="#" class="btn px-1 wl col-2 shadow"
-                                        ><svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="imgcont">
-                                <img src="./assets/images/pic 1.png" width="100%" height="100%" class="card-img-top" alt="..." />
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title ps-2">Purple Scrub Top</h5>
-                                <p class="card-text ps-2">&#x20A6; 5000</p>
-                                <div class="d-flex justify-content-between">
-                                    <a href="#" class="btn col-9 shadow">ADD TO CART</a>
-                                    <a href="#" class="btn px-1 wl col-2 shadow"
-                                        ><svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="imgcont">
-                                <img src="./assets/images/pic 1.png" width="100%" height="100%" class="card-img-top" alt="..." />
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title ps-2">Purple Scrub Top</h5>
-                                <p class="card-text ps-2">&#x20A6; 5000</p>
-                                <div class="d-flex justify-content-between">
-                                    <a href="#" class="btn col-9 shadow">ADD TO CART</a>
-                                    <a href="#" class="btn px-1 wl col-2 shadow"
-                                        ><svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#newArr" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#newArr" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
+                    <!-- <div class="grid">
+                    </div> -->
                 </div>
 
                 <!-- Level Four -->

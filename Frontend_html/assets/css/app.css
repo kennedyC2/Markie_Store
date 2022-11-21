@@ -40,6 +40,19 @@ input[type="number"] {
     color: #03001e;
 }
 
+#newArr {
+    width: 100%;
+    height: 350px;
+    /* border: 1px solid red; */
+}
+
+#newArr .carousel-inner .carousel-item > div {
+    display: none;
+}
+#newArr .carousel-inner .carousel-item > div:first-child {
+    display: block;
+}
+
 /* X-Small devices (portrait phones, less than 576px) */
 /* No media query for `xs` since this is the default in Bootstrap */
 
@@ -50,12 +63,34 @@ input[type="number"] {
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-    /*  */
+    #newArr .carousel-inner .carousel-item.active,
+    #newArr .carousel-inner .carousel-item-next,
+    #newArr .carousel-inner .carousel-item-prev {
+        display: flex;
+    }
+
+    #newArr .carousel-inner .carousel-item > div:first-child {
+        display: flex;
+    }
+
+    #newArr .carousel-inner .carousel-item-end.active,
+    #newArr .carousel-inner .carousel-item-next {
+        transform: translateX(20%);
+    }
+
+    #newArr .carousel-inner .carousel-item-start.active,
+    #newArr .carousel-inner .carousel-item-prev {
+        transform: translateX(-20%);
+    }
+
+    #newArr .carousel-inner .carousel-item-end,
+    #newArr .carousel-inner .carousel-item-start {
+        transform: translateX(0);
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    /*  */
 }
 
 /* X-Large devices (large desktops, 1200px and up) */
@@ -66,7 +101,6 @@ input[type="number"] {
 /* XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) {
     .w_1200 {
-        /* border: 1px solid red; */
         max-width: 1200px;
         margin: auto;
     }
@@ -76,21 +110,25 @@ input[type="number"] {
     }
 
     .header_bottom {
-        background-image: linear-gradient(to right, #03001e, #7303c0, #ec38bc, #fdeff9);
-        padding: 0.55rem 0;
+        background-image: radial-gradient(circle 610px at 5.2% 51.6%, rgba(7, 3, 53, 1) 0%, rgba(5, 8, 114, 1) 97.5%);
+        /* background-image: linear-gradient(109.6deg, rgba(9, 9, 121, 1) 11.2%, rgba(144, 6, 161, 1) 53.7%, rgba(0, 212, 255, 1) 100.2%); */
+        padding: 0.18rem 0;
+        min-height: 1.5rem;
     }
 
-    .header_bottom > ul {
+    .header_bottom ul {
         max-width: 1200px;
-        list-style-type: none;
+        list-style: none;
+        padding: 0;
+        margin: auto;
     }
 
-    .header_bottom > ul > li:not(.dropdown-item),
+    .header_bottom ul.h_list > li:not(.dropdown-item) button,
     #accessory_menu,
     #footwear_menu {
         color: #fff;
         text-decoration: none;
-        font-size: 1.06rem !important;
+        font-size: 1rem !important;
     }
 
     #accessory_menu::after,
@@ -102,7 +140,8 @@ input[type="number"] {
         font-weight: 400 !important;
     }
 
-    .logo a > h4 {
+    .logo a > h4,
+    .logo > h4 {
         font-size: 2.8rem !important;
         font-weight: 700 !important;
         margin-bottom: 0.5rem !important;
@@ -150,13 +189,12 @@ input[type="number"] {
     }
 
     .ad1 {
-        flex-basis: calc((100% / 3) - 1rem);
-        height: 150px;
-        border-radius: 10px;
+        width: 25%;
     }
 
-    .ad1 img {
-        border-radius: 10px;
+    .ad1 > div {
+        width: 100%;
+        height: calc((100% / 3) - 0.6rem);
     }
 
     .intro {
@@ -174,8 +212,7 @@ input[type="number"] {
         margin: auto;
     }
 
-    .lft,
-    .cat {
+    .lft {
         width: 20%;
     }
 
@@ -208,13 +245,12 @@ input[type="number"] {
 
     .rgt,
     #hm_banner {
-        width: 75%;
+        width: 73.5%;
     }
 
     .b_list,
     .c_list,
     .s_list,
-    .h_list,
     .f_list,
     .cp_list,
     .wp_list {
@@ -223,22 +259,30 @@ input[type="number"] {
         margin: 0;
     }
 
-    .h_list li,
     .f_list li {
         padding: 0.43rem 0.5rem;
     }
 
-    .h_list li a {
-        color: unset;
-        text-decoration: none;
-        font-weight: 400 !important;
+    .h_list > li:not(.dropdown-item) {
+        padding: 0.2rem 0.5rem 0.2rem 0;
+        margin: auto 2.2rem auto 0;
     }
 
-    .h_list li:hover {
+    .header_bottom ul.h_list > li:not(.dropdown-item) button::after {
+        display: none;
+    }
+
+    ul.h_list > li:not(.dropdown-item) > a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500 !important;
+    }
+
+    /* .h_list li:hover {
         background-color: rgba(3, 0, 31, 0.8);
         color: #ffffff;
         border-radius: 10px 0 0 5px;
-    }
+    } */
 
     .f_list li:hover {
         text-decoration: underline;
@@ -490,7 +534,8 @@ input[type="number"] {
         padding-top: 0.2rem;
     }
 
-    .wishlist > div li {
+    .wp_list > li,
+    .cp_list > li {
         border: 1px solid rgba(128, 128, 128, 0.3);
     }
 
@@ -501,7 +546,34 @@ input[type="number"] {
         font-family: "Poppins", sans-serif !important;
     }
 
-    .wishlist .input-group > .form-control {
+    .wishlist .input-group > .form-control,
+    .cartlist .input-group > .form-control {
         flex: 0.1 1 auto;
+    }
+
+    .cartlist option {
+        font-size: 1.15rem !important;
+        font-weight: 400 !important;
+    }
+
+    .cartlist select {
+        font-weight: 400 !important;
+    }
+
+    .cartlist .dropdown-center button {
+        color: inherit !important;
+        background-color: transparent;
+        border: 1px solid rgba(128, 128, 128, 0.3);
+        text-align: start;
+        font-weight: 400 !important;
+    }
+
+    .cartlist .dropdown-center button::after {
+        margin-left: calc(100% - 53px);
+    }
+
+    .cartlist .dropdown-menu li a {
+        text-align: start;
+        font-weight: 400 !important;
     }
 }
