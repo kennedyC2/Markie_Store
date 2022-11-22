@@ -41,18 +41,16 @@ input[type="number"] {
 }
 
 #newArrival,
-#trending {
+#trending,
+#scrubs {
     width: 100%;
     height: 350px;
-    /* border: 1px solid red; */
 }
 
-#newArrival .carousel-inner .carousel-item > div,
-#trending .carousel-inner .carousel-item > div {
+.home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item > div {
     display: none;
 }
-#newArrival .carousel-inner .carousel-item > div:first-child,
-#trending .carousel-inner .carousel-item > div:first-child {
+.home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item > div:first-child {
     display: block;
 }
 
@@ -66,38 +64,28 @@ input[type="number"] {
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-    #newArrival .carousel-inner .carousel-item.active,
-    #newArrival .carousel-inner .carousel-item-next,
-    #newArrival .carousel-inner .carousel-item-prev,
-    #trending .carousel-inner .carousel-item.active,
-    #trending .carousel-inner .carousel-item-next,
-    #trending .carousel-inner .carousel-item-prev {
+    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item.active,
+    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item-next,
+    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item-prev {
         display: flex;
     }
 
-    #newArrival .carousel-inner .carousel-item > div:first-child,
-    #trending .carousel-inner .carousel-item > div:first-child {
+    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item > div:first-child {
         display: flex;
     }
 
-    #newArrival .carousel-inner .carousel-item-end.active,
-    #newArrival .carousel-inner .carousel-item-next,
-    #trending .carousel-inner .carousel-item-end.active,
-    #trending .carousel-inner .carousel-item-next {
+    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item-end.active,
+    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item-next {
         transform: translateX(20%);
     }
 
-    #newArrival .carousel-inner .carousel-item-start.active,
-    #newArrival .carousel-inner .carousel-item-prev,
-    #trending .carousel-inner .carousel-item-start.active,
-    #trending .carousel-inner .carousel-item-prev {
+    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item-start.active,
+    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item-prev {
         transform: translateX(-20%);
     }
 
-    #newArrival .carousel-inner .carousel-item-end,
-    #newArrival .carousel-inner .carousel-item-start,
-    #trending .carousel-inner .carousel-item-end,
-    #trending .carousel-inner .carousel-item-start {
+    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item-end,
+    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item-start {
         transform: translateX(0);
     }
 }
@@ -561,20 +549,24 @@ input[type="number"] {
     }
 
     .wishlist .input-group > .form-control,
-    .cartlist .input-group > .form-control {
+    .cartlist .input-group > .form-control,
+    .product .input-group > .form-control {
         flex: 0.1 1 auto;
     }
 
-    .cartlist option {
+    .cartlist option,
+    .product option {
         font-size: 1.15rem !important;
         font-weight: 400 !important;
     }
 
-    .cartlist select {
+    .cartlist select,
+    .product select {
         font-weight: 400 !important;
     }
 
-    .cartlist .dropdown-center button {
+    .cartlist .dropdown-center button,
+    .product .dropdown-center button {
         color: inherit !important;
         background-color: transparent;
         border: 1px solid rgba(128, 128, 128, 0.3);
@@ -582,11 +574,13 @@ input[type="number"] {
         font-weight: 400 !important;
     }
 
-    .cartlist .dropdown-center button::after {
+    .cartlist .dropdown-center button::after,
+    .product .dropdown-center button::after {
         margin-left: calc(100% - 53px);
     }
 
-    .cartlist .dropdown-menu li a {
+    .cartlist .dropdown-menu li a,
+    .product .dropdown-menu li a {
         text-align: start;
         font-weight: 400 !important;
     }
