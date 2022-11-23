@@ -228,7 +228,7 @@ input[type="number"] {
     .lft .accordion-button,
     .lv_1 .accordion-button {
         font-weight: 700 !important;
-        font-size: 0.9rem !important;
+        font-size: 0.85rem !important;
     }
 
     .lft > h4 {
@@ -279,12 +279,6 @@ input[type="number"] {
         font-weight: 500 !important;
         font-size: 1.05rem !important;
     }
-
-    /* .h_list li:hover {
-        background-color: rgba(3, 0, 31, 0.8);
-        color: #ffffff;
-        border-radius: 10px 0 0 5px;
-    } */
 
     .f_list li:hover {
         text-decoration: underline;
@@ -343,10 +337,12 @@ input[type="number"] {
         color: #fff;
     }
 
-    #avail_select label {
+    #avail_select label,
+    #sex_select label {
         font-size: 0.8rem !important;
         font-weight: 500 !important;
         font-family: "Poppins", sans-serif !important;
+        padding-top: 0.25rem;
     }
 
     #hd_banner {
@@ -359,10 +355,45 @@ input[type="number"] {
         height: 60vh;
     }
 
-    .home .grid {
+    .pd_lft-1 {
+        height: 35rem;
+    }
+
+    .pd_lft-2 p {
+        margin: 0 0 0.5rem 0;
+    }
+
+    .pd_lft-2 p:nth-child(2),
+    .pd_lft-2 span {
+        font-weight: 400 !important;
+    }
+
+    .prc {
+        font-size: 1.8rem !important;
+    }
+
+    #item_dsp1 {
+        height: 83%;
+        margin-bottom: 2%;
+    }
+
+    #item_dsp2 {
+        height: 15%;
+    }
+
+    #item_dsp2 .item {
+        flex-basis: calc(100% / 5);
+    }
+
+    .home .grid,
+    .product .grid {
         display: grid;
         grid-template-columns: auto auto auto auto auto;
         column-gap: 1rem;
+    }
+
+    .product > div > div:first-child {
+        margin-bottom: 8rem;
     }
 
     .category .grid {
