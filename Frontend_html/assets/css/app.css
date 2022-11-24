@@ -4,7 +4,7 @@
 body::-webkit-scrollbar,
 div::-webkit-scrollbar,
 select::-webkit-scrollbar {
-    width: 5px;
+    width: 6px;
 }
 
 body::-webkit-scrollbar-thumb,
@@ -35,7 +35,7 @@ input[type="number"] {
 * {
     font-family: "Fira Sans", sans-serif !important;
     font-weight: 500 !important;
-    font-size: 0.95rem !important;
+    font-size: 1rem !important;
     letter-spacing: 0.2px !important;
     color: #03001e;
 }
@@ -44,14 +44,199 @@ input[type="number"] {
 #trending,
 #scrubs {
     width: 100%;
-    height: 350px;
+    height: max-content;
 }
 
-.home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item > div {
+.body {
+    width: 100%;
+    min-height: calc(100vh - 250px);
+}
+
+.w_1200 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.lv_1 {
+    flex-direction: column;
+    height: max-content;
+}
+
+.ad1 > div {
+    margin-bottom: 1rem;
+}
+
+.lv_1 > div:first-child {
+    height: 15rem;
+    margin-bottom: 1rem;
+}
+
+#hm_banner {
+    height: 100%;
+}
+
+footer {
+    min-height: 400px;
+    background-color: rgba(3, 0, 31, 0.8);
+}
+
+footer * {
+    color: #ffffff !important;
+}
+
+.f-bottom {
+    background-color: #03001e;
+    height: 52px;
+}
+
+.f-top > div {
+    width: 100%;
+}
+
+.f-top h2 {
+    font-size: 1.15rem !important;
+    position: relative;
+}
+
+.f1::after {
+    content: " ";
+    width: 90px;
+    height: 1.5px;
+    background-color: red;
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+}
+
+.f2::after {
+    content: " ";
+    width: 100px;
+    height: 1.5px;
+    background-color: red;
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+}
+
+.f3::after {
+    content: " ";
+    width: 220px;
+    height: 1.5px;
+    background-color: red;
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+}
+
+.logo a > h4,
+.logo > h4 {
+    font-size: 2.8rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.b_list,
+.c_list,
+.s_list,
+.f_list,
+.cp_list,
+.wp_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.f_list li {
+    padding: 0.43rem 0;
+}
+
+.f_list li:hover {
+    text-decoration: underline;
+}
+
+.social > div {
+    padding-right: 0.8rem;
+}
+
+.intro {
+    flex-basis: calc((100% / 3) - 1rem);
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.1rem !important;
+    font-weight: 800 !important;
+    color: #adc0cf;
+}
+
+.line {
+    background-color: #adc0cf;
+    height: 1px;
+    margin: auto;
+}
+
+.home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item .grid > div {
     display: none;
 }
-.home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item > div:first-child {
+
+.home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item .grid > div:first-child {
     display: block;
+}
+
+.banner {
+    width: 100%;
+    height: 360px;
+    background-image: linear-gradient(to right, #03001e, #7303c0, #ec38bc, #fdeff9);
+}
+
+.home .grid,
+.product .grid {
+    display: grid;
+    grid-template-columns: auto;
+    column-gap: 1rem;
+}
+
+.grid svg {
+    width: 60%;
+    height: 100%;
+}
+
+.grid a,
+.grid svg,
+.c-btm a,
+.c-btm button,
+.w-btm a,
+.cp_list button:not(.btn-close),
+.wp_list button:not(.btn-close) {
+    border-color: #adc0cf;
+    color: #adc0cf;
+    fill: #adc0cf;
+    font-size: 1rem !important;
+    background-color: transparent;
+}
+
+.grid a:hover,
+.c-btm a:hover,
+.c-btm button:hover,
+.w-btm a:hover,
+.cp_list button:not(.btn-close):hover,
+.wp_list button:not(.btn-close):hover {
+    background-color: rgba(3, 0, 31, 0.8);
+    color: #ffffff;
+    fill: #ffffff;
+}
+
+.grid a:hover svg {
+    fill: #ffffff;
+}
+
+.imgcont {
+    height: 70%;
+    margin: auto;
+}
+
+.card {
+    border: 0;
+    height: 460px;
 }
 
 /* X-Small devices (portrait phones, less than 576px) */
@@ -70,7 +255,7 @@ input[type="number"] {
         display: flex;
     }
 
-    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item > div:first-child {
+    .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item .grid > div {
         display: flex;
     }
 
@@ -101,18 +286,16 @@ input[type="number"] {
 
 /* XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) {
-    .w_1200 {
-        max-width: 1200px;
-        margin: auto;
-    }
-
-    .body {
-        min-height: calc(100vh - 250px);
+    * {
+        font-family: "Fira Sans", sans-serif !important;
+        font-weight: 500 !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0.2px !important;
+        color: #03001e;
     }
 
     .header_bottom {
         background-image: radial-gradient(circle 610px at 5.2% 51.6%, rgba(7, 3, 53, 1) 0%, rgba(5, 8, 114, 1) 97.5%);
-        /* background-image: linear-gradient(109.6deg, rgba(9, 9, 121, 1) 11.2%, rgba(144, 6, 161, 1) 53.7%, rgba(0, 212, 255, 1) 100.2%); */
         padding: 0.18rem 0;
         min-height: 1.5rem;
     }
@@ -141,19 +324,12 @@ input[type="number"] {
         font-weight: 400 !important;
     }
 
-    .logo a > h4,
-    .logo > h4 {
-        font-size: 2.8rem !important;
-        font-weight: 700 !important;
-        margin-bottom: 0.5rem !important;
-    }
-
     .ht_wrapper > div:nth-child(2) {
         width: 80%;
     }
 
-    .social > div {
-        padding-left: 0.8rem;
+    .social {
+        padding-left: 0;
     }
 
     .ln_0 > p {
@@ -198,21 +374,6 @@ input[type="number"] {
         height: calc((100% / 3) - 0.6rem);
     }
 
-    .intro {
-        flex-basis: calc((100% / 3) - 1rem);
-        text-align: center;
-        text-transform: uppercase;
-        font-size: 1.1rem !important;
-        font-weight: 800 !important;
-        color: #adc0cf;
-    }
-
-    .line {
-        background-color: #adc0cf;
-        height: 1px;
-        margin: auto;
-    }
-
     .lft {
         width: 20%;
     }
@@ -245,24 +406,13 @@ input[type="number"] {
     }
 
     .rgt,
-    #hm_banner {
+    .lv_1 > div:first-child {
         width: 73.5%;
     }
-
-    .b_list,
-    .c_list,
-    .s_list,
-    .f_list,
-    .cp_list,
-    .wp_list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
+    /* 
     .f_list li {
-        padding: 0.43rem 0.5rem;
-    }
+        padding: 0.43rem 0rem;
+    } */
 
     .h_list > li:not(.dropdown-item) {
         padding: 0.2rem 0.5rem 0.2rem 0;
@@ -277,7 +427,7 @@ input[type="number"] {
         color: #ffffff;
         text-decoration: none;
         font-weight: 500 !important;
-        font-size: 1.05rem !important;
+        font-size: 1rem !important;
     }
 
     .f_list li:hover {
@@ -299,7 +449,17 @@ input[type="number"] {
     }
 
     .lv_1 {
-        height: 465px;
+        flex-direction: row;
+        height: 31rem;
+    }
+
+    .lv_1 > div:first-child {
+        height: 100%;
+        margin-bottom: 0;
+    }
+
+    .ad1 > div {
+        margin-bottom: 0;
     }
 
     .b_list li {
@@ -392,8 +552,18 @@ input[type="number"] {
         column-gap: 1rem;
     }
 
+    .card {
+        border: 0;
+        height: 350px;
+    }
+
+    .grid svg {
+        width: 90%;
+        height: 100%;
+    }
+
     .product > div > div:first-child {
-        margin-bottom: 8rem;
+        margin-bottom: 7rem;
     }
 
     .category .grid {
@@ -430,29 +600,9 @@ input[type="number"] {
         fill: #ffffff;
     }
 
-    .card {
-        border: 0;
-        height: 350px;
-    }
-
     .imgcont {
         height: 65%;
         margin: auto;
-    }
-
-    .banner {
-        width: 100%;
-        height: 360px;
-        background-image: linear-gradient(to right, #03001e, #7303c0, #ec38bc, #fdeff9);
-    }
-
-    footer {
-        min-height: 400px;
-        background-color: rgba(3, 0, 31, 0.8);
-    }
-
-    footer * {
-        color: #ffffff !important;
     }
 
     .f-top > div {
@@ -462,41 +612,6 @@ input[type="number"] {
     .f-top h2 {
         font-size: 1.15rem !important;
         position: relative;
-    }
-
-    .f1::after {
-        content: " ";
-        width: 90px;
-        height: 1.5px;
-        background-color: red;
-        position: absolute;
-        bottom: -6px;
-        left: 0.5rem;
-    }
-
-    .f2::after {
-        content: " ";
-        width: 100px;
-        height: 1.5px;
-        background-color: red;
-        position: absolute;
-        bottom: -6px;
-        left: 1rem;
-    }
-
-    .f3::after {
-        content: " ";
-        width: 220px;
-        height: 1.5px;
-        background-color: red;
-        position: absolute;
-        bottom: -6px;
-        left: 0;
-    }
-
-    .f-bottom {
-        background-color: #03001e;
-        height: 52px;
     }
 
     #cartlistLabel,

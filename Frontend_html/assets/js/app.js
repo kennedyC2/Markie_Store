@@ -19,6 +19,3 @@ const populate = (elem) => {
 
 populate("newArrival");
 populate("trending");
-populate("scrubs");
-populate("crocs");
-populate("brooches");
