@@ -1,6 +1,5 @@
 const populate = (elem) => {
     let items = document.querySelectorAll("#" + elem + " .carousel-item .grid");
-    console.log(items);
 
     items.forEach((el) => {
         const minPerSlide = 5;

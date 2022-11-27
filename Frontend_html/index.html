@@ -15,7 +15,7 @@
                 <div class="container w_1200 m-auto">
                     <div class="ht_wrapper d-flex justify-content-between">
                         <!-- LOGO Container -->
-                        <div class="logo position-relative">
+                        <div class="logo position-relative d-none d-lg-block">
                             <a href="./index.html">
                                 <h4 class="position-absolute m-0 bottom-0">MARKIE</h4>
                             </a>
@@ -40,9 +40,9 @@
                             <div class="d-none d-lg-block ln_0 py-2">
                                 <p class="m-0">Delivery Within 2-Days To All 36 States Of Nigeria</p>
                             </div>
-                            <div class="d-flex justify-content-end ln_1 py-3">
+                            <div class="d-flex ln_1 justify-content-end">
                                 <!-- Desktop Search Bar -->
-                                <div class="d_search_bar d-none d-lg-block">
+                                <div class="d_search_bar">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="Search_bar_d" />
                                         <span class="input-group-text" id="Search_bar_d">
@@ -53,172 +53,183 @@
                                         </span>
                                     </div>
                                 </div>
-                                <!-- Account Icon -->
-                                <div class="d-flex mt-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 me-2" width="1.35em" height="1.15em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1536 1792"><path fill="#03001e" d="M1201 784q47 14 89.5 38t89 73t79.5 115.5t55 172t22 236.5q0 154-100 263.5T1195 1792H341q-141 0-241-109.5T0 1419q0-131 22-236.5t55-172T156.5 895t89-73t89.5-38q-79-125-79-272q0-104 40.5-198.5T406 150T569.5 40.5T768 0t198.5 40.5T1130 150t109.5 163.5T1280 512q0 147-79 272zM768 128q-159 0-271.5 112.5T384 512t112.5 271.5T768 896t271.5-112.5T1152 512t-112.5-271.5T768 128zm427 1536q88 0 150.5-71.5T1408 1419q0-239-78.5-377T1104 897q-145 127-336 127T432 897q-147 7-225.5 145T128 1419q0 102 62.5 173.5T341 1664h854z" /></svg>
-                                    <p class="d-none d-lg-block">Account</p>
-                                </div>
-                                <!-- Cart Icon -->
-                                <div class="d-flex mt-1">
-                                    <button class="border border-0 bg-transparent p-1 d-inline-flex" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartlist" aria-controls="cartlist">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.14em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill="#03001e" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607L1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479l9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2a1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2a1 1 0 0 1 0-2z" /></svg>
-                                        <span class="d-none d-lg-block">Cart</span>
-                                    </button>
-
-                                    <div class="offcanvas offcanvas-end ps-2" tabindex="-1" id="cartlist" aria-labelledby="cartlistLabel">
-                                        <div class="offcanvas-header pb-0 px-4 mt-2">
-                                            <h5 class="cartlistLabel heading">SHOPPING CART</h5>
-                                            <button type="button" class="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                        </div>
-                                        <div class="offcanvas-body py-0">
-                                            <!-- Top -->
-                                            <div class="item_count text-start c-top px-4">
-                                                <span>3</span>
-                                                <span>Items</span>
-                                            </div>
-                                            <!-- Scrollable Mid -->
-                                            <div class="pt-3 ps-1 c-mid px-4">
-                                                <div>
-                                                    <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                        <div class="col-3 pe-2">
-                                                            <img src="./assets/images/pic 1.png" class="d-block w-100 h-100" alt="..." />
-                                                        </div>
-                                                        <div class="col-5 text-start ps-2 m-auto">
-                                                            <p class="pb-1">Scrub Top</p>
-                                                            <p class="pb-1">Purple / XXL</p>
-                                                            <p class="pb-1">&#x20A6; 5800</p>
-                                                        </div>
-                                                        <div class="col-1 pt-2 m-auto">
-                                                            <button type="button" class="btn-close text-reset"></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                        <div class="col-3 pe-2">
-                                                            <img src="./assets/images/pic 2.jpg" class="d-block w-100 h-100" alt="..." />
-                                                        </div>
-                                                        <div class="col-5 text-start ps-2 m-auto">
-                                                            <p class="pb-1">Scrub Top</p>
-                                                            <p class="pb-1">Lemon Green / L</p>
-                                                            <p class="pb-1">&#x20A6; 8000</p>
-                                                        </div>
-                                                        <div class="col-1 pt-2 m-auto">
-                                                            <button type="button" class="btn-close text-reset"></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                        <div class="col-3 pe-2">
-                                                            <img src="./assets/images/pic 8.png" class="d-block w-100 h-100" alt="..." />
-                                                        </div>
-                                                        <div class="col-5 text-start ps-2 m-auto">
-                                                            <p class="pb-1">Scrub Top</p>
-                                                            <p class="pb-1">Brown / SM</p>
-                                                            <p class="pb-1">&#x20A6; 7000</p>
-                                                        </div>
-                                                        <div class="col-1 pt-2 m-auto">
-                                                            <button type="button" class="btn-close text-reset"></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Bottom -->
-                                            <div class="c-btm px-4">
-                                                <div class="w-100 d-flex justify-content-between pt-3 pb-1">
-                                                    <p>Total:</p>
-                                                    <p>&#x20A6; 20,800</p>
-                                                </div>
-                                                <div class="pt-1 pb-3">
-                                                    <div class="form-check text-start ps-4">
-                                                        <input class="form-check-input me-3" type="checkbox" value="" id="T&C" />
-                                                        <label class="form-check-label" for="T&C"> I Agree With The Terms and Conditions </label>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <button type="button" class="btn btn-md w-100 py-2 mb-3">CHECKOUT</button> <br />
-                                                    <a href="./cart.html" class="btn btn-md w-100 py-2">VIEW CART</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="d-flex">
+                                    <div class="m_menu my-auto d-lg-none"></div>
+                                    <!-- LOGO Container -->
+                                    <div class="my-auto d-lg-none">
+                                        <a class="text-decoration-none" href="./index.html">
+                                            <h3 class="my-auto">MARKIE</h3>
+                                        </a>
                                     </div>
-                                </div>
-                                <!-- Wish list Icon -->
-                                <div class="d-flex mt-1">
-                                    <button class="border-0 bg-transparent p-1 d-inline-flex" type="button" data-bs-toggle="offcanvas" data-bs-target="#wishlist" aria-controls="wishlist">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.25em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z" /></svg>
-                                        <span class="d-none d-lg-block space">Wishlist</span>
-                                    </button>
-
-                                    <div class="offcanvas offcanvas-end ps-2" tabindex="-1" id="wishlist" aria-labelledby="wishlistLabel">
-                                        <div class="offcanvas-header pb-0 px-4 mt-2">
-                                            <h5 class="wishlistLabel heading">WISHLIST</h5>
-                                            <button type="button" class="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    <div class="d-flex">
+                                        <!-- Account Icon -->
+                                        <div class="d-flex">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="m-auto" width="1.35em" height="1.25em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1536 1792"><path fill="#03001e" d="M1201 784q47 14 89.5 38t89 73t79.5 115.5t55 172t22 236.5q0 154-100 263.5T1195 1792H341q-141 0-241-109.5T0 1419q0-131 22-236.5t55-172T156.5 895t89-73t89.5-38q-79-125-79-272q0-104 40.5-198.5T406 150T569.5 40.5T768 0t198.5 40.5T1130 150t109.5 163.5T1280 512q0 147-79 272zM768 128q-159 0-271.5 112.5T384 512t112.5 271.5T768 896t271.5-112.5T1152 512t-112.5-271.5T768 128zm427 1536q88 0 150.5-71.5T1408 1419q0-239-78.5-377T1104 897q-145 127-336 127T432 897q-147 7-225.5 145T128 1419q0 102 62.5 173.5T341 1664h854z" /></svg>
+                                            <p class="d-none d-lg-block m-auto">Account</p>
                                         </div>
-                                        <div class="offcanvas-body py-0">
-                                            <!-- Top -->
-                                            <div class="item_count text-start w-top px-4">
-                                                <span>4</span>
-                                                <span>Items</span>
-                                            </div>
-                                            <!-- Scrollable Mid -->
-                                            <div class="pt-3 ps-1 w-mid px-4">
-                                                <div>
-                                                    <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                        <div class="col-3 pe-2">
-                                                            <img src="./assets/images/pic 1.png" class="d-block w-100 h-100" alt="..." />
-                                                        </div>
-                                                        <div class="col-5 text-start ps-2 m-auto">
-                                                            <p class="pb-1">Scrub Top</p>
-                                                            <p class="pb-1">Purple / XXL</p>
-                                                            <p class="pb-1">&#x20A6; 5800</p>
-                                                        </div>
-                                                        <div class="col-1 pt-2 m-auto">
-                                                            <button type="button" class="btn-close text-reset"></button>
+                                        <!-- Cart Icon -->
+                                        <div class="d-flex">
+                                            <button class="border border-0 bg-transparent d-inline-flex my-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartlist" aria-controls="cartlist">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="m-auto" width="1.45em" height="1.3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill="#03001e" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607L1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479l9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2a1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2a1 1 0 0 1 0-2z" /></svg>
+                                                <span class="d-none d-lg-block m-auto" style="padding-top: 0.18rem">Cart</span>
+                                            </button>
+
+                                            <div class="offcanvas offcanvas-end ps-2" tabindex="-1" id="cartlist" aria-labelledby="cartlistLabel">
+                                                <div class="offcanvas-header pb-0 px-4 mt-2">
+                                                    <h5 class="cartlistLabel heading">SHOPPING CART</h5>
+                                                    <button type="button" class="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                </div>
+                                                <div class="offcanvas-body py-">
+                                                    <!-- Top -->
+                                                    <div class="item_count text-start c-top px-4">
+                                                        <span>3</span>
+                                                        <span>Items</span>
+                                                    </div>
+                                                    <!-- Scrollable Mid -->
+                                                    <div class="pt-3 ps-1 c-mid px-4">
+                                                        <div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 1.png" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Purple / XXL</p>
+                                                                    <p class="pb-1">&#x20A6; 5800</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 2.jpg" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Lemon Green / L</p>
+                                                                    <p class="pb-1">&#x20A6; 8000</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 8.png" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Brown / SM</p>
+                                                                    <p class="pb-1">&#x20A6; 7000</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                        <div class="col-3 pe-2">
-                                                            <img src="./assets/images/pic 2.jpg" class="d-block w-100 h-100" alt="..." />
+                                                    <!-- Bottom -->
+                                                    <div class="c-btm px-4">
+                                                        <div class="w-100 d-flex justify-content-between pt-3 pb-1">
+                                                            <p>Total:</p>
+                                                            <p>&#x20A6; 20,800</p>
                                                         </div>
-                                                        <div class="col-5 text-start ps-2 m-auto">
-                                                            <p class="pb-1">Scrub Top</p>
-                                                            <p class="pb-1">Lemon Green / L</p>
-                                                            <p class="pb-1">&#x20A6; 8000</p>
+                                                        <div class="pt-1 pb-3">
+                                                            <div class="form-check text-start ps-4">
+                                                                <input class="form-check-input me-3" type="checkbox" value="" id="T&C" />
+                                                                <label class="form-check-label" for="T&C"> I Agree With The Terms and Conditions </label>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-1 pt-2 m-auto">
-                                                            <button type="button" class="btn-close text-reset"></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                        <div class="col-3 pe-2">
-                                                            <img src="./assets/images/pic 8.png" class="d-block w-100 h-100" alt="..." />
-                                                        </div>
-                                                        <div class="col-5 text-start ps-2 m-auto">
-                                                            <p class="pb-1">Scrub Top</p>
-                                                            <p class="pb-1">Brown / SM</p>
-                                                            <p class="pb-1">&#x20A6; 7000</p>
-                                                        </div>
-                                                        <div class="col-1 pt-2 m-auto">
-                                                            <button type="button" class="btn-close text-reset"></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                        <div class="col-3 pe-2">
-                                                            <img src="./assets/images/pic 7.jpg" class="d-block w-100 h-100" alt="..." />
-                                                        </div>
-                                                        <div class="col-5 text-start ps-2 m-auto">
-                                                            <p class="pb-1">Scrub Top</p>
-                                                            <p class="pb-1">Lemon Green / L</p>
-                                                            <p class="pb-1">&#x20A6; 8000</p>
-                                                        </div>
-                                                        <div class="col-1 pt-2 m-auto">
-                                                            <button type="button" class="btn-close text-reset"></button>
+                                                        <div>
+                                                            <button type="button" class="btn btn-md w-100 py-2 mb-3">CHECKOUT</button> <br />
+                                                            <a href="./cart.html" class="btn btn-md w-100 py-2">VIEW CART</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- Bottom -->
-                                            <div class="w-btm px-4">
-                                                <div class="pt-3">
-                                                    <a href="./wishlist.html" class="btn btn-md w-100 py-2">VIEW WISHLIST</a>
+                                        </div>
+                                        <!-- Wish list Icon -->
+                                        <div class="d-flex">
+                                            <button class="border-0 bg-transparent d-inline-flex m-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#wishlist" aria-controls="wishlist">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="m-auto" width="1.4em" height="1.35em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z" /></svg>
+                                                <span class="d-none d-lg-block m-auto space">Wishlist</span>
+                                            </button>
+
+                                            <div class="offcanvas offcanvas-end ps-2" tabindex="-1" id="wishlist" aria-labelledby="wishlistLabel">
+                                                <div class="offcanvas-header pb-0 px-4 mt-2">
+                                                    <h5 class="wishlistLabel heading">WISHLIST</h5>
+                                                    <button type="button" class="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                </div>
+                                                <div class="offcanvas-body py-0">
+                                                    <!-- Top -->
+                                                    <div class="item_count text-start w-top px-4">
+                                                        <span>4</span>
+                                                        <span>Items</span>
+                                                    </div>
+                                                    <!-- Scrollable Mid -->
+                                                    <div class="pt-3 ps-1 w-mid px-4">
+                                                        <div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 1.png" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Purple / XXL</p>
+                                                                    <p class="pb-1">&#x20A6; 5800</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 2.jpg" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Lemon Green / L</p>
+                                                                    <p class="pb-1">&#x20A6; 8000</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 8.png" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Brown / SM</p>
+                                                                    <p class="pb-1">&#x20A6; 7000</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 7.jpg" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Lemon Green / L</p>
+                                                                    <p class="pb-1">&#x20A6; 8000</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Bottom -->
+                                                    <div class="w-btm px-4">
+                                                        <div class="pt-3">
+                                                            <a href="./wishlist.html" class="btn btn-md w-100 py-2">VIEW WISHLIST</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -262,14 +273,11 @@
                                     </ul>
                                 </div>
                             </li>
-                            <!-- <li class="menu">
-                                <a href="./category.html">hhhh</a>
-                            </li> -->
                         </ul>
                     </div>
                 </div>
             </header>
-            <div class="home m-auto pt-4">
+            <div class="home m-auto">
                 <!-- Level One -->
                 <div class="lv_1 container w_1200 py-3 d-flex justify-content-between">
                     <!-- Banner Carousel -->
@@ -313,8 +321,8 @@
                 </div>
 
                 <!-- Level Three -->
-                <div class="row lv_3 w_1200 mt-3">
-                    <div class="w-100 my-5 d-flex flex-row justify-content-between">
+                <div class="row lv_3 w_1200">
+                    <div class="w-100 d-flex flex-row justify-content-between">
                         <div class="intro line"></div>
                         <div class="intro">New Arrivals</div>
                         <div class="intro line"></div>
@@ -441,8 +449,8 @@
                 </div>
 
                 <!-- Level Four -->
-                <div class="row lv_4 w_1200 mt-5">
-                    <div class="w-100 my-5 d-flex flex-row justify-content-between">
+                <div class="row lv_4 w_1200">
+                    <div class="w-100 d-flex flex-row justify-content-between">
                         <div class="intro line"></div>
                         <div class="intro">Trending</div>
                         <div class="intro line"></div>
@@ -574,8 +582,8 @@
                 </div>
 
                 <!-- Level Five -->
-                <div class="row lv_5 w_1200 mt-5">
-                    <div class="w-100 my-5 d-flex flex-row justify-content-between">
+                <div class="row lv_5 w_1200">
+                    <div class="w-100 d-flex flex-row justify-content-between">
                         <div class="intro line"></div>
                         <div class="intro">Scrubs</div>
                         <div class="intro line"></div>
@@ -583,7 +591,7 @@
 
                     <!-- Cards -->
                     <div class="grid">
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/pic 2.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -600,7 +608,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/pic 2.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -617,7 +625,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/pic 2.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -634,7 +642,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/pic 2.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -651,7 +659,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/pic 2.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -668,7 +676,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/pic 2.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -685,7 +693,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/pic 2.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -702,7 +710,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/pic 2.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -719,7 +727,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/pic 2.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -736,7 +744,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/pic 2.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -757,8 +765,8 @@
                 </div>
 
                 <!-- Level Six -->
-                <div class="row lv_6 w_1200 mt-5">
-                    <div class="w-100 my-5 d-flex flex-row justify-content-between">
+                <div class="row lv_6 w_1200">
+                    <div class="w-100 d-flex flex-row justify-content-between">
                         <div class="intro line"></div>
                         <div class="intro">Crocs</div>
                         <div class="intro line"></div>
@@ -767,7 +775,7 @@
                     <!-- Cards -->
 
                     <div class="grid">
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/crocs r1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -785,7 +793,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/crocs r1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -803,7 +811,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/crocs r1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -821,7 +829,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/crocs r1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -839,7 +847,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/crocs r1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -857,7 +865,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/crocs r1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -875,7 +883,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/crocs r1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -893,7 +901,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/crocs r1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -911,7 +919,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/crocs r1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -929,7 +937,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/crocs r1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -951,8 +959,8 @@
                 </div>
 
                 <!-- Level Seven -->
-                <div class="row lv_6 w_1200 mt-5">
-                    <div class="w-100 my-5 d-flex flex-row justify-content-between">
+                <div class="row lv_7 w_1200">
+                    <div class="w-100 d-flex flex-row justify-content-between">
                         <div class="intro line"></div>
                         <div class="intro">Brooches</div>
                         <div class="intro line"></div>
@@ -960,7 +968,7 @@
 
                     <!-- Cards -->
                     <div class="grid">
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/b 1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -978,7 +986,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/b 1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -996,7 +1004,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/b 1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -1014,7 +1022,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/b 1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -1032,7 +1040,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/b 1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -1050,7 +1058,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/b 1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -1068,7 +1076,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/b 1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -1086,7 +1094,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/b 1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -1104,7 +1112,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/b 1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>
@@ -1122,7 +1130,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-5">
+                        <div class="card">
                             <div class="imgcont">
                                 <img src="./assets/images/b 1.jpg" width="100%" height="100%" class="card-img-top" alt="..." />
                             </div>

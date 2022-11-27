@@ -68,7 +68,7 @@ input[type="number"] {
 }
 
 .lv_1 > div:first-child {
-    height: 15rem;
+    height: 12rem;
     margin-bottom: 1rem;
 }
 
@@ -179,7 +179,7 @@ footer * {
 }
 
 .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item .grid > div:first-child {
-    display: block;
+    display: flex;
 }
 
 .banner {
@@ -230,13 +230,104 @@ footer * {
 }
 
 .imgcont {
-    height: 70%;
+    /* height: 70%; */
+    height: max-content;
+    width: 100%;
     margin: auto;
 }
 
 .card {
     border: 0;
-    height: 460px;
+    /* height: 460px; */
+    height: max-content;
+}
+
+.card:not(.card:last-child, #trending .card, #newArrival .card) {
+    margin-bottom: 2.5rem;
+}
+
+.ht_wrapper > div:nth-child(2) {
+    width: 100%;
+    flex-direction: row-reverse;
+}
+
+.ln_1 {
+    flex-direction: column-reverse;
+    width: 100%;
+    padding: 0.7rem 0;
+}
+
+.d_search_bar {
+    width: 100%;
+}
+
+.d_search_bar .form-control {
+    border-right: 0;
+}
+
+.d_search_bar .input-group-text {
+    padding: 0.2rem 0.3rem;
+    background-color: transparent;
+    border-left: 0;
+}
+
+.form-control {
+    padding: 0.3rem 0.75rem;
+    font-size: inherit !important;
+}
+
+.ln_1 > div:nth-child(2) {
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    /* border: 1px solid red; */
+}
+
+.ln_1 > div:nth-child(2) > div:nth-child(2) h3 {
+    font-size: 1.5rem !important;
+    padding-left: 1.5rem;
+    font-weight: 700 !important;
+}
+
+.ln_1 > div:nth-child(2) > div:nth-child(3) {
+    flex-direction: row-reverse;
+}
+
+.ln_1 > div:nth-child(2) > div:nth-child(3) > div {
+    margin-left: 0.75rem;
+    /* border: 1px solid red; */
+}
+
+.ln_1 > div:nth-child(2) > div:nth-child(3) > div button {
+    padding: 0;
+}
+
+.ln_1 p {
+    margin: 0;
+    padding-top: 0.08rem;
+    font-size: 1rem !important;
+}
+
+.m_menu {
+    width: 25px;
+    height: 29px;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' fill='currentColor' class='bi bi-list' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z'/%3E%3C/svg%3E") center no-repeat;
+    transform: none;
+}
+
+.lv_3 > div:first-child,
+.lv_4 > div:first-child,
+.lv_5 > div:first-child,
+.lv_6 > div:first-child,
+.lv_7 > div:first-child {
+    margin: 4rem 0 2rem;
+}
+
+.lv_3 > div:nth-child(2) .imgcont,
+.lv_4 > div:nth-child(2) .imgcont,
+.lv_5 > div:nth-child(2) .imgcont,
+.lv_6 > div:nth-child(2) .imgcont,
+.lv_7 > div:nth-child(2) .imgcont {
+    padding-bottom: 0.5rem;
 }
 
 /* X-Small devices (portrait phones, less than 576px) */
@@ -336,6 +427,15 @@ footer * {
         font-size: 0.85rem;
     }
 
+    .ln_1 {
+        flex-direction: row;
+        padding: 1rem 0;
+    }
+
+    .ln_1 > div:nth-child(2) > div:nth-child(3) {
+        flex-direction: row;
+    }
+
     .d_search_bar {
         width: 50%;
     }
@@ -355,8 +455,18 @@ footer * {
         font-size: inherit !important;
     }
 
-    .ln_1 > div {
+    .ln_1 > div:nth-child(2) {
+        justify-content: flex-end;
+        margin-bottom: 0;
+    }
+
+    /* .ln_1 > div, */
+    .ln_1 > div:nth-child(2) > div:nth-child(3) > div {
         margin-left: 2rem;
+    }
+
+    .ln_1 > div:nth-child(2) > div:nth-child(3) > div svg {
+        margin-right: 0.7rem !important;
     }
 
     .ln_1 p {
@@ -409,6 +519,7 @@ footer * {
     .lv_1 > div:first-child {
         width: 73.5%;
     }
+
     /* 
     .f_list li {
         padding: 0.43rem 0rem;
@@ -456,6 +567,26 @@ footer * {
     .lv_1 > div:first-child {
         height: 100%;
         margin-bottom: 0;
+    }
+
+    .lv_3 > div:first-child,
+    .lv_4 > div:first-child,
+    .lv_5 > div:first-child,
+    .lv_6 > div:first-child,
+    .lv_7 > div:first-child {
+        margin: 2.5rem 0 2.5rem;
+    }
+
+    .lv_3 > div:nth-child(2) .imgcont,
+    .lv_4 > div:nth-child(2) .imgcont,
+    .lv_5 > div:nth-child(2) .imgcont,
+    .lv_6 > div:nth-child(2) .imgcont,
+    .lv_7 > div:nth-child(2) .imgcont {
+        padding: 0;
+    }
+
+    .lv_3 > div:nth-child(2) {
+        padding: 0;
     }
 
     .ad1 > div {
@@ -545,6 +676,10 @@ footer * {
         flex-basis: calc(100% / 5);
     }
 
+    .home {
+        padding-top: 1.5rem;
+    }
+
     .home .grid,
     .product .grid {
         display: grid;
@@ -554,7 +689,8 @@ footer * {
 
     .card {
         border: 0;
-        height: 350px;
+        /* height: 350px; */
+        margin-bottom: 4rem;
     }
 
     .grid svg {
@@ -601,7 +737,8 @@ footer * {
     }
 
     .imgcont {
-        height: 65%;
+        /* height: 65%; */
+        height: max-content;
         margin: auto;
     }
 
