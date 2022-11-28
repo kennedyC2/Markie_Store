@@ -6245,7 +6245,7 @@ fieldset:disabled .btn {
 .offcanvas-md,
 .offcanvas-sm {
     --bs-offcanvas-zindex: 1045;
-    --bs-offcanvas-width: 400px;
+    --bs-offcanvas-width: 335px; /* 400px */
     --bs-offcanvas-height: 30vh;
     --bs-offcanvas-padding-x: 0rem;
     --bs-offcanvas-padding-y: 2rem;
