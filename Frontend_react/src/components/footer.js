@@ -1,64 +1,64 @@
 const Footer = () => {
     return (
-        <footer class="mt-5">
-            <div class="container f-top w_1200 pt-5 d-lg-flex justify-content-between">
-                <div class="px-2">
-                    <div class="logo">
+        <footer className="mt-5">
+            <div className="container f-top w_1200 pt-5 d-lg-flex justify-content-between">
+                <div className="px-2">
+                    <div className="logo">
                         <h4>MARKIE</h4>
                     </div>
-                    <div class="d-flex pt-4">
+                    <div className="d-flex pt-4">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
                                     <circle cx="12" cy="10" r="3" />
                                     <path d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8Z" />
                                 </g>
                             </svg>
                         </div>
-                        <p class="ps-3 pt-1">30, Wetheral Road, Owerri, Imo state.</p>
+                        <p className="ps-3 pt-1">30, Wetheral Road, Owerri, Imo state.</p>
                     </div>
-                    <div class="d-flex pt-3">
+                    <div className="d-flex pt-3">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
                                 <path
                                     fill="currentColor"
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M12.547 9.328a1.567 1.567 0 0 0-.594-.117a1.202 1.202 0 0 0-.555.101a2.762 2.762 0 0 0-.43.258a2.166 2.166 0 0 0-.359.328c-.104.12-.205.23-.304.329a2.409 2.409 0 0 1-.29.25a.534.534 0 0 1-.695-.063a32.17 32.17 0 0 1-.328-.312c-.14-.136-.312-.3-.515-.493A61.776 61.776 0 0 1 7.844 9l-.68-.664a25.847 25.847 0 0 1-1.21-1.266a5.312 5.312 0 0 1-.391-.484c-.094-.135-.141-.234-.141-.297a.46.46 0 0 1 .101-.312c.073-.094.16-.19.258-.29c.1-.098.209-.203.328-.312c.12-.11.23-.227.329-.352c.098-.125.182-.268.25-.43c.067-.16.101-.343.101-.546a1.567 1.567 0 0 0-.453-1.102a7.604 7.604 0 0 1-.531-.578a6.487 6.487 0 0 0-.617-.64a4.207 4.207 0 0 0-.696-.516A1.46 1.46 0 0 0 3.742 1a1.567 1.567 0 0 0-1.101.453c-.271.271-.508.513-.711.727a4.006 4.006 0 0 0-.516.664a2.63 2.63 0 0 0-.312.765A4.39 4.39 0 0 0 1 4.625c0 .552.089 1.125.266 1.719c.177.593.416 1.185.718 1.773c.302.589.67 1.167 1.102 1.735c.432.567.901 1.106 1.406 1.617c.505.51 1.042.982 1.61 1.414c.567.432 1.148.805 1.742 1.117c.593.313 1.19.557 1.789.734a6.157 6.157 0 0 0 1.75.266a4.696 4.696 0 0 0 1.008-.11a2.59 2.59 0 0 0 .773-.312c.23-.14.45-.312.664-.515c.214-.204.453-.438.719-.704A1.568 1.568 0 0 0 15 12.257a2.009 2.009 0 0 0-.102-.515a1.674 1.674 0 0 0-.257-.484a7.24 7.24 0 0 0-.368-.445a5.381 5.381 0 0 0-.421-.422a91.549 91.549 0 0 0-.43-.383a8.277 8.277 0 0 1-.367-.344a1.516 1.516 0 0 0-.508-.336zm-.367 4.586a3.13 3.13 0 0 1-.797.086a5.526 5.526 0 0 1-1.516-.242a8.362 8.362 0 0 1-1.586-.664a13.205 13.205 0 0 1-3.047-2.297a17.15 17.15 0 0 1-1.289-1.461a10.502 10.502 0 0 1-1.03-1.578a9.12 9.12 0 0 1-.673-1.61A5.308 5.308 0 0 1 2 4.602a3.34 3.34 0 0 1 .094-.79c.057-.218.143-.414.258-.585c.114-.172.255-.339.421-.5c.167-.162.357-.35.57-.563a.542.542 0 0 1 .4-.164c.062-.005.158.036.288.125c.13.089.271.195.422.32a7.058 7.058 0 0 1 .899.899c.125.15.229.289.312.414c.083.125.125.221.125.289a.429.429 0 0 1-.101.312c-.073.084-.16.18-.258.29c-.1.109-.209.213-.328.312c-.12.099-.23.216-.329.351a2.266 2.266 0 0 0-.25.438a1.345 1.345 0 0 0-.101.54c.005.213.047.413.125.6c.078.188.19.355.336.5l3.726 3.727a1.527 1.527 0 0 0 1.102.46a1.2 1.2 0 0 0 .547-.1a2.414 2.414 0 0 0 .789-.586c.11-.12.21-.23.305-.329c.093-.098.19-.182.289-.25a.545.545 0 0 1 .312-.101c.073 0 .172.042.297.125c.125.083.263.19.414.32c.151.13.307.274.469.43c.161.156.305.312.43.469c.124.156.229.297.312.422c.083.125.125.22.125.289a.533.533 0 0 1-.164.39c-.224.219-.414.41-.57.57a3.159 3.159 0 0 1-.5.422a1.93 1.93 0 0 1-.586.266zM15 1.704l-4.64 4.648h3.288v1h-5v-5h1V5.64L14.297 1l.703.703z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                 />
                             </svg>
                         </div>
-                        <p class="ps-3">+234 817 835 9407</p>
+                        <p className="ps-3">+234 817 835 9407</p>
                     </div>
-                    <div class="d-flex pt-3">
+                    <div className="d-flex pt-3">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.6em" height="1.6em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
                                 <path fill="currentColor" d="M19 24H4L3.997 8.906l11.434 7.916a1 1 0 0 0 1.138 0L28 8.91V18h2V8a2.003 2.003 0 0 0-2-2H4a2.002 2.002 0 0 0-2 2v16a2.003 2.003 0 0 0 2 2h15Zm6.799-16L16 14.784L6.201 8Z" />
                                 <circle cx="26" cy="24" r="4" fill="currentColor" />
                             </svg>
                         </div>
-                        <p class="ps-3">kennedychidi55@gmail.com</p>
+                        <p className="ps-3">kennedychidi55@gmail.com</p>
                     </div>
                 </div>
-                <div class="px-2">
-                    <h2 class="f1">Catalogue:</h2>
-                    <ul class="container f_list mt-3">
-                        <li class="menu">Wardcoats</li>
-                        <li class="menu">Medical Scrubs</li>
-                        <li class="menu">Crocs</li>
-                        <li class="menu">Sneakers</li>
-                        <li class="menu">Pen Torch</li>
-                        <li class="menu">Scrub Caps</li>
-                        <li class="menu">ID Card Holder</li>
-                        <li class="menu">Medical Brooches</li>
-                        <li class="menu">Inscription T-shirt</li>
-                        <li class="menu">Scrub inner Shirts</li>
+                <div className="px-2">
+                    <h2 className="f1">Catalogue:</h2>
+                    <ul className="container f_list mt-3">
+                        <li className="menu">Wardcoats</li>
+                        <li className="menu">Medical Scrubs</li>
+                        <li className="menu">Crocs</li>
+                        <li className="menu">Sneakers</li>
+                        <li className="menu">Pen Torch</li>
+                        <li className="menu">Scrub Caps</li>
+                        <li className="menu">ID Card Holder</li>
+                        <li className="menu">Medical Brooches</li>
+                        <li className="menu">Inscription T-shirt</li>
+                        <li className="menu">Scrub inner Shirts</li>
                     </ul>
                 </div>
-                <div class="px-2">
-                    <h2 class="f2">FOLLOW US</h2>
+                <div className="px-2">
+                    <h2 className="f2">FOLLOW US</h2>
                     {/* Social Media Icons */}
-                    <div class="social d-flex justify-content-start pt-3">
+                    <div className="social d-flex justify-content-start pt-3">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                 <path fill="#ffffff" d="M12 2.04c-5.5 0-10 4.49-10 10.02c0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89c1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02Z" />
@@ -81,16 +81,16 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    <div class="pt-5">
-                        <h2 class="f3">SIGN UP FOR NEWSLETTER</h2>
-                        <p class="pt-3">Receive our latest updates about our products & promotions</p>
-                        <form class="row g-2">
-                            <div class="col-auto">
-                                <label for="news" class="visually-hidden"></label>
-                                <input type="email" class="form-control" id="news" placeholder="Email Address" />
+                    <div className="pt-5">
+                        <h2 className="f3">SIGN UP FOR NEWSLETTER</h2>
+                        <p className="pt-3">Receive our latest updates about our products & promotions</p>
+                        <form className="row g-2">
+                            <div className="col-auto">
+                                <label htmlFor="news" className="visually-hidden"></label>
+                                <input type="email" className="form-control" id="news" placeholder="Email Address" />
                             </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-danger mb-3 px-4">
+                            <div className="col-auto">
+                                <button type="submit" className="btn btn-danger mb-3 px-4">
                                     Submit
                                 </button>
                             </div>
@@ -98,9 +98,9 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div class="f-bottom mt-5">
+            <div className="f-bottom mt-5">
                 {/* Payment Methods */}
-                <div class="w_1200 py-3">© 2022, Markie Stores. All Rights Reserved</div>
+                <div className="w_1200 py-3">© 2022, Markie Stores. All Rights Reserved</div>
             </div>
         </footer>
     );

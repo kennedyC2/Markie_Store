@@ -1,17 +1,23 @@
+import { Link } from "react-router-dom";
+import pic7 from "../assets/images/pic 7.jpg";
+import pic1 from "../assets/images/pic 1.png";
+import pic2 from "../assets/images/pic 2.jpg";
+import pic8 from "../assets/images/pic 8.png";
+
 const Header = () => {
     return (
         <header>
-            <div class="container w_1200 m-auto">
-                <div class="ht_wrapper d-flex justify-content-between">
+            <div className="container w_1200 m-auto">
+                <div className="ht_wrapper d-flex justify-content-between">
                     {/* LOGO Container */}
-                    <div class="logo position-relative d-none d-lg-block">
-                        <a href="./index.html">
-                            <h4 class="position-absolute m-0 bottom-0">MARKIE</h4>
-                        </a>
+                    <div className="logo position-relative d-none d-lg-block">
+                        <Link to="/">
+                            <h4 className="position-absolute m-0 bottom-0">MARKIE</h4>
+                        </Link>
                     </div>
-                    <div class="text-end">
+                    <div className="text-end">
                         {/* Social Media Icons */}
-                        <div class="d-none d-lg-flex social justify-content-end py-3">
+                        <div className="d-none d-lg-flex social justify-content-end py-3">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.6em" height="1.6em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                     <path fill="#03001e" d="M12 2.04c-5.5 0-10 4.49-10 10.02c0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89c1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02Z" />
@@ -34,15 +40,15 @@ const Header = () => {
                             </div>
                         </div>
                         {/* Message Below Social Media Icons */}
-                        <div class="d-none d-lg-block ln_0 py-2">
-                            <p class="m-0">Delivery Within 2-Days To All 36 States Of Nigeria</p>
+                        <div className="d-none d-lg-block ln_0 py-2">
+                            <p className="m-0">Delivery Within 2-Days To All 36 States Of Nigeria</p>
                         </div>
-                        <div class="d-flex ln_1 justify-content-end">
+                        <div className="d-flex ln_1 justify-content-end">
                             {/* Desktop Search Bar */}
-                            <div class="d_search_bar">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="Search_bar_d" />
-                                    <span class="input-group-text" id="Search_bar_d">
+                            <div className="d_search_bar">
+                                <div className="input-group">
+                                    <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="Search_bar_d" />
+                                    <span className="input-group-text" id="Search_bar_d">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 50 50">
                                             <path fill="currentColor" d="M23 36c-7.2 0-13-5.8-13-13s5.8-13 13-13s13 5.8 13 13s-5.8 13-13 13zm0-24c-6.1 0-11 4.9-11 11s4.9 11 11 11s11-4.9 11-11s-4.9-11-11-11z" />
                                             <path fill="currentColor" d="m32.682 31.267l8.98 8.98l-1.414 1.414l-8.98-8.98z" />
@@ -50,199 +56,199 @@ const Header = () => {
                                     </span>
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="m_menu my-auto d-lg-none"></div>
+                            <div className="d-flex">
+                                <div className="m_menu my-auto d-lg-none"></div>
                                 {/* LOGO Container */}
-                                <div class="my-auto d-lg-none">
-                                    <a class="text-decoration-none" href="./index.html">
-                                        <h3 class="my-auto">MARKIE</h3>
+                                <div className="my-auto d-lg-none">
+                                    <a className="text-decoration-none" href="/">
+                                        <h3 className="my-auto">MARKIE</h3>
                                     </a>
                                 </div>
-                                <div class="d-flex">
+                                <div className="d-flex">
                                     {/* Account Icon */}
-                                    <div class="d-flex">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="m-auto" width="1.35em" height="1.25em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1536 1792">
+                                    <div className="d-flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="1.35em" height="1.25em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1536 1792">
                                             <path fill="#03001e" d="M1201 784q47 14 89.5 38t89 73t79.5 115.5t55 172t22 236.5q0 154-100 263.5T1195 1792H341q-141 0-241-109.5T0 1419q0-131 22-236.5t55-172T156.5 895t89-73t89.5-38q-79-125-79-272q0-104 40.5-198.5T406 150T569.5 40.5T768 0t198.5 40.5T1130 150t109.5 163.5T1280 512q0 147-79 272zM768 128q-159 0-271.5 112.5T384 512t112.5 271.5T768 896t271.5-112.5T1152 512t-112.5-271.5T768 128zm427 1536q88 0 150.5-71.5T1408 1419q0-239-78.5-377T1104 897q-145 127-336 127T432 897q-147 7-225.5 145T128 1419q0 102 62.5 173.5T341 1664h854z" />
                                         </svg>
-                                        <p class="d-none d-lg-block m-auto">Account</p>
+                                        <p className="d-none d-lg-block m-auto">Account</p>
                                     </div>
                                     {/* Cart Icon */}
-                                    <div class="d-flex">
-                                        <button class="border border-0 bg-transparent d-inline-flex my-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartlist" aria-controls="cartlist">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="m-auto" width="1.45em" height="1.3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                                    <div className="d-flex">
+                                        <button className="border border-0 bg-transparent d-inline-flex my-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartlist" aria-controls="cartlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="1.45em" height="1.3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
                                                 <path fill="#03001e" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607L1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479l9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2a1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2a1 1 0 0 1 0-2z" />
                                             </svg>
-                                            <span class="d-none d-lg-block m-auto" style={{ paddingTop: "0.18rem" }}>
+                                            <span className="d-none d-lg-block m-auto" style={{ paddingTop: "0.18rem" }}>
                                                 Cart
                                             </span>
                                         </button>
 
-                                        <div class="offcanvas offcanvas-end ps-2" tabIndex="-1" id="cartlist" aria-labelledby="cartlistLabel">
-                                            <div class="offcanvas-header pb-0 px-4 mt-2">
-                                                <h5 class="cartlistLabel heading">SHOPPING CART</h5>
-                                                <button type="button" class="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                        <div className="offcanvas offcanvas-end ps-2" tabIndex="-1" id="cartlist" aria-labelledby="cartlistLabel">
+                                            <div className="offcanvas-header pb-0 px-4 mt-2">
+                                                <h5 className="cartlistLabel heading">SHOPPING CART</h5>
+                                                <button type="button" className="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                             </div>
-                                            <div class="offcanvas-body py-0">
+                                            <div className="offcanvas-body py-0">
                                                 {/* Top */}
-                                                <div class="item_count text-start c-top px-4">
+                                                <div className="item_count text-start c-top px-4">
                                                     <span>3</span>
                                                     <span>Items</span>
                                                 </div>
                                                 {/* Scrollable Mid */}
-                                                <div class="pt-3 ps-1 c-mid px-4">
+                                                <div className="pt-3 ps-1 c-mid px-4">
                                                     <div>
-                                                        <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div class="col-3 pe-2">
-                                                                <img src="./assets/images/pic 1.png" class="d-block w-100 h-100" alt="..." />
+                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
+                                                            <div className="col-3 pe-2">
+                                                                <img src={pic1} className="d-block w-100 h-100" alt="..." />
                                                             </div>
-                                                            <div class="col-5 text-start ps-2 m-auto">
-                                                                <p class="pb-1">Scrub Top</p>
-                                                                <p class="pb-1">Purple / XXL</p>
-                                                                <p class="pb-1">&#x20A6; 5800</p>
+                                                            <div className="col-5 text-start ps-2 m-auto">
+                                                                <p className="pb-1">Scrub Top</p>
+                                                                <p className="pb-1">Purple / XXL</p>
+                                                                <p className="pb-1">&#x20A6; 5800</p>
                                                             </div>
-                                                            <div class="col-1 pt-2 m-auto">
-                                                                <button type="button" class="btn-close text-reset"></button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div class="col-3 pe-2">
-                                                                <img src="./assets/images/pic 2.jpg" class="d-block w-100 h-100" alt="..." />
-                                                            </div>
-                                                            <div class="col-5 text-start ps-2 m-auto">
-                                                                <p class="pb-1">Scrub Top</p>
-                                                                <p class="pb-1">Lemon Green / L</p>
-                                                                <p class="pb-1">&#x20A6; 8000</p>
-                                                            </div>
-                                                            <div class="col-1 pt-2 m-auto">
-                                                                <button type="button" class="btn-close text-reset"></button>
+                                                            <div className="col-1 pt-2 m-auto">
+                                                                <button type="button" className="btn-close text-reset"></button>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div class="col-3 pe-2">
-                                                                <img src="./assets/images/pic 8.png" class="d-block w-100 h-100" alt="..." />
+                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
+                                                            <div className="col-3 pe-2">
+                                                                <img src={pic2} className="d-block w-100 h-100" alt="..." />
                                                             </div>
-                                                            <div class="col-5 text-start ps-2 m-auto">
-                                                                <p class="pb-1">Scrub Top</p>
-                                                                <p class="pb-1">Brown / SM</p>
-                                                                <p class="pb-1">&#x20A6; 7000</p>
+                                                            <div className="col-5 text-start ps-2 m-auto">
+                                                                <p className="pb-1">Scrub Top</p>
+                                                                <p className="pb-1">Lemon Green / L</p>
+                                                                <p className="pb-1">&#x20A6; 8000</p>
                                                             </div>
-                                                            <div class="col-1 pt-2 m-auto">
-                                                                <button type="button" class="btn-close text-reset"></button>
+                                                            <div className="col-1 pt-2 m-auto">
+                                                                <button type="button" className="btn-close text-reset"></button>
+                                                            </div>
+                                                        </div>
+                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
+                                                            <div className="col-3 pe-2">
+                                                                <img src={pic8} className="d-block w-100 h-100" alt="..." />
+                                                            </div>
+                                                            <div className="col-5 text-start ps-2 m-auto">
+                                                                <p className="pb-1">Scrub Top</p>
+                                                                <p className="pb-1">Brown / SM</p>
+                                                                <p className="pb-1">&#x20A6; 7000</p>
+                                                            </div>
+                                                            <div className="col-1 pt-2 m-auto">
+                                                                <button type="button" className="btn-close text-reset"></button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 {/* Bottom */}
-                                                <div class="c-btm px-4">
-                                                    <div class="w-100 d-flex justify-content-between pt-3 pb-1">
+                                                <div className="c-btm px-4">
+                                                    <div className="w-100 d-flex justify-content-between pt-3 pb-1">
                                                         <p>Total:</p>
                                                         <p>&#x20A6; 20,800</p>
                                                     </div>
-                                                    <div class="pt-1 pb-3">
-                                                        <div class="form-check text-start ps-4">
-                                                            <input class="form-check-input me-3" type="checkbox" value="" id="T&C" />
-                                                            <label class="form-check-label" for="T&C">
+                                                    <div className="pt-1 pb-3">
+                                                        <div className="form-check text-start ps-4">
+                                                            <input className="form-check-input me-3" type="checkbox" value="" id="T&C" />
+                                                            <label className="form-check-label" htmlFor="T&C">
                                                                 {" "}
                                                                 I Agree With The Terms and Conditions{" "}
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" class="btn btn-md w-100 py-2 mb-3">
+                                                        <button type="button" className="btn btn-md w-100 py-2 mb-3">
                                                             CHECKOUT
                                                         </button>{" "}
                                                         <br />
-                                                        <a href="./cart.html" class="btn btn-md w-100 py-2">
+                                                        <Link to="./cart" className="btn btn-md w-100 py-2">
                                                             VIEW CART
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     {/* Wish list Icon */}
-                                    <div class="d-flex">
-                                        <button class="border-0 bg-transparent d-inline-flex m-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#wishlist" aria-controls="wishlist">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="m-auto" width="1.4em" height="1.35em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z" />
+                                    <div className="d-flex">
+                                        <button className="border-0 bg-transparent d-inline-flex m-auto pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#wishlist" aria-controls="wishlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="1.4em" height="1.35em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                                <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z" />
                                             </svg>
-                                            <span class="d-none d-lg-block m-auto space">Wishlist</span>
+                                            <span className="d-none d-lg-block m-auto space">Wishlist</span>
                                         </button>
 
-                                        <div class="offcanvas offcanvas-end ps-2" tabIndex="-1" id="wishlist" aria-labelledby="wishlistLabel">
-                                            <div class="offcanvas-header pb-0 px-4 mt-2">
-                                                <h5 class="wishlistLabel heading">WISHLIST</h5>
-                                                <button type="button" class="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                        <div className="offcanvas offcanvas-end ps-2" tabIndex="-1" id="wishlist" aria-labelledby="wishlistLabel">
+                                            <div className="offcanvas-header pb-0 px-4 mt-2">
+                                                <h5 className="wishlistLabel heading">WISHLIST</h5>
+                                                <button type="button" className="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                             </div>
-                                            <div class="offcanvas-body py-0">
+                                            <div className="offcanvas-body py-0">
                                                 {/* Top */}
-                                                <div class="item_count text-start w-top px-4">
+                                                <div className="item_count text-start w-top px-4">
                                                     <span>4</span>
-                                                    <span>Items</span>
+                                                    <span> Items</span>
                                                 </div>
                                                 {/* Scrollable Mid */}
-                                                <div class="pt-3 ps-1 w-mid px-4">
+                                                <div className="pt-3 ps-1 w-mid px-4">
                                                     <div>
-                                                        <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div class="col-3 pe-2">
-                                                                <img src="./assets/images/pic 1.png" class="d-block w-100 h-100" alt="..." />
+                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
+                                                            <div className="col-3 pe-2">
+                                                                <img src={pic1} className="d-block w-100 h-100" alt="..." />
                                                             </div>
-                                                            <div class="col-5 text-start ps-2 m-auto">
-                                                                <p class="pb-1">Scrub Top</p>
-                                                                <p class="pb-1">Purple / XXL</p>
-                                                                <p class="pb-1">&#x20A6; 5800</p>
+                                                            <div className="col-5 text-start ps-2 m-auto">
+                                                                <p className="pb-1">Scrub Top</p>
+                                                                <p className="pb-1">Purple / XXL</p>
+                                                                <p className="pb-1">&#x20A6; 5800</p>
                                                             </div>
-                                                            <div class="col-1 pt-2 m-auto">
-                                                                <button type="button" class="btn-close text-reset"></button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div class="col-3 pe-2">
-                                                                <img src="./assets/images/pic 2.jpg" class="d-block w-100 h-100" alt="..." />
-                                                            </div>
-                                                            <div class="col-5 text-start ps-2 m-auto">
-                                                                <p class="pb-1">Scrub Top</p>
-                                                                <p class="pb-1">Lemon Green / L</p>
-                                                                <p class="pb-1">&#x20A6; 8000</p>
-                                                            </div>
-                                                            <div class="col-1 pt-2 m-auto">
-                                                                <button type="button" class="btn-close text-reset"></button>
+                                                            <div className="col-1 pt-2 m-auto">
+                                                                <button type="button" className="btn-close text-reset"></button>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div class="col-3 pe-2">
-                                                                <img src="./assets/images/pic 8.png" class="d-block w-100 h-100" alt="..." />
+                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
+                                                            <div className="col-3 pe-2">
+                                                                <img src={pic2} className="d-block w-100 h-100" alt="..." />
                                                             </div>
-                                                            <div class="col-5 text-start ps-2 m-auto">
-                                                                <p class="pb-1">Scrub Top</p>
-                                                                <p class="pb-1">Brown / SM</p>
-                                                                <p class="pb-1">&#x20A6; 7000</p>
+                                                            <div className="col-5 text-start ps-2 m-auto">
+                                                                <p className="pb-1">Scrub Top</p>
+                                                                <p className="pb-1">Lemon Green / L</p>
+                                                                <p className="pb-1">&#x20A6; 8000</p>
                                                             </div>
-                                                            <div class="col-1 pt-2 m-auto">
-                                                                <button type="button" class="btn-close text-reset"></button>
+                                                            <div className="col-1 pt-2 m-auto">
+                                                                <button type="button" className="btn-close text-reset"></button>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div class="col-3 pe-2">
-                                                                <img src="./assets/images/pic 7.jpg" class="d-block w-100 h-100" alt="..." />
+                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
+                                                            <div className="col-3 pe-2">
+                                                                <img src={pic8} className="d-block w-100 h-100" alt="..." />
                                                             </div>
-                                                            <div class="col-5 text-start ps-2 m-auto">
-                                                                <p class="pb-1">Scrub Top</p>
-                                                                <p class="pb-1">Lemon Green / L</p>
-                                                                <p class="pb-1">&#x20A6; 8000</p>
+                                                            <div className="col-5 text-start ps-2 m-auto">
+                                                                <p className="pb-1">Scrub Top</p>
+                                                                <p className="pb-1">Brown / SM</p>
+                                                                <p className="pb-1">&#x20A6; 7000</p>
                                                             </div>
-                                                            <div class="col-1 pt-2 m-auto">
-                                                                <button type="button" class="btn-close text-reset"></button>
+                                                            <div className="col-1 pt-2 m-auto">
+                                                                <button type="button" className="btn-close text-reset"></button>
+                                                            </div>
+                                                        </div>
+                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
+                                                            <div className="col-3 pe-2">
+                                                                <img src={pic7} className="d-block w-100 h-100" alt="..." />
+                                                            </div>
+                                                            <div className="col-5 text-start ps-2 m-auto">
+                                                                <p className="pb-1">Scrub Top</p>
+                                                                <p className="pb-1">Lemon Green / L</p>
+                                                                <p className="pb-1">&#x20A6; 8000</p>
+                                                            </div>
+                                                            <div className="col-1 pt-2 m-auto">
+                                                                <button type="button" className="btn-close text-reset"></button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 {/* Bottom */}
-                                                <div class="w-btm px-4">
-                                                    <div class="pt-3">
-                                                        <a href="./wishlist.html" class="btn btn-md w-100 py-2">
+                                                <div className="w-btm px-4">
+                                                    <div className="pt-3">
+                                                        <Link to="./wishlist" className="btn btn-md w-100 py-2">
                                                             VIEW WISHLIST
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </div>
@@ -254,68 +260,68 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <div class="header_bottom mt-1 d-none d-lg-block">
+            <div className="header_bottom mt-1 d-none d-lg-block">
                 {/* Menu */}
-                <div class="cat container w_1200">
-                    <ul class="h_list d-flex">
-                        <li class="menu">
-                            <a href="./category.html">Wardcoats</a>
+                <div className="cat container w_1200">
+                    <ul className="h_list d-flex">
+                        <li className="menu">
+                            <Link to="./category">Wardcoats</Link>
                         </li>
-                        <li class="menu">
-                            <a href="./category.html">Scrubs</a>
+                        <li className="menu">
+                            <Link to="./category">Scrubs</Link>
                         </li>
-                        <li class="menu">
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li className="menu">
+                            <div className="dropdown">
+                                <button className="btn dropdown-toggle border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Footwears
                                 </button>
-                                <ul class="dropdown-menu">
+                                <ul className="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="./category.html">
+                                        <Link className="dropdown-item" to="./category">
                                             Crocs
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="./category.html">
+                                        <Link className="dropdown-item" to="./category">
                                             Sneakers
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li class="menu">
-                            <a href="./category.html">Inscription T-Shirts</a>
+                        <li className="menu">
+                            <Link to="./category">Inscription T-Shirts</Link>
                         </li>
-                        <li class="menu">
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li className="menu">
+                            <div className="dropdown">
+                                <button className="btn dropdown-toggle border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Accessories
                                 </button>
-                                <ul class="dropdown-menu">
+                                <ul className="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="./category.html">
+                                        <Link className="dropdown-item" to="./category">
                                             Pen Torch
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="./category.html">
+                                        <Link className="dropdown-item" to="./category">
                                             Scrub Caps
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="./category.html">
+                                        <Link className="dropdown-item" to="./category">
                                             ID Card Holder
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="./category.html">
+                                        <Link className="dropdown-item" to="./category">
                                             Medical Brooches
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="./category.html">
+                                        <Link className="dropdown-item" to="./category">
                                             Scrub Inner T-Shirt
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>

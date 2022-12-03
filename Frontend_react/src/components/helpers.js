@@ -1,4 +1,4 @@
-const populate = (elem) => {
+export const Populate = (elem) => {
     let items = document.querySelectorAll("#" + elem + " .carousel-item .grid");
 
     items.forEach((el) => {
@@ -15,6 +15,3 @@ const populate = (elem) => {
         }
     });
 };
-
-populate("newArrival");
-populate("trending");
