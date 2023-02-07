@@ -4,8 +4,19 @@ import pic8 from "../assets/images/pic 8.png";
 import pic5 from "../assets/images/pic 5.jpg";
 import pic6 from "../assets/images/pic 6.jpg";
 import pic4 from "../assets/images/pic 4.png";
+import { useEffect } from "react";
 
 const Cart = () => {
+    useEffect(() => {
+        const c_canvas = document.querySelector("div#cartlist.offcanvas");
+        const c_canvas_close = document.querySelector("div#cartlist.offcanvas > div.offcanvas-header button");
+
+        if (c_canvas.classList.contains("show")) {
+            c_canvas_close.click();
+        }
+
+        return;
+    });
     return (
         <div className="cartlist body m-auto pt-3">
             <div className="container w_1200">

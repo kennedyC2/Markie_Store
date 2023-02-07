@@ -4,8 +4,21 @@ import pic8 from "../assets/images/pic 8.png";
 import pic5 from "../assets/images/pic 5.jpg";
 import pic6 from "../assets/images/pic 6.jpg";
 import pic4 from "../assets/images/pic 4.png";
+import { useEffect } from "react";
 
 const Wishlist = () => {
+    useEffect(() => {
+        const w_canvas = document.querySelector("div#wishlist.offcanvas");
+        const w_canvas_close = document.querySelector("div#wishlist.offcanvas > div.offcanvas-header button");
+
+        if (w_canvas.classList.contains("show")) {
+            console.log("true");
+            w_canvas_close.click();
+        }
+
+        return;
+    });
+
     return (
         <div className="wishlist body m-auto pt-3">
             <div className="container w_1200">

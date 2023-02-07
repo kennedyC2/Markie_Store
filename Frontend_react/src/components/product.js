@@ -113,9 +113,7 @@ const Product = () => {
                                 <div className="col-5 text-end">&#x20A6; 20,800</div>
                             </div>
                             <div className="my-4">
-                                <p for="location" className="form-label mb-3">
-                                    Location:
-                                </p>
+                                <p className="mb-3">Location:</p>
                                 <div className="dropdown-center">
                                     <button className="btn dropdown-toggle w-100 mb-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Owerri
@@ -143,7 +141,7 @@ const Product = () => {
                                 <div className="pt-1 pb-3">
                                     <div className="form-check text-start ps-4 pt-4 pb-3">
                                         <input className="form-check-input me-3" type="checkbox" value="" id="T&C" />
-                                        <label className="form-check-label" for="T&C">
+                                        <label className="form-check-label" htmlFor="T&C">
                                             {" "}
                                             I agree with the <span className="text-decoration-underline">Terms and Conditions</span>{" "}
                                         </label>
