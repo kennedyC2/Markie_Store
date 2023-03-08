@@ -7,6 +7,7 @@ import Cart from "./components/cart";
 import Footer from "./components/footer";
 import Wishlist from "./components/wishlist";
 import Product from "./components/product";
+import Admin from "./components/admin/main";
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/product" element={<Product />} />
+                <Route path="/admin" element={<Admin />} />
             </Routes>
             <Footer />
         </div>

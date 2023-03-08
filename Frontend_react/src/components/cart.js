@@ -17,6 +17,7 @@ const Cart = () => {
 
         return;
     });
+
     return (
         <div className="cartlist body m-auto pt-3">
             <div className="container w_1200">

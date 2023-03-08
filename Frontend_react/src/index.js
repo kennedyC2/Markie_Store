@@ -5,12 +5,24 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import rootReducer from "./components/reducers";
+
+// Store
+const store = configureStore({
+    reducer: rootReducer,
+});
+
+console.log(store.getState());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <App />
+            <Provider store={store}>
+                <App />
+            </Provider>
         </BrowserRouter>
     </React.StrictMode>
 );

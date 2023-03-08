@@ -1,20 +1,18 @@
 // Import Dependencies
 // =======================================================
 const url = require("url");
-const https = require("https");
 const http = require("http");
 const stringDecoder = require("string_decoder").StringDecoder;
 const configuration = require("./config");
 const ping = require("../handlers/ping");
 const notFound = require("../handlers/notFound");
+const product = require("../handlers/product");
 const { parseJSONObject } = require("./helper");
+const { getImages } = require("./file");
 
 // Container
 // =======================================================
 const server = {};
-
-// Server Options
-// =======================================================
 
 // http Server
 // =======================================================
@@ -31,6 +29,7 @@ server["unifiedServer"] = (req, res) => {
     // Get Url Path
     const path = parsedUrl.pathname;
     const trimmedPath = path.replace(/^\/+|\/+$/g, "");
+    console.log(trimmedPath);
 
     // Get Header
     const headers = req.headers;
@@ -51,7 +50,6 @@ server["unifiedServer"] = (req, res) => {
     req.on("end", () => {
         // End Buffer
         buffer += decoder.end();
-        console.log(server.router[trimmedPath]);
 
         // Check Request Handler
         let chosenHandler = server.router[trimmedPath] !== undefined ? server.router[trimmedPath] : notFound;
@@ -137,6 +135,10 @@ server["handler"] = (res, Code, Message, Type) => {
 // =======================================================
 server["router"] = {
     ping: ping,
+    "products/add": product.create,
+    "products/get": product.read,
+    "products/update": product.update,
+    "products/delete": product.delete
 };
 
 // Server Init

@@ -1,3 +1,5 @@
+export const domain = "http://localhost:5000/";
+
 export const Populate = (elem) => {
     let items = document.querySelectorAll("#" + elem + " .carousel-item .grid");
 

@@ -19,6 +19,11 @@ select::-webkit-scrollbar-track {
     background: #e3ebf6;
 }
 
+input,
+select {
+    text-transform: capitalize;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -34,10 +39,18 @@ input[type="number"] {
 
 * {
     font-family: "Fira Sans", sans-serif !important;
-    font-weight: 500 !important;
+    font-weight: 500;
     font-size: 0.95rem !important;
     letter-spacing: 0.2px !important;
-    color: #03001e !important;
+    color: #03001e;
+}
+
+.ReactCrop {
+    height: 100% !important;
+}
+
+.invalid-feedback {
+    color: #dc3545 !important;
 }
 
 #newArrival,
@@ -1199,6 +1212,15 @@ footer * {
         font-size: 0.95rem !important;
     }
 
+    .form-check-label {
+        margin-top: 0.2rem;
+    }
+
+    .modal-body form {
+        width: 97%;
+        margin: auto;
+    }
+
     .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item .grid > div {
         display: flex;
     }
@@ -1493,6 +1515,212 @@ footer * {
         top: 1px;
         right: -43px;
         padding: 0.7em 0.7em;
+    }
+
+    /* Dashboard */
+    #myTab {
+        padding-top: 10px;
+    }
+
+    #dashboard .nav-link {
+        padding: 0.6rem 3rem !important;
+    }
+
+    #dashboard > .tab-content {
+        max-width: 1050px;
+        margin: auto;
+    }
+
+    #dashboard .sub_list .nav-link {
+        text-align: left;
+        padding: 0.3rem 1rem !important;
+        margin-bottom: 0.3rem;
+    }
+
+    #dashboard .sub_list > div > div:first-child {
+        width: 23%;
+        padding-right: 0.5rem;
+        /* border-right: 1px dotted #03001e34; */
+        min-height: 100%;
+    }
+
+    #dashboard .sub_list > div > div:nth-child(2) {
+        width: 72%;
+    }
+
+    #dashboard .nav-pills .nav-link.active {
+        background-color: #0d6efd !important;
+        color: #fff !important;
+    }
+
+    #dashboard .sub_list .nav-link:hover {
+        background-color: rgba(128, 128, 128, 0.258);
+    }
+
+    #dashboard .card {
+        /* display: flex;
+        flex-direction: row;  */
+        border: 1px dotted #03001e34;
+        /* margin-bottom: 1rem !important; */
+        /* width: calc((100% / 3) - 1rem); */
+    }
+
+    #dashboard .card img {
+        width: 100%;
+        height: 100%;
+        /* border-radius: calc(0.375rem - 1px) !important; */
+    }
+
+    #dashboard .card-title {
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+    }
+
+    /* #dashboard .card-text {
+        font-size: 0.95rem !important;
+        font-weight: 400 !important;
+    } */
+
+    /* #dashboard .card > .card-body {
+        padding-top: 1.5rem;
+        padding-right: 2rem;
+    } */
+
+    /* #dashboard .card > .card-body > div:nth-child(2) {
+        display: flex;
+        flex-direction: row;
+    } */
+
+    /* #dashboard .card > .card-body > div:nth-child(2) * {
+        margin-right: 1rem;
+        font-weight: 400 !important;
+    } */
+
+    #dashboard .grid {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        column-gap: 1rem;
+    }
+
+    #dashboard .form-check-input:checked {
+        background-color: unset;
+        border-color: unset !important;
+    }
+
+    #dashboard .modal button {
+        color: #fff !important;
+    }
+
+    #products-tab-pane > a {
+        position: fixed;
+        right: 55px;
+        bottom: 30px;
+        color: #fff !important;
+        box-shadow: 0px 5px 8px 3px rgba(70, 70, 70, 0.314);
+    }
+
+    .clr > input {
+        width: 40px;
+        height: 40px;
+        border-radius: 50% !important;
+        margin-right: 12px !important;
+    }
+
+    #dashboard form div * {
+        font-weight: 400 !important;
+    }
+
+    #dashboard input[type="file"] {
+        display: none !important;
+    }
+
+    #dashboard .cont1 {
+        width: 100%;
+        height: 25rem;
+    }
+
+    #dashboard .cont2 {
+        width: 80%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    #dashboard .cont2 > div:first-child {
+        width: 100%;
+        height: 87%;
+        position: relative;
+    }
+
+    .reactEasyCrop_CropArea {
+        color: rgba(128, 128, 128, 0.25) !important;
+    }
+
+    #dashboard .cont2 > div:nth-child(2) {
+        width: 100%;
+    }
+
+    #dashboard .cont3 {
+        width: 17%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    #dashboard .cont4 {
+        /* width: calc((100% / 3) - 0.5rem); */
+        /* height: 100%; */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #dashboard .cont3 > div {
+        width: 100%;
+        height: calc((100% / 3) - 0.5rem);
+        border: 1px solid gray;
+        position: relative;
+    }
+
+    #dashboard .cont4 > div {
+        /* width: 100%; */
+        width: calc((100% / 3) - 0.5rem);
+        border: 1px solid gray;
+        position: relative;
+    }
+
+    #dashboard .cont3 > div button {
+        width: 100%;
+        height: 100%;
+        color: gray !important;
+        opacity: 0.5;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    #dashboard .cont3 > div img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #dashboard .cont3 > div button:hover {
+        opacity: 0.9;
+    }
+
+    .modalTwo,
+    .modalOne {
+        min-width: 800px !important;
+    }
+
+    .modalThree {
+        min-width: 500px !important;
+    }
+
+    .fdiv > div {
+        width: 48%;
     }
 }
 

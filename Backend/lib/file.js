@@ -1,6 +1,6 @@
 // import Dependencies
 // =================================================================================
-const { open, readFile, writeFile, close } = await import("fs");
+const { readFile, writeFileSync, openSync } = require("fs");
 const path = require("path");
 
 // Container
@@ -52,59 +52,34 @@ misc["getImages"] = (data, callback) => {
 };
 
 // Save Images
-misc["saveImages"] = (data, callback) => {
-    // Check Method
-    switch (data.method) {
-        case "options":
-            callback(200, {}, "json");
-            break;
+misc["saveImages"] = (obj, callback) => {
+    // Validate data
+    const data = typeof obj === "object" ? obj : false;
 
-        case "post":
-            // Validate data
-            const email = typeof data.payload.email === "string" && data.payload.email.trim().length > 0 ? data.payload.email.trim().toLowerCase() : false;
-            const base64 = typeof data.payload.base64 === "string" && data.payload.base64.trim().length > 0 ? data.payload.base64.trim() : false;
+    if (data) {
+        // Define Response
+        const _data = {};
 
-            if (email && base64) {
-                const filename = Date.now() + ".jpg";
+        // Loop and save
+        for (const prop in data) {
+            const filename = Date.now() + ".jpg";
+            // Get Payload
+            const base64_file = data[prop].toString("base64");
 
-                // Open File
-                open(misc.image_base_directory + filename, "wx", (err, fd) => {
-                    // Check for error
-                    if (!err && fd) {
-                        // Get Payload
-                        const base64_file = base64.toString("base64");
+            // Define Filename
+            const _file = base64_file.split(",")[1];
 
-                        // Define Filename
-                        const _file = base64_file.split(",")[1];
+            // Write data
+            writeFileSync(misc.image_base_directory + filename, _file, "base64");
 
-                        // Write data
-                        writeFile(fd, _file, "base64", (err) => {
-                            if (!err) {
-                                // Close File
-                                close(fd, (err) => {
-                                    if (!err) {
-                                        // Return
-                                        callback(200, {}, "json");
-                                    } else {
-                                        callback(500, { error: "Something Happened, Please Try Again Later" }, "json");
-                                    }
-                                });
-                            } else {
-                                callback(500, { error: "Something Happened, Please Try Again Later" }, "json");
-                            }
-                        });
-                    } else {
-                        callback(500, { error: "Something Happened, Please Try Again Later" }, "json");
-                    }
-                });
-            } else {
-                callback(400, { error: "Missing Required Fields" }, "json");
-            }
-            break;
+            // Update
+            _data[prop] = filename;
+        }
 
-        default:
-            callback(405, {}, "json");
-            break;
+        // Send
+        callback(false, _data);
+    } else {
+        callback(true, { error: "Inappropriate Data" });
     }
 };
 
