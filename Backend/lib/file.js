@@ -1,6 +1,6 @@
 // import Dependencies
 // =================================================================================
-const { readFile, writeFileSync, openSync } = require("fs");
+const { readFile, writeFileSync, openSync, unlinkSync } = require("fs");
 const path = require("path");
 
 // Container
@@ -63,6 +63,7 @@ misc["saveImages"] = (obj, callback) => {
         // Loop and save
         for (const prop in data) {
             const filename = Date.now() + ".jpg";
+
             // Get Payload
             const base64_file = data[prop].toString("base64");
 
@@ -78,6 +79,146 @@ misc["saveImages"] = (obj, callback) => {
 
         // Send
         callback(false, _data);
+    } else {
+        callback(true, { error: "Inappropriate Data" });
+    }
+};
+
+// Update Images
+misc["updateImages"] = (oldImages, newImages, callback) => {
+    // Validate data
+    const data1 = typeof oldImages === "object" ? oldImages : false;
+    const data2 = typeof newImages === "object" ? newImages : false;
+
+    if (data1 && data2) {
+        // check and delete
+        if (newImages.main !== "") {
+            const filename = Date.now() + ".jpg";
+
+            try {
+                // delete data
+                unlinkSync(misc.image_base_directory + oldImages.main);
+
+                // Get Payload
+                const base64_file = newImages.main.toString("base64");
+
+                // Define Filename
+                const _file = base64_file.split(",")[1];
+
+                // Write data
+                writeFileSync(misc.image_base_directory + filename, _file, "base64");
+
+                // Update filename
+                oldImages.main = filename
+            } catch (error) {
+                // Get Payload
+                const base64_file = newImages.main.toString("base64");
+
+                // Define Filename
+                const _file = base64_file.split(",")[1];
+
+                // Write data
+                writeFileSync(misc.image_base_directory + filename, _file, "base64");
+
+                // Update filename
+                oldImages.main = filename
+            }
+        }
+
+        if (newImages.image_1 !== "") {
+            const filename = Date.now() + ".jpg";
+
+            try {
+                // delete data
+                unlinkSync(misc.image_base_directory + oldImages.image_1);
+
+                // Get Payload
+                const base64_file = newImages.image_1.toString("base64");
+
+                // Define Filename
+                const _file = base64_file.split(",")[1];
+
+                // Write data
+                writeFileSync(misc.image_base_directory + filename, _file, "base64");
+
+                // Update filename
+                oldImages.image_1 = filename
+            } catch (error) {
+                // Get Payload
+                const base64_file = newImages.image_1.toString("base64");
+
+                // Define Filename
+                const _file = base64_file.split(",")[1];
+
+                // Write data
+                writeFileSync(misc.image_base_directory + filename, _file, "base64");
+
+                // Update filename
+                oldImages.image_1 = filename
+            }
+        }
+
+        if (newImages.image_2 !== "") {
+            const filename = Date.now() + ".jpg";
+
+            try {
+                // delete data
+                unlinkSync(misc.image_base_directory + oldImages.image_2);
+
+                // Get Payload
+                const base64_file = newImages.image_2.toString("base64");
+
+                // Define Filename
+                const _file = base64_file.split(",")[1];
+
+                // Write data
+                writeFileSync(misc.image_base_directory + filename, _file, "base64");
+
+                // Update filename
+                oldImages.image_2 = filename
+            } catch (error) {
+                // Get Payload
+                const base64_file = newImages.image_2.toString("base64");
+
+                // Define Filename
+                const _file = base64_file.split(",")[1];
+
+                // Write data
+                writeFileSync(misc.image_base_directory + filename, _file, "base64");
+
+                // Update filename
+                oldImages.image_2 = filename
+            }
+        }
+
+        // Send
+        callback(false, oldImages);
+    } else {
+        callback(true, { error: "Inappropriate Data" });
+    }
+};
+
+// Delete Images
+misc["deleteImages"] = (obj, callback) => {
+    // Validate data
+    const data = typeof obj === "object" ? obj : false;
+
+    if (data) {
+        // Loop and delete
+        for (const prop in data) {
+            const filename = data[prop];
+
+            try {
+                // Write data
+                unlinkSync(misc.image_base_directory + filename);
+            } catch (error) {
+                continue
+            }
+        }
+
+        // Send
+        callback(false, {});
+
     } else {
         callback(true, { error: "Inappropriate Data" });
     }

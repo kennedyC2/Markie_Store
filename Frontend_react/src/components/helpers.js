@@ -1,7 +1,7 @@
 export const domain = "http://localhost:5000/";
 
 export const Populate = (elem) => {
-    let items = document.querySelectorAll("#" + elem + " .carousel-item .grid");
+    let items = document.querySelectorAll("#" + elem + " .carousel-item");
 
     items.forEach((el) => {
         const minPerSlide = 5;
@@ -11,8 +11,8 @@ export const Populate = (elem) => {
                 // wrap carousel by using first child
                 next = items[0];
             }
-            let cloneChild = next.cloneNode(true);
-            el.appendChild(cloneChild.children[0]);
+            let cloneChild = next.firstChild.cloneNode(true);
+            el.firstChild.appendChild(cloneChild.children[0]);
             next = next.nextElementSibling;
         }
     });

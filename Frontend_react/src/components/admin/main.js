@@ -6,18 +6,16 @@ const Admin = () => {
         // Variables
         const dashboard = document.getElementById("dashboard");
         const menuTab = document.querySelector("ul#myTab");
+        const _menuTab = document.querySelector("div#myTabContent");
         const menuTabs = document.querySelectorAll("ul#myTab li");
         let tabs_width = 0;
 
         if (dashboard) {
-            document.querySelector("header").style.display = "none";
-            document.querySelector("footer").style.display = "none";
-
             menuTabs.forEach((element) => {
                 tabs_width += element.clientWidth;
             });
 
-            const padding = (menuTab.clientWidth - tabs_width) / 2;
+            const padding = ((menuTab.clientWidth - _menuTab.clientWidth) / 2) + (_menuTab.clientWidth - tabs_width);
 
             // Centralize menu
             menuTab.setAttribute("style", "padding-left:" + padding + "px");

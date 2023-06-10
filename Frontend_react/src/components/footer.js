@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
     return (
         <footer className="mt-5">
@@ -43,16 +45,33 @@ const Footer = () => {
                 <div className="px-2">
                     <h2 className="f1">Catalogue:</h2>
                     <ul className="container f_list mt-3">
-                        <li className="menu">Wardcoats</li>
-                        <li className="menu">Medical Scrubs</li>
-                        <li className="menu">Crocs</li>
-                        <li className="menu">Sneakers</li>
-                        <li className="menu">Pen Torch</li>
-                        <li className="menu">Scrub Caps</li>
-                        <li className="menu">ID Card Holder</li>
-                        <li className="menu">Medical Brooches</li>
-                        <li className="menu">Inscription T-shirt</li>
-                        <li className="menu">Scrub inner Shirts</li>
+                        <li className="menu">
+                            <Link to="/category/coats" state={{ collection: "coats", page: "1" }}>Wardcoats</Link>
+                        </li>
+                        <li className="menu">
+                            <Link to="/category/scrubs" state={{ collection: "scrubs", page: "1" }}>Medical Scrubs</Link>
+                        </li>
+                        <li className="menu">
+                            <Link to="/category/crocs" state={{ collection: "crocs", page: "1" }}>Crocs</Link>
+                        </li>
+                        <li className="menu">
+                            <Link to="/category/sneakers" state={{ collection: "sneakers", page: "1" }}>Sneakers</Link>
+                        </li>
+                        <li className="menu">
+                            <Link to="/category/pen_torch" state={{ collection: "penTorch", page: "1" }}>Pen Torch</Link>
+                        </li>
+                        <li className="menu">
+                            <Link to="/category/scrub_caps" state={{ collection: "scrubCaps", page: "1" }}>Scrub Caps</Link>
+                        </li>
+                        <li className="menu">
+                            <Link to="/category/id_card_holder" state={{ collection: "cardHolders", page: "1" }}>ID Card Holder</Link>
+                        </li>
+                        <li className="menu">
+                            <Link to="/category/medical_brooches" state={{ collection: "brooches", page: "1" }}>Medical Brooches</Link>
+                        </li>
+                        <li className="menu">
+                            <Link to="/category/inscription_t-shirts" state={{ collection: "inscription_shirts", page: "1" }}>Inscription T-shirt</Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="px-2">
@@ -98,7 +117,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className="f-bottom mt-5">
+            <div className="f-bottom opg mt-5">
                 {/* Payment Methods */}
                 <div className="w_1200 py-3">© 2022, Markie Stores. All Rights Reserved</div>
             </div>

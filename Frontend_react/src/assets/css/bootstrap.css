@@ -341,6 +341,7 @@ caption {
 }
 
 th {
+    text-align: match-parent;
     text-align: -webkit-match-parent;
     text-align: inherit;
 }
@@ -3339,7 +3340,7 @@ fieldset:disabled .btn {
 
 .dropdown-menu {
     --bs-dropdown-zindex: 1000;
-    --bs-dropdown-min-width: 9rem;
+    --bs-dropdown-min-width: 12rem;
     --bs-dropdown-padding-x: 0;
     --bs-dropdown-padding-y: 0.5rem;
     --bs-dropdown-spacer: 0.125rem;
@@ -3360,7 +3361,7 @@ fieldset:disabled .btn {
     --bs-dropdown-link-active-bg: #005de8;
     --bs-dropdown-link-disabled-color: #adb5bd;
     --bs-dropdown-item-padding-x: 1rem;
-    --bs-dropdown-item-padding-y: 0.25rem;
+    --bs-dropdown-item-padding-y: 0.4rem;
     --bs-dropdown-header-color: #6c757d;
     --bs-dropdown-header-padding-x: 1rem;
     --bs-dropdown-header-padding-y: 0.5rem;

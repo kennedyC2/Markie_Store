@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./assets/css/bootstrap.css" />
+        <link rel="stylesheet" href="./assets/css/app.css" />
+        <title>Home Page</title>
+    </head>
+    <body>
+        <!-- Main Container -->
+        <div class="ext_cnt w-100 min-vh-100">
+            <header>
+                <div class="container w_1200 m-auto">
+                    <div class="ht_wrapper d-flex justify-content-between">
+                        <!-- LOGO Container -->
+                        <div class="logo position-relative d-none d-lg-block">
+                            <a href="./index.html">
+                                <h4 class="position-absolute m-0 bottom-0">MARKIE</h4>
+                            </a>
+                        </div>
+                        <div class="text-end">
+                            <!-- Social Media Icons -->
+                            <div class="d-none d-lg-flex social justify-content-end py-3">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.6em" height="1.6em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#03001e" d="M12 2.04c-5.5 0-10 4.49-10 10.02c0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89c1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02Z" /></svg>
+                                </div>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.6em" height="1.6em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="#03001e" d="M512 378.7c-73.4 0-133.3 59.9-133.3 133.3S438.6 645.3 512 645.3S645.3 585.4 645.3 512S585.4 378.7 512 378.7zM911.8 512c0-55.2.5-109.9-2.6-165c-3.1-64-17.7-120.8-64.5-167.6c-46.9-46.9-103.6-61.4-167.6-64.5c-55.2-3.1-109.9-2.6-165-2.6c-55.2 0-109.9-.5-165 2.6c-64 3.1-120.8 17.7-167.6 64.5C132.6 226.3 118.1 283 115 347c-3.1 55.2-2.6 109.9-2.6 165s-.5 109.9 2.6 165c3.1 64 17.7 120.8 64.5 167.6c46.9 46.9 103.6 61.4 167.6 64.5c55.2 3.1 109.9 2.6 165 2.6c55.2 0 109.9.5 165-2.6c64-3.1 120.8-17.7 167.6-64.5c46.9-46.9 61.4-103.6 64.5-167.6c3.2-55.1 2.6-109.8 2.6-165zM512 717.1c-113.5 0-205.1-91.6-205.1-205.1S398.5 306.9 512 306.9S717.1 398.5 717.1 512S625.5 717.1 512 717.1zm213.5-370.7c-26.5 0-47.9-21.4-47.9-47.9s21.4-47.9 47.9-47.9s47.9 21.4 47.9 47.9a47.84 47.84 0 0 1-47.9 47.9z" /></svg>
+                                </div>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.6em" height="1.6em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="#03001e" d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448s448-200.6 448-448S759.4 64 512 64zm215.3 337.7c.3 4.7.3 9.6.3 14.4c0 146.8-111.8 315.9-316.1 315.9c-63 0-121.4-18.3-170.6-49.8c9 1 17.6 1.4 26.8 1.4c52 0 99.8-17.6 137.9-47.4c-48.8-1-89.8-33-103.8-77c17.1 2.5 32.5 2.5 50.1-2a111 111 0 0 1-88.9-109v-1.4c14.7 8.3 32 13.4 50.1 14.1a111.13 111.13 0 0 1-49.5-92.4c0-20.7 5.4-39.6 15.1-56a315.28 315.28 0 0 0 229 116.1C492 353.1 548.4 292 616.2 292c32 0 60.8 13.4 81.1 35c25.1-4.7 49.1-14.1 70.5-26.7c-8.3 25.7-25.7 47.4-48.8 61.1c22.4-2.4 44-8.6 64-17.3c-15.1 22.2-34 41.9-55.7 57.6z" /></svg>
+                                </div>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.6em" height="1.6em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="#03001e" d="M16.8 5.7C14.4 2 9.5.9 5.7 3.2C2 5.5.8 10.5 3.2 14.2l.2.3l-.8 3l3-.8l.3.2c1.3.7 2.7 1.1 4.1 1.1c1.5 0 3-.4 4.3-1.2c3.7-2.4 4.8-7.3 2.5-11.1zm-2.1 7.7c-.4.6-.9 1-1.6 1.1c-.4 0-.9.2-2.9-.6c-1.7-.8-3.1-2.1-4.1-3.6c-.6-.7-.9-1.6-1-2.5c0-.8.3-1.5.8-2c.2-.2.4-.3.6-.3H7c.2 0 .4 0 .5.4c.2.5.7 1.7.7 1.8c.1.1.1.3 0 .4c.1.2 0 .4-.1.5c-.1.1-.2.3-.3.4c-.2.1-.3.3-.2.5c.4.6.9 1.2 1.4 1.7c.6.5 1.2.9 1.9 1.2c.2.1.4.1.5-.1s.6-.7.8-.9c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.5.3c.1.3.1.7-.1 1z" /></svg>
+                                </div>
+                            </div>
+                            <!-- Message Below Social Media Icons -->
+                            <div class="d-none d-lg-block ln_0 py-2">
+                                <p class="m-0">Delivery Within 2-Days To All 36 States Of Nigeria</p>
+                            </div>
+                            <div class="d-flex ln_1 justify-content-end">
+                                <!-- Desktop Search Bar -->
+                                <div class="d_search_bar">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="Search_bar_d" />
+                                        <span class="input-group-text" id="Search_bar_d">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 50 50">
+                                                <path fill="currentColor" d="M23 36c-7.2 0-13-5.8-13-13s5.8-13 13-13s13 5.8 13 13s-5.8 13-13 13zm0-24c-6.1 0-11 4.9-11 11s4.9 11 11 11s11-4.9 11-11s-4.9-11-11-11z" />
+                                                <path fill="currentColor" d="m32.682 31.267l8.98 8.98l-1.414 1.414l-8.98-8.98z" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="m_menu my-auto d-lg-none"></div>
+                                    <!-- LOGO Container -->
+                                    <div class="my-auto d-lg-none">
+                                        <a class="text-decoration-none" href="./index.html">
+                                            <h3 class="my-auto">MARKIE</h3>
+                                        </a>
+                                    </div>
+                                    <div class="d-flex">
+                                        <!-- Account Icon -->
+                                        <div class="d-flex">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="m-auto" width="1.35em" height="1.25em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1536 1792"><path fill="#03001e" d="M1201 784q47 14 89.5 38t89 73t79.5 115.5t55 172t22 236.5q0 154-100 263.5T1195 1792H341q-141 0-241-109.5T0 1419q0-131 22-236.5t55-172T156.5 895t89-73t89.5-38q-79-125-79-272q0-104 40.5-198.5T406 150T569.5 40.5T768 0t198.5 40.5T1130 150t109.5 163.5T1280 512q0 147-79 272zM768 128q-159 0-271.5 112.5T384 512t112.5 271.5T768 896t271.5-112.5T1152 512t-112.5-271.5T768 128zm427 1536q88 0 150.5-71.5T1408 1419q0-239-78.5-377T1104 897q-145 127-336 127T432 897q-147 7-225.5 145T128 1419q0 102 62.5 173.5T341 1664h854z" /></svg>
+                                            <p class="d-none d-lg-block m-auto">Account</p>
+                                        </div>
+                                        <!-- Cart Icon -->
+                                        <div class="d-flex">
+                                            <button class="border border-0 bg-transparent d-inline-flex my-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartlist" aria-controls="cartlist">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="m-auto" width="1.45em" height="1.3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill="#03001e" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607L1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479l9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2a1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2a1 1 0 0 1 0-2z" /></svg>
+                                                <span class="d-none d-lg-block m-auto" style="padding-top: 0.18rem">Cart</span>
+                                            </button>
+
+                                            <div class="offcanvas offcanvas-end ps-2" tabindex="-1" id="cartlist" aria-labelledby="cartlistLabel">
+                                                <div class="offcanvas-header pb-0 px-4 mt-2">
+                                                    <h5 class="cartlistLabel heading">SHOPPING CART</h5>
+                                                    <button type="button" class="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                </div>
+                                                <div class="offcanvas-body py-0">
+                                                    <!-- Top -->
+                                                    <div class="item_count text-start c-top px-4">
+                                                        <span>3</span>
+                                                        <span>Items</span>
+                                                    </div>
+                                                    <!-- Scrollable Mid -->
+                                                    <div class="pt-3 ps-1 c-mid px-4">
+                                                        <div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 1.png" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Purple / XXL</p>
+                                                                    <p class="pb-1">&#x20A6; 5800</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 2.jpg" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Lemon Green / L</p>
+                                                                    <p class="pb-1">&#x20A6; 8000</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 8.png" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Brown / SM</p>
+                                                                    <p class="pb-1">&#x20A6; 7000</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Bottom -->
+                                                    <div class="c-btm px-4">
+                                                        <div class="w-100 d-flex justify-content-between pt-3 pb-1">
+                                                            <p>Total:</p>
+                                                            <p>&#x20A6; 20,800</p>
+                                                        </div>
+                                                        <div class="pt-1 pb-3">
+                                                            <div class="form-check text-start ps-4">
+                                                                <input class="form-check-input me-3" type="checkbox" value="" id="T&C" />
+                                                                <label class="form-check-label" for="T&C"> I Agree With The Terms and Conditions </label>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <button type="button" class="btn btn-md w-100 py-2 mb-3">CHECKOUT</button> <br />
+                                                            <a href="./cart.html" class="btn btn-md w-100 py-2">VIEW CART</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Wish list Icon -->
+                                        <div class="d-flex">
+                                            <button class="border-0 bg-transparent d-inline-flex m-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#wishlist" aria-controls="wishlist">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="m-auto" width="1.4em" height="1.35em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z" /></svg>
+                                                <span class="d-none d-lg-block m-auto space">Wishlist</span>
+                                            </button>
+
+                                            <div class="offcanvas offcanvas-end ps-2" tabindex="-1" id="wishlist" aria-labelledby="wishlistLabel">
+                                                <div class="offcanvas-header pb-0 px-4 mt-2">
+                                                    <h5 class="wishlistLabel heading">WISHLIST</h5>
+                                                    <button type="button" class="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                </div>
+                                                <div class="offcanvas-body py-0">
+                                                    <!-- Top -->
+                                                    <div class="item_count text-start w-top px-4">
+                                                        <span>4</span>
+                                                        <span>Items</span>
+                                                    </div>
+                                                    <!-- Scrollable Mid -->
+                                                    <div class="pt-3 ps-1 w-mid px-4">
+                                                        <div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 1.png" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Purple / XXL</p>
+                                                                    <p class="pb-1">&#x20A6; 5800</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 2.jpg" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Lemon Green / L</p>
+                                                                    <p class="pb-1">&#x20A6; 8000</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 8.png" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Brown / SM</p>
+                                                                    <p class="pb-1">&#x20A6; 7000</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex w-100 justify-content-between py-4 ms-4">
+                                                                <div class="col-3 pe-2">
+                                                                    <img src="./assets/images/pic 7.jpg" class="d-block w-100 h-100" alt="..." />
+                                                                </div>
+                                                                <div class="col-5 text-start ps-2 m-auto">
+                                                                    <p class="pb-1">Scrub Top</p>
+                                                                    <p class="pb-1">Lemon Green / L</p>
+                                                                    <p class="pb-1">&#x20A6; 8000</p>
+                                                                </div>
+                                                                <div class="col-1 pt-2 m-auto">
+                                                                    <button type="button" class="btn-close text-reset"></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Bottom -->
+                                                    <div class="w-btm px-4">
+                                                        <div class="pt-3">
+                                                            <a href="./wishlist.html" class="btn btn-md w-100 py-2">VIEW WISHLIST</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header_bottom mt-1 d-none d-lg-block">
+                    <!-- Menu -->
+                    <div class="cat container w_1200">
+                        <ul class="h_list d-flex">
+                            <li class="menu">
+                                <a href="./category.html">Wardcoats</a>
+                            </li>
+                            <li class="menu">
+                                <a href="./category.html">Scrubs</a>
+                            </li>
+                            <li class="menu">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">Footwears</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="./category.html">Crocs</a></li>
+                                        <li><a class="dropdown-item" href="./category.html">Sneakers</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu">
+                                <a href="./category.html">Inscription T-Shirts</a>
+                            </li>
+                            <li class="menu">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">Accessories</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="./category.html">Pen Torch</a></li>
+                                        <li><a class="dropdown-item" href="./category.html">Scrub Caps</a></li>
+                                        <li><a class="dropdown-item" href="./category.html">ID Card Holder</a></li>
+                                        <li><a class="dropdown-item" href="./category.html">Medical Brooches</a></li>
+                                        <li><a class="dropdown-item" href="./category.html">Scrub Inner T-Shirt</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+            <div class="profile w_1200 m-auto d-flex justify-content-between py-5">
+                <div class="px-3">
+                    <div class="mb-5">
+                        <h2 class="py-2">Personal Details:</h2>
+                        <p>Name: Ogbonna Kennedy C</p>
+                        <p>Email: Kennedychidi55@gmail.com</p>
+                        <p>Delivery: Imo State <span>&nbsp; Change</span></p>
+                        <p>Password: ************* <span>&nbsp; Change</span></p>
+                    </div>
+                    <div>
+                        <h2 class="py-2">Cards:</h2>
+                        <div class="d-flex justify-content-between c_cont">
+                            <div class="my-auto gg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" viewBox="0 0 256 83">
+                                    <defs>
+                                        <linearGradient id="logosVisa0" x1="45.974%" x2="54.877%" y1="-2.006%" y2="100%">
+                                            <stop offset="0%" stop-color="#222357" />
+                                            <stop offset="100%" stop-color="#254AA5" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path fill="url(#logosVisa0)" d="M132.397 56.24c-.146-11.516 10.263-17.942 18.104-21.763c8.056-3.92 10.762-6.434 10.73-9.94c-.06-5.365-6.426-7.733-12.383-7.825c-10.393-.161-16.436 2.806-21.24 5.05l-3.744-17.519c4.82-2.221 13.745-4.158 23-4.243c21.725 0 35.938 10.724 36.015 27.351c.085 21.102-29.188 22.27-28.988 31.702c.069 2.86 2.798 5.912 8.778 6.688c2.96.392 11.131.692 20.395-3.574l3.636 16.95c-4.982 1.814-11.385 3.551-19.357 3.551c-20.448 0-34.83-10.87-34.946-26.428m89.241 24.968c-3.967 0-7.31-2.314-8.802-5.865L181.803 1.245h21.709l4.32 11.939h26.528l2.506-11.939H256l-16.697 79.963h-17.665m3.037-21.601l6.265-30.027h-17.158l10.893 30.027m-118.599 21.6L88.964 1.246h20.687l17.104 79.963h-20.679m-30.603 0L53.941 26.782l-8.71 46.277c-1.022 5.166-5.058 8.149-9.54 8.149H.493L0 78.886c7.226-1.568 15.436-4.097 20.41-6.803c3.044-1.653 3.912-3.098 4.912-7.026L41.819 1.245H63.68l33.516 79.963H75.473" transform="matrix(1 0 0 -1 0 82.668)" />
+                                </svg>
+                            </div>
+                            <div class="my-auto gg">
+                                <p class="my-0">Ogbonna Kennedy C</p>
+                                <p class="my-0">XXXX-XXXX-XXXX-0942</p>
+                            </div>
+                            <div class="my-auto gg text-end">
+                                <button class="btn btn-sm btn-danger text-white">Remove</button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between c_cont">
+                            <div class="my-auto gg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="60" viewBox="0 0 256 199">
+                                    <path
+                                        d="M46.54 198.011V184.84c0-5.05-3.074-8.342-8.343-8.342c-2.634 0-5.488.878-7.464 3.732c-1.536-2.415-3.731-3.732-7.024-3.732c-2.196 0-4.39.658-6.147 3.073v-2.634h-4.61v21.074h4.61v-11.635c0-3.731 1.976-5.488 5.05-5.488c3.072 0 4.61 1.976 4.61 5.488v11.635h4.61v-11.635c0-3.731 2.194-5.488 5.048-5.488c3.074 0 4.61 1.976 4.61 5.488v11.635h5.05Zm68.271-21.074h-7.463v-6.366h-4.61v6.366h-4.171v4.17h4.17v9.66c0 4.83 1.976 7.683 7.245 7.683c1.976 0 4.17-.658 5.708-1.536l-1.318-3.952c-1.317.878-2.853 1.098-3.951 1.098c-2.195 0-3.073-1.317-3.073-3.513v-9.44h7.463v-4.17Zm39.076-.44c-2.634 0-4.39 1.318-5.488 3.074v-2.634h-4.61v21.074h4.61v-11.854c0-3.512 1.536-5.488 4.39-5.488c.878 0 1.976.22 2.854.439l1.317-4.39c-.878-.22-2.195-.22-3.073-.22Zm-59.052 2.196c-2.196-1.537-5.269-2.195-8.562-2.195c-5.268 0-8.78 2.634-8.78 6.805c0 3.513 2.634 5.488 7.244 6.147l2.195.22c2.415.438 3.732 1.097 3.732 2.195c0 1.536-1.756 2.634-4.83 2.634c-3.073 0-5.488-1.098-7.025-2.195l-2.195 3.512c2.415 1.756 5.708 2.634 9 2.634c6.147 0 9.66-2.853 9.66-6.805c0-3.732-2.854-5.708-7.245-6.366l-2.195-.22c-1.976-.22-3.512-.658-3.512-1.975c0-1.537 1.536-2.415 3.951-2.415c2.635 0 5.269 1.097 6.586 1.756l1.976-3.732Zm122.495-2.195c-2.635 0-4.391 1.317-5.489 3.073v-2.634h-4.61v21.074h4.61v-11.854c0-3.512 1.537-5.488 4.39-5.488c.879 0 1.977.22 2.855.439l1.317-4.39c-.878-.22-2.195-.22-3.073-.22Zm-58.833 10.976c0 6.366 4.39 10.976 11.196 10.976c3.073 0 5.268-.658 7.463-2.414l-2.195-3.732c-1.756 1.317-3.512 1.975-5.488 1.975c-3.732 0-6.366-2.634-6.366-6.805c0-3.951 2.634-6.586 6.366-6.805c1.976 0 3.732.658 5.488 1.976l2.195-3.732c-2.195-1.757-4.39-2.415-7.463-2.415c-6.806 0-11.196 4.61-11.196 10.976Zm42.588 0v-10.537h-4.61v2.634c-1.537-1.975-3.732-3.073-6.586-3.073c-5.927 0-10.537 4.61-10.537 10.976c0 6.366 4.61 10.976 10.537 10.976c3.073 0 5.269-1.097 6.586-3.073v2.634h4.61v-10.537Zm-16.904 0c0-3.732 2.415-6.805 6.366-6.805c3.732 0 6.367 2.854 6.367 6.805c0 3.732-2.635 6.805-6.367 6.805c-3.951-.22-6.366-3.073-6.366-6.805Zm-55.1-10.976c-6.147 0-10.538 4.39-10.538 10.976c0 6.586 4.39 10.976 10.757 10.976c3.073 0 6.147-.878 8.562-2.853l-2.196-3.293c-1.756 1.317-3.951 2.195-6.146 2.195c-2.854 0-5.708-1.317-6.367-5.05h15.587v-1.755c.22-6.806-3.732-11.196-9.66-11.196Zm0 3.951c2.853 0 4.83 1.757 5.268 5.05h-10.976c.439-2.854 2.415-5.05 5.708-5.05Zm114.372 7.025v-18.879h-4.61v10.976c-1.537-1.975-3.732-3.073-6.586-3.073c-5.927 0-10.537 4.61-10.537 10.976c0 6.366 4.61 10.976 10.537 10.976c3.074 0 5.269-1.097 6.586-3.073v2.634h4.61v-10.537Zm-16.903 0c0-3.732 2.414-6.805 6.366-6.805c3.732 0 6.366 2.854 6.366 6.805c0 3.732-2.634 6.805-6.366 6.805c-3.952-.22-6.366-3.073-6.366-6.805Zm-154.107 0v-10.537h-4.61v2.634c-1.537-1.975-3.732-3.073-6.586-3.073c-5.927 0-10.537 4.61-10.537 10.976c0 6.366 4.61 10.976 10.537 10.976c3.074 0 5.269-1.097 6.586-3.073v2.634h4.61v-10.537Zm-17.123 0c0-3.732 2.415-6.805 6.366-6.805c3.732 0 6.367 2.854 6.367 6.805c0 3.732-2.635 6.805-6.367 6.805c-3.951-.22-6.366-3.073-6.366-6.805Z"
+                                    />
+                                    <path fill="#FF5F00" d="M93.298 16.903h69.15v124.251h-69.15z" />
+                                    <path fill="#EB001B" d="M97.689 79.029c0-25.245 11.854-47.637 30.074-62.126C114.373 6.366 97.47 0 79.03 0C35.343 0 0 35.343 0 79.029c0 43.685 35.343 79.029 79.029 79.029c18.44 0 35.343-6.366 48.734-16.904c-18.22-14.269-30.074-36.88-30.074-62.125Z" />
+                                    <path fill="#F79E1B" d="M255.746 79.029c0 43.685-35.343 79.029-79.029 79.029c-18.44 0-35.343-6.366-48.734-16.904c18.44-14.488 30.075-36.88 30.075-62.125c0-25.245-11.855-47.637-30.075-62.126C141.373 6.366 158.277 0 176.717 0c43.686 0 79.03 35.563 79.03 79.029Z" />
+                                </svg>
+                            </div>
+                            <div class="my-auto gg">
+                                <p class="my-0">Ogbonna Kennedy C</p>
+                                <p class="my-0">XXXX-XXXX-XXXX-0942</p>
+                            </div>
+                            <div class="my-auto gg text-end">
+                                <button class="btn btn-sm btn-danger text-white">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3">
+                    <div>
+                        <h2 class="py-3">Cart History:</h2>
+                        <div class="d-flex mb-3">
+                            <div class="my-auto me-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M9 20c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2m8-2c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m-9.8-3.2v-.1l.9-1.7h7.4c.7 0 1.4-.4 1.7-1l3.9-7l-1.7-1l-3.9 7h-7L4.3 2H1v2h2l3.6 7.6L5.2 14c-.1.3-.2.6-.2 1c0 1.1.9 2 2 2h12v-2H7.4c-.1 0-.2-.1-.2-.2M18 2.8l-1.4-1.4l-4.8 4.8l-2.6-2.6L7.8 5l4 4L18 2.8Z" /></svg>
+                            </div>
+                            <div class="my-auto gg">
+                                <p class="my-0">C1234786509090908</p>
+                                <p class="my-0">12/5/2023 - 5.07pm</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="my-auto me-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M9 20c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2m8-2c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m-9.8-3.2v-.1l.9-1.7h7.4c.7 0 1.4-.4 1.7-1l3.9-7l-1.7-1l-3.9 7h-7L4.3 2H1v2h2l3.6 7.6L5.2 14c-.1.3-.2.6-.2 1c0 1.1.9 2 2 2h12v-2H7.4c-.1 0-.2-.1-.2-.2M18 2.8l-1.4-1.4l-4.8 4.8l-2.6-2.6L7.8 5l4 4L18 2.8Z" /></svg>
+                            </div>
+                            <div class="my-auto gg">
+                                <p class="my-0">C1234786509090908</p>
+                                <p class="my-0">12/5/2023 - 5.07pm</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="my-auto me-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M9 20c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2m8-2c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m-9.8-3.2v-.1l.9-1.7h7.4c.7 0 1.4-.4 1.7-1l3.9-7l-1.7-1l-3.9 7h-7L4.3 2H1v2h2l3.6 7.6L5.2 14c-.1.3-.2.6-.2 1c0 1.1.9 2 2 2h12v-2H7.4c-.1 0-.2-.1-.2-.2M18 2.8l-1.4-1.4l-4.8 4.8l-2.6-2.6L7.8 5l4 4L18 2.8Z" /></svg>
+                            </div>
+                            <div class="my-auto gg">
+                                <p class="my-0">C1234786509090908</p>
+                                <p class="my-0">12/5/2023 - 5.07pm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="mt-5">
+                <div class="container f-top w_1200 pt-5 d-lg-flex justify-content-between">
+                    <div class="px-2">
+                        <div class="logo">
+                            <h4>MARKIE</h4>
+                        </div>
+                        <div class="d-flex pt-4">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                        <circle cx="12" cy="10" r="3" />
+                                        <path d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8Z" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <p class="ps-3 pt-1">30, Wetheral Road, Owerri, Imo state.</p>
+                        </div>
+                        <div class="d-flex pt-3">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                                    <path
+                                        fill="currentColor"
+                                        fill-rule="evenodd"
+                                        d="M12.547 9.328a1.567 1.567 0 0 0-.594-.117a1.202 1.202 0 0 0-.555.101a2.762 2.762 0 0 0-.43.258a2.166 2.166 0 0 0-.359.328c-.104.12-.205.23-.304.329a2.409 2.409 0 0 1-.29.25a.534.534 0 0 1-.695-.063a32.17 32.17 0 0 1-.328-.312c-.14-.136-.312-.3-.515-.493A61.776 61.776 0 0 1 7.844 9l-.68-.664a25.847 25.847 0 0 1-1.21-1.266a5.312 5.312 0 0 1-.391-.484c-.094-.135-.141-.234-.141-.297a.46.46 0 0 1 .101-.312c.073-.094.16-.19.258-.29c.1-.098.209-.203.328-.312c.12-.11.23-.227.329-.352c.098-.125.182-.268.25-.43c.067-.16.101-.343.101-.546a1.567 1.567 0 0 0-.453-1.102a7.604 7.604 0 0 1-.531-.578a6.487 6.487 0 0 0-.617-.64a4.207 4.207 0 0 0-.696-.516A1.46 1.46 0 0 0 3.742 1a1.567 1.567 0 0 0-1.101.453c-.271.271-.508.513-.711.727a4.006 4.006 0 0 0-.516.664a2.63 2.63 0 0 0-.312.765A4.39 4.39 0 0 0 1 4.625c0 .552.089 1.125.266 1.719c.177.593.416 1.185.718 1.773c.302.589.67 1.167 1.102 1.735c.432.567.901 1.106 1.406 1.617c.505.51 1.042.982 1.61 1.414c.567.432 1.148.805 1.742 1.117c.593.313 1.19.557 1.789.734a6.157 6.157 0 0 0 1.75.266a4.696 4.696 0 0 0 1.008-.11a2.59 2.59 0 0 0 .773-.312c.23-.14.45-.312.664-.515c.214-.204.453-.438.719-.704A1.568 1.568 0 0 0 15 12.257a2.009 2.009 0 0 0-.102-.515a1.674 1.674 0 0 0-.257-.484a7.24 7.24 0 0 0-.368-.445a5.381 5.381 0 0 0-.421-.422a91.549 91.549 0 0 0-.43-.383a8.277 8.277 0 0 1-.367-.344a1.516 1.516 0 0 0-.508-.336zm-.367 4.586a3.13 3.13 0 0 1-.797.086a5.526 5.526 0 0 1-1.516-.242a8.362 8.362 0 0 1-1.586-.664a13.205 13.205 0 0 1-3.047-2.297a17.15 17.15 0 0 1-1.289-1.461a10.502 10.502 0 0 1-1.03-1.578a9.12 9.12 0 0 1-.673-1.61A5.308 5.308 0 0 1 2 4.602a3.34 3.34 0 0 1 .094-.79c.057-.218.143-.414.258-.585c.114-.172.255-.339.421-.5c.167-.162.357-.35.57-.563a.542.542 0 0 1 .4-.164c.062-.005.158.036.288.125c.13.089.271.195.422.32a7.058 7.058 0 0 1 .899.899c.125.15.229.289.312.414c.083.125.125.221.125.289a.429.429 0 0 1-.101.312c-.073.084-.16.18-.258.29c-.1.109-.209.213-.328.312c-.12.099-.23.216-.329.351a2.266 2.266 0 0 0-.25.438a1.345 1.345 0 0 0-.101.54c.005.213.047.413.125.6c.078.188.19.355.336.5l3.726 3.727a1.527 1.527 0 0 0 1.102.46a1.2 1.2 0 0 0 .547-.1a2.414 2.414 0 0 0 .789-.586c.11-.12.21-.23.305-.329c.093-.098.19-.182.289-.25a.545.545 0 0 1 .312-.101c.073 0 .172.042.297.125c.125.083.263.19.414.32c.151.13.307.274.469.43c.161.156.305.312.43.469c.124.156.229.297.312.422c.083.125.125.22.125.289a.533.533 0 0 1-.164.39c-.224.219-.414.41-.57.57a3.159 3.159 0 0 1-.5.422a1.93 1.93 0 0 1-.586.266zM15 1.704l-4.64 4.648h3.288v1h-5v-5h1V5.64L14.297 1l.703.703z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                            <p class="ps-3">+234 817 835 9407</p>
+                        </div>
+                        <div class="d-flex pt-3">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.6em" height="1.6em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                    <path fill="currentColor" d="M19 24H4L3.997 8.906l11.434 7.916a1 1 0 0 0 1.138 0L28 8.91V18h2V8a2.003 2.003 0 0 0-2-2H4a2.002 2.002 0 0 0-2 2v16a2.003 2.003 0 0 0 2 2h15Zm6.799-16L16 14.784L6.201 8Z" />
+                                    <circle cx="26" cy="24" r="4" fill="currentColor" />
+                                </svg>
+                            </div>
+                            <p class="ps-3">kennedychidi55@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="px-2">
+                        <h2 class="f1">Catalogue:</h2>
+                        <ul class="container f_list mt-3">
+                            <li class="menu">Wardcoats</li>
+                            <li class="menu">Medical Scrubs</li>
+                            <li class="menu">Crocs</li>
+                            <li class="menu">Sneakers</li>
+                            <li class="menu">Pen Torch</li>
+                            <li class="menu">Scrub Caps</li>
+                            <li class="menu">ID Card Holder</li>
+                            <li class="menu">Medical Brooches</li>
+                            <li class="menu">Inscription T-shirt</li>
+                            <li class="menu">Scrub inner Shirts</li>
+                        </ul>
+                    </div>
+                    <div class="px-2">
+                        <h2 class="f2">FOLLOW US</h2>
+                        <!-- Social Media Icons -->
+                        <div class="social d-flex justify-content-start pt-3">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 2.04c-5.5 0-10 4.49-10 10.02c0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89c1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02Z" /></svg>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="#ffffff" d="M512 378.7c-73.4 0-133.3 59.9-133.3 133.3S438.6 645.3 512 645.3S645.3 585.4 645.3 512S585.4 378.7 512 378.7zM911.8 512c0-55.2.5-109.9-2.6-165c-3.1-64-17.7-120.8-64.5-167.6c-46.9-46.9-103.6-61.4-167.6-64.5c-55.2-3.1-109.9-2.6-165-2.6c-55.2 0-109.9-.5-165 2.6c-64 3.1-120.8 17.7-167.6 64.5C132.6 226.3 118.1 283 115 347c-3.1 55.2-2.6 109.9-2.6 165s-.5 109.9 2.6 165c3.1 64 17.7 120.8 64.5 167.6c46.9 46.9 103.6 61.4 167.6 64.5c55.2 3.1 109.9 2.6 165 2.6c55.2 0 109.9.5 165-2.6c64-3.1 120.8-17.7 167.6-64.5c46.9-46.9 61.4-103.6 64.5-167.6c3.2-55.1 2.6-109.8 2.6-165zM512 717.1c-113.5 0-205.1-91.6-205.1-205.1S398.5 306.9 512 306.9S717.1 398.5 717.1 512S625.5 717.1 512 717.1zm213.5-370.7c-26.5 0-47.9-21.4-47.9-47.9s21.4-47.9 47.9-47.9s47.9 21.4 47.9 47.9a47.84 47.84 0 0 1-47.9 47.9z" /></svg>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="#ffffff" d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448s448-200.6 448-448S759.4 64 512 64zm215.3 337.7c.3 4.7.3 9.6.3 14.4c0 146.8-111.8 315.9-316.1 315.9c-63 0-121.4-18.3-170.6-49.8c9 1 17.6 1.4 26.8 1.4c52 0 99.8-17.6 137.9-47.4c-48.8-1-89.8-33-103.8-77c17.1 2.5 32.5 2.5 50.1-2a111 111 0 0 1-88.9-109v-1.4c14.7 8.3 32 13.4 50.1 14.1a111.13 111.13 0 0 1-49.5-92.4c0-20.7 5.4-39.6 15.1-56a315.28 315.28 0 0 0 229 116.1C492 353.1 548.4 292 616.2 292c32 0 60.8 13.4 81.1 35c25.1-4.7 49.1-14.1 70.5-26.7c-8.3 25.7-25.7 47.4-48.8 61.1c22.4-2.4 44-8.6 64-17.3c-15.1 22.2-34 41.9-55.7 57.6z" /></svg>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="#ffffff" d="M16.8 5.7C14.4 2 9.5.9 5.7 3.2C2 5.5.8 10.5 3.2 14.2l.2.3l-.8 3l3-.8l.3.2c1.3.7 2.7 1.1 4.1 1.1c1.5 0 3-.4 4.3-1.2c3.7-2.4 4.8-7.3 2.5-11.1zm-2.1 7.7c-.4.6-.9 1-1.6 1.1c-.4 0-.9.2-2.9-.6c-1.7-.8-3.1-2.1-4.1-3.6c-.6-.7-.9-1.6-1-2.5c0-.8.3-1.5.8-2c.2-.2.4-.3.6-.3H7c.2 0 .4 0 .5.4c.2.5.7 1.7.7 1.8c.1.1.1.3 0 .4c.1.2 0 .4-.1.5c-.1.1-.2.3-.3.4c-.2.1-.3.3-.2.5c.4.6.9 1.2 1.4 1.7c.6.5 1.2.9 1.9 1.2c.2.1.4.1.5-.1s.6-.7.8-.9c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.5.3c.1.3.1.7-.1 1z" /></svg>
+                            </div>
+                        </div>
+
+                        <div class="pt-5">
+                            <h2 class="f3">SIGN UP FOR NEWSLETTER</h2>
+                            <p class="pt-3">Receive our latest updates about our products & promotions</p>
+                            <form class="row g-2">
+                                <div class="col-auto">
+                                    <label for="news" class="visually-hidden"></label>
+                                    <input type="email" class="form-control" id="news" placeholder="Email Address" />
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-danger mb-3 px-4">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="f-bottom mt-5">
+                    <!-- Payment Methods -->
+                    <div class="w_1200 py-3">© 2022, Markie Stores. All Rights Reserved</div>
+                </div>
+            </footer>
+        </div>
+        <!-- JavaScript -->
+        <script src="./assets/js/bootstrap.bundle.js"></script>
+        <script src="./assets/js/app.js"></script>
+    </body>
+</html>

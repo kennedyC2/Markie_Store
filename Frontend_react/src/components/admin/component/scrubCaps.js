@@ -2,147 +2,97 @@ import axios from "axios";
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
+import { Admin_DSP } from "../../dsp";
 
 const AdminCaps = (props) => {
-    const { setData } = props;
+    const { setData, dKeys } = props;
     const { scrubCaps } = useSelector((state) => state);
     const Dispatch = useDispatch();
 
     const updateState = (pos, id) => {
+        const scrubCap = scrubCaps[pos]
         const _data = {
             item: pos,
             id: id,
             details: {
-                title: scrubCaps[pos]["title"],
-                quantity: scrubCaps[pos]["quantity"],
-                price: scrubCaps[pos]["price"],
-                colors: scrubCaps[pos]["colors"],
-                category: scrubCaps[pos]["category"],
-                description: scrubCaps[pos]["description"],
-                misc: scrubCaps[pos]["misc"],
+                title: scrubCap["title"],
+                quantity: scrubCap["quantity"],
+                price: scrubCap["price"],
+                colors: scrubCap["colors"],
+                category: scrubCap["category"],
+                description: scrubCap["description"],
+                misc: scrubCap["misc"],
             },
             images: {
-                main: scrubCaps[pos]["images"]["main"],
-                image_1: scrubCaps[pos]["images"]["image_1"],
-                image_2: scrubCaps[pos]["images"]["image_2"],
+                main: scrubCap["images"]["main"],
+                image_1: scrubCap["images"]["image_1"],
+                image_2: scrubCap["images"]["image_2"],
             },
+            newImages: {
+                main: "",
+                image_1: "",
+                image_2: "",
+            }
         }
         setData(_data)
     }
 
-    const deleteItem = async (e, pos, id) => {
+    const deleteItem = async (e, id, category, images) => {
         e.preventDefault();
 
         try {
-            const response = await axios({
-                method: "POST",
+            await axios({
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                url: domain + "products/delete?t=" + id,
+                url: domain + "products/delete?t=" + id + "&c=" + category,
+                data: images
             });
 
-            const result = response.data;
+            const updated = scrubCaps.filter(each => {
+                return each._id !== id
+            })
 
-            console.log(result);
+            Dispatch({ type: dKeys[category]["delete"], payload: updated })
         } catch (error) {
             console.log(error);
         }
     };
 
     useEffect(() => {
-        (async () => {
-            const response = await axios.get(domain + "products?i=marky&a=true&c=scrubs");
-            Dispatch({ type: "createCaps", payload: response.data });
-        })();
-    }, [Dispatch]);
+        if (scrubCaps.length === 0) {
+            (async () => {
+                const response = await axios.get(domain + "products/get?i=marky&a=true&c=scrubCaps");
+                Dispatch({ type: "createCaps", payload: response.data });
+            })();
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Fragment>
             <div className="tab-pane fade" id="v-pills-caps" role="tabpanel" aria-labelledby="v-pills-caps-tab" tabIndex="0">
-                <div className="w-100 grid">
-                    {scrubCaps && scrubCaps.length > 0
-                        ? scrubCaps.map((item, index) => {
-                            return (
-                                <div key={index} className="card" id={item._id + "_" + index}>
-                                    <img src={domain + "image/" + item.images.main} className="card-img-top" alt="scrubCaps" width={"100%"} height={"100%"} />
-                                    <div className="card-body">
-                                        <div>
-                                            <h5 className="card-title">{item.title}</h5>
-                                            <p className="card-text">{item.description}</p>
-                                        </div>
-
-                                        <div className="card-body d-flex justify-content-between">
-                                            <button type="button" className="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target={"#scrubCaps_" + index + "a"}>
-                                                view
-                                            </button>
-
-                                            <div className="modal fade" id={"scrubCaps_" + index + "a"} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={"scrubCaps_" + index + "a_Label"} aria-hidden="true">
-                                                <div className="modal-dialog modal-dialog-centered modalThree">
-                                                    <div className="modal-content">
-                                                        <div className="modal-header">
-                                                            <h1 className="modal-title fs-5 invisible" id={"scrubCaps_" + index + "a_Label"}>Modal title</h1>
-                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div className="modal-body text-start">
-                                                            <div>
-                                                                <div className="">
-                                                                    <h5 className="title">Product: {item.title}</h5>
-                                                                    <div className="mt-2 d-flex justify-content-between">
-                                                                        <p>Price: {item.price}</p>
-                                                                        <p>In Stock: {item.quantity}</p>
-                                                                        <p>Purchased: {item.sold}</p>
-                                                                    </div>
-                                                                    <p className="desc">Description: {item.description}</p>
-                                                                </div>
-                                                                <div className="cont4">
-                                                                    <div>
-                                                                        <img src={domain + "image/" + item.images.main} alt="main" />
-                                                                    </div>
-                                                                    <div>
-                                                                        <img src={domain + "image/" + item.images.image_1} alt="image_1" />
-                                                                    </div>
-                                                                    <div>
-                                                                        <img src={domain + "image/" + item.images.image_2} alt="image_2" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="modal-footer">
-                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <button type="button" className="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => updateState(index, item._id)}>
-                                                edit
-                                            </button>
-
-                                            <button type="button" className="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target={"#scrubCaps_" + index + "b"}>
-                                                delete
-                                            </button>
-
-                                            <div className="modal fade" id={"scrubCaps_" + index + "b"} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={"scrubCaps_" + index + "b_Label"} aria-hidden="true">
-                                                <div className="modal-dialog modal-dialog-centered modalThree">
-                                                    <div className="modal-content">
-                                                        <div className="modal-body text-start py-5">
-                                                            Do you really want to delete this item?
-                                                        </div>
-                                                        <div className="modal-footer">
-                                                            <button type="button" className="btn btn-secondary px-5" data-bs-dismiss="modal">No</button>
-                                                            <button type="button" className="btn btn-danger px-5" data-bs-dismiss="modal" onClick={(e) => deleteItem(e, index, item._id)}>Yes</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })
-                        : ""}
-                </div>
+                <Fragment>
+                    {scrubCaps && scrubCaps.length > 0 ?
+                        <div className="w-100 grid">
+                            {
+                                scrubCaps.map((item, index) => {
+                                    return (
+                                        Admin_DSP(domain, index, item, updateState, deleteItem)
+                                    )
+                                })
+                            }
+                        </div>
+                        :
+                        <Fragment>
+                            <div className="empty">
+                                <p>------- &nbsp;  no data &nbsp; -------</p>
+                            </div>
+                        </Fragment>
+                    }
+                </Fragment>
             </div>
         </Fragment>
     );

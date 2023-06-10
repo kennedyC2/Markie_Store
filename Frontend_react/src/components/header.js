@@ -1,10 +1,24 @@
-import { Link } from "react-router-dom";
-import pic7 from "../assets/images/pic 7.jpg";
-import pic1 from "../assets/images/pic 1.png";
-import pic2 from "../assets/images/pic 2.jpg";
-import pic8 from "../assets/images/pic 8.png";
+import { Link, useNavigate } from "react-router-dom";
+import { Header_Cart_DSP, Header_Wishlist_DSP } from "./dsp";
+import { Fragment } from "react";
+import { domain } from "./helpers";
+import { useDispatch, useSelector } from "react-redux";
+import { set } from "idb-keyval";
+import { store } from "./main";
 
 const Header = () => {
+    const Dispatch = useDispatch()
+    const Navigate = useNavigate()
+    const { user, cart, wishlist, status } = useSelector(state => state)
+
+    const total = () => {
+        let val = 0
+        for (const prop of cart.data) {
+            val += (parseInt(prop["order"]["quantity"]) * parseInt(prop["price"]))
+        }
+        return val
+    }
+
     return (
         <header>
             <div className="container w_1200 m-auto">
@@ -66,14 +80,55 @@ const Header = () => {
                                 </div>
                                 <div className="d-flex">
                                     {/* Account Icon */}
-                                    <div className="d-flex">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="1.35em" height="1.25em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1536 1792">
-                                            <path fill="#03001e" d="M1201 784q47 14 89.5 38t89 73t79.5 115.5t55 172t22 236.5q0 154-100 263.5T1195 1792H341q-141 0-241-109.5T0 1419q0-131 22-236.5t55-172T156.5 895t89-73t89.5-38q-79-125-79-272q0-104 40.5-198.5T406 150T569.5 40.5T768 0t198.5 40.5T1130 150t109.5 163.5T1280 512q0 147-79 272zM768 128q-159 0-271.5 112.5T384 512t112.5 271.5T768 896t271.5-112.5T1152 512t-112.5-271.5T768 128zm427 1536q88 0 150.5-71.5T1408 1419q0-239-78.5-377T1104 897q-145 127-336 127T432 897q-147 7-225.5 145T128 1419q0 102 62.5 173.5T341 1664h854z" />
-                                        </svg>
-                                        <p className="d-none d-lg-block m-auto">Account</p>
+                                    <div className="lg_1 dropdown-center my-auto">
+                                        <button className="btn d-flex border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="1.35em" height="1.25em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1536 1792">
+                                                <path fill="#03001e" d="M1201 784q47 14 89.5 38t89 73t79.5 115.5t55 172t22 236.5q0 154-100 263.5T1195 1792H341q-141 0-241-109.5T0 1419q0-131 22-236.5t55-172T156.5 895t89-73t89.5-38q-79-125-79-272q0-104 40.5-198.5T406 150T569.5 40.5T768 0t198.5 40.5T1130 150t109.5 163.5T1280 512q0 147-79 272zM768 128q-159 0-271.5 112.5T384 512t112.5 271.5T768 896t271.5-112.5T1152 512t-112.5-271.5T768 128zm427 1536q88 0 150.5-71.5T1408 1419q0-239-78.5-377T1104 897q-145 127-336 127T432 897q-147 7-225.5 145T128 1419q0 102 62.5 173.5T341 1664h854z" />
+                                            </svg>
+                                            <p className="d-none d-lg-block m-auto">{status.active ? user.firstname : "Account"}</p>
+                                        </button>
+                                        <ul className="dropdown-menu px-2 py-3">
+                                            {status.active ?
+                                                <li>
+                                                    <Link className="dropdown-item" to="/profile">
+                                                        Profile
+                                                    </Link>
+                                                </li> : ""
+                                            }
+                                            {user["admin"] && status.active ?
+                                                <li>
+                                                    <Link className="dropdown-item" to="/admin">
+                                                        Dashboard
+                                                    </Link>
+                                                </li> : ""
+                                            }
+                                            <li>
+                                                <Link className="dropdown-item" to="/account/complaints">
+                                                    Report An Issue
+                                                </Link>
+                                            </li>
+                                            <hr></hr>
+                                            <li>
+                                                {status.active ?
+                                                    <button type="button" className="dropdown-item btn bg-primary text-white text-center py-2" onClick={e => {
+                                                        set("status", {
+                                                            active: !status.active,
+                                                            session: status.session
+                                                        }, store)
+                                                        Dispatch({ type: "active", payload: !status.active })
+
+                                                        // Navigate
+                                                        Navigate("/", { replace: true })
+                                                    }}>Sign Out</button>
+                                                    :
+                                                    <Link className="dropdown-item btn bg-primary text-white text-center py-2" to="/account/login" >
+                                                        Sign In
+                                                    </Link>}
+                                            </li>
+                                        </ul>
                                     </div>
                                     {/* Cart Icon */}
-                                    <div className="d-flex">
+                                    <div className="d-flex my-auto">
                                         <button className="border border-0 bg-transparent d-inline-flex my-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartlist" aria-controls="cartlist">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="1.45em" height="1.3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
                                                 <path fill="#03001e" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607L1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479l9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2a1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2a1 1 0 0 1 0-2z" />
@@ -91,58 +146,42 @@ const Header = () => {
                                             <div className="offcanvas-body py-0">
                                                 {/* Top */}
                                                 <div className="item_count text-start c-top px-4">
-                                                    <span>3</span>
-                                                    <span>Items</span>
+                                                    <span className="me-1">{user["cart"] ? user["cart"].length : 0}</span>
+                                                    <span>Item(s)</span>
                                                 </div>
                                                 {/* Scrollable Mid */}
-                                                <div className="pt-3 ps-1 c-mid px-4">
+                                                <div className="pt-3 c-mid px-4">
                                                     <div>
-                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div className="col-3 pe-2">
-                                                                <img src={pic1} className="d-block w-100 h-100" alt="..." />
-                                                            </div>
-                                                            <div className="col-5 text-start ps-2 m-auto">
-                                                                <p className="pb-1">Scrub Top</p>
-                                                                <p className="pb-1">Purple / XXL</p>
-                                                                <p className="pb-1">&#x20A6; 5800</p>
-                                                            </div>
-                                                            <div className="col-1 pt-2 m-auto">
-                                                                <button type="button" className="btn-close text-reset"></button>
-                                                            </div>
-                                                        </div>
-                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div className="col-3 pe-2">
-                                                                <img src={pic2} className="d-block w-100 h-100" alt="..." />
-                                                            </div>
-                                                            <div className="col-5 text-start ps-2 m-auto">
-                                                                <p className="pb-1">Scrub Top</p>
-                                                                <p className="pb-1">Lemon Green / L</p>
-                                                                <p className="pb-1">&#x20A6; 8000</p>
-                                                            </div>
-                                                            <div className="col-1 pt-2 m-auto">
-                                                                <button type="button" className="btn-close text-reset"></button>
-                                                            </div>
-                                                        </div>
-                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div className="col-3 pe-2">
-                                                                <img src={pic8} className="d-block w-100 h-100" alt="..." />
-                                                            </div>
-                                                            <div className="col-5 text-start ps-2 m-auto">
-                                                                <p className="pb-1">Scrub Top</p>
-                                                                <p className="pb-1">Brown / SM</p>
-                                                                <p className="pb-1">&#x20A6; 7000</p>
-                                                            </div>
-                                                            <div className="col-1 pt-2 m-auto">
-                                                                <button type="button" className="btn-close text-reset"></button>
-                                                            </div>
-                                                        </div>
+                                                        {cart && cart["id"] && cart["id"].length > 0 ?
+                                                            (
+                                                                <Fragment>
+                                                                    {cart["data"].map((item, index) => {
+                                                                        return (
+                                                                            Header_Cart_DSP(domain, index, item, cart, Dispatch)
+                                                                        )
+                                                                    })}
+                                                                </Fragment>
+                                                            ) : (
+                                                                <div className="empty">
+                                                                    {/* <p>------- &nbsp;  Empty &nbsp; -------</p> */}
+                                                                </div>
+                                                            )
+                                                        }
                                                     </div>
                                                 </div>
                                                 {/* Bottom */}
                                                 <div className="c-btm px-4">
                                                     <div className="w-100 d-flex justify-content-between pt-3 pb-1">
-                                                        <p>Total:</p>
-                                                        <p>&#x20A6; 20,800</p>
+                                                        <p>Subtotal:</p>
+                                                        <p>&#x20A6; {
+                                                            cart && cart["id"] && cart["id"].length > 0 ?
+                                                                (
+                                                                    new Intl.NumberFormat("en-US", {}).format(total())
+                                                                ) : (
+                                                                    "0.00"
+                                                                )
+                                                        }
+                                                        </p>
                                                     </div>
                                                     <div className="pt-1 pb-3">
                                                         <div className="form-check text-start ps-4">
@@ -154,9 +193,9 @@ const Header = () => {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" className="btn btn-md w-100 py-2 mb-3">
+                                                        <Link to="./cart" className="btn btn-md w-100 py-2 mb-3">
                                                             CHECKOUT
-                                                        </button>{" "}
+                                                        </Link>{" "}
                                                         <br />
                                                         <Link to="./cart" className="btn btn-md w-100 py-2">
                                                             VIEW CART
@@ -167,7 +206,7 @@ const Header = () => {
                                         </div>
                                     </div>
                                     {/* Wish list Icon */}
-                                    <div className="d-flex">
+                                    <div className="d-flex my-auto">
                                         <button className="border-0 bg-transparent d-inline-flex m-auto pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#wishlist" aria-controls="wishlist">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="1.4em" height="1.35em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                                 <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z" />
@@ -183,64 +222,27 @@ const Header = () => {
                                             <div className="offcanvas-body py-0">
                                                 {/* Top */}
                                                 <div className="item_count text-start w-top px-4">
-                                                    <span>4</span>
-                                                    <span> Items</span>
+                                                    <span>{user["wishlist"] ? user["wishlist"].length : 0}</span>
+                                                    <span> Item(s)</span>
                                                 </div>
                                                 {/* Scrollable Mid */}
-                                                <div className="pt-3 ps-1 w-mid px-4">
+                                                <div className="pt-3 w-mid px-4">
                                                     <div>
-                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div className="col-3 pe-2">
-                                                                <img src={pic1} className="d-block w-100 h-100" alt="..." />
-                                                            </div>
-                                                            <div className="col-5 text-start ps-2 m-auto">
-                                                                <p className="pb-1">Scrub Top</p>
-                                                                <p className="pb-1">Purple / XXL</p>
-                                                                <p className="pb-1">&#x20A6; 5800</p>
-                                                            </div>
-                                                            <div className="col-1 pt-2 m-auto">
-                                                                <button type="button" className="btn-close text-reset"></button>
-                                                            </div>
-                                                        </div>
-                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div className="col-3 pe-2">
-                                                                <img src={pic2} className="d-block w-100 h-100" alt="..." />
-                                                            </div>
-                                                            <div className="col-5 text-start ps-2 m-auto">
-                                                                <p className="pb-1">Scrub Top</p>
-                                                                <p className="pb-1">Lemon Green / L</p>
-                                                                <p className="pb-1">&#x20A6; 8000</p>
-                                                            </div>
-                                                            <div className="col-1 pt-2 m-auto">
-                                                                <button type="button" className="btn-close text-reset"></button>
-                                                            </div>
-                                                        </div>
-                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div className="col-3 pe-2">
-                                                                <img src={pic8} className="d-block w-100 h-100" alt="..." />
-                                                            </div>
-                                                            <div className="col-5 text-start ps-2 m-auto">
-                                                                <p className="pb-1">Scrub Top</p>
-                                                                <p className="pb-1">Brown / SM</p>
-                                                                <p className="pb-1">&#x20A6; 7000</p>
-                                                            </div>
-                                                            <div className="col-1 pt-2 m-auto">
-                                                                <button type="button" className="btn-close text-reset"></button>
-                                                            </div>
-                                                        </div>
-                                                        <div className="d-flex w-100 justify-content-between py-4 ms-4">
-                                                            <div className="col-3 pe-2">
-                                                                <img src={pic7} className="d-block w-100 h-100" alt="..." />
-                                                            </div>
-                                                            <div className="col-5 text-start ps-2 m-auto">
-                                                                <p className="pb-1">Scrub Top</p>
-                                                                <p className="pb-1">Lemon Green / L</p>
-                                                                <p className="pb-1">&#x20A6; 8000</p>
-                                                            </div>
-                                                            <div className="col-1 pt-2 m-auto">
-                                                                <button type="button" className="btn-close text-reset"></button>
-                                                            </div>
-                                                        </div>
+                                                        {wishlist && wishlist["id"] && wishlist["id"].length > 0 ?
+                                                            (
+                                                                <Fragment>
+                                                                    {wishlist["data"].map((item, index) => {
+                                                                        return (
+                                                                            Header_Wishlist_DSP(domain, index, item, wishlist, Dispatch)
+                                                                        )
+                                                                    })}
+                                                                </Fragment>
+                                                            ) : (
+                                                                <div className="empty">
+                                                                    {/* <p>------- &nbsp;  Empty &nbsp; -------</p> */}
+                                                                </div>
+                                                            )
+                                                        }
                                                     </div>
                                                 </div>
                                                 {/* Bottom */}
@@ -265,24 +267,24 @@ const Header = () => {
                 <div className="cat container w_1200">
                     <ul className="h_list d-flex">
                         <li className="menu">
-                            <Link to="./category">Wardcoats</Link>
+                            <Link to="/category/coats" state={{ collection: "coats", page: "1" }}>Wardcoats</Link>
                         </li>
                         <li className="menu">
-                            <Link to="./category">Scrubs</Link>
+                            <Link to="/category/scrubs" state={{ collection: "scrubs", page: "1" }}>Scrubs</Link>
                         </li>
                         <li className="menu">
-                            <div className="dropdown">
-                                <button className="btn dropdown-toggle border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div className="dropdown-center lg_2">
+                                <button className="btn border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Footwears
                                 </button>
-                                <ul className="dropdown-menu">
+                                <ul className="dropdown-menu px-2 py-2">
                                     <li>
-                                        <Link className="dropdown-item" to="./category">
+                                        <Link className="dropdown-item" to="/category/crocs" state={{ collection: "crocs", page: "1" }}>
                                             Crocs
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to="./category">
+                                        <Link className="dropdown-item" to="/category/sneakers" state={{ collection: "sneakers", page: "1" }}>
                                             Sneakers
                                         </Link>
                                     </li>
@@ -290,37 +292,32 @@ const Header = () => {
                             </div>
                         </li>
                         <li className="menu">
-                            <Link to="./category">Inscription T-Shirts</Link>
+                            <Link to="/category/inscription_t-shirts" state={{ collection: "shirts", page: "1" }}>Inscription T-Shirts</Link>
                         </li>
                         <li className="menu">
-                            <div className="dropdown">
-                                <button className="btn dropdown-toggle border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div className="dropdown-center lg_2">
+                                <button className="btn border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Accessories
                                 </button>
-                                <ul className="dropdown-menu">
+                                <ul className="dropdown-menu px-2 py-2">
                                     <li>
-                                        <Link className="dropdown-item" to="./category">
+                                        <Link className="dropdown-item" to="/category/pen_torch" state={{ collection: "penTorch", page: "1" }}>
                                             Pen Torch
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to="./category">
+                                        <Link className="dropdown-item" to="/category/scrub_caps" state={{ collection: "scrubCaps", page: "1" }}>
                                             Scrub Caps
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to="./category">
+                                        <Link className="dropdown-item" to="/category/id_card_holder" state={{ collection: "cardHolders", page: "1" }}>
                                             ID Card Holder
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to="./category">
+                                        <Link className="dropdown-item" to="/category/medical_brooches" state={{ collection: "brooches", page: "1" }}>
                                             Medical Brooches
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link className="dropdown-item" to="./category">
-                                            Scrub Inner T-Shirt
                                         </Link>
                                     </li>
                                 </ul>

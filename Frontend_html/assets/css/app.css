@@ -44,7 +44,7 @@ input[type="number"] {
     font-family: "Fira Sans", sans-serif !important;
     font-weight: 500 !important;
     font-size: 0.95rem !important;
-    letter-spacing: 0.2px !important;
+    letter-spacing: 0.5px !important;
     color: #03001e !important;
 }
 
@@ -64,6 +64,57 @@ input[type="number"] {
     width: 100%;
     max-width: 1200px;
     margin: auto;
+}
+
+.lg_mid {
+    height: calc(100vh - 170px);
+    padding-top: 1rem !important;
+}
+
+.sg_mid {
+    height: calc(100vh - 170px);
+    padding-top: 1rem !important;
+}
+
+.lg_mid > div {
+    width: 100%;
+}
+
+.sg_mid > div:first-child {
+    width: 40%;
+}
+
+.sg_mid > div:nth-child(2) {
+    width: 100%;
+}
+
+.sg_mid > div:nth-child(2) > form > div,
+.lg_mid > div:nth-child(2) > form > div {
+    width: 100%;
+}
+
+.sg_mid > div:nth-child(2) > form > div:first-child > div {
+    width: 100%;
+}
+
+.lg_mid h3,
+.sg_mid h3 {
+    font-size: 2.7rem !important;
+    font-weight: 400 !important;
+    line-height: 3.7rem;
+}
+
+.lg_mid p,
+.sg_mid p {
+    font-size: 0.85rem !important;
+    font-family: unset !important;
+    font-weight: 400 !important;
+}
+
+.login .f-bottom,
+.signup .f-bottom,
+.verify .f-bottom {
+    background-color: transparent !important;
 }
 
 .lv_1 {
@@ -87,6 +138,11 @@ input[type="number"] {
 footer {
     min-height: 400px;
     background-color: rgba(3, 0, 31, 0.8);
+}
+
+.login footer {
+    min-height: unset;
+    background-color: unset;
 }
 
 footer * {
@@ -153,7 +209,7 @@ footer * {
 
 .logo a > h4,
 .logo > h4 {
-    font-size: 2.8rem !important;
+    font-size: 3rem !important;
     font-weight: 700 !important;
     margin-bottom: 0.5rem !important;
 }
@@ -294,9 +350,13 @@ footer * {
 }
 
 .ln_1 {
-    flex-direction: column-reverse;
     width: 100%;
     padding: 1rem 0 0.8rem;
+}
+
+.verify .ln_1,
+.verify .form-label {
+    visibility: hidden;
 }
 
 .d_search_bar {
@@ -1217,7 +1277,7 @@ footer * {
 
     .logo a > h4,
     .logo > h4 {
-        font-size: 2.8rem !important;
+        font-size: 3rem !important;
         font-weight: 700 !important;
         margin-bottom: 0.5rem !important;
     }
@@ -1286,6 +1346,40 @@ footer * {
         transform: translateX(0);
     }
 
+    .lg_mid {
+        height: calc(100vh - 174px);
+        padding-top: 5rem !important;
+    }
+
+    .verify .lg_mid {
+        width: 30%;
+    }
+
+    .sg_mid {
+        height: calc(100vh - 174px);
+        padding-top: 5rem !important;
+    }
+
+    .lg_mid > div {
+        width: 40%;
+    }
+
+    .lg_mid > div:nth-child(2) > form > div {
+        width: 75%;
+    }
+
+    .sg_mid > div:nth-child(2) > form > div {
+        width: 80%;
+    }
+
+    .sg_mid > div:nth-child(2) {
+        width: 46%;
+    }
+
+    .sg_mid > div:nth-child(2) > form > div:first-child > div {
+        width: 47%;
+    }
+
     .f-bottom div {
         text-align: right;
     }
@@ -1312,6 +1406,10 @@ footer * {
     .form-control {
         padding: 0.3rem 0.75rem;
         font-size: inherit !important;
+    }
+
+    .ln_1 {
+        justify-content: end;
     }
 
     .ln_1 > div:nth-child(2) {
@@ -1644,6 +1742,52 @@ footer * {
         color: #fff !important;
         border-radius: 50%;
         box-shadow: 0px 5px 8px 3px rgba(70, 70, 70, 0.314);
+    }
+
+    .profile > div:nth-child(1) {
+        width: 70%;
+    }
+
+    .profile > div:nth-child(1) > div:nth-child(1) > p {
+        font-size: 1.2rem !important;
+    }
+
+    .profile > div:nth-child(2) {
+        width: 28%;
+        border: 1px solid #adc0cf;
+        border-radius: 1rem;
+    }
+
+    .profile h2 {
+        font-size: 1.2rem !important;
+    }
+
+    .profile p {
+        font-size: 1.2rem !important;
+        font-weight: 400 !important;
+    }
+
+    .profile span {
+        font-size: 12px !important;
+        color: red !important;
+    }
+
+    .c_cont {
+        width: 50%;
+        height: 100px;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        border-radius: 1rem;
+        border: 1px solid #adc0cf;
+    }
+
+    .gg {
+        min-width: 10%;
+    }
+
+    .gg p,
+    .gg button {
+        font-size: 0.95rem !important;
     }
 }
 

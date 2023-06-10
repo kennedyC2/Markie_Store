@@ -2,147 +2,97 @@ import axios from "axios";
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
+import { Admin_DSP } from "../../dsp";
 
 const AdminCoats = (props) => {
-    const { setData } = props;
+    const { setData, dKeys } = props;
     const { coats } = useSelector((state) => state);
     const Dispatch = useDispatch();
 
     const updateState = (pos, id) => {
+        const coat = coats[pos]
         const _data = {
             item: pos,
             id: id,
             details: {
-                title: coats[pos]["title"],
-                quantity: coats[pos]["quantity"],
-                price: coats[pos]["price"],
-                colors: coats[pos]["colors"],
-                category: coats[pos]["category"],
-                description: coats[pos]["description"],
-                misc: coats[pos]["misc"],
+                title: coat["title"],
+                quantity: coat["quantity"],
+                price: coat["price"],
+                colors: coat["colors"],
+                category: coat["category"],
+                description: coat["description"],
+                misc: coat["misc"],
             },
             images: {
-                main: coats[pos]["images"]["main"],
-                image_1: coats[pos]["images"]["image_1"],
-                image_2: coats[pos]["images"]["image_2"],
+                main: coat["images"]["main"],
+                image_1: coat["images"]["image_1"],
+                image_2: coat["images"]["image_2"],
             },
+            newImages: {
+                main: "",
+                image_1: "",
+                image_2: "",
+            }
         }
         setData(_data)
     }
 
-    const deleteItem = async (e, pos, id) => {
+    const deleteItem = async (e, id, category, images) => {
         e.preventDefault();
 
         try {
-            const response = await axios({
-                method: "POST",
+            await axios({
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                url: domain + "products/delete?t=" + id,
+                url: domain + "products/delete?t=" + id + "&c=" + category,
+                data: images
             });
 
-            const result = response.data;
+            const updated = coats.filter(each => {
+                return each._id !== id
+            })
 
-            console.log(result);
+            Dispatch({ type: dKeys[category]["delete"], payload: updated })
         } catch (error) {
             console.log(error);
         }
     };
 
     useEffect(() => {
-        (async () => {
-            const response = await axios.get(domain + "products?i=marky&a=true&c=scrubs");
-            Dispatch({ type: "createCoats", payload: response.data });
-        })();
-    }, [Dispatch]);
+        if (coats.length === 0) {
+            (async () => {
+                const response = await axios.get(domain + "products/get?i=marky&a=true&c=coats");
+                Dispatch({ type: "createCoats", payload: response.data });
+            })();
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Fragment>
             <div className="tab-pane fade active show" id="v-pills-coats" role="tabpanel" aria-labelledby="v-pills-coats-tab" tabIndex="0">
-                <div className="w-100 grid">
-                    {coats && coats.length > 0
-                        ? coats.map((item, index) => {
-                            return (
-                                <div key={index} className="card" id={item._id + "_" + index}>
-                                    <img src={domain + "image/" + item.images.main} className="card-img-top" alt="coats" width={"100%"} height={"100%"} />
-                                    <div className="card-body">
-                                        <div>
-                                            <h5 className="card-title">{item.title}</h5>
-                                            <p className="card-text">{item.description}</p>
-                                        </div>
-
-                                        <div className="card-body d-flex justify-content-between">
-                                            <button type="button" className="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target={"#coats_" + index + "a"}>
-                                                view
-                                            </button>
-
-                                            <div className="modal fade" id={"coats_" + index + "a"} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={"coats_" + index + "a_Label"} aria-hidden="true">
-                                                <div className="modal-dialog modal-dialog-centered modalThree">
-                                                    <div className="modal-content">
-                                                        <div className="modal-header">
-                                                            <h1 className="modal-title fs-5 invisible" id={"coats_" + index + "a_Label"}>Modal title</h1>
-                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div className="modal-body text-start">
-                                                            <div>
-                                                                <div className="">
-                                                                    <h5 className="title">Product: {item.title}</h5>
-                                                                    <div className="mt-2 d-flex justify-content-between">
-                                                                        <p>Price: {item.price}</p>
-                                                                        <p>In Stock: {item.quantity}</p>
-                                                                        <p>Purchased: {item.sold}</p>
-                                                                    </div>
-                                                                    <p className="desc">Description: {item.description}</p>
-                                                                </div>
-                                                                <div className="cont4">
-                                                                    <div>
-                                                                        <img src={domain + "image/" + item.images.main} alt="main" />
-                                                                    </div>
-                                                                    <div>
-                                                                        <img src={domain + "image/" + item.images.image_1} alt="image_1" />
-                                                                    </div>
-                                                                    <div>
-                                                                        <img src={domain + "image/" + item.images.image_2} alt="image_2" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="modal-footer">
-                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <button type="button" className="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => updateState(index, item._id)}>
-                                                edit
-                                            </button>
-
-                                            <button type="button" className="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target={"#coats_" + index + "b"}>
-                                                delete
-                                            </button>
-
-                                            <div className="modal fade" id={"coats_" + index + "b"} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={"coats_" + index + "b_Label"} aria-hidden="true">
-                                                <div className="modal-dialog modal-dialog-centered modalThree">
-                                                    <div className="modal-content">
-                                                        <div className="modal-body text-start py-5">
-                                                            Do you really want to delete this item?
-                                                        </div>
-                                                        <div className="modal-footer">
-                                                            <button type="button" className="btn btn-secondary px-5" data-bs-dismiss="modal">No</button>
-                                                            <button type="button" className="btn btn-danger px-5" data-bs-dismiss="modal" onClick={(e) => deleteItem(e, index, item._id)}>Yes</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })
-                        : ""}
-                </div>
+                <Fragment>
+                    {coats && coats.length > 0 ?
+                        <div className="w-100 grid">
+                            {
+                                coats.map((item, index) => {
+                                    return (
+                                        Admin_DSP(domain, index, item, updateState, deleteItem)
+                                    )
+                                })
+                            }
+                        </div>
+                        :
+                        <Fragment>
+                            <div className="empty">
+                                <p>------- &nbsp;  no data &nbsp; -------</p>
+                            </div>
+                        </Fragment>
+                    }
+                </Fragment>
             </div>
         </Fragment>
     );

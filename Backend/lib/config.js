@@ -13,6 +13,8 @@ Environments["staging"] = {
     HTTPS_port: 5001,
     mode: "staging",
     secret: "JEHOVAH REIGNS",
+    user: "48577dd1e0c29a",
+    pass: "dccd4f98ea78a1"
 };
 
 // Production Environment

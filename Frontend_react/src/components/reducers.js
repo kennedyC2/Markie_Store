@@ -5,17 +5,16 @@ const scrubs = (state = [], action) => {
     // ============================
     switch (action.type) {
         case "createScrubs":
+            return [...state, ...action.payload]
+
+        case "addScrub":
+            return [...state, action.payload];
+
+        case "updateScrub":
             return [...action.payload];
 
-        case "add":
-            return { ...state, ...action.payload.data };
-
-        case "update":
-            return { ...state, ...(state[action.payload.id] = action.payload.data) };
-
-        case "delete":
-            delete state[action.payload.id];
-            return { ...state };
+        case "deleteScrub":
+            return [...action.payload];
 
         default:
             return state;
@@ -26,17 +25,16 @@ const coats = (state = [], action) => {
     // ============================
     switch (action.type) {
         case "createCoats":
+            return [...state, ...action.payload]
+
+        case "addCoat":
+            return [...state, action.payload]
+
+        case "updateCoat":
             return [...action.payload];
 
-        case "add":
-            return { ...state, ...action.payload.data };
-
-        case "update":
-            return { ...state, ...(state[action.payload.id] = action.payload.data) };
-
-        case "delete":
-            delete state[action.payload.id];
-            return { ...state };
+        case "deleteCoat":
+            return [...action.payload];
 
         default:
             return state;
@@ -47,17 +45,16 @@ const crocs = (state = [], action) => {
     // ============================
     switch (action.type) {
         case "createCrocs":
+            return [...state, ...action.payload]
+
+        case "addCroc":
+            return [...state, action.payload]
+
+        case "updateCroc":
             return [...action.payload];
 
-        case "add":
-            return { ...state, ...action.payload.data };
-
-        case "update":
-            return { ...state, ...(state[action.payload.id] = action.payload.data) };
-
-        case "delete":
-            delete state[action.payload.id];
-            return { ...state };
+        case "deleteCroc":
+            return [...action.payload];
 
         default:
             return state;
@@ -68,17 +65,16 @@ const sneakers = (state = [], action) => {
     // ============================
     switch (action.type) {
         case "createSneakers":
+            return [...state, ...action.payload]
+
+        case "addSneaker":
+            return [...state, action.payload]
+
+        case "updateSneaker":
             return [...action.payload];
 
-        case "add":
-            return { ...state, ...action.payload.data };
-
-        case "update":
-            return { ...state, ...(state[action.payload.id] = action.payload.data) };
-
-        case "delete":
-            delete state[action.payload.id];
-            return { ...state };
+        case "deleteSneaker":
+            return [...action.payload];
 
         default:
             return state;
@@ -89,17 +85,16 @@ const penTorch = (state = [], action) => {
     // ============================
     switch (action.type) {
         case "createTorch":
+            return [...state, ...action.payload]
+
+        case "addTorch":
+            return [...state, action.payload]
+
+        case "updateTorch":
             return [...action.payload];
 
-        case "add":
-            return { ...state, ...action.payload.data };
-
-        case "update":
-            return { ...state, ...(state[action.payload.id] = action.payload.data) };
-
-        case "delete":
-            delete state[action.payload.id];
-            return { ...state };
+        case "deleteTorch":
+            return [...action.payload];
 
         default:
             return state;
@@ -110,17 +105,16 @@ const scrubCaps = (state = [], action) => {
     // ============================
     switch (action.type) {
         case "createCaps":
+            return [...state, ...action.payload]
+
+        case "addCap":
+            return [...state, action.payload]
+
+        case "updateCap":
             return [...action.payload];
 
-        case "add":
-            return { ...state, ...action.payload.data };
-
-        case "update":
-            return { ...state, ...(state[action.payload.id] = action.payload.data) };
-
-        case "delete":
-            delete state[action.payload.id];
-            return { ...state };
+        case "deleteCap":
+            return [...action.payload];
 
         default:
             return state;
@@ -131,17 +125,16 @@ const brooches = (state = [], action) => {
     // ============================
     switch (action.type) {
         case "createBrooches":
+            return [...state, ...action.payload]
+
+        case "addBrooch":
+            return [...state, action.payload]
+
+        case "updateBrooch":
             return [...action.payload];
 
-        case "addBrooches":
-            return { ...state, ...action.payload };
-
-        case "update":
-            return { ...state, ...(state[action.payload.id] = action.payload.data) };
-
-        case "delete":
-            delete state[action.payload.id];
-            return { ...state };
+        case "deleteBrooch":
+            return [...action.payload];
 
         default:
             return state;
@@ -152,28 +145,47 @@ const cardHolders = (state = [], action) => {
     // ============================
     switch (action.type) {
         case "createCardHolders":
+            return [...state, ...action.payload]
+
+        case "addCardHolder":
+            return [...state, action.payload]
+
+        case "updateCardHolder":
             return [...action.payload];
 
-        case "add":
-            return { ...state, ...action.payload.data };
-
-        case "update":
-            return { ...state, ...(state[action.payload.id] = action.payload.data) };
-
-        case "delete":
-            delete state[action.payload.id];
-            return { ...state };
+        case "deleteCardHolder":
+            return [...action.payload];
 
         default:
             return state;
     }
 };
 
-const inscription_shirts = (state = [], action) => {
+const shirts = (state = [], action) => {
     // ============================
     switch (action.type) {
         case "createShirts":
+            return [...state, ...action.payload]
+
+        case "addShirt":
+            return [...state, action.payload]
+
+        case "updateShirt":
             return [...action.payload];
+
+        case "deleteShirt":
+            return [...action.payload];
+
+        default:
+            return state;
+    }
+};
+
+const home = (state = {}, action) => {
+    // ============================
+    switch (action.type) {
+        case "createHome":
+            return { ...state, ...action.payload };
 
         case "add":
             return { ...state, ...action.payload.data };
@@ -190,19 +202,134 @@ const inscription_shirts = (state = [], action) => {
     }
 };
 
-const categories = () => {
-    return [
-        "ward coats",
-        "scrubs",
-        "crocs",
-        "sneakers",
-        "pen torch",
-        "scrub caps",
-        "brooches",
-        "ID card Holders",
-        "Inscription shirts",
-    ]
-}
+const appData = (state = {}, action) => {
+    // ============================
+    switch (action.type) {
+        case "createData":
+            return { ...state, ...action.payload };
+
+        case "add":
+            return { ...state, ...action.payload.data };
+
+        case "updateData":
+            return { ...state, ...state["appData"]["brand"] = new Set(state["appData"]["brand"]).add(action.payload) };
+
+        case "delete":
+            delete state[action.payload.id];
+            return { ...state };
+
+        default:
+            return state;
+    }
+};
+
+const user = (state = {}, action) => {
+    // ============================
+    switch (action.type) {
+        case "createUserData":
+            return { ...state, ...action.payload };
+
+        case "delivery":
+            return { ...state, delivery: action.payload };
+
+        case "verify":
+            return { ...state, verified: action.payload };
+
+        case "delete":
+            delete state[action.payload.id];
+            return { ...state };
+
+        default:
+            return state;
+    }
+};
+
+const cart = (state = {}, action) => {
+    // ============================
+    switch (action.type) {
+        case "createCart":
+            return { ...state, ...action.payload };
+
+        case "addToCart":
+            return { ...state, id: [...state.id, action.payload._id], data: [...state.data, action.payload] };
+
+        case "remove4rmCart":
+            return {
+                ...state,
+                id: state.id.filter((each) => {
+                    return each !== action.payload["_id"]
+                }),
+                data: state.data.filter((each) => {
+                    return each["_id"] !== action.payload["_id"]
+                })
+            };
+
+        case "increaseCQuantity":
+            let ideal = [...state.data]
+            ideal[action.payload]["order"]["quantity"] += 1
+            return { ...state, data: [...ideal] };
+
+        case "decreaseCQuantity":
+            let cdeal = [...state.data]
+            cdeal[action.payload]["order"]["quantity"] -= 1
+            return { ...state, data: [...cdeal] };
+
+        default:
+            return state;
+    }
+};
+
+const wishlist = (state = {}, action) => {
+    // ============================
+    switch (action.type) {
+        case "createWishlist":
+            return { ...state, ...action.payload };
+
+        case "addToWishlist":
+            return { ...state, id: [...state.id, action.payload._id], data: [...state.data, action.payload] };
+
+        case "remove4rmWishlist":
+            return {
+                ...state,
+                id: state.id.filter((each) => {
+                    return each !== action.payload["_id"]
+                }),
+                data: state.data.filter((each) => {
+                    return each["_id"] !== action.payload["_id"]
+                })
+            };
+
+        case "increaseWQuantity":
+            let ideal = [...state.data]
+            ideal[action.payload]["order"]["quantity"] += 1
+            return { ...state, data: [...ideal] };
+
+        case "decreaseWQuantity":
+            let cdeal = [...state.data]
+            cdeal[action.payload]["order"]["quantity"] -= 1
+            return { ...state, data: [...cdeal] };
+
+        default:
+            return state;
+    }
+};
+
+const status = (state = {}, action) => {
+    // ============================
+    switch (action.type) {
+        case "createStatus":
+            return { ...state, ...action.payload };
+
+        case "active":
+            return { ...state, active: action.payload };
+
+        case "session":
+            return { ...state, session: action.payload };
+
+        default:
+            return state;
+    }
+};
 
 // Combine Reducers
 const rootReducer = combineReducers({
@@ -214,8 +341,13 @@ const rootReducer = combineReducers({
     scrubCaps,
     brooches,
     cardHolders,
-    inscription_shirts,
-    categories
+    shirts,
+    home,
+    user,
+    appData,
+    cart,
+    wishlist,
+    status
 });
 
 export default rootReducer;

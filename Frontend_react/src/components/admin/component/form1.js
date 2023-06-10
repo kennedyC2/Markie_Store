@@ -1,17 +1,7 @@
 import { Fragment } from "react";
-import { useSelector } from "react-redux";
 
-const Form1 = (props) => {
-    const { categories } = useSelector(state => state)
-    const { data, setData, submit } = props;
-
-    const setColors = (e) => {
-        if (data["details"]["colors"].indexOf(e.target.value) < 0) {
-            setData({ ...data, ...data["details"]["colors"].push(e.target.value) });
-        } else {
-            setData({ ...data, ...(data["details"]["colors"] = data["details"]["colors"].filter((color) => color !== e.target.value)) });
-        }
-    };
+const Form1 = ({ data, setData, submit, appData }) => {
+    const { categories, sex, appColors } = appData
 
     const setMisc = (e) => {
         if (data["details"]["misc"].indexOf(e.target.value) < 0) {
@@ -20,12 +10,11 @@ const Form1 = (props) => {
             setData({ ...data, ...(data["details"]["misc"] = data["details"]["misc"].filter((item) => item !== e.target.value)) });
         }
     };
-    console.log(data.details)
 
     return (
         <Fragment>
-            <form action="#" method="post" className="needs-validation" onSubmit={submit} noValidate>
-                <div className="d-flex justify-content-between fdiv">
+            <form action="#" method="post" onSubmit={submit}>
+                <div className="d-flex justify-content-between fm1div">
                     <div>
                         <div className="mb-3">
                             <label htmlFor="title" className="form-label">
@@ -33,6 +22,13 @@ const Form1 = (props) => {
                             </label>
                             <input type="text" className="form-control" id="title" name="title" onChange={(e) => setData({ ...data, ...(data["details"]["title"] = e.target.value) })} value={data.details.title} required />
                             <div className="invalid-feedback">Please enter product title.</div>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="price" className="form-label">
+                                Brand:
+                            </label>
+                            <input type="text" className="form-control" id="brand" name="brand" onChange={(e) => setData({ ...data, ...(data["details"]["brand"] = e.target.value) })} value={data.details.brand} required />
+                            <div className="invalid-feedback">Please enter product brand.</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="quantity" className="form-label">
@@ -48,19 +44,22 @@ const Form1 = (props) => {
                             <input type="text" className="form-control" id="price" name="price" onChange={(e) => setData({ ...data, ...(data["details"]["price"] = e.target.value) })} value={data.details.price} required />
                             <div className="invalid-feedback">Please enter product price.</div>
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="title" className="form-label">
-                                Colors:
+                        <div className="mb-4">
+                            <label htmlFor="category" className="form-label">
+                                Sex:
                             </label>
-                            <div className="clr d-flex flex-wrap">
-                                <input className="form-check-input" type="checkbox" value="yellow" id="yellow" style={{ backgroundColor: "yellow" }} onChange={(e) => setColors(e)} checked={data.details.colors.indexOf("yellow") > -1 ? true : false} />
-                                <input className="form-check-input" type="checkbox" value="green" id="green" style={{ backgroundColor: "green" }} onChange={(e) => setColors(e)} checked={data.details.colors.indexOf("green") > -1 ? true : false} />
-                                <input className="form-check-input" type="checkbox" value="blue" id="blue" style={{ backgroundColor: "blue" }} onChange={(e) => setColors(e)} checked={data.details.colors.indexOf("blue") > -1 ? true : false} />
-                                <input className="form-check-input" type="checkbox" value="red" id="red" style={{ backgroundColor: "red" }} onChange={(e) => setColors(e)} checked={data.details.colors.indexOf("red") > -1 ? true : false} />
-                                <input className="form-check-input" type="checkbox" value="gray" id="gray" style={{ backgroundColor: "gray" }} onChange={(e) => setColors(e)} checked={data.details.colors.indexOf("gray") > -1 ? true : false} />
-                                <input className="form-check-input" type="checkbox" value="purple" id="purple" style={{ backgroundColor: "purple" }} onChange={(e) => setColors(e)} checked={data.details.colors.indexOf("purple") > -1 ? true : false} />
-                                <input className="form-check-input" type="checkbox" value="pink" id="pink" style={{ backgroundColor: "pink" }} onChange={(e) => setColors(e)} checked={data.details.colors.indexOf("pink") > -1 ? true : false} />
-                            </div>
+                            <select className="form-select" id="sex" aria-label="select" onChange={(e) => setData({ ...data, ...(data["details"]["sex"] = e.target.value) })} value={data.details.sex} required>
+                                {sex && sex.length > 0 ? (
+                                    sex.map((sx, index) => {
+                                        return (
+                                            <option key={index} value={sx}>{sx}</option>
+                                        )
+                                    })
+                                ) : (
+                                    <option value={false}>Empty</option>
+                                )}
+                            </select>
+                            <div className="invalid-feedback">Please select product category.</div>
                         </div>
                     </div>
                     <div>
@@ -69,10 +68,10 @@ const Form1 = (props) => {
                                 Category:
                             </label>
                             <select className="form-select" id="category" aria-label="select" onChange={(e) => setData({ ...data, ...(data["details"]["category"] = e.target.value) })} value={data.details.category} required>
-                                {categories.length > 0 ? (
+                                {categories && categories.length > 0 ? (
                                     categories.map((catg, index) => {
                                         return (
-                                            <option key={index} value={catg}>{catg}</option>
+                                            <option key={index} value={catg}>{catg.replaceAll("_", " ")}</option>
                                         )
                                     })
                                 ) : (
@@ -83,10 +82,26 @@ const Form1 = (props) => {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="desc" className="form-label">
-                                Description:
+                                Primary Colour:
                             </label>
-                            <textarea className="form-control" id="desc" rows="5" onChange={(e) => setData({ ...data, ...(data["details"]["description"] = e.target.value) })} value={data.details.description} required></textarea>
-                            <div className="invalid-feedback">Please enter product description.</div>
+                            <div className="c_list pe-5">
+                                {
+                                    appColors && Object.keys(appColors).length > 0 ? (
+                                        Object.keys(appColors).map((each, index) => {
+                                            return (
+                                                <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} onClick={e => {
+                                                    document.querySelectorAll("input[type=checkbox]:checked").forEach(g => {
+                                                        g.checked = false
+                                                    })
+
+                                                    e.currentTarget.checked = true
+                                                    setData({ ...data, ...(data["details"]["dColor"] = each) })
+                                                }} />
+                                            )
+                                        })
+                                    ) : (" ")
+                                }
+                            </div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="title" className="form-label">

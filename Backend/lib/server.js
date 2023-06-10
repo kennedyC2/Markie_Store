@@ -4,9 +4,10 @@ const url = require("url");
 const http = require("http");
 const stringDecoder = require("string_decoder").StringDecoder;
 const configuration = require("./config");
-const ping = require("../handlers/ping");
-const notFound = require("../handlers/notFound");
-const product = require("../handlers/product");
+const { ping, notFound, appData, homepage } = require("../handlers/main")
+const { createProduct, getProduct, updateProduct, deleteProduct } = require("../handlers/main")
+const { createUser, verifyUser, resendCode, getUser, updateUser, deleteUser } = require("../handlers/main")
+const { delivery, password } = require("../handlers/main")
 const { parseJSONObject } = require("./helper");
 const { getImages } = require("./file");
 
@@ -29,7 +30,6 @@ server["unifiedServer"] = (req, res) => {
     // Get Url Path
     const path = parsedUrl.pathname;
     const trimmedPath = path.replace(/^\/+|\/+$/g, "");
-    console.log(trimmedPath);
 
     // Get Header
     const headers = req.headers;
@@ -65,6 +65,7 @@ server["unifiedServer"] = (req, res) => {
             query: queryStringObject,
             payload: parseJSONObject(buffer),
         };
+
 
         // Route Request to Chosen Handler
         chosenHandler(data, (Code, Message, Type) => {
@@ -135,10 +136,20 @@ server["handler"] = (res, Code, Message, Type) => {
 // =======================================================
 server["router"] = {
     ping: ping,
-    "products/add": product.create,
-    "products/get": product.read,
-    "products/update": product.update,
-    "products/delete": product.delete
+    "app/data": appData,
+    "home": homepage,
+    "products/add": createProduct,
+    "products/get": getProduct,
+    "products/update": updateProduct,
+    "products/delete": deleteProduct,
+    "product/delivery": delivery,
+    "account/create": createUser,
+    "account/verify": verifyUser,
+    "account/code": resendCode,
+    "account/login": getUser,
+    "account/update": updateUser,
+    "account/password": password,
+    "account/delete": deleteUser,
 };
 
 // Server Init

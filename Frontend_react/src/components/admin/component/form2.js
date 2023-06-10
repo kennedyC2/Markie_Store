@@ -54,15 +54,27 @@ const Form2 = (props) => {
         const base64Image = canvas.toDataURL("image/jpeg");
 
         if (data["images"]["index"] === "img1") {
-            setData({ ...data, ...(data["images"]["main"] = base64Image) });
+            if (data["item"] < 0) {
+                setData({ ...data, ...(data["images"]["main"] = base64Image) });
+            } else {
+                setData({ ...data, ...(data["newImages"]["main"] = base64Image) });
+            }
         }
 
         if (data["images"]["index"] === "img2") {
-            setData({ ...data, ...(data["images"]["image_1"] = base64Image) });
+            if (data["item"] < 0) {
+                setData({ ...data, ...(data["images"]["image_1"] = base64Image) });
+            } else {
+                setData({ ...data, ...(data["newImages"]["image_1"] = base64Image) });
+            }
         }
 
         if (data["images"]["index"] === "img3") {
-            setData({ ...data, ...(data["images"]["image_2"] = base64Image) });
+            if (data["item"] < 0) {
+                setData({ ...data, ...(data["images"]["image_2"] = base64Image) });
+            } else {
+                setData({ ...data, ...(data["newImages"]["image_2"] = base64Image) });
+            }
         }
     };
 
@@ -80,7 +92,7 @@ const Form2 = (props) => {
             </form>
             <div className="cont1 d-flex justify-content-between">
                 <div className="cont2">
-                    <div>{src && <Cropper image={src} crop={crop} zoom={zoom} aspect={1 / 1.5} objectFit="auto-cover" onCropChange={setCrop} onCropComplete={onCropComplete} showGrid={false} onZoomChange={setZoom} style={style} />}</div>
+                    <div>{src && <Cropper image={src} crop={crop} zoom={zoom} aspect={14 / 16.8} objectFit="auto-cover" onCropChange={setCrop} onCropComplete={onCropComplete} showGrid={false} onZoomChange={setZoom} style={style} />}</div>
                     <div>
                         <button type="button" className="btn w-100 btn-secondary" onClick={cropImageNow}>
                             Crop Image
@@ -89,19 +101,19 @@ const Form2 = (props) => {
                 </div>
                 <div className="cont3">
                     <div>
-                        {data.images.main && <img src={domain + "image/" + data.images.main} alt="main" />}
+                        {data.images.main && <img src={data.images.main.indexOf(".jpg") > -1 ? (data.newImages.main !== "" ? data.newImages.main : domain + "image/" + data.images.main) : data.images.main} alt="main" />}
                         <button type="button" className="btn" onClick={(e) => clickFileInput("img1")}>
                             Main
                         </button>
                     </div>
                     <div>
-                        {data.images.image_1 && <img src={domain + "image/" + data.images.image_1} alt="image_1" />}
+                        {data.images.image_1 && <img src={data.images.image_1.indexOf(".jpg") > -1 ? (data.newImages.image_1 !== "" ? data.newImages.image_1 : domain + "image/" + data.images.image_1) : data.images.image_1} alt="image_1" />}
                         <button type="button" className="btn" onClick={(e) => clickFileInput("img2")}>
                             Image 1
                         </button>
                     </div>
                     <div>
-                        {data.images.image_2 && <img src={domain + "image/" + data.images.image_2} alt="image_2" />}
+                        {data.images.image_2 && <img src={data.images.image_2.indexOf(".jpg") > -1 ? (data.newImages.image_2 !== "" ? data.newImages.image_2 : domain + "image/" + data.images.image_2) : data.images.image_2} alt="image_2" />}
                         <button type="button" className="btn" onClick={(e) => clickFileInput("img3")}>
                             Image 2
                         </button>
