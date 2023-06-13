@@ -3,9 +3,10 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
+import { useOutletContext } from "react-router-dom";
 
-const AdminBrooches = (props) => {
-    const { setData, dKeys } = props;
+const AdminBrooches = () => {
+    const [setData, dKeys] = useOutletContext()
     const { brooches } = useSelector((state) => state);
     const Dispatch = useDispatch();
 
@@ -16,11 +17,17 @@ const AdminBrooches = (props) => {
             id: id,
             details: {
                 title: brooch["title"],
+                brand: brooch["brand"],
                 quantity: brooch["quantity"],
                 price: brooch["price"],
+                dColor: brooch["dColor"],
                 colors: brooch["colors"],
                 category: brooch["category"],
                 description: brooch["description"],
+                sizes: brooch["sizes"],
+                sold: brooch["sold"],
+                sex: brooch["sex"],
+                order: brooch["order"],
                 misc: brooch["misc"],
             },
             images: {
@@ -74,27 +81,23 @@ const AdminBrooches = (props) => {
 
     return (
         <Fragment>
-            <div className="tab-pane fade" id="v-pills-brooches" role="tabpanel" aria-labelledby="v-pills-brooches-tab" tabIndex="0">
-                <Fragment>
-                    {brooches && brooches.length > 0 ?
-                        <div className="w-100 grid">
-                            {
-                                brooches.map((item, index) => {
-                                    return (
-                                        Admin_DSP(domain, index, item, updateState, deleteItem)
-                                    )
-                                })
-                            }
-                        </div>
-                        :
-                        <Fragment>
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        </Fragment>
+            {brooches && brooches.length > 0 ?
+                <div className="w-100 grid">
+                    {
+                        brooches.map((item, index) => {
+                            return (
+                                Admin_DSP(domain, index, item, updateState, deleteItem)
+                            )
+                        })
                     }
+                </div>
+                :
+                <Fragment>
+                    <div className="empty">
+                        <p>------- &nbsp;  no data &nbsp; -------</p>
+                    </div>
                 </Fragment>
-            </div>
+            }
         </Fragment>
     );
 };

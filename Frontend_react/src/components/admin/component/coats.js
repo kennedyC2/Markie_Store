@@ -3,9 +3,10 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
+import { useOutletContext } from "react-router-dom";
 
-const AdminCoats = (props) => {
-    const { setData, dKeys } = props;
+const AdminCoats = () => {
+    const [setData, dKeys] = useOutletContext()
     const { coats } = useSelector((state) => state);
     const Dispatch = useDispatch();
 
@@ -16,11 +17,17 @@ const AdminCoats = (props) => {
             id: id,
             details: {
                 title: coat["title"],
+                brand: coat["brand"],
                 quantity: coat["quantity"],
                 price: coat["price"],
+                dColor: coat["dColor"],
                 colors: coat["colors"],
                 category: coat["category"],
                 description: coat["description"],
+                sizes: coat["sizes"],
+                sold: coat["sold"],
+                sex: coat["sex"],
+                order: coat["order"],
                 misc: coat["misc"],
             },
             images: {
@@ -73,27 +80,23 @@ const AdminCoats = (props) => {
 
     return (
         <Fragment>
-            <div className="tab-pane fade active show" id="v-pills-coats" role="tabpanel" aria-labelledby="v-pills-coats-tab" tabIndex="0">
-                <Fragment>
-                    {coats && coats.length > 0 ?
-                        <div className="w-100 grid">
-                            {
-                                coats.map((item, index) => {
-                                    return (
-                                        Admin_DSP(domain, index, item, updateState, deleteItem)
-                                    )
-                                })
-                            }
-                        </div>
-                        :
-                        <Fragment>
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        </Fragment>
+            {coats && coats.length > 0 ?
+                <div className="w-100 grid">
+                    {
+                        coats.map((item, index) => {
+                            return (
+                                Admin_DSP(domain, index, item, updateState, deleteItem)
+                            )
+                        })
                     }
+                </div>
+                :
+                <Fragment>
+                    <div className="empty">
+                        <p>------- &nbsp;  no data &nbsp; -------</p>
+                    </div>
                 </Fragment>
-            </div>
+            }
         </Fragment>
     );
 };

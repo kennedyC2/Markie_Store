@@ -89,7 +89,7 @@ const Product = () => {
                                         " "
                                     )}
                                 </div>
-                                <div id="item_dsp2" className="w-100 d-flex flex-nowrap">
+                                <div id="item_dsp2" className="w-100 d-flex flex-nowrap mt-5">
                                     <div className="item me-2">
                                         <img src={domain + "image/" + target.images.main} width="100%" height="100%" alt={collection} />
                                     </div>

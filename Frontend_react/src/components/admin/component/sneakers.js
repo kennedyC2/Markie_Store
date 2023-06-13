@@ -3,9 +3,10 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
+import { useOutletContext } from "react-router-dom";
 
-const AdminSneakers = (props) => {
-    const { setData, dKeys } = props;
+const AdminSneakers = () => {
+    const [setData, dKeys] = useOutletContext()
     const { sneakers } = useSelector((state) => state);
     const Dispatch = useDispatch();
 
@@ -16,11 +17,17 @@ const AdminSneakers = (props) => {
             id: id,
             details: {
                 title: sneaker["title"],
+                brand: sneaker["brand"],
                 quantity: sneaker["quantity"],
                 price: sneaker["price"],
+                dColor: sneaker["dColor"],
                 colors: sneaker["colors"],
                 category: sneaker["category"],
                 description: sneaker["description"],
+                sizes: sneaker["sizes"],
+                sold: sneaker["sold"],
+                sex: sneaker["sex"],
+                order: sneaker["order"],
                 misc: sneaker["misc"],
             },
             images: {
@@ -73,27 +80,23 @@ const AdminSneakers = (props) => {
 
     return (
         <Fragment>
-            <div className="tab-pane fade" id="v-pills-sneakers" role="tabpanel" aria-labelledby="v-pills-sneakers-tab" tabIndex="0">
-                <Fragment>
-                    {sneakers && sneakers.length > 0 ?
-                        <div className="w-100 grid">
-                            {
-                                sneakers.map((item, index) => {
-                                    return (
-                                        Admin_DSP(domain, index, item, updateState, deleteItem)
-                                    )
-                                })
-                            }
-                        </div>
-                        :
-                        <Fragment>
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        </Fragment>
+            {sneakers && sneakers.length > 0 ?
+                <div className="w-100 grid">
+                    {
+                        sneakers.map((item, index) => {
+                            return (
+                                Admin_DSP(domain, index, item, updateState, deleteItem)
+                            )
+                        })
                     }
+                </div>
+                :
+                <Fragment>
+                    <div className="empty">
+                        <p>------- &nbsp;  no data &nbsp; -------</p>
+                    </div>
                 </Fragment>
-            </div>
+            }
         </Fragment>
     );
 };

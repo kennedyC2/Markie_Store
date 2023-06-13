@@ -3,9 +3,10 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
+import { useOutletContext } from "react-router-dom";
 
-const AdminCardHolder = (props) => {
-    const { setData, dKeys } = props;
+const AdminCardHolder = () => {
+    const [setData, dKeys] = useOutletContext()
     const { cardHolders } = useSelector((state) => state);
     const Dispatch = useDispatch();
 
@@ -16,11 +17,17 @@ const AdminCardHolder = (props) => {
             id: id,
             details: {
                 title: cardHolder["title"],
+                brand: cardHolder["brand"],
                 quantity: cardHolder["quantity"],
                 price: cardHolder["price"],
+                dColor: cardHolder["dColor"],
                 colors: cardHolder["colors"],
                 category: cardHolder["category"],
                 description: cardHolder["description"],
+                sizes: cardHolder["sizes"],
+                sold: cardHolder["sold"],
+                sex: cardHolder["sex"],
+                order: cardHolder["order"],
                 misc: cardHolder["misc"],
             },
             images: {
@@ -73,27 +80,23 @@ const AdminCardHolder = (props) => {
 
     return (
         <Fragment>
-            <div className="tab-pane fade" id="v-pills-cards" role="tabpanel" aria-labelledby="v-pills-cards-tab" tabIndex="0">
-                <Fragment>
-                    {cardHolders && cardHolders.length > 0 ?
-                        <div className="w-100 grid">
-                            {
-                                cardHolders.map((item, index) => {
-                                    return (
-                                        Admin_DSP(domain, index, item, updateState, deleteItem)
-                                    )
-                                })
-                            }
-                        </div>
-                        :
-                        <Fragment>
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        </Fragment>
+            {cardHolders && cardHolders.length > 0 ?
+                <div className="w-100 grid">
+                    {
+                        cardHolders.map((item, index) => {
+                            return (
+                                Admin_DSP(domain, index, item, updateState, deleteItem)
+                            )
+                        })
                     }
+                </div>
+                :
+                <Fragment>
+                    <div className="empty">
+                        <p>------- &nbsp;  no data &nbsp; -------</p>
+                    </div>
                 </Fragment>
-            </div>
+            }
         </Fragment>
     );
 };

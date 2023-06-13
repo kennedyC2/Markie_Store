@@ -3,9 +3,10 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
+import { useOutletContext } from "react-router-dom";
 
-const AdminCaps = (props) => {
-    const { setData, dKeys } = props;
+const AdminCaps = () => {
+    const [setData, dKeys] = useOutletContext()
     const { scrubCaps } = useSelector((state) => state);
     const Dispatch = useDispatch();
 
@@ -16,11 +17,17 @@ const AdminCaps = (props) => {
             id: id,
             details: {
                 title: scrubCap["title"],
+                brand: scrubCap["brand"],
                 quantity: scrubCap["quantity"],
                 price: scrubCap["price"],
+                dColor: scrubCap["dColor"],
                 colors: scrubCap["colors"],
                 category: scrubCap["category"],
                 description: scrubCap["description"],
+                sizes: scrubCap["sizes"],
+                sold: scrubCap["sold"],
+                sex: scrubCap["sex"],
+                order: scrubCap["order"],
                 misc: scrubCap["misc"],
             },
             images: {
@@ -73,27 +80,23 @@ const AdminCaps = (props) => {
 
     return (
         <Fragment>
-            <div className="tab-pane fade" id="v-pills-caps" role="tabpanel" aria-labelledby="v-pills-caps-tab" tabIndex="0">
-                <Fragment>
-                    {scrubCaps && scrubCaps.length > 0 ?
-                        <div className="w-100 grid">
-                            {
-                                scrubCaps.map((item, index) => {
-                                    return (
-                                        Admin_DSP(domain, index, item, updateState, deleteItem)
-                                    )
-                                })
-                            }
-                        </div>
-                        :
-                        <Fragment>
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        </Fragment>
+            {scrubCaps && scrubCaps.length > 0 ?
+                <div className="w-100 grid">
+                    {
+                        scrubCaps.map((item, index) => {
+                            return (
+                                Admin_DSP(domain, index, item, updateState, deleteItem)
+                            )
+                        })
                     }
+                </div>
+                :
+                <Fragment>
+                    <div className="empty">
+                        <p>------- &nbsp;  no data &nbsp; -------</p>
+                    </div>
                 </Fragment>
-            </div>
+            }
         </Fragment>
     );
 };

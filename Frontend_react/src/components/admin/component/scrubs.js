@@ -3,9 +3,10 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
+import { useOutletContext } from "react-router-dom";
 
-const AdminScrubs = (props) => {
-    const { setData, dKeys } = props;
+const AdminScrubs = () => {
+    const [setData, dKeys] = useOutletContext()
     const { scrubs } = useSelector((state) => state);
     const Dispatch = useDispatch();
 
@@ -16,11 +17,17 @@ const AdminScrubs = (props) => {
             id: id,
             details: {
                 title: scrub["title"],
+                brand: scrub["brand"],
                 quantity: scrub["quantity"],
                 price: scrub["price"],
+                dColor: scrub["dColor"],
                 colors: scrub["colors"],
                 category: scrub["category"],
                 description: scrub["description"],
+                sizes: scrub["sizes"],
+                sold: scrub["sold"],
+                sex: scrub["sex"],
+                order: scrub["order"],
                 misc: scrub["misc"],
             },
             images: {
@@ -74,27 +81,23 @@ const AdminScrubs = (props) => {
 
     return (
         <Fragment>
-            <div className="tab-pane fade" id="v-pills-scrubs" role="tabpanel" aria-labelledby="v-pills-scrubs-tab" tabIndex="0">
-                <Fragment>
-                    {scrubs && scrubs.length > 0 ?
-                        <div className="w-100 grid">
-                            {
-                                scrubs.map((item, index) => {
-                                    return (
-                                        Admin_DSP(domain, index, item, updateState, deleteItem)
-                                    )
-                                })
-                            }
-                        </div>
-                        :
-                        <Fragment>
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        </Fragment>
+            {scrubs && scrubs.length > 0 ?
+                <div className="w-100 grid">
+                    {
+                        scrubs.map((item, index) => {
+                            return (
+                                Admin_DSP(domain, index, item, updateState, deleteItem)
+                            )
+                        })
                     }
+                </div>
+                :
+                <Fragment>
+                    <div className="empty">
+                        <p>------- &nbsp;  no data &nbsp; -------</p>
+                    </div>
                 </Fragment>
-            </div>
+            }
         </Fragment>
     );
 };

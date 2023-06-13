@@ -4,17 +4,9 @@ import Form2 from "./form2";
 import Form3 from "./form3";
 import axios from "axios";
 import { domain } from "../../helpers";
-import AdminBrooches from "./brooches";
-import AdminCardHolder from "./cardHolder";
-import AdminCoats from "./coats";
-import AdminCrocs from "./crocs";
-import AdminTorch from "./penTorch";
-import AdminCaps from "./scrubCaps";
-import AdminScrubs from "./scrubs";
-import AdminSneakers from "./sneakers";
-import AdminShirts from "./tShirt";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchAppData } from "../../action";
+import { Link, Outlet } from "react-router-dom";
 
 // InitialState
 const InitialState = {
@@ -24,7 +16,7 @@ const InitialState = {
         title: "",
         brand: "",
         quantity: "",
-        purchased: 0,
+        sold: "0",
         price: "",
         dColor: "",
         colors: [],
@@ -33,7 +25,6 @@ const InitialState = {
         sizes: {},
         sex: "male",
         misc: [],
-        sold: 0,
     },
     images: {
         index: "",
@@ -154,45 +145,39 @@ const AdminList = () => {
         <Fragment>
             <div className="mt-4 sub_list">
                 <div className="d-flex justify-content-between">
-                    <div className="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <button className="nav-link active" id="v-pills-coats-tab" data-bs-toggle="pill" data-bs-target="#v-pills-coats" type="button" role="tab" aria-controls="v-pills-coats" aria-selected="true">
-                            Ward coats
-                        </button>
-                        <button className="nav-link" id="v-pills-scrubs-tab" data-bs-toggle="pill" data-bs-target="#v-pills-scrubs" type="button" role="tab" aria-controls="v-pills-scrubs" aria-selected="false">
-                            Scrubs
-                        </button>
-                        <button className="nav-link" id="v-pills-crocs-tab" data-bs-toggle="pill" data-bs-target="#v-pills-crocs" type="button" role="tab" aria-controls="v-pills-crocs" aria-selected="false">
-                            Crocs
-                        </button>
-                        <button className="nav-link" id="v-pills-sneakers-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sneakers" type="button" role="tab" aria-controls="v-pills-sneakers" aria-selected="false">
-                            Sneakers
-                        </button>
-                        <button className="nav-link" id="v-pills-torch-tab" data-bs-toggle="pill" data-bs-target="#v-pills-torch" type="button" role="tab" aria-controls="v-pills-torch" aria-selected="false">
-                            Pen Torch
-                        </button>
-                        <button className="nav-link" id="v-pills-caps-tab" data-bs-toggle="pill" data-bs-target="#v-pills-caps" type="button" role="tab" aria-controls="v-pills-caps" aria-selected="false">
-                            Scrub Caps
-                        </button>
-                        <button className="nav-link" id="v-pills-cards-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cards" type="button" role="tab" aria-controls="v-pills-cards" aria-selected="false">
-                            ID Card Holder
-                        </button>
-                        <button className="nav-link" id="v-pills-shirts-tab" data-bs-toggle="pill" data-bs-target="#v-pills-shirts" type="button" role="tab" aria-controls="v-pills-shirts" aria-selected="false">
-                            Inscription T-Shirt
-                        </button>
-                        <button className="nav-link" id="v-pills-brooches-tab" data-bs-toggle="pill" data-bs-target="#v-pills-brooches" type="button" role="tab" aria-controls="v-pills-brooches" aria-selected="false">
-                            Brooches
-                        </button>
+                    <div className="lft">
+                        <ul className="d_list">
+                            <li>
+                                <Link to="/admin/product/coats">Coats</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/product/scrubs">Scrubs</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/product/crocs">Crocs</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/product/sneakers">Sneakers</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/product/penTorch">Pen Torch</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/product/scrubCaps">Scrub Caps</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/product/CardHolder">ID Card Holder</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/product/shirts">Inscription T-shirt</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/product/brooches">Medical Brooches</Link>
+                            </li>
+                        </ul>
                     </div>
-                    <div className="tab-content" id="v-pills-tabContent">
-                        <AdminCoats setData={setData} dKeys={dKeys} />
-                        <AdminScrubs setData={setData} dKeys={dKeys} />
-                        <AdminCrocs setData={setData} dKeys={dKeys} />
-                        <AdminSneakers setData={setData} dKeys={dKeys} />
-                        <AdminTorch setData={setData} dKeys={dKeys} />
-                        <AdminCaps setData={setData} dKeys={dKeys} />
-                        <AdminCardHolder setData={setData} dKeys={dKeys} />
-                        <AdminShirts setData={setData} dKeys={dKeys} />
-                        <AdminBrooches setData={setData} dKeys={dKeys} />
+                    <div className="rgt">
+                        <Outlet context={[setData, dKeys]} />
                     </div>
                 </div>
             </div>
@@ -269,7 +254,7 @@ const AdminList = () => {
                     </div>
                 </div>
             </div>
-        </Fragment>
+        </Fragment >
     );
 };
 

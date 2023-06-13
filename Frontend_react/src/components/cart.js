@@ -7,9 +7,8 @@ import { set } from "idb-keyval";
 
 const Cart = () => {
     const Dispatch = useDispatch()
-    const [selectedSize, setSelectedSize] = useState("all")
+    let [val, setVal] = useState(1)
     const { appData, user, cart } = useSelector(state => state)
-    console.log(appData)
 
     const total = () => {
         let val = 0
@@ -48,9 +47,10 @@ const Cart = () => {
                             {cart && cart.data && cart.data.length > 0 ?
                                 (
                                     <Fragment>
-                                        {cart.data.map((item, index) => {
+                                        {cart.data.map((item, indexC) => {
+                                            let selectedSize = item.order.size !== "" ? item.order.size : "all"
                                             return (
-                                                <li key={index} className="pe-3 my-2 rounded">
+                                                <li key={indexC} className="pe-3 my-2 rounded">
                                                     <div className="d-flex justify-content-between w-100 h-100 py-3">
                                                         <div className="box_1 ps-2">
                                                             <img src={domain + "image/" + item.images.main} className="d-block w-100 h-100" alt="..." />
@@ -64,41 +64,68 @@ const Cart = () => {
                                                                 <ul className="px-2 py-1 s_list">
                                                                     {Object.keys(item["sizes"]).map((each, index) => {
                                                                         return (
-                                                                            <li key={index} onClick={e => {
-                                                                                let selectedSz = document.querySelector("li.selectedSz")
+                                                                            <li key={index} className={each === item.order.size ? "selectedSz" : ""} onClick={async e => {
+                                                                                console.log(item)
+                                                                                // let selectedSz = document.querySelector("li.selectedSz")
 
-                                                                                if (selectedSz) {
-                                                                                    selectedSz.classList.remove("selectedSz")
-                                                                                }
+                                                                                // if (selectedSz) {
+                                                                                //     selectedSz.classList.remove("selectedSz")
+                                                                                // }
 
-                                                                                document.querySelectorAll("input[type=checkbox]:checked").forEach(each => {
-                                                                                    each.checked = false
-                                                                                })
+                                                                                // document.querySelectorAll("input[type=checkbox]:checked").forEach(each => {
+                                                                                //     each.checked = false
+                                                                                // })
 
-                                                                                e.currentTarget.classList.add("selectedSz")
-                                                                                setSelectedSize(each)
+                                                                                // e.currentTarget.classList.add("selectedSz")
+                                                                                selectedSize = each
+                                                                                setVal(val += 1)
+
+                                                                                // Update Store
+                                                                                const newData = [...cart.data]
+                                                                                newData[indexC].order.size = each
+                                                                                set("cart", {
+                                                                                    data: newData,
+                                                                                    id: cart.id,
+                                                                                    expiry: cart.expiry
+                                                                                }, store)
+
+                                                                                // Update State
+                                                                                Dispatch({ type: "updateSize", payload: [...newData] })
                                                                             }}>{each}</li>
                                                                         )
                                                                     })}
                                                                 </ul>
                                                                 <p className="px-2 py-1 m-auto">Colors:</p>
                                                                 <div className="px-2 py-1 c_list">
-                                                                    {selectedSize === "all" ? (
+                                                                    {selectedSize === "all" && val ? (
                                                                         item["colors"].map((each, index) => {
                                                                             return (
-                                                                                <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} />
+                                                                                <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} disabled />
                                                                             )
                                                                         })
                                                                     ) : (
                                                                         Object.keys(item["sizes"][selectedSize]).map((each, index) => {
+                                                                            console.log(item)
                                                                             return (
-                                                                                <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} onClick={e => {
-                                                                                    document.querySelectorAll("input[type=checkbox]:checked").forEach(each => {
-                                                                                        each.checked = false
-                                                                                    })
+                                                                                <input key={index} className="form-check-input" type="checkbox" style={{ backgroundColor: each }} onClick={async e => {
+                                                                                    // document.querySelectorAll("input[type=checkbox]:checked").forEach(each => {
+                                                                                    //     each.checked = false
+                                                                                    // })
 
-                                                                                    e.currentTarget.checked = true
-                                                                                }} />
+                                                                                    // e.currentTarget.checked = true
+
+                                                                                    // Update Store
+                                                                                    const newData = [...cart.data]
+                                                                                    newData[indexC].order.color = each
+                                                                                    set("cart", {
+                                                                                        data: newData,
+                                                                                        id: cart.id,
+                                                                                        expiry: cart.expiry
+                                                                                    }, store)
+
+                                                                                    // Update State
+                                                                                    Dispatch({ type: "updateColor", payload: [...newData] })
+                                                                                }} defaultChecked={cart.data[indexC].order.color === each ? "true" : ""} />
                                                                             )
                                                                         })
                                                                     )}
@@ -110,7 +137,7 @@ const Cart = () => {
                                                             <div className="col-lg-3">
                                                                 <div className="input-group m-auto py-1">
                                                                     <span className="input-group-text" id="minus" onClick={e => {
-                                                                        return Dispatch({ type: "decreaseCQuantity", payload: index })
+                                                                        return Dispatch({ type: "decreaseCQuantity", payload: indexC })
                                                                     }}>
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-dash" viewBox="0 0 16 16">
                                                                             <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
@@ -118,7 +145,7 @@ const Cart = () => {
                                                                     </span>
                                                                     <input type="number" className="form-control inc text-center" placeholder="1" aria-label="Username" aria-describedby="basic-addon1" value={item.order.quantity} readOnly />
                                                                     <span className="input-group-text" id="plus" onClick={e => {
-                                                                        return Dispatch({ type: "increaseCQuantity", payload: index })
+                                                                        return Dispatch({ type: "increaseCQuantity", payload: indexC })
                                                                     }}>
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
                                                                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
@@ -220,7 +247,9 @@ const Cart = () => {
                                 </div>
                             </div>
                             <div>
-                                <button type="button" className="btn btn-md w-100 py-2 mb-3">
+                                <button type="button" className="btn btn-md w-100 py-2 mb-3" onClick={e => {
+                                    console.log(cart)
+                                }}>
                                     CHECKOUT
                                 </button>{" "}
                                 <br />

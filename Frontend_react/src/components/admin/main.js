@@ -1,7 +1,14 @@
 import { useEffect } from "react";
 import AdminList from "./component/list";
+import { useDispatch, useSelector } from "react-redux";
+import { createUserData, updateStatus } from "../action";
+import { store } from "../main";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
+    const { user, status } = useSelector(state => state)
+    const Dispatch = useDispatch()
+    const Navigate = useNavigate()
     useEffect(() => {
         // Variables
         const dashboard = document.getElementById("dashboard");
@@ -21,6 +28,34 @@ const Admin = () => {
             menuTab.setAttribute("style", "padding-left:" + padding + "px");
         }
     });
+
+    // Load User Data
+    useEffect(() => {
+        if (Object.keys(user).length === 0) {
+            createUserData(Dispatch, store)
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    // Load User Status
+    useEffect(() => {
+        if (Object.keys(status).length === 0) {
+            updateStatus(Dispatch, store)
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    // Validate User
+    useEffect(() => {
+        if (Object.keys(user).length > 0 && Object.keys(status).length > 0) {
+            if (!user.admin || !status.active) {
+                // Navigate
+                Navigate("/", { replace: true })
+            }
+        }
+    })
 
     return (
         <div className="ext_cnt min-vh-100" id="dashboard">

@@ -96,7 +96,7 @@ const Form1 = ({ data, setData, submit, appData }) => {
 
                                                     e.currentTarget.checked = true
                                                     setData({ ...data, ...(data["details"]["dColor"] = each) })
-                                                }} />
+                                                }} checked={each === data["details"]["dColor"] ? true : false} />
                                             )
                                         })
                                     ) : (" ")

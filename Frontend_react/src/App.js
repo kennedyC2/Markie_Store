@@ -16,6 +16,15 @@ import ScrubCaps from "./components/user/components/scrubCaps";
 import Crocs from "./components/user/components/crocs";
 import Sneakers from "./components/user/components/sneakers";
 import Shirts from "./components/user/components/tShirt";
+import AdminBrooches from "./components/admin/component/brooches";
+import AdminCardHolder from "./components/admin/component/cardHolder";
+import AdminCoats from "./components/admin/component/coats";
+import AdminCrocs from "./components/admin/component/crocs";
+import AdminTorch from "./components/admin/component/penTorch";
+import AdminCaps from "./components/admin/component/scrubCaps";
+import AdminScrubs from "./components/admin/component/scrubs";
+import AdminSneakers from "./components/admin/component/sneakers";
+import AdminShirts from "./components/admin/component/tShirt";
 import Login from "./components/login";
 import SignUp from "./components/SignUp";
 import Verify from "./components/verify";
@@ -44,7 +53,17 @@ const App = () => {
                         <Route path="/category/inscription_t-shirts" exact element={<Shirts />} />
                     </Route>
                 </Route>
-                <Route path="/admin" exact element={<Admin />} />
+                <Route path="/admin" exact element={<Admin />}>
+                    <Route path="/admin/product/scrubs" exact element={<AdminScrubs />} />
+                    <Route path="/admin/product/brooches" exact element={<AdminBrooches />} />
+                    <Route path="/admin/product/cardHolder" exact element={<AdminCardHolder />} />
+                    <Route path="/admin/product/coats" exact element={<AdminCoats />} />
+                    <Route path="/admin/product/crocs" exact element={<AdminCrocs />} />
+                    <Route path="/admin/product/penTorch" exact element={<AdminTorch />} />
+                    <Route path="/admin/product/scrubCaps" exact element={<AdminCaps />} />
+                    <Route path="/admin/product/sneakers" exact element={<AdminSneakers />} />
+                    <Route path="/admin/product/shirts" exact element={<AdminShirts />} />
+                </Route>
                 <Route path="/account/login" exact element={<Login />} />
                 <Route path="/account/create" exact element={<SignUp />} />
                 <Route path="/account/verification" exact element={<Verify />} />

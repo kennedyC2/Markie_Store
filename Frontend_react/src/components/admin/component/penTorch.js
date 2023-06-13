@@ -3,9 +3,10 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
+import { useOutletContext } from "react-router-dom";
 
-const AdminTorch = (props) => {
-    const { setData, dKeys } = props;
+const AdminTorch = () => {
+    const [setData, dKeys] = useOutletContext()
     const { penTorch } = useSelector((state) => state);
     const Dispatch = useDispatch();
 
@@ -16,11 +17,17 @@ const AdminTorch = (props) => {
             id: id,
             details: {
                 title: penT["title"],
+                brand: penT["brand"],
                 quantity: penT["quantity"],
                 price: penT["price"],
+                dColor: penT["dColor"],
                 colors: penT["colors"],
                 category: penT["category"],
                 description: penT["description"],
+                sizes: penT["sizes"],
+                sold: penT["sold"],
+                sex: penT["sex"],
+                order: penT["order"],
                 misc: penT["misc"],
             },
             images: {
@@ -29,7 +36,6 @@ const AdminTorch = (props) => {
                 image_2: penT["images"]["image_2"],
             },
             newImages: {
-                index: "",
                 main: "",
                 image_1: "",
                 image_2: "",
@@ -74,27 +80,23 @@ const AdminTorch = (props) => {
 
     return (
         <Fragment>
-            <div className="tab-pane fade" id="v-pills-torch" role="tabpanel" aria-labelledby="v-pills-torch-tab" tabIndex="0">
-                <Fragment>
-                    {penTorch && penTorch.length > 0 ?
-                        <div className="w-100 grid">
-                            {
-                                penTorch.map((item, index) => {
-                                    return (
-                                        Admin_DSP(domain, index, item, updateState, deleteItem)
-                                    )
-                                })
-                            }
-                        </div>
-                        :
-                        <Fragment>
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        </Fragment>
+            {penTorch && penTorch.length > 0 ?
+                <div className="w-100 grid">
+                    {
+                        penTorch.map((item, index) => {
+                            return (
+                                Admin_DSP(domain, index, item, updateState, deleteItem)
+                            )
+                        })
                     }
+                </div>
+                :
+                <Fragment>
+                    <div className="empty">
+                        <p>------- &nbsp;  no data &nbsp; -------</p>
+                    </div>
                 </Fragment>
-            </div>
+            }
         </Fragment>
     );
 };

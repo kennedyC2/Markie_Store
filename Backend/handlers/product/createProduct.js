@@ -14,6 +14,7 @@ const createProduct = (data, callback) => {
             const title = typeof data.payload.details.title === "string" && data.payload.details.title.trim().length > 0 ? data.payload.details.title.trim() : false;
             const brand = typeof data.payload.details.brand === "string" && data.payload.details.brand.trim().length > 0 ? data.payload.details.brand.trim() : false;
             const dColor = typeof data.payload.details.dColor === "string" && data.payload.details.dColor.trim().length > 0 ? data.payload.details.dColor.trim() : false;
+            const sold = typeof data.payload.details.sold === "string" && data.payload.details.sold.trim().length > 0 ? data.payload.details.sold.trim() : false;
             const sex = typeof data.payload.details.sex === "string" && data.payload.details.sex.trim().length > 0 ? data.payload.details.sex.trim() : false;
             const quantity = typeof data.payload.details.quantity === "string" && data.payload.details.quantity.trim().length > 0 ? data.payload.details.quantity.trim() : false;
             const price = typeof data.payload.details.price === "string" && data.payload.details.price.trim().length > 0 ? data.payload.details.price.trim() : false;
@@ -23,9 +24,7 @@ const createProduct = (data, callback) => {
             const misc = typeof data.payload.details.misc === "object" ? data.payload.details.misc : false;
             const main = typeof data.payload.images.main === "string" && data.payload.images.main.trim().length > 0 ? data.payload.images.main.trim() : false;
 
-            console.log(data.payload.details.sex)
-            console.log(title, brand, dColor, sex, quantity, price, colors, category, sizes, misc)
-            if (title && brand && dColor && sex && quantity && price && colors && category && sizes && misc) {
+            if (title && brand && dColor && sex && quantity && purchased && price && colors && category && sizes && misc) {
                 // Check Images
                 if (main) {
                     // Sav Images
@@ -37,6 +36,7 @@ const createProduct = (data, callback) => {
                                 title: title,
                                 brand: brand,
                                 dColor: dColor,
+                                sold: sold,
                                 sex: sex,
                                 sizes: sizes,
                                 quantity: quantity,
@@ -45,8 +45,7 @@ const createProduct = (data, callback) => {
                                     brand: brand,
                                     category: category,
                                     quantity: 1,
-                                    color: "",
-                                    size: "",
+                                    size: {},
                                     sex: ""
                                 },
                                 price: price,

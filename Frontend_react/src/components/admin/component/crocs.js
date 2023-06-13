@@ -3,9 +3,10 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
+import { useOutletContext } from "react-router-dom";
 
-const AdminCrocs = (props) => {
-    const { setData, dKeys } = props;
+const AdminCrocs = () => {
+    const [setData, dKeys] = useOutletContext()
     const { crocs } = useSelector((state) => state);
     const Dispatch = useDispatch();
 
@@ -79,27 +80,23 @@ const AdminCrocs = (props) => {
 
     return (
         <Fragment>
-            <div className="tab-pane fade" id="v-pills-crocs" role="tabpanel" aria-labelledby="v-pills-crocs-tab" tabIndex="0">
-                <Fragment>
-                    {crocs && crocs.length > 0 ?
-                        <div className="w-100 grid">
-                            {
-                                crocs.map((item, index) => {
-                                    return (
-                                        Admin_DSP(domain, index, item, updateState, deleteItem)
-                                    )
-                                })
-                            }
-                        </div>
-                        :
-                        <Fragment>
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        </Fragment>
+            {crocs && crocs.length > 0 ?
+                <div className="w-100 grid">
+                    {
+                        crocs.map((item, index) => {
+                            return (
+                                Admin_DSP(domain, index, item, updateState, deleteItem)
+                            )
+                        })
                     }
+                </div>
+                :
+                <Fragment>
+                    <div className="empty">
+                        <p>------- &nbsp;  no data &nbsp; -------</p>
+                    </div>
                 </Fragment>
-            </div>
+            }
         </Fragment>
     );
 };

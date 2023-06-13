@@ -35,10 +35,10 @@ export const createUserData = async (dispatch, store) => {
     let data = await get("user", store)
 
     if (data !== null && data !== undefined) {
-        return dispatch({ type: "createUserData", payload: data })
+        return await dispatch({ type: "createUserData", payload: data })
     }
 
-    return dispatch({ type: "createUserData", payload: InitialState })
+    return await dispatch({ type: "createUserData", payload: InitialState })
 }
 
 export const createCart = async (dispatch, store) => {

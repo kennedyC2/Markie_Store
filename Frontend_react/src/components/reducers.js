@@ -274,6 +274,12 @@ const cart = (state = {}, action) => {
             cdeal[action.payload]["order"]["quantity"] -= 1
             return { ...state, data: [...cdeal] };
 
+        case "updateSize":
+            return { ...state, data: action.payload }
+
+        case "updateColor":
+            return { ...state, data: action.payload }
+
         default:
             return state;
     }

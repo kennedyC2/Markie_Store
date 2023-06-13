@@ -14,6 +14,7 @@ const updateProduct = (data, callback) => {
             const title = typeof data.payload.details.title === "string" && data.payload.details.title.trim().length > 0 ? data.payload.details.title.trim() : false;
             const brand = typeof data.payload.details.brand === "string" && data.payload.details.brand.trim().length > 0 ? data.payload.details.brand.trim() : false;
             const dColor = typeof data.payload.details.dColor === "string" && data.payload.details.dColor.trim().length > 0 ? data.payload.details.dColor.trim() : false;
+            const sold = typeof data.payload.details.sold === "string" && data.payload.details.sold.trim().length > 0 ? data.payload.details.sold.trim() : false;
             const sex = typeof data.payload.details.sex === "string" && data.payload.details.sex.trim().length > 0 ? data.payload.details.sex.trim() : false;
             const sizes = typeof data.payload.details.sizes === "object" ? data.payload.details.sizes : false;
             const quantity = typeof data.payload.details.quantity === "number" && data.payload.details.quantity > 0 ? data.payload.details.quantity : false;
@@ -24,9 +25,7 @@ const updateProduct = (data, callback) => {
             const misc = typeof data.payload.details.misc === "object" ? data.payload.details.misc : false;
             const main = typeof data.payload.images.main === "string" && data.payload.images.main.trim().length > 0 ? data.payload.images.main.trim() : false;
 
-            console.log(typeof (data.payload.details.quantity))
-            console.log(title, brand, dColor, sex, sizes, id, quantity, price, colors, category, misc)
-            if (title && brand && dColor && sex && sizes && id && quantity && price && colors && category && misc) {
+            if (title && brand && dColor && purchased && sex && sizes && id && quantity && price && colors && category && misc) {
                 // Check Images
                 if (main) {
                     // Sav Images
@@ -37,6 +36,7 @@ const updateProduct = (data, callback) => {
                                 title: title,
                                 brand: brand,
                                 dColor: dColor,
+                                sold: sold,
                                 sex: sex,
                                 sizes: sizes,
                                 quantity: quantity,
