@@ -4,7 +4,7 @@ import { store } from "./main"
 
 export const Header_Cart_DSP = (domain, index, item, cart, dispatch) => {
     return (
-        <div key={index} className="d-flex w-100 justify-content-between py-4">
+        <div key={item._id.toUpperCase() + "_" + index + "C"} className="d-flex w-100 justify-content-between py-4">
             <div className="col-3 pe-2">
                 <img src={domain + "image/" + item.images.main} className="d-block w-100 h-100" alt="..." />
             </div>
@@ -35,7 +35,7 @@ export const Header_Cart_DSP = (domain, index, item, cart, dispatch) => {
 
 export const Header_Wishlist_DSP = (domain, index, item, wishlist, dispatch) => {
     return (
-        <div key={index} className="d-flex w-100 justify-content-between py-4">
+        <div key={item._id.toUpperCase() + "_" + index + "W"} className="d-flex w-100 justify-content-between py-4">
             <div className="col-3 pe-2">
                 <img src={domain + "image/" + item.images.main} className="d-block w-100 h-100" alt="..." />
             </div>
@@ -66,7 +66,7 @@ export const Header_Wishlist_DSP = (domain, index, item, wishlist, dispatch) => 
 
 export const Product_DSP = (domain, collection, index, item, cart, wishlist, dispatch) => {
     return (
-        <div key={index} className="card">
+        <div key={item._id.toUpperCase() + "_" + index + "P"} className="card">
             <div className="imgcont">
                 <Link to={`/product/${collection}/${item._id}/1`} state={{ collection: collection, page: "1", id: item._id }} preventScrollReset={false} className="d-inline-block text-decoration-none">
                     <img src={domain + "image/" + item.images.main} width="100%" height="100%" className="card-img-top" alt={collection} />
@@ -81,7 +81,7 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
                     <button type="button" className="btn col-9 shadow" onClick={async e => {
                         let i = cart.id.indexOf(item["_id"])
                         if (i > -1) {
-                            let _cart = cart.data
+                            let _cart = [...cart.data]
                             _cart.data[i]["order"]["quantity"] += 1
 
                             // Update Store
@@ -102,7 +102,7 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
                             expiry: cart.expiry
                         }, store)
 
-                        return dispatch({ type: "addToCart", payload: item })
+                        return dispatch({ type: "addToCart", payload: JSON.parse(JSON.stringify(item)) })
 
                     }}>
                         ADD TO CART
@@ -149,7 +149,7 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
 export const Admin_DSP = (domain, index, item, updateState, deleteItem) => {
     console.log(item)
     return (
-        <div key={index} className="card" id={item._id + "_" + index}>
+        <div key={item._id.toUpperCase() + "_" + index + "A"} className="card" id={item._id + "_" + index}>
             <img src={domain + "image/" + item.images.main} className="card-img-top" alt="crocs" width={"100%"} height={"100%"} />
             <div className="card-body">
                 <div>

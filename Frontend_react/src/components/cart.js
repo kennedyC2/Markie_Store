@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { domain } from "./helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "./main";
@@ -7,7 +7,6 @@ import { set } from "idb-keyval";
 
 const Cart = () => {
     const Dispatch = useDispatch()
-    let [val, setVal] = useState(1)
     const { appData, user, cart } = useSelector(state => state)
 
     const total = () => {
@@ -27,7 +26,7 @@ const Cart = () => {
         }
 
         return;
-    });
+    }, []);
 
     return (
         <div className="cartlist body m-auto pt-3">
@@ -65,69 +64,59 @@ const Cart = () => {
                                                                     {Object.keys(item["sizes"]).map((each, index) => {
                                                                         return (
                                                                             <li key={index} className={each === item.order.size ? "selectedSz" : ""} onClick={async e => {
-                                                                                console.log(item)
-                                                                                // let selectedSz = document.querySelector("li.selectedSz")
-
-                                                                                // if (selectedSz) {
-                                                                                //     selectedSz.classList.remove("selectedSz")
-                                                                                // }
-
-                                                                                // document.querySelectorAll("input[type=checkbox]:checked").forEach(each => {
-                                                                                //     each.checked = false
-                                                                                // })
-
-                                                                                // e.currentTarget.classList.add("selectedSz")
                                                                                 selectedSize = each
-                                                                                setVal(val += 1)
+                                                                                // setVal(val += 1)
 
                                                                                 // Update Store
-                                                                                const newData = [...cart.data]
+                                                                                const newData = JSON.parse(JSON.stringify(cart.data))
                                                                                 newData[indexC].order.size = each
-                                                                                set("cart", {
+                                                                                await set("cart", {
                                                                                     data: newData,
                                                                                     id: cart.id,
                                                                                     expiry: cart.expiry
                                                                                 }, store)
 
                                                                                 // Update State
-                                                                                Dispatch({ type: "updateSize", payload: [...newData] })
+                                                                                Dispatch({ type: "updateSize", payload: newData })
                                                                             }}>{each}</li>
                                                                         )
                                                                     })}
                                                                 </ul>
                                                                 <p className="px-2 py-1 m-auto">Colors:</p>
                                                                 <div className="px-2 py-1 c_list">
-                                                                    {selectedSize === "all" && val ? (
+                                                                    {selectedSize === "all" ? (
                                                                         item["colors"].map((each, index) => {
                                                                             return (
                                                                                 <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} disabled />
                                                                             )
                                                                         })
                                                                     ) : (
-                                                                        Object.keys(item["sizes"][selectedSize]).map((each, index) => {
-                                                                            console.log(item)
-                                                                            return (
-                                                                                <input key={index} className="form-check-input" type="checkbox" style={{ backgroundColor: each }} onClick={async e => {
-                                                                                    // document.querySelectorAll("input[type=checkbox]:checked").forEach(each => {
-                                                                                    //     each.checked = false
-                                                                                    // })
+                                                                        <form action="" method="get">
+                                                                            {Object.keys(item["sizes"][selectedSize]).map((each, index) => {
+                                                                                return (
+                                                                                    <input key={index + selectedSize} className={`form-check-input ${item._id.toUpperCase() + "_" + index}${selectedSize}`} type="checkbox" style={{ backgroundColor: each }}
+                                                                                        onChange={async e => {
+                                                                                            document.querySelectorAll(`input.${item._id.toUpperCase() + "_" + index}${selectedSize}`).forEach(each => {
+                                                                                                each.checked = false
+                                                                                            })
 
-                                                                                    // e.currentTarget.checked = true
+                                                                                            e.currentTarget.checked = true
 
-                                                                                    // Update Store
-                                                                                    const newData = [...cart.data]
-                                                                                    newData[indexC].order.color = each
-                                                                                    set("cart", {
-                                                                                        data: newData,
-                                                                                        id: cart.id,
-                                                                                        expiry: cart.expiry
-                                                                                    }, store)
+                                                                                            // Update Store
+                                                                                            const newData = JSON.parse(JSON.stringify(cart.data))
+                                                                                            newData[indexC].order.color = each
+                                                                                            await set("cart", {
+                                                                                                data: newData,
+                                                                                                id: cart.id,
+                                                                                                expiry: cart.expiry
+                                                                                            }, store)
 
-                                                                                    // Update State
-                                                                                    Dispatch({ type: "updateColor", payload: [...newData] })
-                                                                                }} defaultChecked={cart.data[indexC].order.color === each ? "true" : ""} />
-                                                                            )
-                                                                        })
+                                                                                            // Update State
+                                                                                            Dispatch({ type: "updateColor", payload: newData })
+                                                                                        }} checked={item.order.color === each} />
+                                                                                )
+                                                                            })}
+                                                                        </form>
                                                                     )}
                                                                 </div>
                                                             </div>

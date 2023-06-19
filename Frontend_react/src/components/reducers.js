@@ -1,5 +1,3 @@
-import { combineReducers } from "redux";
-
 // Reducers
 const scrubs = (state = [], action) => {
     // ============================
@@ -338,7 +336,7 @@ const status = (state = {}, action) => {
 };
 
 // Combine Reducers
-const rootReducer = combineReducers({
+const rootReducer = {
     coats,
     scrubs,
     crocs,
@@ -354,6 +352,6 @@ const rootReducer = combineReducers({
     cart,
     wishlist,
     status
-});
+};
 
 export default rootReducer;

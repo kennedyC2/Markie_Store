@@ -23,7 +23,9 @@ const Home = () => {
         }
 
         return
-    }, [Dispatch, home]);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="home m-auto">
