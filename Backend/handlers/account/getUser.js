@@ -19,21 +19,35 @@ const getUser = async (data, callback) => {
                 try {
                     const directory = client.db(database);
                     const sub_directory = directory.collection("users");
-                    const data = await sub_directory.findOne({ email: email });
+                    const data = await sub_directory.aggregate([
+                        {
+                            $match: { email: "kennedychidi55@gmail.com" }
+                        },
+                        {
+                            $lookup: {
+                                from: "unsettled",
+                                localField: "pending",
+                                foreignField: "_id",
+                                as: "pending"
+                            }
+                        }
+                    ]).toArray()
+
+                    console.log(data[0])
 
                     if (data !== null || data !== undefined) {
                         // Verify
                         const hashedPassword = hash(password)
 
-                        if (hashedPassword === data.password) {
+                        if (hashedPassword === data[0].password) {
                             // Delete password
-                            delete data.password
+                            delete data[0].password
 
                             // Delete code
-                            delete data.code
+                            delete data[0].code
 
                             // Return
-                            callback(200, data, "json");
+                            callback(200, data[0], "json");
                         } else {
                             // Return
                             callback(400, { message: "Wrong Password" }, "json");

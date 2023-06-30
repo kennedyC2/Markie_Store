@@ -89,14 +89,14 @@ const Form1 = ({ data, setData, submit, appData }) => {
                                     appColors && Object.keys(appColors).length > 0 ? (
                                         Object.keys(appColors).map((each, index) => {
                                             return (
-                                                <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} onClick={e => {
+                                                <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} onChange={e => {
                                                     document.querySelectorAll("input[type=checkbox]:checked").forEach(g => {
                                                         g.checked = false
                                                     })
 
                                                     e.currentTarget.checked = true
                                                     setData({ ...data, ...(data["details"]["dColor"] = each) })
-                                                }} checked={each === data["details"]["dColor"] ? true : false} />
+                                                }} checked={each === data["details"]["dColor"]} />
                                             )
                                         })
                                     ) : (" ")

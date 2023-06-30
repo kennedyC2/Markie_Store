@@ -8,6 +8,7 @@ const { ping, notFound, appData, homepage } = require("../handlers/main")
 const { createProduct, getProduct, updateProduct, deleteProduct } = require("../handlers/main")
 const { createUser, verifyUser, resendCode, getUser, updateUser, deleteUser } = require("../handlers/main")
 const { delivery, password } = require("../handlers/main")
+const { createCart, getUnsettled, getSettled, closeCart } = require("../handlers/main")
 const { parseJSONObject } = require("./helper");
 const { getImages } = require("./file");
 
@@ -150,6 +151,10 @@ server["router"] = {
     "account/update": updateUser,
     "account/password": password,
     "account/delete": deleteUser,
+    "cart/create": createCart,
+    "cart/unsettled": createCart,
+    "cart/settled": closeCart,
+    "cart/close": closeCart
 };
 
 // Server Init

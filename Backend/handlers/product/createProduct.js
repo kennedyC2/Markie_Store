@@ -24,7 +24,7 @@ const createProduct = (data, callback) => {
             const misc = typeof data.payload.details.misc === "object" ? data.payload.details.misc : false;
             const main = typeof data.payload.images.main === "string" && data.payload.images.main.trim().length > 0 ? data.payload.images.main.trim() : false;
 
-            if (title && brand && dColor && sex && quantity && purchased && price && colors && category && sizes && misc) {
+            if (title && brand && dColor && sex && quantity && sold && price && colors && category && sizes && misc) {
                 // Check Images
                 if (main) {
                     // Sav Images
@@ -45,8 +45,11 @@ const createProduct = (data, callback) => {
                                     brand: brand,
                                     category: category,
                                     quantity: 1,
-                                    size: {},
-                                    sex: ""
+                                    size: "",
+                                    color: "",
+                                    sex: sex,
+                                    price: price,
+                                    image: file.main
                                 },
                                 price: price,
                                 colors: colors,

@@ -22,13 +22,14 @@ verify["user"] = async (data, callback) => {
                 try {
                     const directory = client.db(database);
                     const sub_directory = directory.collection("users");
-                    const data = await sub_directory.findOne({ _id: id });
+                    const data = await sub_directory.findOne({ _id: new ObjectId(id) });
 
                     if (data !== null && data !== undefined) {
+                        // console.log(code, data.code)
                         // Check Code
                         if (code === data.code) {
                             // Update new code
-                            await sub_directory.updateOne({ _id: id }, { $set: { "verified": true } });
+                            await sub_directory.updateOne({ _id: new ObjectId(id) }, { $set: { "verified": true } });
 
                             // Return
                             callback(200, { verified: true }, "json");

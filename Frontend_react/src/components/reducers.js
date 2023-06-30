@@ -233,6 +233,12 @@ const user = (state = {}, action) => {
         case "verify":
             return { ...state, verified: action.payload };
 
+        case "pending":
+            return { ...state, pending: [...state.pending, action.payload] };
+
+        case "settled":
+            return { ...state, settled: [...state.settled, action.payload] };
+
         case "delete":
             delete state[action.payload.id];
             return { ...state };
@@ -263,12 +269,12 @@ const cart = (state = {}, action) => {
             };
 
         case "increaseCQuantity":
-            let ideal = [...state.data]
+            let ideal = JSON.parse(JSON.stringify(state.data))
             ideal[action.payload]["order"]["quantity"] += 1
             return { ...state, data: [...ideal] };
 
         case "decreaseCQuantity":
-            let cdeal = [...state.data]
+            let cdeal = JSON.parse(JSON.stringify(state.data))
             cdeal[action.payload]["order"]["quantity"] -= 1
             return { ...state, data: [...cdeal] };
 
@@ -277,6 +283,13 @@ const cart = (state = {}, action) => {
 
         case "updateColor":
             return { ...state, data: action.payload }
+
+        case "deleteCart":
+            return {
+                ...state,
+                id: [],
+                data: []
+            };
 
         default:
             return state;

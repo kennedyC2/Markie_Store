@@ -1,6 +1,7 @@
 import { set } from "idb-keyval"
 import { Link } from "react-router-dom"
 import { store } from "./main"
+import { Fragment } from "react"
 
 export const Header_Cart_DSP = (domain, index, item, cart, dispatch) => {
     return (
@@ -147,7 +148,6 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
 }
 
 export const Admin_DSP = (domain, index, item, updateState, deleteItem) => {
-    console.log(item)
     return (
         <div key={item._id.toUpperCase() + "_" + index + "A"} className="card" id={item._id + "_" + index}>
             <img src={domain + "image/" + item.images.main} className="card-img-top" alt="crocs" width={"100%"} height={"100%"} />
@@ -224,5 +224,48 @@ export const Admin_DSP = (domain, index, item, updateState, deleteItem) => {
                 </div>
             </div>
         </div>
+    );
+}
+
+export const History_DSP = (history, domain, index) => {
+    return (
+        <Fragment>
+            <div className="modal-body">
+                <div className="d-flex flex-wrap">
+                    {
+                        history[index]["cart"].map((item, index1) => {
+                            return (<div key={"cct" + index1} className="prCard card mb-3 ps-2" style={{ "maxWidth": "540px" }}>
+                                <div className="row g-0 justify-content-between">
+                                    <div className="col-md-5 my-auto">
+                                        <img src={domain + "image/" + item.image} className="img-fluid rounded-start" alt="..." />
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="card-body">
+                                            <h5 className="card-title">{item.title}</h5>
+                                            <p className="card-text"><small className="text-muted">Brand: {item.brand}</small></p>
+                                            <p className="card-text"><small className="text-muted">Sex: {item.sex}</small></p>
+                                            <p className="card-text">
+                                                <small className="text-muted">
+                                                    Colour:  <span className="form-check-input ms-2 mt-0 rounded-circle d-inline-block" style={{ backgroundColor: item.color, width: "20px", height: "20px" }}></span>
+                                                </small>
+                                            </p>
+                                            <p className="card-text"><small className="text-muted">Quantity: {item.quantity}</small></p>
+                                            <p className="card-text"><small className="text-muted">Price: {item.price}</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+            <div className="modal-footer">
+                {/* <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button> */}
+                <p className="text-capitalize">Delivery: {history[index].delivery} State, </p>
+                <p className="text-capitalize">Total paid: &#x20A6; {new Intl.NumberFormat("en-US", {}).format(history[index].total)}</p>
+            </div>
+        </Fragment>
+
     );
 }

@@ -7,7 +7,7 @@
     font-size: 0.95rem !important;
     letter-spacing: 0.5px !important;
     color: #03001e;
-    transition: all 0.2s ease !important;
+    /* transition: all 0.2s ease !important; */
 }
 
 body::-webkit-scrollbar,
@@ -558,7 +558,7 @@ footer * {
 .c_list input[type="checkbox"] {
     margin-bottom: 0.7rem;
     margin-right: 0.2rem;
-    padding: 1rem;
+    padding: 1.3rem;
     border: 1px solid #dee2e6;
     border-radius: 50%;
 }
@@ -1841,10 +1841,19 @@ footer * {
         color: #fff !important;
     } */
 
-    #products-tab-pane > a {
+    #products-tab-pane > a:nth-child(3) {
         position: fixed;
         right: 55px;
         bottom: 30px;
+        color: #fff !important;
+        box-shadow: 0px 5px 8px 3px rgba(70, 70, 70, 0.314);
+    }
+
+    #products-tab-pane > a:nth-child(2) {
+        position: fixed;
+        right: 55px;
+        bottom: 110px;
+        padding: 1rem 1.07rem;
         color: #fff !important;
         box-shadow: 0px 5px 8px 3px rgba(70, 70, 70, 0.314);
     }
@@ -1940,8 +1949,8 @@ footer * {
 
     .modalTwo,
     .modalOne {
-        min-width: 800px !important;
-        min-height: 600px !important;
+        min-width: 950px !important;
+        height: 600px !important;
     }
 
     .modalThree {
@@ -2011,6 +2020,10 @@ footer * {
 
     .profile span a {
         font-size: 10px !important;
+    }
+
+    .prCard {
+        width: calc(100% / 3) !important;
     }
 
     .c_cont {

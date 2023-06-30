@@ -1,25 +1,37 @@
 // import axios from "axios";
 import axios from "axios";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { domain } from "./helpers";
 import { set } from "idb-keyval";
 import { store } from "./main";
+import { History_DSP } from "./dsp";
+import { createUserData } from "./action";
 
 const Profile = () => {
     const Dispatch = useDispatch()
     const { user, appData } = useSelector((state) => state);
+    const [passwordShown1, passwordToggle1] = useState(false)
+    const [passwordShown2, passwordToggle2] = useState(false)
+    const [passwordShown3, passwordToggle3] = useState(false)
+    const [targetD, setTargetD] = useState(0)
     const [data_1, setData_1] = useState(user.delivery)
     const [data_2, setData_2] = useState({
         old: "",
         new1: "",
         new2: ""
     });
-    const [passwordShown1, passwordToggle1] = useState(false)
-    const [passwordShown2, passwordToggle2] = useState(false)
-    const [passwordShown3, passwordToggle3] = useState(false)
     let hasCharacter = /\W/
     let hasDigit = /\d/
+
+    // Load User Data
+    useEffect(() => {
+        if (Object.keys(user).length === 0) {
+            createUserData(Dispatch, store)
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const submitForm = async (e) => {
         e.preventDefault();
@@ -94,7 +106,7 @@ const Profile = () => {
                             </a>
                         </span></p>
                     </div>
-                    <div className=" py-3 px-4" style={{ border: "1px solid #adc0cf", borderRadius: "1rem" }}>
+                    <div className="py-3 px-4" style={{ border: "1px solid #adc0cf", borderRadius: "1rem" }}>
                         <h2 className="py-2">Cards:</h2>
                         {
                             user.cards && user.cards.length > 0 ? (
@@ -132,21 +144,21 @@ const Profile = () => {
                 </div>
                 <div className="px-4 py-2">
                     <div style={{ height: "100%" }}>
-                        <h2 className="py-3">Cart History:</h2>
+                        <h2 className="py-3">History:</h2>
                         {
-                            user.history && user.history.length > 0 ? (
-                                user.history.map((item, index) => {
+                            user.pending && user.pending.length > 0 ? (
+                                user.pending.map((item, index) => {
                                     if (index <= 10) {
                                         return (
-                                            <div className="d-flex mb-3">
-                                                <div className="my-auto me-4">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M9 20c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2m8-2c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m-9.8-3.2v-.1l.9-1.7h7.4c.7 0 1.4-.4 1.7-1l3.9-7l-1.7-1l-3.9 7h-7L4.3 2H1v2h2l3.6 7.6L5.2 14c-.1.3-.2.6-.2 1c0 1.1.9 2 2 2h12v-2H7.4c-.1 0-.2-.1-.2-.2M18 2.8l-1.4-1.4l-4.8 4.8l-2.6-2.6L7.8 5l4 4L18 2.8Z" /></svg>
+                                            <a key={"h" + index} className="btn btn-sm d-flex mb-3 text-start px-0" title="Change Delivery" data-bs-toggle="modal" href="#backdropC" role="button" onClick={() => setTargetD(index)}>
+                                                <div className="my-auto me-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24"><path fill="#FF0066" d="M9 20c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2m8-2c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m-9.8-3.2v-.1l.9-1.7h7.4c.7 0 1.4-.4 1.7-1l3.9-7l-1.7-1l-3.9 7h-7L4.3 2H1v2h2l3.6 7.6L5.2 14c-.1.3-.2.6-.2 1c0 1.1.9 2 2 2h12v-2H7.4c-.1 0-.2-.1-.2-.2M18 2.8l-1.4-1.4l-4.8 4.8l-2.6-2.6L7.8 5l4 4L18 2.8Z" /></svg>
                                                 </div>
                                                 <div className="my-auto gg">
-                                                    <p className="my-0">C1234786509090908</p>
-                                                    <p className="my-0">12/5/2023 - 5.07pm</p>
+                                                    <p className="my-0">{item._id.toUpperCase()}</p>
+                                                    <p className="my-0 text-capitalize">{item.date} - {item.status}</p>
                                                 </div>
-                                            </div>
+                                            </a>
                                         )
                                     }
 
@@ -163,7 +175,7 @@ const Profile = () => {
             </div>
 
             <div className="modal fade" id="backdropD" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="backdropDLabel" tabIndex="-1">
-                <div className="modal-dialog modal-dialog-centered modalFive">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modalFive">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id="backdropDLabel">
@@ -225,7 +237,7 @@ const Profile = () => {
             </div>
 
             <div className="modal fade" id="backdropP" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="backdropPLabel" tabIndex="-1">
-                <div className="modal-dialog modal-dialog-centered modalFive">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modalFive">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id="backdropPLabel">
@@ -305,6 +317,19 @@ const Profile = () => {
                             <button type="button" className="btn btn-secondary invisible" data-bs-dismiss="modal">Close</button>
                             <button type="button" className="btn btn-secondary" onClick={e => document.getElementById("cPass").click()} >Save</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div className="modal fade" id="backdropC" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="backdropCLabel" tabIndex="-1">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modalTwo">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-6 invisible" id="backdropCLabel">
+                                Images
+                            </h1>
+                            <button type="button" className="btn-close" id="f2c" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        {user && user.pending ? History_DSP(user.pending, domain, targetD) : ""}
                     </div>
                 </div>
             </div>

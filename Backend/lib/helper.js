@@ -74,10 +74,13 @@ helpers["createID"] = function (Uname) {
 };
 
 // Get Today
-helpers["today"] = `${months[timeStamp.getMonth()]} ${timeStamp.getDate()}`;
+helpers["today"] = `${months[timeStamp.getMonth()]}/${timeStamp.getDate()}`;
 
 // Get Month
 helpers["month"] = months[timeStamp.getMonth()];
+
+// Get Month in Number
+helpers["monthN"] = timeStamp.getMonth() + 1;
 
 // Get Number days In The Month
 helpers["days_In_Month"] = (month) => {

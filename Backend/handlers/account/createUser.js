@@ -33,7 +33,7 @@ const createUser = async (data, callback) => {
                         const vCode = createRandomString(8)
 
                         const response = {
-                            _id: "MKE" + new ObjectId(Date.now()),
+                            _id: new ObjectId(Date.now()),
                             firstname: firstname,
                             lastname: lastname,
                             email: email,
@@ -43,7 +43,8 @@ const createUser = async (data, callback) => {
                             active: false,
                             admin: false,
                             code: vCode.toUpperCase(),
-                            history: [],
+                            pending: [],
+                            settled: [],
                             cards: []
                         };
 

@@ -4,6 +4,7 @@ import { domain } from "./helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "./main";
 import { set } from "idb-keyval";
+import axios from "axios";
 
 const Cart = () => {
     const Dispatch = useDispatch()
@@ -94,9 +95,9 @@ const Cart = () => {
                                                                         <form action="" method="get">
                                                                             {Object.keys(item["sizes"][selectedSize]).map((each, index) => {
                                                                                 return (
-                                                                                    <input key={index + selectedSize} className={`form-check-input ${item._id.toUpperCase() + "_" + index}${selectedSize}`} type="checkbox" style={{ backgroundColor: each }}
+                                                                                    <input key={index + selectedSize} className={`form-check-input A${item._id.toUpperCase() + "_" + index}${selectedSize}`} type="checkbox" style={{ backgroundColor: each }}
                                                                                         onChange={async e => {
-                                                                                            document.querySelectorAll(`input.${item._id.toUpperCase() + "_" + index}${selectedSize}`).forEach(each => {
+                                                                                            document.querySelectorAll(`input.A${item._id.toUpperCase() + "_" + index}${selectedSize}`).forEach(each => {
                                                                                                 each.checked = false
                                                                                             })
 
@@ -236,8 +237,61 @@ const Cart = () => {
                                 </div>
                             </div>
                             <div>
-                                <button type="button" className="btn btn-md w-100 py-2 mb-3" onClick={e => {
-                                    console.log(cart)
+                                <button type="button" className="btn btn-md w-100 py-2 mb-3" onClick={async e => {
+                                    const _data = cart.data.map((item) => {
+                                        return item.order
+                                    })
+
+                                    const reqData = {
+                                        cart: _data,
+                                        total: total() + appData["delivery"][user["delivery"]],
+                                        user: user._id,
+                                        email: user.email,
+                                        delivery: user.delivery
+                                    }
+
+                                    console.log(reqData)
+
+                                    try {
+                                        const response = await axios({
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                            },
+                                            url: domain + "cart/create",
+                                            data: reqData,
+                                        });
+
+                                        const result = response.data;
+
+                                        // Update Store
+                                        await set("user", {
+                                            _id: user._id,
+                                            firstname: user.firstname,
+                                            lastname: user.lastname,
+                                            email: user.email,
+                                            delivery: user.delivery,
+                                            verified: user.verified,
+                                            active: user.active,
+                                            admin: user.admin,
+                                            pending: [...user.pending, result],
+                                            settled: user.settled,
+                                            cards: user.cards
+                                        }, store)
+
+                                        await set("cart", {
+                                            id: [],
+                                            data: [],
+                                            expiry: cart.expiry
+                                        }, store)
+
+                                        // Update State
+                                        Dispatch({ type: "pending", payload: result })
+                                        Dispatch({ type: "deleteCart", payload: [] })
+
+                                    } catch (error) {
+                                        console.log(error);
+                                    }
                                 }}>
                                     CHECKOUT
                                 </button>{" "}

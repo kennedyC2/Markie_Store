@@ -182,6 +182,12 @@ const AdminList = () => {
                 </div>
             </div>
 
+            <Link className="btn btn-primary rounded-circle" title="Go to Home" to="/" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#fff" class="bi bi-house rounded-circle" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
+                </svg>
+            </Link>
+
             <a className="btn btn-primary rounded-circle" title="Add Product" data-bs-toggle="modal" href="#staticBackdrop" role="button" onClick={() => setData(InitialState)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="#fff" className="bi bi-plus rounded-circle" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
@@ -189,7 +195,7 @@ const AdminList = () => {
             </a>
 
             <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="staticBackdropLabel" tabIndex="-1">
-                <div className="modal-dialog modal-dialog-centered modalOne">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modalOne">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5 invisible" id="staticBackdropLabel">
@@ -209,7 +215,7 @@ const AdminList = () => {
                 </div>
             </div>
             <div className="modal fade" id="staticBackdrop3" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="staticBackdropLabel3" tabIndex="-1">
-                <div className="modal-dialog modal-dialog-centered modalOne">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modalOne">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5 invisible" id="staticBackdropLabel">
@@ -232,7 +238,7 @@ const AdminList = () => {
                 </div>
             </div>
             <div className="modal fade" id="staticBackdrop2" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="staticBackdropLabel2" tabIndex="-1">
-                <div className="modal-dialog modal-dialog-centered modalTwo">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modalTwo">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-6 invisible" id="staticBackdropLabel2">
