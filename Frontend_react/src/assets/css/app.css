@@ -962,15 +962,18 @@ footer * {
 
     .d_list li {
         display: block;
-        margin-bottom: 0.5rem;
+        /* margin-bottom: 0.5rem; */
         padding: 0.4rem 0.63rem;
         border-radius: 0.3rem;
         font-size: 0.8rem !important;
         font-weight: 500 !important;
         font-family: "Poppins", sans-serif !important;
+        /* border-top: 1px solid #adc0cf; */
+        border-bottom: 1px solid #adc0cf;
     }
 
-    .d_list li a {
+    .d_list li a,
+    .d_list li p {
         display: inline-block;
         width: 100%;
         text-decoration: none;

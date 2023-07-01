@@ -146,8 +146,8 @@ const Profile = () => {
                     <div style={{ height: "100%" }}>
                         <h2 className="py-3">History:</h2>
                         {
-                            user.pending && user.pending.length > 0 ? (
-                                user.pending.map((item, index) => {
+                            user.history && user.history.length > 0 ? (
+                                user.history.map((item, index) => {
                                     if (index <= 10) {
                                         return (
                                             <a key={"h" + index} className="btn btn-sm d-flex mb-3 text-start px-0" title="Change Delivery" data-bs-toggle="modal" href="#backdropC" role="button" onClick={() => setTargetD(index)}>
@@ -329,7 +329,7 @@ const Profile = () => {
                             </h1>
                             <button type="button" className="btn-close" id="f2c" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        {user && user.pending ? History_DSP(user.pending, domain, targetD) : ""}
+                        {user && user.history ? History_DSP(user.history, domain, targetD) : ""}
                     </div>
                 </div>
             </div>

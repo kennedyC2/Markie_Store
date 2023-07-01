@@ -17,7 +17,7 @@ const createCart = async (data, callback) => {
                 // Define Response
                 const response = {
                     _id: new ObjectId(Date.now()),
-                    user: _data.user,
+                    user: new ObjectId(_data.user),
                     email: _data.email,
                     date: date + "/" + monthN + "/" + year,
                     month: month,
@@ -30,10 +30,12 @@ const createCart = async (data, callback) => {
                 // Send to database
                 try {
                     const directory = client.db(database);
-                    const sub_directory_1 = directory.collection("unsettled");
+                    const sub_directory_1 = directory.collection("pending");
                     await sub_directory_1.insertOne(response);
-                    const sub_directory_2 = directory.collection("users");
-                    await sub_directory_2.updateOne({ _id: new ObjectId(_data.user) }, { $addToSet: { pending: new ObjectId(response._id) } });
+                    const sub_directory_2 = directory.collection("history");
+                    await sub_directory_2.insertOne(response);
+                    const sub_directory_3 = directory.collection("users");
+                    await sub_directory_3.updateOne({ _id: new ObjectId(_data.user) }, { $addToSet: { history: new ObjectId(response._id) } });
 
                     // Return
                     callback(200, response, "json");

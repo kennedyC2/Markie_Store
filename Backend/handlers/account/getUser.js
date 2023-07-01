@@ -26,14 +26,12 @@ const getUser = async (data, callback) => {
                         {
                             $lookup: {
                                 from: "unsettled",
-                                localField: "pending",
+                                localField: "history",
                                 foreignField: "_id",
-                                as: "pending"
+                                as: "history"
                             }
                         }
                     ]).toArray()
-
-                    console.log(data[0])
 
                     if (data !== null || data !== undefined) {
                         // Verify

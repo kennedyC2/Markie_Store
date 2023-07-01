@@ -348,6 +348,28 @@ const status = (state = {}, action) => {
     }
 };
 
+const pending = (state = [], action) => {
+    // ============================
+    switch (action.type) {
+        case "createPendingOrders":
+            return [...state, ...action.payload];
+
+        default:
+            return state;
+    }
+};
+
+const completed = (state = [], action) => {
+    // ============================
+    switch (action.type) {
+        case "createCompletedOrders":
+            return { ...state, ...action.payload };
+
+        default:
+            return state;
+    }
+};
+
 // Combine Reducers
 const rootReducer = {
     coats,
@@ -364,7 +386,9 @@ const rootReducer = {
     appData,
     cart,
     wishlist,
-    status
+    status,
+    pending,
+    completed
 };
 
 export default rootReducer;

@@ -15,6 +15,32 @@ export const FetchAppData = async (dispatch) => {
     return dispatch({ type: "createData", payload: data })
 }
 
+export const FetchPendingOrders = async (dispatch) => {
+    let { data } = await axios({
+        method: "get",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        url: domain + "cart/pending",
+        params: {}
+    })
+
+    return dispatch({ type: "createPendingOrders", payload: data })
+}
+
+export const FetchCompletedOrders = async (dispatch) => {
+    let { data } = await axios({
+        method: "get",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        url: domain + "cart/settled",
+        params: {}
+    })
+
+    return dispatch({ type: "createCompletedOrders", payload: data })
+}
+
 export const createUserData = async (dispatch, store) => {
     // Initialize User Data
     const InitialState = {

@@ -152,8 +152,8 @@ server["router"] = {
     "account/password": password,
     "account/delete": deleteUser,
     "cart/create": createCart,
-    "cart/unsettled": createCart,
-    "cart/settled": closeCart,
+    "cart/pending": getUnsettled,
+    "cart/settled": getSettled,
     "cart/close": closeCart
 };
 
