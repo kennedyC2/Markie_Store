@@ -13,13 +13,13 @@
 body::-webkit-scrollbar,
 div::-webkit-scrollbar,
 select::-webkit-scrollbar {
-    width: 6px;
+    width: 1px;
 }
 
 body::-webkit-scrollbar-thumb,
 div::-webkit-scrollbar-thumb,
 select::-webkit-scrollbar-thumb {
-    background: #aeaeae;
+    background: #adc0cf;
 }
 
 body::-webkit-scrollbar-track,
@@ -916,8 +916,8 @@ footer * {
 
     .lft {
         width: 22%;
-        border: 1px solid #adc0cf;
-        border-radius: 1rem;
+        border-right: 1px solid #adc0cf;
+        /* border-radius: 1rem; */
         padding: 1rem 0.5rem;
     }
 
@@ -964,12 +964,13 @@ footer * {
         display: block;
         /* margin-bottom: 0.5rem; */
         padding: 0.4rem 0.63rem;
+        margin-bottom: 0.5rem;
         border-radius: 0.3rem;
         font-size: 0.8rem !important;
         font-weight: 500 !important;
         font-family: "Poppins", sans-serif !important;
         /* border-top: 1px solid #adc0cf; */
-        border-bottom: 1px solid #adc0cf;
+        /* border-bottom: 1px solid #adc0cf; */
     }
 
     .d_list li a,
@@ -1801,20 +1802,24 @@ footer * {
 
     #dashboard .sub_list > div > div:first-child {
         width: 20%;
-        padding-right: 0.5rem;
-        min-height: 100%;
+        padding-right: 1rem;
+        max-height: inherit;
+        overflow-y: auto;
     }
 
     #dashboard .sub_list > div > div:nth-child(2) {
-        width: 75%;
+        width: 78%;
+        max-height: inherit;
+        overflow-y: auto;
     }
 
     #dashboard .sub_list .nav-link:hover {
         background-color: rgba(128, 128, 128, 0.258);
     }
 
-    #dashboard .card {
-        border: 1px dotted #03001e34;
+    #dashboard .card,
+    .hMid .card {
+        border: 1px dotted #adc0cf;
         /* width: calc(100% / 3); */
     }
 
@@ -1846,16 +1851,18 @@ footer * {
 
     #products-tab-pane > a:nth-child(3) {
         position: fixed;
-        right: 55px;
-        bottom: 30px;
+        right: 40px;
+        bottom: 110px;
         color: #fff !important;
         box-shadow: 0px 5px 8px 3px rgba(70, 70, 70, 0.314);
     }
 
-    #products-tab-pane > a:nth-child(2) {
+    #products-tab-pane > a:nth-child(2),
+    #pending-tab-pane > a:nth-child(2),
+    #settled-tab-pane > a:nth-child(2) {
         position: fixed;
-        right: 55px;
-        bottom: 110px;
+        right: 40px;
+        bottom: 30px;
         padding: 1rem 1.07rem;
         color: #fff !important;
         box-shadow: 0px 5px 8px 3px rgba(70, 70, 70, 0.314);
@@ -2026,7 +2033,7 @@ footer * {
     }
 
     .prCard {
-        width: calc(100% / 3) !important;
+        width: calc((100% / 3) - 1rem) !important;
     }
 
     .c_cont {
@@ -2045,6 +2052,24 @@ footer * {
     .gg p,
     .gg button {
         font-size: 0.95rem !important;
+    }
+
+    .sub_list {
+        max-height: 87vh;
+    }
+
+    .sub_list > div {
+        max-height: inherit;
+    }
+
+    .hTop {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .hTop div {
+        width: 45%;
     }
 }
 

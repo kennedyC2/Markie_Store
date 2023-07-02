@@ -323,12 +323,6 @@ const Profile = () => {
             <div className="modal fade" id="backdropC" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="backdropCLabel" tabIndex="-1">
                 <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modalTwo">
                     <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-6 invisible" id="backdropCLabel">
-                                Images
-                            </h1>
-                            <button type="button" className="btn-close" id="f2c" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
                         {user && user.history ? History_DSP(user.history, domain, targetD) : ""}
                     </div>
                 </div>

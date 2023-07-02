@@ -1,5 +1,4 @@
 const { client, database, ObjectId } = require("../../lib/mongo");
-const { today, month, year } = require("./../../lib/helper")
 
 // Create Cart
 const closeCart = async (data, callback) => {
@@ -14,45 +13,26 @@ const closeCart = async (data, callback) => {
             const _data = typeof data.payload === "object" ? data.payload : false;
 
             if (_data) {
-                // Define Response
-                const response = {
-                    _id: new ObjectId(Date.now()),
-                    user: _data.user,
-                    email: _data.email,
-                    date: today + ", ", year,
-                    month: month,
-                    cart: _data.cart,
-                    total: _data.total,
-                    status: "Processed"
-                };
-
                 // Send to database
                 try {
                     const directory = client.db(database);
-                    const sub_directory_1 = directory.collection("settled");
-                    await sub_directory_1.insertOne(response);
-                    const sub_directory_2 = directory.collection("user");
-                    const datm = await sub_directory_2.findOne({ _id: new ObjectId(_data.user) });
-
-                    // Update pending
-                    datm.pending = datm.pending.map((item) => {
-                        return item !== _data._id
-                    })
+                    const sub_directory_1 = directory.collection("unsettled");
+                    await sub_directory_1.deleteOne({ _id: new ObjectId(_data.product) });
+                    const sub_directory_2 = directory.collection("history");
+                    await sub_directory_2.updateOne({ _id: new ObjectId(_data.product) }, { $set: { "status": "Processed" } });
+                    const sub_directory_3 = directory.collection("user");
+                    const datm = await sub_directory_3.findOne({ _id: new ObjectId(_data.user) });
 
                     // Check pending
-                    if (datm.settled.length >= 10) {
+                    if (datm.pending.length >= 10) {
                         // Remove oldest
-                        datm.settled.shift()
+                        datm.pending.shift()
 
-                        // Update new
-                        datm.settled.push(response._id)
-                    } else {
-                        // Update new
-                        datm.settled.push(response._id)
+                        delete datm._id
+
+                        // Replace OLd
+                        await sub_directory_3.replaceOne({ _id: new ObjectId(_data.user) }, datm, { upsert: true });
                     }
-
-                    // Replace OLd
-                    await sub_directory_2.replaceOne({ _id: new ObjectId(_data.user) }, response, { upsert: true });
 
                     // Return
                     callback(200, response, "json");

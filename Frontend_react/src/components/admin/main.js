@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FetchPendingOrders, createUserData, updateStatus } from "../action";
 import { store } from "../main";
 import { useNavigate } from "react-router-dom";
+import SettledList from "./component/settled";
 
 const Admin = () => {
     const { user, status, pending } = useSelector(state => state)
@@ -65,7 +66,7 @@ const Admin = () => {
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [user, pending])
 
     return (
         <div className="ext_cnt min-vh-100" id="dashboard">
@@ -106,7 +107,7 @@ const Admin = () => {
                 </div>
 
                 <div className="tab-pane fade" id="settled-tab-pane" role="tabpanel" aria-labelledby="settled-tab" tabIndex="0">
-                    Settled List
+                    <SettledList />
                 </div>
             </div>
         </div>

@@ -236,6 +236,9 @@ const user = (state = {}, action) => {
         case "pending":
             return { ...state, pending: [...state.pending, action.payload] };
 
+        case "history":
+            return { ...state, pending: [...state.history, action.payload] };
+
         case "settled":
             return { ...state, settled: [...state.settled, action.payload] };
 
@@ -352,7 +355,15 @@ const pending = (state = [], action) => {
     // ============================
     switch (action.type) {
         case "createPendingOrders":
-            return [...state, ...action.payload];
+            return [...action.payload];
+
+        case "addToPending":
+            return [...state, ...action.payload]
+
+        case "remove4rmPending":
+            return state.filter((item) => {
+                return item._id !== action.payload["_id"]
+            })
 
         default:
             return state;
@@ -363,7 +374,7 @@ const completed = (state = [], action) => {
     // ============================
     switch (action.type) {
         case "createCompletedOrders":
-            return { ...state, ...action.payload };
+            return [...action.payload];
 
         default:
             return state;

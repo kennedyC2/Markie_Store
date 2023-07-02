@@ -43,6 +43,7 @@ const createUser = async (data, callback) => {
                             active: false,
                             admin: false,
                             code: vCode.toUpperCase(),
+                            pending: [],
                             history: [],
                             cards: []
                         };

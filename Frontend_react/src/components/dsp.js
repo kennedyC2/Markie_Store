@@ -2,6 +2,7 @@ import { set } from "idb-keyval"
 import { Link } from "react-router-dom"
 import { store } from "./main"
 import { Fragment } from "react"
+import axios from "axios"
 
 export const Header_Cart_DSP = (domain, index, item, cart, dispatch) => {
     return (
@@ -230,8 +231,118 @@ export const Admin_DSP = (domain, index, item, updateState, deleteItem) => {
 export const History_DSP = (history, domain, index) => {
     return (
         <Fragment>
+            <div className="modal-header">
+                <h1 className="modal-title fs-6 px-3" id="backdropCLabel">
+                    Ticket No: {history[index]._id.toUpperCase()}
+                </h1>
+                <button type="button" className="btn-close" id="f2c" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
             <div className="modal-body">
-                <div className="d-flex flex-wrap">
+                <div className="hTop px-4">
+                    <div>
+                        <p className="">Email: {history[index].email} </p>
+                    </div>
+                    <div>
+                        <p className="text-capitalize">Phone: {history[index].phone} </p>
+                    </div>
+                </div>
+                <div className="hMid px-4">
+                    <p className="text-capitalize">Items:  </p>
+                    <div className="d-flex flex-wrap justify-content-between">
+                        {
+                            history[index]["cart"].map((item, index1) => {
+                                return (<div key={"cct" + index1} className="prCard card mb-3 ps-2" style={{ "maxWidth": "540px" }}>
+                                    <div className="row g-0 justify-content-between">
+                                        <div className="col-md-5 my-auto">
+                                            <img src={domain + "image/" + item.image} className="img-fluid rounded-start" alt="..." />
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="card-body">
+                                                <h5 className="card-title">{item.title}</h5>
+                                                <p className="card-text"><small className="text-muted">Brand: {item.brand}</small></p>
+                                                <p className="card-text"><small className="text-muted">Sex: {item.sex}</small></p>
+                                                <p className="card-text">
+                                                    <small className="text-muted">
+                                                        Colour:  <span className="form-check-input ms-2 mt-0 rounded-circle d-inline-block" style={{ backgroundColor: item.color, width: "20px", height: "20px" }}></span>
+                                                    </small>
+                                                </p>
+                                                <p className="card-text"><small className="text-muted">Quantity: {item.quantity}</small></p>
+                                                <p className="card-text"><small className="text-muted">Price: {item.price}</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div className="modal-footer">
+                {/* <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button> */}
+                <p className="text-capitalize">Delivery: {history[index].delivery} State, </p>
+                <p className="text-capitalize">Total paid: &#x20A6; {new Intl.NumberFormat("en-US", {}).format(history[index].total)}</p>
+            </div>
+        </Fragment>
+
+    );
+}
+
+export const AdminPending_DSP = (history, user, domain, index, dispatch) => {
+    return (
+        <Fragment>
+            <div className="hTop">
+                <div>
+                    <p className="text-capitalize">Ticket No: {history[index]._id.toUpperCase()} </p>
+                    <p className="">Email: {history[index].email} </p>
+                    <p className="text-capitalize">Phone: {history[index].phone} </p>
+                </div>
+                <div className="hBtm" style={{ width: "28%" }}>
+                    <p className="text-capitalize">Delivery: {history[index].delivery} State </p>
+                    <p className="text-capitalize">Total paid: &#x20A6; {new Intl.NumberFormat("en-US", {}).format(history[index].total)}</p>
+                </div>
+                <div style={{ width: "20%" }}>
+                    <button type="button" className="btn btn-danger" onClick={async (e) => {
+                        try {
+                            await axios({
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                url: domain + "cart/close",
+                                data: {
+                                    product: history[index]._id,
+                                    user: history[index].user
+                                }
+                            });
+
+                            let targetIndex = user.pending.indexOf(history[index]._id)
+
+                            if (targetIndex > -1) {
+                                const newData = JSON.parse(JSON.stringify(user))
+
+                                // Update Status
+                                newData.history[targetIndex].status = "Processed"
+
+                                // Update Store
+                                await set("user", newData, store)
+
+                                // Update State
+                                dispatch({ type: "createUserData", payload: newData })
+                            }
+
+                            // Update Pending
+                            dispatch({ type: "remove4rmPending", payload: history[index]._id })
+
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    }}>Close Ticket</button>
+                </div>
+            </div>
+            <div className="hMid">
+                <p className="text-capitalize">Items:  </p>
+                <div className="d-flex flex-wrap justify-content-between">
                     {
                         history[index]["cart"].map((item, index1) => {
                             return (<div key={"cct" + index1} className="prCard card mb-3 ps-2" style={{ "maxWidth": "540px" }}>
@@ -259,11 +370,6 @@ export const History_DSP = (history, domain, index) => {
                         })
                     }
                 </div>
-            </div>
-            <div className="modal-footer">
-                {/* <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button> */}
-                <p className="text-capitalize">Delivery: {history[index].delivery} State, </p>
-                <p className="text-capitalize">Total paid: &#x20A6; {new Intl.NumberFormat("en-US", {}).format(history[index].total)}</p>
             </div>
         </Fragment>
 

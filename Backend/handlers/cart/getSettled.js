@@ -12,7 +12,7 @@ const getSettled = async (data, callback) => {
             // Fetch
             try {
                 const directory = client.db(database);
-                const sub_directory = directory.collection("settled");
+                const sub_directory = directory.collection("history");
                 const data = await sub_directory.find({}).toArray();
 
                 // Return

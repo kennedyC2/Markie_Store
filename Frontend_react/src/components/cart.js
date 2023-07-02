@@ -250,8 +250,6 @@ const Cart = () => {
                                         delivery: user.delivery
                                     }
 
-                                    console.log(reqData)
-
                                     try {
                                         const response = await axios({
                                             method: "POST",
@@ -274,7 +272,8 @@ const Cart = () => {
                                             verified: user.verified,
                                             active: user.active,
                                             admin: user.admin,
-                                            pending: [...user.pending, result],
+                                            pending: [...user.pending, result._id],
+                                            history: [...user.history, result],
                                             settled: user.settled,
                                             cards: user.cards
                                         }, store)
@@ -285,8 +284,14 @@ const Cart = () => {
                                             expiry: cart.expiry
                                         }, store)
 
+                                        // Update Admin
+                                        if (user.admin) {
+                                            Dispatch({ type: "pending", payload: result })
+                                        }
+
                                         // Update State
-                                        Dispatch({ type: "pending", payload: result })
+                                        Dispatch({ type: "pending", payload: result._id })
+                                        Dispatch({ type: "history", payload: result })
                                         Dispatch({ type: "deleteCart", payload: [] })
 
                                     } catch (error) {

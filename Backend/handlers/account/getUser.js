@@ -26,7 +26,7 @@ const getUser = async (data, callback) => {
                         {
                             $lookup: {
                                 from: "unsettled",
-                                localField: "history",
+                                localField: "pending",
                                 foreignField: "_id",
                                 as: "history"
                             }

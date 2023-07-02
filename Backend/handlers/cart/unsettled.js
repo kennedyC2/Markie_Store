@@ -35,7 +35,7 @@ const createCart = async (data, callback) => {
                     const sub_directory_2 = directory.collection("history");
                     await sub_directory_2.insertOne(response);
                     const sub_directory_3 = directory.collection("users");
-                    await sub_directory_3.updateOne({ _id: new ObjectId(_data.user) }, { $addToSet: { history: new ObjectId(response._id) } });
+                    await sub_directory_3.updateOne({ _id: new ObjectId(_data.user) }, { $addToSet: { pending: new ObjectId(response._id) } });
 
                     // Return
                     callback(200, response, "json");
