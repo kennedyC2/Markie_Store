@@ -20,11 +20,12 @@ const createProduct = (data, callback) => {
             const price = typeof data.payload.details.price === "string" && data.payload.details.price.trim().length > 0 ? data.payload.details.price.trim() : false;
             const colors = typeof data.payload.details.colors === "object" ? data.payload.details.colors : false;
             const category = typeof data.payload.details.category === "string" && data.payload.details.category.trim().length > 0 ? data.payload.details.category.trim() : false;
+            const tags = typeof data.payload.details.tags === "string" && data.payload.details.tags.trim().length > 0 ? data.payload.details.tags.trim() : false;
             const sizes = typeof data.payload.details.sizes === "object" ? data.payload.details.sizes : false;
             const misc = typeof data.payload.details.misc === "object" ? data.payload.details.misc : false;
             const main = typeof data.payload.images.main === "string" && data.payload.images.main.trim().length > 0 ? data.payload.images.main.trim() : false;
 
-            if (title && brand && dColor && sex && quantity && sold && price && colors && category && sizes && misc) {
+            if (title && brand && dColor && sex && quantity && sold && price && colors && category && tags && sizes && misc) {
                 // Check Images
                 if (main) {
                     // Sav Images
@@ -53,6 +54,7 @@ const createProduct = (data, callback) => {
                                 },
                                 price: price,
                                 colors: colors,
+                                tags: tags,
                                 category: category,
                                 misc: misc,
                                 images: file,
@@ -64,7 +66,7 @@ const createProduct = (data, callback) => {
                             // Send to database
                             try {
                                 const directory = client.db(database);
-                                const sub_directory_1 = directory.collection(category);
+                                const sub_directory_1 = directory.collection("products");
                                 await sub_directory_1.insertOne(response);
                                 const sub_directory_2 = directory.collection("misc");
                                 await sub_directory_2.updateOne({ _id: new ObjectId("645c0171c74cf72d2397c0bb") }, { $addToSet: { [target_1]: brand, [target_2]: { $each: colors } } });

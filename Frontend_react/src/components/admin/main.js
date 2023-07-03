@@ -66,7 +66,7 @@ const Admin = () => {
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user, pending])
+    }, [])
 
     return (
         <div className="ext_cnt min-vh-100" id="dashboard">

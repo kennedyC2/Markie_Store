@@ -23,7 +23,7 @@ const AdminShirts = () => {
                 dColor: shirt["dColor"],
                 colors: shirt["colors"],
                 category: shirt["category"],
-                description: shirt["description"],
+                tags: shirt["tags"],
                 sizes: shirt["sizes"],
                 sold: shirt["sold"],
                 sex: shirt["sex"],

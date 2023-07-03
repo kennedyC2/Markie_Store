@@ -23,7 +23,7 @@ const AdminTorch = () => {
                 dColor: penT["dColor"],
                 colors: penT["colors"],
                 category: penT["category"],
-                description: penT["description"],
+                tags: penT["tags"],
                 sizes: penT["sizes"],
                 sold: penT["sold"],
                 sex: penT["sex"],

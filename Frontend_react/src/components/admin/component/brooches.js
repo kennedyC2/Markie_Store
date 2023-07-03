@@ -23,7 +23,7 @@ const AdminBrooches = () => {
                 dColor: brooch["dColor"],
                 colors: brooch["colors"],
                 category: brooch["category"],
-                description: brooch["description"],
+                tags: brooch["tags"],
                 sizes: brooch["sizes"],
                 sold: brooch["sold"],
                 sex: brooch["sex"],

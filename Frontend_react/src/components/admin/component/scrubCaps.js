@@ -23,7 +23,7 @@ const AdminCaps = () => {
                 dColor: scrubCap["dColor"],
                 colors: scrubCap["colors"],
                 category: scrubCap["category"],
-                description: scrubCap["description"],
+                tags: scrubCap["tags"],
                 sizes: scrubCap["sizes"],
                 sold: scrubCap["sold"],
                 sex: scrubCap["sex"],

@@ -61,7 +61,7 @@ const updateProduct = (data, callback) => {
                             // Send to database
                             try {
                                 const directory = client.db(database);
-                                const sub_directory = directory.collection(category);
+                                const sub_directory = directory.collection("products");
                                 await sub_directory.replaceOne({ _id: new ObjectId(id) }, response, { upsert: true });
 
                                 // Add id

@@ -23,7 +23,7 @@ const AdminCrocs = () => {
                 dColor: croc["dColor"],
                 colors: croc["colors"],
                 category: croc["category"],
-                description: croc["description"],
+                tags: croc["tags"],
                 sizes: croc["sizes"],
                 sold: croc["sold"],
                 sex: croc["sex"],

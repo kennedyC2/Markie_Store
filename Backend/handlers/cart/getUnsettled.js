@@ -12,7 +12,7 @@ const getUnsettled = async (data, callback) => {
             // Fetch
             try {
                 const directory = client.db(database);
-                const sub_directory = directory.collection("unsettled");
+                const sub_directory = directory.collection("pending");
                 const data = await sub_directory.find({}).toArray();
 
                 // Return

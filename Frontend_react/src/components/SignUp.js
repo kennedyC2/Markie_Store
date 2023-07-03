@@ -18,6 +18,7 @@ const SignUp = () => {
         firstname: "",
         lastname: "",
         email: "",
+        phone: "",
         password: "",
         delivery: "imo"
     });
@@ -136,13 +137,10 @@ const SignUp = () => {
             </header>
             <div>
                 <div className="container sg_mid w_1200 m-auto d-lg-flex justify-content-between">
-                    <div className="d-none d-lg-block">
+                    <div className="d-none d-lg-block mt-5">
                         <h3>We offer the best Medical Scrubs, Crocs, Sneakers, and Accessories.</h3>
                     </div>
                     <div className="px-2">
-                        <div className="mb-4 w-75">
-                            <p>Enter your details below to Register</p>
-                        </div>
                         <form action="#" method="post" className="needs-validation" onSubmit={e => submitForm(e)} noValidate>
                             <div className="d-lg-flex justify-content-between">
                                 <div className="mb-4">
@@ -160,6 +158,11 @@ const SignUp = () => {
                                 <label htmlFor="email" className="form-label"> Email: </label>
                                 <input type="email" className="form-control form-control-lg" id="email" name="email" placeholder="someone@email.com" value={data.email.toLowerCase()} onChange={(e) => setData({ ...data, email: e.target.value })} required />
                                 <div className="invalid-feedback">{data.email === "" ? "Please enter a valid email" : (data.email.length < 10 ? "Please enter a valid email" : (!data.email.includes("@") ? "Please enter a valid email" : document.getElementById("email").classList.remove("is-invalid")))}</div>
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="phone" className="form-label"> Phone: </label>
+                                <input type="number" className="form-control form-control-lg" id="phone" name="phone" placeholder="0814-094-8648" value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} required />
+                                <div className="invalid-feedback">{data.phone === "" ? "Please enter a valid phone number" : (data.email.length < 11 ? "Please enter a valid phone number" : document.getElementById("email").classList.remove("is-invalid"))}</div>
                             </div>
                             <div className="d-lg-flex justify-content-between">
                                 <div className="mb-5">

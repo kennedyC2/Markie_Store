@@ -24,6 +24,7 @@ const InitialState = {
         description: "",
         sizes: {},
         sex: "male",
+        tags: "",
         misc: [],
     },
     images: {
@@ -126,11 +127,11 @@ const AdminList = () => {
                 Dispatch({ type: dKeys[data.details.category.toLowerCase()]["update"], payload: newData })
             }
 
-            // Reset
-            setData(InitialState)
-
             // Close Modal
             document.getElementById("f2c").click()
+
+            // Reset
+            setData(InitialState)
 
         } catch (error) {
             console.log(error);
@@ -188,7 +189,7 @@ const AdminList = () => {
                 </svg>
             </Link>
 
-            <a className="btn btn-primary rounded-circle" title="Add Product" data-bs-toggle="modal" href="#staticBackdrop" role="button" onClick={() => setData(InitialState)}>
+            <a className="btn btn-primary rounded-circle" title="Add Product" data-bs-toggle="modal" href="#staticBackdrop" role="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="#fff" className="bi bi-plus rounded-circle" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                 </svg>

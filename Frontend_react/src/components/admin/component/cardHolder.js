@@ -23,7 +23,7 @@ const AdminCardHolder = () => {
                 dColor: cardHolder["dColor"],
                 colors: cardHolder["colors"],
                 category: cardHolder["category"],
-                description: cardHolder["description"],
+                tags: cardHolder["tags"],
                 sizes: cardHolder["sizes"],
                 sold: cardHolder["sold"],
                 sex: cardHolder["sex"],

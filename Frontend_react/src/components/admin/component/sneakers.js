@@ -23,7 +23,7 @@ const AdminSneakers = () => {
                 dColor: sneaker["dColor"],
                 colors: sneaker["colors"],
                 category: sneaker["category"],
-                description: sneaker["description"],
+                tags: sneaker["tags"],
                 sizes: sneaker["sizes"],
                 sold: sneaker["sold"],
                 sex: sneaker["sex"],

@@ -17,6 +17,7 @@ const createCart = async (data, callback) => {
                 // Define Response
                 const response = {
                     _id: new ObjectId(Date.now()),
+                    ticket: Date.now(),
                     user: new ObjectId(_data.user),
                     email: _data.email,
                     date: date + "/" + monthN + "/" + year,

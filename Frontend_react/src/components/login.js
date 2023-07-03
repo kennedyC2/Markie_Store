@@ -122,11 +122,11 @@ const Login = () => {
             </header>
             <div>
                 <div className="container lg_mid w_1200 m-auto d-lg-flex justify-content-between">
-                    <div className="d-none d-lg-block">
+                    <div className="d-none d-lg-block mt-5">
                         <h3>We offer the best Medical Scrubs, Crocs, Sneakers, and Accessories.</h3>
                     </div>
                     <div className="px-2">
-                        <div className="mb-4 w-75">
+                        <div className="mb-4 w-75  mt-5">
                             <p>Enter your details below to Sign In</p>
                         </div>
                         <form action="#" method="post" className="needs-validation" onSubmit={e => submitForm(e)} noValidate>

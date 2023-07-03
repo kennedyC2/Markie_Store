@@ -16,7 +16,7 @@ const closeCart = async (data, callback) => {
                 // Send to database
                 try {
                     const directory = client.db(database);
-                    const sub_directory_1 = directory.collection("unsettled");
+                    const sub_directory_1 = directory.collection("pending");
                     await sub_directory_1.deleteOne({ _id: new ObjectId(_data.product) });
                     const sub_directory_2 = directory.collection("history");
                     await sub_directory_2.updateOne({ _id: new ObjectId(_data.product) }, { $set: { "status": "Processed" } });

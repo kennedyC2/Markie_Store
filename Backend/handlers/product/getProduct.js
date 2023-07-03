@@ -19,8 +19,8 @@ const getProduct = async (data, callback) => {
                 if (all) {
                     try {
                         const directory = client.db(database);
-                        const sub_directory = directory.collection(collection);
-                        const data = await sub_directory.find({}).toArray();
+                        const sub_directory = directory.collection("products");
+                        const data = await sub_directory.find({ category: collection }).toArray();
 
                         // Return
                         callback(200, data, "json");

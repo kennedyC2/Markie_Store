@@ -164,23 +164,48 @@ export const Admin_DSP = (domain, index, item, updateState, deleteItem) => {
                     </button>
 
                     <div className="modal fade" id={"crocs_" + index + "a"} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={"crocs_" + index + "a_Label"} aria-hidden="true">
-                        <div className="modal-dialog modal-dialog-centered modalThree">
+                        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modalThree">
                             <div className="modal-content py-3">
                                 <div className="modal-header px-4">
-                                    <h1 className="modal-title fs-5" id={"crocs_" + index + "a_Label"}>Details:</h1>
+                                    <h1 className="modal-title fs-5" id={"crocs_" + index + "a_Label"}>Category: {item.category}</h1>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body text-start px-4">
                                     <div>
-                                        <div className="w-75">
-                                            <h5 className="title">Product: {item.title}</h5>
-                                            <div className="py-2 d-flex justify-content-between">
-                                                <p>Price: &#x20A6; {new Intl.NumberFormat("en-US", {}).format(item.price)}</p>
-                                                <p>In Stock: {new Intl.NumberFormat("en-US", {}).format(item.quantity)}</p>
-                                                <p>Purchased: {new Intl.NumberFormat("en-US", {}).format(item.sold)}</p>
+                                        <div className="w-100 d-flex justify-content-between">
+                                            <div style={{ width: "30%" }}>
+                                                <p className="text-capitalize">Product: {item.title}</p>
+                                                <p className="text-capitalize">Brand: {item.brand}</p>
+                                                <p className="text-capitalize">Sex: {item.sex}</p>
+                                                <p>Primary Color: <span className="form-check-input ms-2 mt-0 rounded-circle d-inline-block" style={{ backgroundColor: item.dColor, width: "20px", height: "20px" }}></span></p>
+                                                <p>Current price: &#x20A6; {new Intl.NumberFormat("en-US", {}).format(item.price)}</p>
                                             </div>
-                                            <p className="desc pt-0">Description: {item.description}</p>
+                                            <div className="d-flex justify-content-between" style={{ width: "65%" }}>
+                                                <div className="w-30">
+                                                    <p>In Stock: {new Intl.NumberFormat("en-US", {}).format(item.quantity)}</p>
+                                                    <p>Sold: {new Intl.NumberFormat("en-US", {}).format(item.sold)}</p>
+                                                </div>
+                                                <div className="" style={{ width: "60%" }}>
+                                                    {
+                                                        Object.entries(item.sizes).map(([each, obj], index1) => {
+                                                            return (
+                                                                <p key={"dd" + index1}>Size {each}: {
+                                                                    Object.entries(obj).map(([each1, value], index2) => {
+                                                                        return (
+                                                                            <span key={"de" + index2} >
+                                                                                <span className="form-check-input ms-2 mt-0 rounded-circle d-inline-block" style={{ backgroundColor: each1, width: "20px", height: "20px" }}></span>
+                                                                                {" "}= {value}{index2 > 1 ? "," : ""}{", "}
+                                                                            </span>
+                                                                        )
+                                                                    })
+                                                                }</p>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
+                                            </div>
                                         </div>
+                                        <p className="desc pt-0">Images:</p>
                                         <div className="cont4">
                                             <div>
                                                 <img src={domain + "image/" + item.images.main} alt="main" />

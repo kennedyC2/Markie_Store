@@ -16,9 +16,10 @@ const createUser = async (data, callback) => {
             const lastname = typeof data.payload.lastname === "string" && data.payload.lastname.trim().length > 0 ? data.payload.lastname.trim() : false;
             const delivery = typeof data.payload.delivery === "string" && data.payload.delivery.trim().length > 0 ? data.payload.delivery.trim() : false;
             const email = typeof data.payload.email === "string" && data.payload.email.trim().length > 0 ? data.payload.email.trim() : false;
+            const phone = typeof data.payload.phone === "string" && data.payload.phone.trim().length > 0 ? data.payload.phone.trim() : false;
             const password = typeof data.payload.password === "string" && data.payload.password.trim().length > 0 ? data.payload.password.trim() : false;
 
-            if (firstname && email && password && lastname && delivery) {
+            if (firstname && email && phone && password && lastname && delivery) {
                 // Check to database
                 try {
                     const directory = client.db(database);
@@ -37,6 +38,7 @@ const createUser = async (data, callback) => {
                             firstname: firstname,
                             lastname: lastname,
                             email: email,
+                            phone: phone,
                             password: hashedPassword,
                             delivery: "imo",
                             verified: false,

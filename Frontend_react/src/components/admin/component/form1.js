@@ -60,10 +60,7 @@ const Form1 = ({ data, setData, submit, appData }) => {
                                 )}
                             </select>
                             <div className="invalid-feedback">Please select product category.</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="mb-4">
+                        </div><div className="mb-4">
                             <label htmlFor="category" className="form-label">
                                 Category:
                             </label>
@@ -80,6 +77,8 @@ const Form1 = ({ data, setData, submit, appData }) => {
                             </select>
                             <div className="invalid-feedback">Please select product category.</div>
                         </div>
+                    </div>
+                    <div>
                         <div className="mb-3">
                             <label htmlFor="desc" className="form-label">
                                 Primary Colour:
@@ -102,6 +101,13 @@ const Form1 = ({ data, setData, submit, appData }) => {
                                     ) : (" ")
                                 }
                             </div>
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="tags" className="form-label">
+                                Tags:
+                            </label><br></br>
+                            <textarea className="form-control" name="tags" id="tags" cols="50" rows="6" onChange={(e) => setData({ ...data, ...(data["details"]["tags"] = e.target.value) })} value={data.details.tags} required ></textarea>
+                            <div className="invalid-feedback">Please add tags to current product.</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="title" className="form-label">

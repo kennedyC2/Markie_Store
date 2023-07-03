@@ -23,7 +23,7 @@ const AdminCoats = () => {
                 dColor: coat["dColor"],
                 colors: coat["colors"],
                 category: coat["category"],
-                description: coat["description"],
+                tags: coat["tags"],
                 sizes: coat["sizes"],
                 sold: coat["sold"],
                 sex: coat["sex"],

@@ -23,7 +23,7 @@ const AdminScrubs = () => {
                 dColor: scrub["dColor"],
                 colors: scrub["colors"],
                 category: scrub["category"],
-                description: scrub["description"],
+                tags: scrub["tags"],
                 sizes: scrub["sizes"],
                 sold: scrub["sold"],
                 sex: scrub["sex"],

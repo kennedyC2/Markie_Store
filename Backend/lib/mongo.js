@@ -2,7 +2,8 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
 // Server URL
-const s_url = "mongodb+srv://NodeApp:C2FGwthfGr3hEzPM@test.v3cuzhq.mongodb.net/?retryWrites=true&w=majority";
+// const s_url = "mongodb+srv://NodeApp:C2FGwthfGr3hEzPM@test.v3cuzhq.mongodb.net/?retryWrites=true&w=majority";
+const s_url = "mongodb://localhost:27017/";
 
 // Database
 const database = "makkie";

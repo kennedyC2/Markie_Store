@@ -22,7 +22,7 @@ const deleteProduct = (data, callback) => {
                         // Fetch
                         try {
                             const directory = client.db(database);
-                            const sub_directory = directory.collection(collection);
+                            const sub_directory = directory.collection("products");
                             await sub_directory.deleteOne({ _id: new ObjectId(id) });
 
                             // Return

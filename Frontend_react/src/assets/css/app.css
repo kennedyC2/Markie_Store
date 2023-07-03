@@ -176,7 +176,7 @@ footer * {
 
 .lg_mid h3,
 .sg_mid h3 {
-    font-size: 2.7rem !important;
+    font-size: 3rem !important;
     font-weight: 400 !important;
     line-height: 3.7rem;
 }
@@ -1464,7 +1464,7 @@ footer * {
     .sg_mid,
     .lg_mid {
         height: calc(100vh - 174px);
-        padding-top: 4.1rem !important;
+        padding-top: 1.5rem !important;
     }
 
     .sg_mid > div:nth-child(2) {
