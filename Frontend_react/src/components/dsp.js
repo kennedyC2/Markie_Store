@@ -76,8 +76,8 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
             </div>
             <div className="card-body">
                 <Link to={`/product/${collection}/${item._id}/1`} preventScrollReset={false} className="d-inline-block px-2 pb-3 text-decoration-none">
-                    <h5 className="card-title ps-2">{item.title}</h5>
-                    <p className="card-text ps-2">&#x20A6; {new Intl.NumberFormat("en-US", {}).format(item.price)}</p>
+                    <h5 className="card-title ps-1">{item.title}</h5>
+                    <p className="card-text ps-1">&#x20A6; {new Intl.NumberFormat("en-US", {}).format(item.price)}</p>
                 </Link>
                 <div className="d-flex justify-content-between">
                     <button type="button" className="btn col-9 shadow" onClick={async e => {
@@ -138,7 +138,7 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
                         return dispatch({ type: "addToWishlist", payload: item })
 
                     }}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" className="bi bi-heart-fill" fill={wishlist.id.indexOf(item._id) > -1 ? "red" : "#adc0cf"} viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="100%" className="bi bi-heart-fill" fill={wishlist.id && wishlist.id.indexOf(item._id) > -1 ? "red" : "#adc0cf"} viewBox="0 0 16 16">
                             <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                         </svg>
                     </button>

@@ -16,6 +16,12 @@ const User = () => {
     }, [appData, Dispatch])
 
     const [selectedCatg, setCatg] = useState("")
+    const [filter, setFilter] = useState({
+        brand: false,
+        color: false,
+        sex: false,
+        size: false
+    })
     const { brand, colors, sex, sizes_1, sizes_2 } = appData
 
     const selectCatg = useCallback((str) => {
@@ -187,7 +193,7 @@ const User = () => {
                 </div>
             </div>
             <div className="rgt">
-                <Outlet context={[selectCatg]} />
+                <Outlet context={[selectCatg, filter]} />
             </div>
         </div>
     );

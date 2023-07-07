@@ -11,9 +11,9 @@ import { Product_DSP } from "../../dsp";
 
 const Crocs = () => {
     const [selectCatg] = useOutletContext()
-    const { collection, page } = useLocation()["state"]
+    const { collection } = useLocation()["state"]
     const { cart, wishlist } = useSelector(state => state)
-    const data = useSelector(state => state[collection])[page]
+    const data = useSelector(state => state[collection])
     const Dispatch = useDispatch()
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const Crocs = () => {
     useEffect(() => {
 
         // Fetch Collection
-        if (!data) {
+        if (data.length === 0) {
             (async () => {
                 const response = await axios.get(domain + "products/get?i=marky&a=true&c=crocs");
                 Dispatch({ type: "createCrocs", payload: response.data });

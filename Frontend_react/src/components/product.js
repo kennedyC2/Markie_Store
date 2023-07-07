@@ -39,7 +39,7 @@ const Product = () => {
 
     useEffect(() => {
         if (data && data[page]) {
-            let _data = data[page].filter((item) => item._id === productID)
+            let _data = data.filter((item) => item._id === productID)
             _data[0]["order"] = 1
             setTarget(_data[0])
         } else {
@@ -56,7 +56,7 @@ const Product = () => {
             <div className="container w_1200">
                 <div>
                     <div>
-                        <p className="my-4 px-1 heading">Scrub</p>
+                        <p className="my-4 px-1 heading">{collection}</p>
                     </div>
                     <div className="min-h-50 mt-4 d-flex justify-content-between">
                         <div className="col-lg-8 h-auto d-flex justify-content-between pt-2">

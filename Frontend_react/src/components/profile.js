@@ -95,6 +95,7 @@ const Profile = () => {
                         <h2 className="py-2">Personal Details:</h2>
                         <p>Name: {user.firstname} {user.lastname}</p>
                         <p>Email: {user.email}</p>
+                        <p>Phone: {user.phone}</p>
                         <p className="text-capitalize">Delivery: {user.delivery} <span>
                             <a className="btn btn-sm btn-danger ms-2" title="Change Delivery" data-bs-toggle="modal" href="#backdropD" role="button" >
                                 Change
@@ -323,7 +324,7 @@ const Profile = () => {
             <div className="modal fade" id="backdropC" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="backdropCLabel" tabIndex="-1">
                 <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modalTwo">
                     <div className="modal-content">
-                        {user && user.history ? History_DSP(user.history, domain, targetD) : ""}
+                        {user && user.history && user.history.length > 0 ? History_DSP(user.history, domain, targetD) : ""}
                     </div>
                 </div>
             </div>

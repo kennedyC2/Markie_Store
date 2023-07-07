@@ -8,12 +8,12 @@ import { Fragment, useEffect } from "react";
 import { domain } from "../../helpers";
 import { useLocation, useOutletContext } from "react-router-dom";
 import { Product_DSP } from "../../dsp";
+import { sortData } from "../../filter";
 
 const Scrubs = () => {
-    const [selectCatg] = useOutletContext()
-    const { collection, page } = useLocation()["state"]
-    const { cart, wishlist } = useSelector(state => state)
-    const data = useSelector(state => state[collection])[page]
+    const [selectCatg, filter] = useOutletContext()
+    const { collection } = useLocation()["state"]
+    const { cart, wishlist, scrubs } = useSelector(state => state)
     const Dispatch = useDispatch()
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const Scrubs = () => {
     }, [selectCatg, collection]);
 
     useEffect(() => {
-        if (!data) {
+        if (scrubs.length === 0) {
             (async () => {
                 const response = await axios.get(domain + "products/get?i=marky&a=true&c=scrubs");
                 Dispatch({ type: "createScrubs", payload: response.data });
@@ -32,10 +32,14 @@ const Scrubs = () => {
         }
 
         return
-    }, [Dispatch, data]);
+    }, [Dispatch, scrubs]);
+
+    // Data
+    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? scrubs : sortData(scrubs, filter.brand, filter.color, filter.sex, filter.size)
 
     return (
-        <Fragment>{/* Banner Carousel */}
+        <Fragment>
+            {/* Banner Carousel */}
             <div id="pd_banner" className="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div className="carousel-indicators">
                     <button type="button" data-bs-target="" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>

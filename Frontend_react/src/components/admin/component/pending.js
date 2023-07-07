@@ -8,7 +8,6 @@ const PendingList = () => {
     const Dispatch = useDispatch()
     const { user, pending } = useSelector(state => state)
     const [targetD, setTargetD] = useState(0)
-    console.log(pending)
 
     return (
         <Fragment>

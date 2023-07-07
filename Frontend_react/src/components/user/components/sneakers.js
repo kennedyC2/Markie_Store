@@ -11,9 +11,9 @@ import { Product_DSP } from "../../dsp";
 
 const Sneakers = () => {
     const [selectCatg] = useOutletContext()
-    const { collection, page } = useLocation()["state"]
+    const { collection } = useLocation()["state"]
     const { cart, wishlist } = useSelector(state => state)
-    const data = useSelector(state => state[collection])[page]
+    const data = useSelector(state => state[collection])
     const Dispatch = useDispatch()
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const Sneakers = () => {
     }, [selectCatg, collection]);
 
     useEffect(() => {
-        if (!data) {
+        if (data.length === 0) {
             (async () => {
                 const response = await axios.get(domain + "products/get?i=marky&a=true&c=sneakers");
                 Dispatch({ type: "createSneakers", payload: response.data });

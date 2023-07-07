@@ -92,7 +92,7 @@ const Form2 = (props) => {
             </form>
             <div className="cont1 d-flex justify-content-between">
                 <div className="cont2">
-                    <div>{src && <Cropper image={src} crop={crop} zoom={zoom} aspect={1 / 1} objectFit="auto-cover" onCropChange={setCrop} onCropComplete={onCropComplete} showGrid={false} onZoomChange={setZoom} style={style} />}</div>
+                    <div>{src && <Cropper image={src} crop={crop} zoom={zoom} aspect={4 / 5} objectFit="auto-cover" onCropChange={setCrop} onCropComplete={onCropComplete} showGrid={false} onZoomChange={setZoom} style={style} />}</div>
                     <div>
                         <button type="button" className="btn w-100 btn-secondary" onClick={cropImageNow}>
                             Crop Image
