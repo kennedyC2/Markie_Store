@@ -1,14 +1,15 @@
 import axios from "axios";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
 import { useOutletContext } from "react-router-dom";
 
-const AdminCrocs = () => {
+const AdminCrocs = ({ FetchData }) => {
     const [setData, dKeys] = useOutletContext()
-    const { crocs } = useSelector((state) => state);
+    const { crocs, trending, newArrivals } = useSelector((state) => state);
     const Dispatch = useDispatch();
+    const [display, setDisplay] = useState(true)
 
     const updateState = (pos, id) => {
         const croc = crocs[pos]
@@ -44,8 +45,11 @@ const AdminCrocs = () => {
         setData(_data)
     }
 
-    const deleteItem = async (e, id, category, images) => {
+    const deleteItem = async (e, id, category, images, misc) => {
         e.preventDefault();
+
+        // Hide
+        setDisplay(false)
 
         try {
             await axios({
@@ -54,25 +58,122 @@ const AdminCrocs = () => {
                     "Content-Type": "application/json",
                 },
                 url: domain + "products/delete?t=" + id + "&c=" + category,
-                data: images
+                data: {
+                    images: images,
+                    misc: misc
+                }
             });
 
             const updated = crocs.filter(each => {
                 return each._id !== id
             })
 
-            Dispatch({ type: dKeys[category]["delete"], payload: updated })
+            // Notification
+            const notification = document.getElementById("notifB")
+            notification.firstChild.innerHTML = "SUCCESS"
+            notification.classList.add("showNotif")
+
+            setTimeout(() => {
+                // Show
+                setDisplay(true)
+
+                // Close Notification
+                notification.classList.remove("showNotif")
+
+                setTimeout(() => {
+                    // Close Modal
+                    e.target.previousSibling.click()
+
+                    // Update
+                    Dispatch({ type: dKeys[category]["delete"], payload: updated })
+                }, 500);
+            }, 1000);
         } catch (error) {
-            console.log(error);
+            // Show
+            setDisplay(true)
+
+            // Continue
+            const { data } = error.response
+
+            // Notification
+            const notification = document.getElementById("notifA")
+            notification.firstChild.innerHTML = data.message
+            notification.classList.add("showNotif")
+
+            setTimeout(() => {
+                // Close Notification
+                notification.classList.remove("showNotif")
+
+                // Close Modal
+                e.target.previousSibling.click()
+            }, 1000);
+        }
+    };
+
+    const addTN = async (e, item, trend) => {
+        e.preventDefault();
+
+        // Hide
+        e.target.classList.add("d-none")
+        trend ? e.target.nextSibling.classList.remove("d-none") : e.target.previousSibling.classList.remove("d-none")
+
+        try {
+            await axios({
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                url: trend ? domain + "products/trending/add" : domain + "products/newArrivals/add",
+                data: item
+            });
+
+            // Notification
+            const notification = document.getElementById("notifB")
+            notification.firstChild.innerHTML = "SUCCESS"
+            notification.classList.add("showNotif")
+
+            setTimeout(() => {
+                // Show
+                trend ? e.target.nextSibling.classList.add("d-none") : e.target.previousSibling.classList.add("d-none")
+                e.target.classList.remove("d-none")
+
+                // Close Notification
+                notification.classList.remove("showNotif")
+                // Update
+                Dispatch({ type: trend ? "addToTrending" : "addToNewArrivals", payload: item })
+
+            }, 1000);
+        } catch (error) {
+            // Show
+            trend ? e.target.nextSibling.classList.add("d-none") : e.target.previousSibling.classList.add("d-none")
+            e.target.classList.remove("d-none")
+
+            // Continue
+            const { data } = error.response
+
+            // Notification
+            const notification = document.getElementById("notifA")
+            notification.firstChild.innerHTML = data.message
+            notification.classList.add("showNotif")
+
+            setTimeout(() => {
+                // Close Notification
+                notification.classList.remove("showNotif")
+            }, 1000);
         }
     };
 
     useEffect(() => {
         if (crocs.length === 0) {
-            (async () => {
-                const response = await axios.get(domain + "products/get?i=marky&a=true&c=crocs");
-                Dispatch({ type: "createCrocs", payload: response.data });
-            })();
+            FetchData("products", "crocs", Dispatch, "createCrocs")
+        }
+
+        if (trending.data.length === 0) {
+            FetchData("trending", null, Dispatch, "createTrending", "TH")
+        }
+
+        if (newArrivals.data.length === 0) {
+            FetchData("newArrivals", null, Dispatch, "createNewArrivals", "TH")
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,7 +186,7 @@ const AdminCrocs = () => {
                     {
                         crocs.map((item, index) => {
                             return (
-                                Admin_DSP(domain, index, item, updateState, deleteItem)
+                                Admin_DSP(domain, index, item, updateState, deleteItem, addTN, display, trending.id, newArrivals.id)
                             )
                         })
                     }

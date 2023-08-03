@@ -1,14 +1,16 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Header_Cart_DSP, Header_Wishlist_DSP } from "./dsp";
 import { Fragment } from "react";
 import { domain } from "./helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "idb-keyval";
 import { store } from "./main";
+import axios from "axios";
 
 const Header = () => {
     const Dispatch = useDispatch()
     const Navigate = useNavigate()
+    const { state } = useLocation()
     const { user, cart, wishlist, status } = useSelector(state => state)
 
     const total = () => {
@@ -61,7 +63,18 @@ const Header = () => {
                             {/* Desktop Search Bar */}
                             <div className="d_search_bar">
                                 <div className="input-group">
-                                    <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="Search_bar_d" />
+                                    <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="Search_bar_d" defaultValue={state && state.q ? state.q : ""} onKeyDown={e => {
+                                        if (e.code === "Enter" && e.target.value !== "") {
+                                            // Fetch Data
+                                            (async () => {
+                                                const response = await axios.get(domain + "products/search?i=marky&q=" + e.target.value);
+                                                Dispatch({ type: "createSearchData", payload: response.data });
+                                            })();
+
+                                            // Navigate
+                                            Navigate("/products/search/" + e.target.value, { replace: true, state: { q: e.target.value } })
+                                        }
+                                    }} />
                                     <span className="input-group-text" id="Search_bar_d">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 50 50">
                                             <path fill="currentColor" d="M23 36c-7.2 0-13-5.8-13-13s5.8-13 13-13s13 5.8 13 13s-5.8 13-13 13zm0-24c-6.1 0-11 4.9-11 11s4.9 11 11 11s11-4.9 11-11s-4.9-11-11-11z" />
@@ -71,7 +84,60 @@ const Header = () => {
                                 </div>
                             </div>
                             <div className="d-flex">
-                                <div className="m_menu my-auto d-lg-none"></div>
+                                <div className="my-auto d-lg-none">
+                                    <button className="btn m_menu my-auto d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#menulist" aria-controls="cartlist">
+                                    </button>
+                                </div>
+                                <div className="offcanvas offcanvas-start ps-2" tabIndex="-1" id="menulist" aria-labelledby="menulistLabel">
+                                    <div className="offcanvas-header pb-0 px-4 mt-2">
+                                        <h5 className="cartlistLabel heading">CATEGORIES</h5>
+                                        <button type="button" className="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div className="offcanvas-body p-4">
+                                        <ul className="m_list">
+                                            <li className="menu">
+                                                <Link to="/category/coats" state={{ collection: "coats", page: "1" }}>Wardcoats</Link>
+                                            </li>
+                                            <li className="menu">
+                                                <Link to="/category/scrubs" state={{ collection: "scrubs", page: "1" }}>Scrubs</Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/category/crocs" state={{ collection: "crocs", page: "1" }}>
+                                                    Crocs
+                                                </Link>
+                                            </li>
+                                            <li className="menu">
+                                                <Link to="/category/sneakers" state={{ collection: "sneakers", page: "1" }}>
+                                                    Sneakers
+                                                </Link>
+                                            </li>
+                                            <li className="menu">
+                                                <Link to="/category/shirts" state={{ collection: "shirts", page: "1" }}>Inscription T-Shirts</Link>
+                                            </li>
+                                            <li className="menu">
+                                                <Link to="/category/penTorch" state={{ collection: "penTorch", page: "1" }}>
+                                                    Pen Torch
+                                                </Link>
+                                            </li>
+                                            <li className="menu">
+                                                <Link to="/category/scrubCaps" state={{ collection: "scrubCaps", page: "1" }}>
+                                                    Scrub Caps
+                                                </Link>
+                                            </li>
+                                            <li className="menu">
+                                                <Link to="/category/cardHolders" state={{ collection: "cardHolders", page: "1" }}>
+                                                    ID Card Holder
+                                                </Link>
+                                            </li>
+                                            <li className="menu">
+                                                <Link to="/category/brooches" state={{ collection: "brooches", page: "1" }}>
+                                                    Medical Brooches
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
                                 {/* LOGO Container */}
                                 <div className="my-auto d-lg-none">
                                     <a className="text-decoration-none" href="/">
@@ -80,7 +146,7 @@ const Header = () => {
                                 </div>
                                 <div className="d-flex">
                                     {/* Account Icon */}
-                                    <div className="lg_1 dropdown-center my-auto">
+                                    <div className="lg_1 comn1 dropdown-center my-auto">
                                         <button className="btn d-flex border-0 p-0 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="1.35em" height="1.25em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1536 1792">
                                                 <path fill="#03001e" d="M1201 784q47 14 89.5 38t89 73t79.5 115.5t55 172t22 236.5q0 154-100 263.5T1195 1792H341q-141 0-241-109.5T0 1419q0-131 22-236.5t55-172T156.5 895t89-73t89.5-38q-79-125-79-272q0-104 40.5-198.5T406 150T569.5 40.5T768 0t198.5 40.5T1130 150t109.5 163.5T1280 512q0 147-79 272zM768 128q-159 0-271.5 112.5T384 512t112.5 271.5T768 896t271.5-112.5T1152 512t-112.5-271.5T768 128zm427 1536q88 0 150.5-71.5T1408 1419q0-239-78.5-377T1104 897q-145 127-336 127T432 897q-147 7-225.5 145T128 1419q0 102 62.5 173.5T341 1664h854z" />
@@ -97,7 +163,7 @@ const Header = () => {
                                             }
                                             {user["admin"] && status.active ?
                                                 <li>
-                                                    <Link className="dropdown-item" to="/admin">
+                                                    <Link className="dropdown-item" to="/admin/product/coats">
                                                         Dashboard
                                                     </Link>
                                                 </li> : ""
@@ -128,10 +194,10 @@ const Header = () => {
                                         </ul>
                                     </div>
                                     {/* Cart Icon */}
-                                    <div className="d-flex my-auto">
+                                    <div className="d-flex comn2 my-auto">
                                         <button className="border border-0 bg-transparent d-inline-flex my-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartlist" aria-controls="cartlist">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="1.45em" height="1.3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
-                                                <path fill="#03001e" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607L1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479l9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2a1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2a1 1 0 0 1 0-2z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart2 m-auto" viewBox="0 0 16 16">
+                                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                                             </svg>
                                             <span className="d-none d-lg-block m-auto" style={{ paddingTop: "0.18rem" }}>
                                                 Cart
@@ -206,7 +272,7 @@ const Header = () => {
                                         </div>
                                     </div>
                                     {/* Wish list Icon */}
-                                    <div className="d-flex my-auto">
+                                    <div className="d-flex comn3 my-auto">
                                         <button className="border-0 bg-transparent d-inline-flex m-auto pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#wishlist" aria-controls="wishlist">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="m-auto" width="1.4em" height="1.35em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                                 <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z" />
@@ -292,7 +358,7 @@ const Header = () => {
                             </div>
                         </li>
                         <li className="menu">
-                            <Link to="/category/inscription_t-shirts" state={{ collection: "shirts", page: "1" }}>Inscription T-Shirts</Link>
+                            <Link to="/category/shirts" state={{ collection: "shirts", page: "1" }}>Inscription T-Shirts</Link>
                         </li>
                         <li className="menu">
                             <div className="dropdown-center lg_2">
@@ -301,22 +367,22 @@ const Header = () => {
                                 </button>
                                 <ul className="dropdown-menu px-2 py-2">
                                     <li>
-                                        <Link className="dropdown-item" to="/category/pen_torch" state={{ collection: "penTorch", page: "1" }}>
+                                        <Link className="dropdown-item" to="/category/penTorch" state={{ collection: "penTorch", page: "1" }}>
                                             Pen Torch
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to="/category/scrub_caps" state={{ collection: "scrubCaps", page: "1" }}>
+                                        <Link className="dropdown-item" to="/category/scrubCaps" state={{ collection: "scrubCaps", page: "1" }}>
                                             Scrub Caps
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to="/category/id_card_holder" state={{ collection: "cardHolders", page: "1" }}>
+                                        <Link className="dropdown-item" to="/category/cardHolders" state={{ collection: "cardHolders", page: "1" }}>
                                             ID Card Holder
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to="/category/medical_brooches" state={{ collection: "brooches", page: "1" }}>
+                                        <Link className="dropdown-item" to="/category/brooches" state={{ collection: "brooches", page: "1" }}>
                                             Medical Brooches
                                         </Link>
                                     </li>

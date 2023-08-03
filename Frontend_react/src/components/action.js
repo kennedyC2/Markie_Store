@@ -41,7 +41,7 @@ export const FetchCompletedOrders = async (dispatch) => {
     return dispatch({ type: "createCompletedOrders", payload: data })
 }
 
-export const createUserData = async (dispatch, store) => {
+export const CreateUserData = async (dispatch, store) => {
     // Initialize User Data
     const InitialState = {
         firstname: "",
@@ -67,7 +67,7 @@ export const createUserData = async (dispatch, store) => {
     return await dispatch({ type: "createUserData", payload: InitialState })
 }
 
-export const createCart = async (dispatch, store) => {
+export const CreateCart = async (dispatch, store) => {
     // Initialize User Data
     const InitialState = {
         id: [],
@@ -91,7 +91,7 @@ export const createCart = async (dispatch, store) => {
     return dispatch({ type: "createCart", payload: InitialState })
 }
 
-export const createWishlist = async (dispatch, store) => {
+export const CreateWishlist = async (dispatch, store) => {
     // Initialize User Data
     const InitialState = {
         id: [],
@@ -115,7 +115,7 @@ export const createWishlist = async (dispatch, store) => {
     return dispatch({ type: "createWishlist", payload: InitialState })
 }
 
-export const updateStatus = async (dispatch, store) => {
+export const UpdateStatus = async (dispatch, store) => {
     // Initialize User Data
     const InitialState = {
         active: false,

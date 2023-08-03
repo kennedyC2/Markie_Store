@@ -2,12 +2,11 @@ import { useEffect } from "react";
 import AdminList from "./component/list";
 import PendingOrders from "./component/pending"
 import { useDispatch, useSelector } from "react-redux";
-import { FetchPendingOrders, createUserData, updateStatus } from "../action";
 import { store } from "../main";
 import { useNavigate } from "react-router-dom";
 import SettledList from "./component/settled";
 
-const Admin = () => {
+const Admin = ({ FetchPendingOrders, CreateUserData, UpdateStatus }) => {
     const { user, status, pending } = useSelector(state => state)
     const Dispatch = useDispatch()
     const Navigate = useNavigate()
@@ -31,19 +30,20 @@ const Admin = () => {
         }
     });
 
-    // Load User Data
     useEffect(() => {
+        // Load User Data
         if (Object.keys(user).length === 0) {
-            createUserData(Dispatch, store)
+            CreateUserData(Dispatch, store)
         }
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    // Load User Status
-    useEffect(() => {
+        // Load User Status
         if (Object.keys(status).length === 0) {
-            updateStatus(Dispatch, store)
+            UpdateStatus(Dispatch, store)
+        }
+
+        // Load Admin Pending Orders
+        if (user.admin && Object.keys(pending).length === 0) {
+            FetchPendingOrders(Dispatch)
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,25 +59,16 @@ const Admin = () => {
         }
     })
 
-    // Load Admin Pending Orders
-    useEffect(() => {
-        if (user.admin && Object.keys(pending).length === 0) {
-            FetchPendingOrders(Dispatch)
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
     return (
         <div className="ext_cnt min-vh-100" id="dashboard">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
-                <li className="nav-item" role="presentation">
+                {/* <li className="nav-item" role="presentation">
                     <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
                         Home
                     </button>
-                </li>
+                </li> */}
                 <li className="nav-item" role="presentation">
-                    <button className="nav-link" id="products-tab" data-bs-toggle="tab" data-bs-target="#products-tab-pane" type="button" role="tab" aria-controls="products-tab-pane" aria-selected="false">
+                    <button className="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products-tab-pane" type="button" role="tab" aria-controls="products-tab-pane" aria-selected="false">
                         Products
                     </button>
                 </li>
@@ -93,12 +84,12 @@ const Admin = () => {
                 </li>
             </ul>
             <div className="tab-content" id="myTabContent">
-                <div className="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabIndex="0">
+                {/* <div className="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabIndex="0">
                     Home
-                </div>
+                </div> */}
 
                 {/* Product list */}
-                <div className="tab-pane fade" id="products-tab-pane" role="tabpanel" aria-labelledby="products-tab" tabIndex="0">
+                <div className="tab-pane fade show active" id="products-tab-pane" role="tabpanel" aria-labelledby="products-tab" tabIndex="0">
                     <AdminList />
                 </div>
 

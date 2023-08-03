@@ -83,7 +83,7 @@ const Form3 = ({ data, setData, appData }) => {
                                                                     return (
                                                                         <div key={index} className="input-group mb-3">
                                                                             <span className="input-group-text" id={`inputGroup-${key_2}`} style={{ backgroundColor: value_2, minWidth: "80px" }} ></span>
-                                                                            <input type="number" className="form-control" id={`${key_2}_${value_1}`} aria-label={`${key_2}-color`} aria-describedby={`inputGroup-${key_2}`} min={0} value={data["details"]["sizes"] && data["details"]["sizes"][value_1] !== undefined ? data["details"]["sizes"][value_1][key_2] : ""} onChange={e => updateColors(e.target.id, e.target.value)} />
+                                                                            <input type="number" className="form-control" id={`${key_2}_${value_1}`} aria-label={`${key_2}-color`} aria-describedby={`inputGroup-${key_2}`} min={0} defaultValue={data["details"]["sizes"] && data["details"]["sizes"][value_1] !== undefined ? data["details"]["sizes"][value_1][key_2] : ""} onChange={e => updateColors(e.target.id, e.target.value)} />
                                                                         </div>
                                                                     )
                                                                 })
@@ -104,7 +104,7 @@ const Form3 = ({ data, setData, appData }) => {
                                                                     return (
                                                                         <div key={index} className="input-group mb-3">
                                                                             <span className="input-group-text" id={`inputGroup-${key_2}`} style={{ backgroundColor: value_2, minWidth: "80px" }} ></span>
-                                                                            <input type="number" className="form-control" id={`${key_2}_${value_1}`} aria-label={`${key_2}-color`} aria-describedby={`inputGroup-${key_2}`} min={0} value={data["details"]["sizes"][value_1] ? data["details"]["sizes"][value_1][key_2] : ""} onChange={e => updateColors(e.target.id, e.target.value)} />
+                                                                            <input type="number" className="form-control" id={`${key_2}_${value_1}`} aria-label={`${key_2}-color`} aria-describedby={`inputGroup-${key_2}`} min={0} defaultValue={data["details"]["sizes"][value_1] ? data["details"]["sizes"][value_1][key_2] : ""} onChange={e => updateColors(e.target.id, e.target.value)} />
                                                                         </div>
                                                                     )
                                                                 })

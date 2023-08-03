@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { store } from "./main"
 import { Fragment } from "react"
 import axios from "axios"
+import { Spinner } from "./misc"
 
 export const Header_Cart_DSP = (domain, index, item, cart, dispatch) => {
     return (
@@ -70,12 +71,12 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
     return (
         <div key={item._id.toUpperCase() + "_" + index + "P"} className="card">
             <div className="imgcont">
-                <Link to={`/product/${collection}/${item._id}/1`} state={{ collection: collection, page: "1", id: item._id }} preventScrollReset={false} className="d-inline-block text-decoration-none">
+                <Link to={`/product/${collection}/${index}/SRC-${item._id.toUpperCase()}`} preventScrollReset={false} className="d-inline-block text-decoration-none">
                     <img src={domain + "image/" + item.images.main} width="100%" height="100%" className="card-img-top" alt={collection} />
                 </Link>
             </div>
             <div className="card-body">
-                <Link to={`/product/${collection}/${item._id}/1`} preventScrollReset={false} className="d-inline-block px-2 pb-3 text-decoration-none">
+                <Link to={`/product/${collection}/${index}/SRC-${item._id.toUpperCase()}`} preventScrollReset={false} className="d-inline-block px-2 pb-3 text-decoration-none">
                     <h5 className="card-title ps-1">{item.title}</h5>
                     <p className="card-text ps-1">&#x20A6; {new Intl.NumberFormat("en-US", {}).format(item.price)}</p>
                 </Link>
@@ -148,7 +149,8 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
     )
 }
 
-export const Admin_DSP = (domain, index, item, updateState, deleteItem) => {
+export const Admin_DSP = (domain, index, item, updateState, deleteItem, addTN, display, trending, newArrival) => {
+    console.log(trending, newArrival)
     return (
         <div key={item._id.toUpperCase() + "_" + index + "A"} className="card" id={item._id + "_" + index}>
             <img src={domain + "image/" + item.images.main} className="card-img-top" alt="crocs" width={"100%"} height={"100%"} />
@@ -160,7 +162,7 @@ export const Admin_DSP = (domain, index, item, updateState, deleteItem) => {
 
                 <div className="card-body px-0 pb-0 d-flex justify-content-between">
                     <button type="button" className="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target={"#crocs_" + index + "a"}>
-                        view
+                        View
                     </button>
 
                     <div className="modal fade" id={"crocs_" + index + "a"} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={"crocs_" + index + "a_Label"} aria-hidden="true">
@@ -227,11 +229,11 @@ export const Admin_DSP = (domain, index, item, updateState, deleteItem) => {
                     </div>
 
                     <button type="button" className="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => updateState(index, item._id)}>
-                        edit
+                        Edit
                     </button>
 
                     <button type="button" className="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target={"#crocs_" + index + "b"}>
-                        delete
+                        Delete
                     </button>
 
                     <div className="modal fade" id={"crocs_" + index + "b"} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={"crocs_" + index + "b_Label"} aria-hidden="true">
@@ -242,11 +244,48 @@ export const Admin_DSP = (domain, index, item, updateState, deleteItem) => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary px-5" data-bs-dismiss="modal">No</button>
-                                    <button type="button" className="btn btn-danger px-5" data-bs-dismiss="modal" onClick={(e) => deleteItem(e, item._id, item.category, item.images)}>Yes</button>
+                                    <button type="button" className="btn btn-danger px-5" style={{ display: display ? "block" : "none" }} onClick={(e) => deleteItem(e, item._id, item.category, item.images, item.misc)}>Yes</button>
+                                    <button type="button" className="btn btn-danger px-5" style={{ display: display ? "none" : "block" }} disabled>
+                                        {Spinner("#03001fcc", "1.5rem", "28px")}
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className="card-body px-0 pb-0 d-flex justify-content-between">
+                    <button type="button" className="btn btn-outline-secondary" style={{ width: "45%" }} onClick={(e) => addTN(e, item, true)} disabled={trending.indexOf(item._id) > -1 ? true : false}>
+                        {trending.indexOf(item._id) > -1 ? "Added" : "Trending"}
+                    </button>
+                    <button type="button" className="btn btn-outline-secondary d-none">
+                        {Spinner("#adc0cf", "1.5rem", "70px")}
+                    </button>
+                    <button type="button" className="btn btn-outline-secondary" style={{ width: "50%" }} onClick={(e) => addTN(e, item, false)} disabled={newArrival.indexOf(item._id) > -1 ? true : false}>
+                        {trending.indexOf(item._id) > -1 ? "Added" : "New Arrival"}
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export const Admin_DSP_TN = (domain, index, item, deleteTN, TH) => {
+    return (
+        <div key={item._id.toUpperCase() + "_" + index + "A"} className="card" id={item._id + "_" + index}>
+            <img src={domain + "image/" + item.images.main} className="card-img-top" alt="crocs" width={"100%"} height={"100%"} />
+            <div className="card-body">
+                <div>
+                    <h5 className="card-title">{item.title}</h5>
+                    <p className="card-text">&#x20A6; {new Intl.NumberFormat("en-US", {}).format(item.price)}</p>
+                </div>
+
+                <div className="card-body px-0 pb-0 justify-content-between">
+                    <button type="button" className="btn btn-outline-secondary" style={{ width: "100%" }} onClick={(e) => TH ? deleteTN(e, item, true) : deleteTN(e, item, false)}>
+                        Delete
+                    </button>
+                    <button type="button" className="btn btn-outline-secondary d-none" style={{ width: "100%" }}>
+                        {Spinner("#adc0cf", "1.5rem", "100%")}
+                    </button>
                 </div>
             </div>
         </div>
@@ -304,7 +343,6 @@ export const History_DSP = (history, domain, index) => {
                 </div>
             </div>
             <div className="modal-footer">
-                {/* <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button> */}
                 <p className="text-capitalize">Delivery: {history[index].delivery} State, </p>
                 <p className="text-capitalize">Total paid: &#x20A6; {new Intl.NumberFormat("en-US", {}).format(history[index].total)}</p>
             </div>

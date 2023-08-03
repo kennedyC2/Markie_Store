@@ -69,26 +69,35 @@ const createProduct = (data, callback) => {
                                 const sub_directory_1 = directory.collection("products");
                                 await sub_directory_1.insertOne(response);
                                 const sub_directory_2 = directory.collection("misc");
-                                await sub_directory_2.updateOne({ _id: new ObjectId("645c0171c74cf72d2397c0bb") }, { $addToSet: { [target_1]: brand, [target_2]: { $each: colors } } });
+                                await sub_directory_2.updateOne({ _id: new ObjectId("64a317d76b65613a27902143") }, { $addToSet: { [target_1]: brand, [target_2]: { $each: colors }, appBrands: brand } });
+
+                                if (misc.indexOf("trending") > -1) {
+                                    const sub_directory_3 = directory.collection("trending");
+                                    await sub_directory_3.insertOne(response);
+                                }
+
+                                if (misc.indexOf("newArrival") > -1) {
+                                    const sub_directory_4 = directory.collection("newArrivals");
+                                    await sub_directory_4.insertOne(response);
+                                }
 
                                 // Return
                                 callback(200, response, "json");
                             } catch (error) {
                                 // Return
-                                console.log(error)
-                                callback(502, { error: "Oops, Something Went Wrong, Try Again Later" }, "json");
+                                callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                             } finally {
                                 client.close;
                             }
                         } else {
-                            callback(400, { error: file.error }, "json");
+                            callback(400, { message: file.error }, "json");
                         }
                     });
                 } else {
-                    callback(400, { error: "Main Image Missing" }, "json");
+                    callback(400, { message: "Main Image Missing" }, "json");
                 }
             } else {
-                callback(400, { error: "Missing Required Fields" }, "json");
+                callback(400, { message: "Missing Required Fields" }, "json");
             }
 
             break;

@@ -6,9 +6,8 @@ import { domain } from "./helpers";
 import { set } from "idb-keyval";
 import { store } from "./main";
 import { History_DSP } from "./dsp";
-import { createUserData } from "./action";
 
-const Profile = () => {
+const Profile = ({ CreateUserData }) => {
     const Dispatch = useDispatch()
     const { user, appData } = useSelector((state) => state);
     const [passwordShown1, passwordToggle1] = useState(false)
@@ -27,7 +26,7 @@ const Profile = () => {
     // Load User Data
     useEffect(() => {
         if (Object.keys(user).length === 0) {
-            createUserData(Dispatch, store)
+            CreateUserData(Dispatch, store)
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps

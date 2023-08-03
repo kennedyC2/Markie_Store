@@ -41,12 +41,12 @@ const deleteUser = async (data, callback) => {
                 } catch (error) {
                     // Return
                     console.log(error)
-                    callback(502, { error: "Oops, Something Went Wrong, Try Again Later" }, "json");
+                    callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                 } finally {
                     client.close;
                 }
             } else {
-                callback(400, { error: "Missing Required Fields" }, "json");
+                callback(400, { message: "Missing Required Fields" }, "json");
             }
 
             break;

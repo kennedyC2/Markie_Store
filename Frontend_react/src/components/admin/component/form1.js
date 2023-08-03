@@ -1,11 +1,25 @@
 import { Fragment } from "react";
+import { useSelector } from "react-redux";
 
 const Form1 = ({ data, setData, submit, appData }) => {
     const { categories, sex, appColors } = appData
+    const _data = useSelector(state => state)
 
     const setMisc = (e) => {
         if (data["details"]["misc"].indexOf(e.target.value) < 0) {
-            setData({ ...data, ...data["details"]["misc"].push(e.target.value) });
+            if (!(_data[e.target.value].length > 5)) {
+                setData({ ...data, ...data["details"]["misc"].push(e.target.value) });
+            } else {
+                // Notification
+                const notification = document.getElementById("notifA")
+                notification.firstChild.innerHTML = "List of trending products cannot be greater than 5, try deleting one to add current product."
+                notification.classList.add("showNotif")
+
+                setTimeout(() => {
+                    // Close Notification
+                    notification.classList.remove("showNotif")
+                }, 2000);
+            }
         } else {
             setData({ ...data, ...(data["details"]["misc"] = data["details"]["misc"].filter((item) => item !== e.target.value)) });
         }
@@ -114,13 +128,13 @@ const Form1 = ({ data, setData, submit, appData }) => {
                                 Misc:
                             </label>
                             <div className="form-check">
-                                <input className="form-check-input me-3" type="checkbox" value="new" id="new" onChange={(e) => setMisc(e)} checked={data.details.misc.indexOf("new") > -1 ? true : false} />
+                                <input className="form-check-input me-3" type="checkbox" value="newArrival" id="new" onChange={(e) => setMisc(e)} checked={data.details.misc.indexOf("newArrival") > -1 ? true : false} />
                                 <label className="form-check-label" htmlFor="new">
                                     New Arrivals
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input me-3" type="checkbox" value="trend" id="trend" onChange={(e) => setMisc(e)} checked={data.details.misc.indexOf("trend") > -1 ? true : false} />
+                                <input className="form-check-input me-3" type="checkbox" value="trending" id="trend" onChange={(e) => setMisc(e)} checked={data.details.misc.indexOf("trending") > -1 ? true : false} />
                                 <label className="form-check-label" htmlFor="trend">
                                     Trending
                                 </label>

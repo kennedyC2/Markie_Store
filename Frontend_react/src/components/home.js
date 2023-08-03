@@ -3,23 +3,72 @@ import crocs2 from "../assets/images/crocs 2.png";
 import scrub5 from "../assets/images/scrub 5.jpg";
 import scrub1 from "../assets/images/scrub 1.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { Fragment, useEffect } from "react";
-import axios from "axios";
-import { domain, Populate } from "./helpers";
+import { Fragment, useCallback, useEffect } from "react";
+import { domain } from "./helpers";
 import { Product_DSP } from "./dsp";
+import { store } from "./main";
 
-const Home = () => {
-    const { home, cart, wishlist } = useSelector((state) => state);
+const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
+    const { coats, scrubs, crocs, sneakers, penTorch, scrubCaps, brooches, cardHolders, shirts, trending, newArrivals, cart, wishlist } = useSelector((state) => state);
     const Dispatch = useDispatch()
-    Populate("newArrival")
-    Populate("trending")
+
+    // ======================================================================
+    // "Wrap Function in USeCallback"
+    // ======================================================================
 
     useEffect(() => {
-        if (Object.keys(home).length === 0) {
-            (async () => {
-                const response = await axios.get(domain + "home");
-                Dispatch({ type: "createHome", payload: response.data });
-            })();
+        if (coats.length === 0) {
+            FetchData("products", "coats", Dispatch, "createCoats")
+        }
+
+        if (scrubs.length === 0) {
+            FetchData("products", "scrubs", Dispatch, "createScrubs")
+        }
+
+        if (crocs.length === 0) {
+            FetchData("products", "crocs", Dispatch, "createCrocs")
+        }
+
+        if (sneakers.length === 0) {
+            FetchData("products", "sneakers", Dispatch, "createSneakers")
+        }
+
+        if (penTorch.length === 0) {
+            FetchData("products", "penTorch", Dispatch, "createTorch")
+        }
+
+        if (scrubCaps.length === 0) {
+            FetchData("products", "scrubCaps", Dispatch, "createCaps")
+        }
+
+        if (brooches.length === 0) {
+            FetchData("products", "brooches", Dispatch, "createBrooches")
+        }
+
+        if (cardHolders.length === 0) {
+            FetchData("products", "cardHolders", Dispatch, "createCardHolders")
+        }
+
+        if (shirts.length === 0) {
+            FetchData("products", "shirts", Dispatch, "createShirts")
+        }
+
+        if (trending.data.length === 0) {
+            FetchData("trending", null, Dispatch, "createTrending", "TH")
+        }
+
+        if (newArrivals.data.length === 0) {
+            FetchData("newArrivals", null, Dispatch, "createNewArrivals", "TH")
+        }
+
+        // Load User Cart
+        if (Object.keys(cart).length === 0) {
+            CreateCart(Dispatch, store)
+        }
+
+        // Load User Wishlist
+        if (Object.keys(wishlist).length === 0) {
+            CreateWishlist(Dispatch, store)
         }
 
         return
@@ -27,12 +76,47 @@ const Home = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        Populate("newArrival")
+        Populate("trending")
+    }, [newArrivals, trending, Populate])
+
+    const randomTrials_A = useCallback((file, dir) => {
+        // const dd = await get(dir, store)
+        const dd = JSON.parse(sessionStorage.getItem(dir))
+
+        if (dd !== null && dd !== undefined) {
+            return dd
+        } else {
+            const trials = []
+            let pos = []
+            if (file && file.length >= 10) {
+                for (var i = 0; i < 10; i++) {
+                    let index = Math.floor((Math.random() * file.length))
+                    if (pos.includes(index)) {
+                        i--
+                    } else {
+                        let copy = JSON.parse(JSON.stringify(file[index]))
+                        copy["pos"] = index
+                        pos.push(index)
+                        trials.push(copy)
+                    }
+                }
+            }
+
+            // Update Store
+            sessionStorage.setItem(dir, JSON.stringify(trials))
+
+            return trials
+        }
+    }, [])
+
     return (
         <div className="home m-auto">
             {/* Level One */}
-            <div className="lv_1 container w_1200 py-3 d-flex justify-content-between">
+            <div className="lv_1 container w_1200 py-2 d-flex justify-content-between">
                 {/* Banner Carousel */}
-                <div>
+                <div className="d-none d-lg-block">
                     <div id="hm_banner" className="carousel slide carousel-fade" data-bs-ride="carousel">
                         <div className="carousel-indicators">
                             <button type="button" data-bs-target="" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -72,25 +156,25 @@ const Home = () => {
             </div>
 
             {/* Level Three */}
-            <div className="row lv_3 w_1200">
+            <div className="row lv_4 w_1200">
                 <div className="w-100 d-flex flex-row justify-content-between">
                     <div className="intro line"></div>
-                    <div className="intro">New Arrivals</div>
+                    <div className="intro">Trending</div>
                     <div className="intro line"></div>
                 </div>
 
                 {/* Cards */}
                 <Fragment>
-                    {home["newArrival"] && home["newArrival"].length > 0 ?
+                    {trending && trending.data.length === 5 && newArrivals.data.length === 5 && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
                         (
                             <Fragment >
-                                <div id="newArrival" className="carousel slide m-auto" data-bs-ride="carousel">
+                                <div id="trending" className="carousel slide m-auto" data-bs-ride="carousel">
                                     <div className="carousel-inner w-100 h-100">
-                                        {home["newArrival"].map((item, index) => {
+                                        {trending.data.map((item, index) => {
                                             return (
-                                                <div className={`carousel-item ${index === 0 ? "active" : ""} w-100 h-100`}>
+                                                <div key={"TN" + index} className={`carousel-item ${index === 0 ? "active" : ""} w-100 h-100`}>
                                                     <div className="grid">
-                                                        {Product_DSP(domain, "newArrival", index, item, cart, wishlist, Dispatch)}
+                                                        {Product_DSP(domain, "trending", index, item, cart, wishlist, Dispatch)}
                                                     </div>
                                                 </div>
                                             )
@@ -115,25 +199,25 @@ const Home = () => {
             </div>
 
             {/* Level Four */}
-            <div className="row lv_4 w_1200">
+            <div className="row lv_3 w_1200">
                 <div className="w-100 d-flex flex-row justify-content-between">
                     <div className="intro line"></div>
-                    <div className="intro">Trending</div>
+                    <div className="intro">New Arrivals</div>
                     <div className="intro line"></div>
                 </div>
 
                 {/* Cards */}
                 <Fragment>
-                    {home["trending"] && home["trending"].length > 0 ?
+                    {newArrivals && newArrivals.data.length === 5 && trending.data.length === 5 && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
                         (
                             <Fragment >
-                                <div id="trending" className="carousel slide m-auto" data-bs-ride="carousel">
+                                <div id="newArrival" className="carousel slide m-auto" data-bs-ride="carousel">
                                     <div className="carousel-inner w-100 h-100">
-                                        {home["trending"].map((item, index) => {
+                                        {newArrivals.data.map((item, index) => {
                                             return (
-                                                <div className={`carousel-item ${index === 0 ? "active" : ""} w-100 h-100`}>
+                                                <div key={"NT" + index} className={`carousel-item ${index === 0 ? "active" : ""} w-100 h-100`}>
                                                     <div className="grid">
-                                                        {Product_DSP(domain, "trending", index, item, cart, wishlist, Dispatch)}
+                                                        {Product_DSP(domain, "newArrivals", index, item, cart, wishlist, Dispatch)}
                                                     </div>
                                                 </div>
                                             )
@@ -170,13 +254,13 @@ const Home = () => {
 
                 {/* Cards */}
                 <Fragment>
-                    {home["scrubs"] && home["scrubs"].length > 0 ?
+                    {scrubs && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {home["scrubs"].map((item, index) => {
+                                    {randomTrials_A(scrubs, "scrubs_H").map((item) => {
                                         return (
-                                            Product_DSP(domain, "scrubs", index, item, cart, wishlist, Dispatch)
+                                            Product_DSP(domain, "scrubs", item.pos, item, cart, wishlist, Dispatch)
                                         )
                                     })}
                                 </div>
@@ -199,13 +283,13 @@ const Home = () => {
 
                 {/* Cards */}
                 <Fragment>
-                    {home["coats"] && home["coats"].length > 0 ?
+                    {coats && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {[...home["coats"]].map((item, index) => {
+                                    {randomTrials_A(coats, "coats_H").map((item) => {
                                         return (
-                                            Product_DSP(domain, "coats", index, item, cart, wishlist, Dispatch)
+                                            Product_DSP(domain, "coats", item.pos, item, cart, wishlist, Dispatch)
                                         )
                                     })}
                                 </div>
@@ -228,13 +312,13 @@ const Home = () => {
 
                 {/* Cards */}
                 <Fragment>
-                    {home["crocs"] && home["crocs"].length > 0 ?
+                    {crocs && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {home["crocs"].map((item, index) => {
+                                    {randomTrials_A(crocs, "crocs_H").map((item) => {
                                         return (
-                                            Product_DSP(domain, "crocs", index, { ...item }, cart, wishlist, Dispatch)
+                                            Product_DSP(domain, "crocs", item.pos, item, cart, wishlist, Dispatch)
                                         )
                                     })}
                                 </div>
@@ -257,13 +341,13 @@ const Home = () => {
 
                 {/* Cards */}
                 <Fragment>
-                    {home["brooches"] && home["brooches"].length > 0 ?
+                    {brooches && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {home["brooches"].map((item, index) => {
+                                    {randomTrials_A(brooches, "brooches_H").map((item) => {
                                         return (
-                                            Product_DSP(domain, "brooches", index, item, cart, wishlist, Dispatch)
+                                            Product_DSP(domain, "brooches", item.pos, item, cart, wishlist, Dispatch)
                                         )
                                     })}
                                 </div>
@@ -286,13 +370,13 @@ const Home = () => {
 
                 {/* Cards */}
                 <Fragment>
-                    {home["sneakers"] && home["sneakers"].length > 0 ?
+                    {sneakers && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {home["sneakers"].map((item, index) => {
+                                    {randomTrials_A(sneakers, "sneakers_H").map((item) => {
                                         return (
-                                            Product_DSP(domain, "sneakers", index, item, cart, wishlist, Dispatch)
+                                            Product_DSP(domain, "sneakers", item.pos, item, cart, wishlist, Dispatch)
                                         )
                                     })}
                                 </div>
@@ -315,13 +399,13 @@ const Home = () => {
 
                 {/* Cards */}
                 <Fragment>
-                    {home["shirts"] && home["shirts"].length > 0 ?
+                    {shirts && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {home["shirts"].map((item, index) => {
+                                    {randomTrials_A(shirts, "shirts_H").map((item) => {
                                         return (
-                                            Product_DSP(domain, "shirts", index, item, cart, wishlist, Dispatch)
+                                            Product_DSP(domain, "shirts", item.pos, item, cart, wishlist, Dispatch)
                                         )
                                     })}
                                 </div>

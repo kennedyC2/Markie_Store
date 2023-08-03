@@ -6,7 +6,7 @@ import { store } from "./main";
 import { set } from "idb-keyval";
 import axios from "axios";
 
-const Cart = () => {
+const Cart = ({ FetchAppData, CreateUserData, CreateCart }) => {
     const Dispatch = useDispatch()
     const { appData, user, cart } = useSelector(state => state)
 
@@ -28,6 +28,25 @@ const Cart = () => {
 
         return;
     }, []);
+
+    // Load User Data
+    useEffect(() => {
+        if (Object.keys(user).length === 0) {
+            CreateUserData(Dispatch, store)
+        }
+
+        // Load User Cart
+        if (Object.keys(cart).length === 0) {
+            CreateCart(Dispatch, store)
+        }
+
+        // Load AppData
+        if (Object.keys(appData).length === 0) {
+            FetchAppData(Dispatch)
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="cartlist body m-auto pt-3">

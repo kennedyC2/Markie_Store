@@ -4,9 +4,10 @@ import { domain } from "./helpers";
 import { set } from "idb-keyval";
 import { store } from "./main";
 
-const Wishlist = () => {
+const Wishlist = ({ CreateCart, CreateWishlist }) => {
     const Dispatch = useDispatch()
     const { cart, wishlist } = useSelector(state => state)
+
     useEffect(() => {
         const w_canvas = document.querySelector("div#wishlist.offcanvas");
         const w_canvas_close = document.querySelector("div#wishlist.offcanvas > div.offcanvas-header button");
@@ -17,6 +18,20 @@ const Wishlist = () => {
 
         return;
     });
+
+    useEffect(() => {
+        // Load User Wishlist
+        if (Object.keys(wishlist).length === 0) {
+            CreateWishlist(Dispatch, store)
+        }
+
+        // Load User Cart
+        if (Object.keys(cart).length === 0) {
+            CreateCart(Dispatch, store)
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="wishlist body m-auto pt-3">

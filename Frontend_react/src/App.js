@@ -16,6 +16,7 @@ import ScrubCaps from "./components/user/components/scrubCaps";
 import Crocs from "./components/user/components/crocs";
 import Sneakers from "./components/user/components/sneakers";
 import Shirts from "./components/user/components/tShirt";
+import Search from "./components/user/components/search";
 import AdminBrooches from "./components/admin/component/brooches";
 import AdminCardHolder from "./components/admin/component/cardHolder";
 import AdminCoats from "./components/admin/component/coats";
@@ -29,44 +30,217 @@ import Login from "./components/login";
 import SignUp from "./components/SignUp";
 import Verify from "./components/verify";
 import Profile from "./components/profile";
+import axios from "axios";
+import { domain } from "./components/helpers";
+import { get, set } from "idb-keyval";
+import { useCallback } from "react";
+import AdminTrends from "./components/admin/component/trending";
+import AdminNewArrivals from "./components/admin/component/newArrival";
 
 const App = () => {
+    const FetchAppData = useCallback(async (dispatch) => {
+        let { data } = await axios({
+            method: "get",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            url: domain + "app/data",
+            params: {}
+        })
+
+        return dispatch({ type: "createData", payload: data })
+    }, [])
+
+    const FetchPendingOrders = useCallback(async (dispatch) => {
+        let { data } = await axios({
+            method: "get",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            url: domain + "cart/pending",
+            params: {}
+        })
+
+        return dispatch({ type: "createPendingOrders", payload: data })
+    }, [])
+
+    const FetchCompletedOrders = useCallback(async (dispatch) => {
+        let { data } = await axios({
+            method: "get",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            url: domain + "cart/settled",
+            params: {}
+        })
+
+        return dispatch({ type: "createCompletedOrders", payload: data })
+    }, [])
+
+    const CreateUserData = useCallback(async (dispatch, store) => {
+        // Initialize User Data
+        const InitialState = {
+            firstname: "",
+            lastname: "",
+            email: "",
+            delivery: "imo",
+            verified: false,
+            active: false,
+            admin: false,
+            cart: [],
+            wishlist: [],
+            history: [],
+            cards: []
+        };
+
+        // Load User Data
+        let data = await get("user", store)
+
+        if (data !== null && data !== undefined) {
+            return await dispatch({ type: "createUserData", payload: data })
+        }
+
+        return await dispatch({ type: "createUserData", payload: InitialState })
+    }, [])
+
+    const CreateCart = useCallback(async (dispatch, store) => {
+        // Initialize User Data
+        const InitialState = {
+            id: [],
+            data: [],
+            expiry: Date.now()
+        };
+
+        // Load User Data
+        let data = await get("cart", store)
+
+        if (data !== null && data !== undefined) {
+            if (Date.now() - data.expiry > 1000 * 60 * 60 * 6) {
+                await set("cart", InitialState, store)
+                return dispatch({ type: "createCart", payload: InitialState })
+            }
+
+            return dispatch({ type: "createCart", payload: data })
+        }
+
+        await set("cart", InitialState, store)
+        return dispatch({ type: "createCart", payload: InitialState })
+    }, [])
+
+    const CreateWishlist = useCallback(async (dispatch, store) => {
+        // Initialize User Data
+        const InitialState = {
+            id: [],
+            data: [],
+            expiry: Date.now()
+        };
+
+        // Load User Data
+        let data = await get("wishlist", store)
+
+        if (data !== null && data !== undefined) {
+            if (Date.now() - data.expiry > 1000 * 60 * 60 * 6) {
+                await set("wishlist", InitialState, store)
+                return dispatch({ type: "createWishlist", payload: InitialState })
+            }
+
+            return dispatch({ type: "createWishlist", payload: data })
+        }
+
+        await set("wishlist", InitialState, store)
+        return dispatch({ type: "createWishlist", payload: InitialState })
+    }, [])
+
+    const UpdateStatus = useCallback(async (dispatch, store) => {
+        // Initialize User Data
+        const InitialState = {
+            active: false,
+            session: 0
+        };
+
+        // Load User Data
+        let data = await get("status", store)
+
+        if (data !== null && data !== undefined) {
+            return dispatch({ type: "createStatus", payload: data })
+        }
+
+        return dispatch({ type: "createStatus", payload: InitialState })
+    }, [])
+
+    const FetchData = useCallback(async (collection, category, dispatch, type, TH) => {
+        if (TH) {
+            const { data } = await axios.get(domain + "products/trending/get?i=marky&a=true&c=" + collection);
+            return await dispatch({ type: type, payload: data });
+        } else {
+            const { data } = await axios.get(domain + "products/get?i=marky&a=true&c=" + collection + "&q=" + category);
+            return await dispatch({ type: type, payload: data });
+        }
+    }, []);
+
+    const Populate = useCallback((elem) => {
+        let items = document.querySelectorAll("#" + elem + " .carousel-item");
+
+        items.forEach((el) => {
+            const minPerSlide = 5;
+            let next = el.nextElementSibling;
+            for (var i = 1; i < minPerSlide; i++) {
+                if (!next) {
+                    // wrap carousel by using first child
+                    next = items[0];
+                }
+                let cloneChild = next.firstChild.cloneNode(true);
+                el.firstChild.appendChild(cloneChild.children[0]);
+                next = next.nextElementSibling;
+            }
+        });
+    }, []);
+
+
     return (
         <div className="ext_cnt w-100 min-vh-100">
+            <div id="notifA" className="notifA">
+                <p className="bg-danger text-white"></p>
+            </div>
+            <div id="notifB" className="notifB">
+                <p className="bg-primary text-white"></p>
+            </div>
             <Routes>
                 <Route path="/" element={<Container />}>
-                    <Route path="/" exact element={<Home />} />
-                    <Route path="/medical_brooches" exact element={<Brooches />} />
-                    <Route path="/cart" exact element={<Cart />} />
-                    <Route path="/wishlist" exact element={<Wishlist />} />
-                    <Route path="/profile" exact element={<Profile />} />
-                    <Route path="/product/:collection/:productID/:page" exact element={<Product />} />
-                    <Route path="/category" element={<User />}>
-                        <Route path="/category/scrubs" exact element={<Scrubs />} />
-                        <Route path="/category/medical_brooches" exact element={<Brooches />} />
-                        <Route path="/category/id_card_holder" exact element={<CardHolders />} />
-                        <Route path="/category/coats" exact element={<Coats />} />
-                        <Route path="/category/crocs" exact element={<Crocs />} />
-                        <Route path="/category/pen_torch" exact element={<PenTorch />} />
-                        <Route path="/category/scrub_caps" exact element={<ScrubCaps />} />
-                        <Route path="/category/sneakers" exact element={<Sneakers />} />
-                        <Route path="/category/inscription_t-shirts" exact element={<Shirts />} />
+                    <Route path="/" exact element={<Home FetchData={FetchData} CreateCart={CreateCart} CreateWishlist={CreateWishlist} Populate={Populate} />} />
+                    <Route path="/cart" exact element={<Cart FetchAppData={FetchAppData} CreateUserData={CreateUserData} CreateCart={CreateCart} />} />
+                    <Route path="/wishlist" exact element={<Wishlist CreateCart={CreateCart} CreateWishlist={CreateWishlist} />} />
+                    <Route path="/profile" exact element={<Profile CreateUserData={CreateUserData} />} />
+                    <Route path="/product/:collection/:index/:id" exact element={<Product FetchAppData={FetchAppData} CreateUserData={CreateUserData} />} />
+                    <Route path="/products/search/:query" exact element={<Search />} />
+                    <Route path="/category" element={<User FetchAppData={FetchAppData} FetchCompletedOrders={FetchCompletedOrders} FetchPendingOrders={FetchPendingOrders} CreateCart={CreateCart} CreateUserData={CreateUserData} CreateWishlist={CreateWishlist} UpdateStatus={UpdateStatus} />}>
+                        <Route path="/category/scrubs" exact element={<Scrubs FetchData={FetchData} />} />
+                        <Route path="/category/brooches" exact element={<Brooches FetchData={FetchData} />} />
+                        <Route path="/category/cardHolders" exact element={<CardHolders FetchData={FetchData} />} />
+                        <Route path="/category/coats" exact element={<Coats FetchData={FetchData} />} />
+                        <Route path="/category/crocs" exact element={<Crocs FetchData={FetchData} />} />
+                        <Route path="/category/penTorch" exact element={<PenTorch FetchData={FetchData} />} />
+                        <Route path="/category/scrubCaps" exact element={<ScrubCaps FetchData={FetchData} />} />
+                        <Route path="/category/sneakers" exact element={<Sneakers FetchData={FetchData} />} />
+                        <Route path="/category/shirts" exact element={<Shirts FetchData={FetchData} />} />
                     </Route>
                 </Route>
-                <Route path="/admin" exact element={<Admin />}>
-                    <Route path="/admin/product/scrubs" exact element={<AdminScrubs />} />
-                    <Route path="/admin/product/brooches" exact element={<AdminBrooches />} />
-                    <Route path="/admin/product/cardHolder" exact element={<AdminCardHolder />} />
-                    <Route path="/admin/product/coats" exact element={<AdminCoats />} />
-                    <Route path="/admin/product/crocs" exact element={<AdminCrocs />} />
-                    <Route path="/admin/product/penTorch" exact element={<AdminTorch />} />
-                    <Route path="/admin/product/scrubCaps" exact element={<AdminCaps />} />
-                    <Route path="/admin/product/sneakers" exact element={<AdminSneakers />} />
-                    <Route path="/admin/product/shirts" exact element={<AdminShirts />} />
+                <Route path="/admin" exact element={<Admin FetchPendingOrders={FetchPendingOrders} CreateUserData={CreateUserData} UpdateStatus={UpdateStatus} />}>
+                    <Route path="/admin/product/scrubs" exact element={<AdminScrubs FetchData={FetchData} />} />
+                    <Route path="/admin/product/brooches" exact element={<AdminBrooches FetchData={FetchData} />} />
+                    <Route path="/admin/product/cardHolders" exact element={<AdminCardHolder FetchData={FetchData} />} />
+                    <Route path="/admin/product/coats" exact element={<AdminCoats FetchData={FetchData} />} />
+                    <Route path="/admin/product/crocs" exact element={<AdminCrocs FetchData={FetchData} />} />
+                    <Route path="/admin/product/penTorch" exact element={<AdminTorch FetchData={FetchData} />} />
+                    <Route path="/admin/product/scrubCaps" exact element={<AdminCaps FetchData={FetchData} />} />
+                    <Route path="/admin/product/sneakers" exact element={<AdminSneakers FetchData={FetchData} />} />
+                    <Route path="/admin/product/shirts" exact element={<AdminShirts FetchData={FetchData} />} />
+                    <Route path="/admin/product/trending" exact element={<AdminTrends FetchData={FetchData} />} />
+                    <Route path="/admin/product/newArrivals" exact element={<AdminNewArrivals FetchData={FetchData} />} />
                 </Route>
                 <Route path="/account/login" exact element={<Login />} />
-                <Route path="/account/create" exact element={<SignUp />} />
-                <Route path="/account/verification" exact element={<Verify />} />
+                <Route path="/account/create" exact element={<SignUp FetchAppData={FetchAppData} />} />
+                <Route path="/account/verification" exact element={<Verify CreateUserData={CreateUserData} />} />
             </Routes>
         </div>
     );

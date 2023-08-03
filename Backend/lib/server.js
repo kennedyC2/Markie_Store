@@ -5,8 +5,10 @@ const http = require("http");
 const stringDecoder = require("string_decoder").StringDecoder;
 const configuration = require("./config");
 const { ping, notFound, appData, homepage } = require("../handlers/main")
-const { createProduct, getProduct, updateProduct, deleteProduct } = require("../handlers/main")
+const { createProduct, getProduct, searchProduct, updateProduct, deleteProduct } = require("../handlers/main")
 const { createUser, verifyUser, resendCode, getUser, updateUser, deleteUser } = require("../handlers/main")
+const { createTrending, getTrending, deleteTrending } = require("../handlers/main")
+const { createNewArrival, getNewArrival, deleteNewArrival } = require("../handlers/main")
 const { delivery, password } = require("../handlers/main")
 const { createCart, getUnsettled, getSettled, closeCart } = require("../handlers/main")
 const { parseJSONObject } = require("./helper");
@@ -141,9 +143,16 @@ server["router"] = {
     "home": homepage,
     "products/add": createProduct,
     "products/get": getProduct,
+    "products/search": searchProduct,
     "products/update": updateProduct,
     "products/delete": deleteProduct,
     "product/delivery": delivery,
+    "products/trending/get": getTrending,
+    "products/newArrivals/get": getNewArrival,
+    "products/trending/add": createTrending,
+    "products/newArrivals/add": createNewArrival,
+    "products/trending/delete": deleteTrending,
+    "products/newArrivals/delete": deleteNewArrival,
     "account/create": createUser,
     "account/verify": verifyUser,
     "account/code": resendCode,

@@ -1,71 +1,44 @@
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import scrub4 from "../../../assets/images/scrub 4.jpg";
-import crocs2 from "../../../assets/images/crocs 2.png";
-import scrub5 from "../../../assets/images/scrub 5.jpg";
-import scrub1 from "../../../assets/images/scrub 1.jpg";
 import { Fragment, useEffect } from "react";
 import { domain } from "../../helpers";
 import { useLocation, useOutletContext } from "react-router-dom";
 import { Product_DSP } from "../../dsp";
 import { sortData } from "../../filter";
 
-const Scrubs = () => {
+const Scrubs = ({ FetchData }) => {
     const [selectCatg, filter] = useOutletContext()
-    const { collection } = useLocation()["state"]
+    const { pathname } = useLocation()
     const { cart, wishlist, scrubs } = useSelector(state => state)
     const Dispatch = useDispatch()
+    const collection = pathname.split("/")[2]
 
     useEffect(() => {
         // Set Brand
         selectCatg(collection)
 
         return
-    }, [selectCatg, collection]);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         if (scrubs.length === 0) {
-            (async () => {
-                const response = await axios.get(domain + "products/get?i=marky&a=true&c=scrubs");
-                Dispatch({ type: "createScrubs", payload: response.data });
-            })();
+            FetchData("products", "scrubs", Dispatch, "createScrubs")
         }
 
         return
-    }, [Dispatch, scrubs]);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Data
-    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? scrubs : sortData(scrubs, filter.brand, filter.color, filter.sex, filter.size)
+    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? scrubs : (sortData(scrubs, filter.brand, filter.color, filter.sex, filter.size))
 
     return (
         <Fragment>
-            {/* Banner Carousel */}
-            <div id="pd_banner" className="carousel slide carousel-fade" data-bs-ride="carousel">
-                <div className="carousel-indicators">
-                    <button type="button" data-bs-target="" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                </div>
-                <div className="carousel-inner h-100 w-100">
-                    <div className="carousel-item h-100 w-100 active">
-                        <img src={scrub4} className="d-block w-100 h-100" alt="..." />
-                    </div>
-                    <div className="carousel-item h-100 w-100">
-                        <img src={crocs2} className="d-block w-100 h-100" alt="..." />
-                    </div>
-                    <div className="carousel-item h-100 w-100">
-                        <img src={scrub5} className="d-block w-100 h-100" alt="..." />
-                    </div>
-                    <div className="carousel-item h-100 w-100">
-                        <img src={scrub1} className="d-block w-100 h-100" alt="..." />
-                    </div>
-                </div>
-            </div>
-
             {/* Cards */}
-            <div className="pt-2">
-                <div className="w-100 mt-5 mb-3 d-flex flex-row justify-content-between">
+            <div>
+                <div className="w-100 mb-4 d-flex flex-row justify-content-between">
                     <div className="intro line"></div>
                     <div className="intro">SCRUBS</div>
                     <div className="intro line"></div>
@@ -78,8 +51,11 @@ const Scrubs = () => {
                 </button>
 
                 <div className="offcanvas offcanvas-start ps-2" tabIndex="-1" id="filter" aria-labelledby="filterLabel">
-                    <button type="button" className="btn-close me-2" data-bs-dismiss="offcanvas" data-bs-target="#filter" aria-label="Close"></button>
-                    <div className="offcanvas-body">
+                    <div className="offcanvas-header pb-0 px-4 mt-2">
+                        <h5 className="cartlistLabel heading">FILTERS</h5>
+                        <button type="button" className="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div className="offcanvas-body pt-1">
                         <div className="accordion accordion-flush" id="m_filter">
                             {/* Brand Selector */}
                             <div className="accordion-item px-4">

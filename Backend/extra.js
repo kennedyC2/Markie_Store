@@ -1,5 +1,3 @@
-
-
 const multiple = async (sort, s_query, s_num, limit, l_num, collection, callback) => {
     if (sort && !limit) {
         // Validate

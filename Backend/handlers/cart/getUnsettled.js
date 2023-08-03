@@ -11,16 +11,20 @@ const getUnsettled = async (data, callback) => {
         case "get":
             // Fetch
             try {
+                const _data = []
                 const directory = client.db(database);
                 const sub_directory = directory.collection("pending");
-                const data = await sub_directory.find({}).toArray();
+                const data = sub_directory.find({})
+
+                for await (const each of data) {
+                    _data.push(each)
+                }
 
                 // Return
-                callback(200, data, "json");
+                callback(200, _data, "json");
             } catch (error) {
                 // Return
-                console.log(error);
-                callback(502, { error: "Oops, Something Went Wrong, Try Again Later" }, "json");
+                callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
             } finally {
                 client.close;
             }

@@ -5,7 +5,14 @@ const appData = require("./appData")
 const home = require("./home")
 const createProduct = require("./product/createProduct")
 const getProduct = require("./product/getProduct")
+const getTrending = require("./trending/getTrending")
+const getNewArrivals = require("./newArrivals/getNewArrivals")
+const searchProduct = require("./product/search")
 const updateProduct = require("./product/updateProduct")
+const trending = require("./trending/trending")
+const newArrivals = require("./newArrivals/newArrival")
+const deleteTrending = require("./trending/deleteTrending")
+const deleteNewArrivals = require("./newArrivals/deleteNewArrival")
 const delivery = require("./product/delivery")
 const deleteProduct = require("./product/deleteProduct")
 const createUser = require("./account/createUser")
@@ -38,9 +45,20 @@ main["homepage"] = home
 // Products
 main["createProduct"] = createProduct
 main["getProduct"] = getProduct
+main["searchProduct"] = searchProduct
 main["updateProduct"] = updateProduct
 main["deleteProduct"] = deleteProduct
 main["delivery"] = delivery
+
+// Trending
+main["createTrending"] = trending
+main["getTrending"] = getTrending
+main["deleteTrending"] = deleteTrending
+
+// New Arrivals
+main["createNewArrival"] = newArrivals
+main["getNewArrival"] = getNewArrivals
+main["deleteNewArrival"] = deleteNewArrivals
 
 // User
 main["createUser"] = createUser

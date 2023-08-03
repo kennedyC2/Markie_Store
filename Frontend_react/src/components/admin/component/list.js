@@ -7,6 +7,7 @@ import { domain } from "../../helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchAppData } from "../../action";
 import { Link, Outlet } from "react-router-dom";
+import { Spinner } from "../../misc";
 
 // InitialState
 const InitialState = {
@@ -20,7 +21,7 @@ const InitialState = {
         price: "",
         dColor: "",
         colors: [],
-        category: "",
+        category: "coats",
         description: "",
         sizes: {},
         sex: "male",
@@ -57,12 +58,12 @@ const dKeys = {
         update: "updateSneaker",
         delete: "deleteSneaker"
     },
-    penTorch: {
+    pentorch: {
         add: "addTorch",
         update: "updateTorch",
         delete: "deleteTorch"
     },
-    scrubCaps: {
+    scrubcaps: {
         add: "addCap",
         update: "updateCap",
         delete: "deleteCap"
@@ -72,7 +73,7 @@ const dKeys = {
         update: "updateBrooch",
         delete: "deleteBrooch"
     },
-    cardHolders: {
+    cardholders: {
         add: "addCardHolder",
         update: "updateCardHolder",
         delete: "deleteCardHolder"
@@ -88,6 +89,7 @@ const AdminList = () => {
     const Dispatch = useDispatch()
     const _data = useSelector(state => state)
     const [data, setData] = useState(InitialState);
+    const [display, setDisplay] = useState(true)
 
     // Load appData
     useEffect(() => {
@@ -100,9 +102,10 @@ const AdminList = () => {
 
     const submitForm = async (e) => {
         e.preventDefault();
-        console.log(data.details)
 
         delete data["images"]["index"];
+
+        setDisplay(false)
 
         try {
             const response = await axios({
@@ -127,14 +130,43 @@ const AdminList = () => {
                 Dispatch({ type: dKeys[data.details.category.toLowerCase()]["update"], payload: newData })
             }
 
-            // Close Modal
-            document.getElementById("f2c").click()
+            // Notification
+            const notification = document.getElementById("notifB")
+            notification.firstChild.innerHTML = "SUCCESS"
+            notification.classList.add("showNotif")
 
-            // Reset
-            setData(InitialState)
+            setTimeout(() => {
+                // Show
+                setDisplay(true)
+
+                // Reset
+                setData(InitialState)
+
+                // Close Notification
+                notification.classList.remove("showNotif")
+
+                setTimeout(() => {
+                    // Close Modal
+                    document.getElementById("f2c").click()
+                }, 1000);
+            }, 2000);
 
         } catch (error) {
-            console.log(error);
+            // Show
+            setDisplay(true)
+
+            // Continue
+            const { data } = error.response
+
+            // Notification
+            const notification = document.getElementById("notifA")
+            notification.firstChild.innerHTML = data.message
+            notification.classList.add("showNotif")
+
+            setTimeout(() => {
+                // Close Notification
+                notification.classList.remove("showNotif")
+            }, 2000);
         }
     };
 
@@ -149,31 +181,38 @@ const AdminList = () => {
                     <div className="lft">
                         <ul className="d_list">
                             <li>
-                                <Link to="/admin/product/coats">Coats</Link>
+                                <Link to="/admin/product/trending">Trending</Link>
                             </li>
                             <li>
-                                <Link to="/admin/product/scrubs">Scrubs</Link>
+                                <Link to="/admin/product/newArrivals">New Arrivals</Link>
                             </li>
+                            <hr style={{ color: "#adc0cf", opacity: "0.5" }} />
                             <li>
-                                <Link to="/admin/product/crocs">Crocs</Link>
+                                <Link to="/admin/product/brooches">Brooches</Link>
                             </li>
                             <li>
                                 <Link to="/admin/product/sneakers">Sneakers</Link>
                             </li>
                             <li>
+                                <Link to="/admin/product/coats">Coats</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/product/crocs">Crocs</Link>
+                            </li>
+                            <li>
                                 <Link to="/admin/product/penTorch">Pen Torch</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/product/scrubs">Scrubs</Link>
                             </li>
                             <li>
                                 <Link to="/admin/product/scrubCaps">Scrub Caps</Link>
                             </li>
                             <li>
-                                <Link to="/admin/product/CardHolder">ID Card Holder</Link>
+                                <Link to="/admin/product/cardHolders">ID Card Holder</Link>
                             </li>
                             <li>
                                 <Link to="/admin/product/shirts">Inscription T-shirt</Link>
-                            </li>
-                            <li>
-                                <Link to="/admin/product/brooches">Medical Brooches</Link>
                             </li>
                         </ul>
                     </div>
@@ -189,7 +228,11 @@ const AdminList = () => {
                 </svg>
             </Link>
 
-            <a className="btn btn-primary rounded-circle" title="Add Product" data-bs-toggle="modal" href="#staticBackdrop" role="button">
+            <a className="btn btn-primary rounded-circle" title="Add Product" data-bs-toggle="modal" href="#staticBackdrop" role="button" onClick={(e) => {
+                setTimeout(() => {
+                    setData(InitialState)
+                }, 500)
+            }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="#fff" className="bi bi-plus rounded-circle" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                 </svg>
@@ -208,7 +251,7 @@ const AdminList = () => {
                             <Form1 data={data} setData={setData} submit={submitForm} appData={_data.appData} />
                         </div>
                         <div className="modal-footer">
-                            <button className="btn btn-secondary px-4" data-bs-target="#staticBackdrop3" data-bs-toggle="modal">
+                            <button className="btn btn-secondary px-4" data-bs-target={data.details.category === "penTorch" || data.details.category === "scrubCaps" || data.details.category === "cardHolders" || data.details.category === "brooches" ? "#staticBackdrop2" : "#staticBackdrop3"} data-bs-toggle="modal">
                                 Next
                             </button>
                         </div>
@@ -251,11 +294,14 @@ const AdminList = () => {
                             <Form2 data={data} setData={setData} appData={_data.appData} />
                         </div>
                         <div className="modal-footer d-flex justify-content-between">
-                            <button className="btn btn-secondary px-4" data-bs-target="#staticBackdrop3" data-bs-toggle="modal">
+                            <button className="btn btn-secondary px-4" data-bs-target={data.details.category === "penTorch" || data.details.category === "scrubCaps" || data.details.category === "cardHolders" || data.details.category === "brooches" ? "#staticBackdrop" : "#staticBackdrop3"} data-bs-toggle="modal">
                                 Previous
                             </button>
-                            <button type="button" className="btn btn-secondary  px-4" onClick={clickSubmit}>
+                            <button type="button" className="btn btn-secondary  px-4" style={{ display: display ? "block" : "none" }} onClick={clickSubmit}>
                                 Save
+                            </button>
+                            <button type="button" className="btn btn-secondary  px-4" style={{ display: display ? "none" : "block" }} disabled>
+                                {Spinner("#ffffff", "1.5rem", "60px")}
                             </button>
                         </div>
                     </div>

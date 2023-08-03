@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { domain } from "./helpers"
 import { set } from "idb-keyval"
 import { store } from "./main"
+import { Spinner } from "./misc"
 
 const Login = () => {
     const Dispatch = useDispatch()
@@ -18,6 +19,7 @@ const Login = () => {
     });
 
     const [passwordShown, passwordToggle] = useState(false)
+    const [display, setDisplay] = useState(true)
 
     const submitForm = async (e) => {
         e.preventDefault();
@@ -41,6 +43,9 @@ const Login = () => {
         }
 
         if (email && password) {
+            // Hide
+            setDisplay(false)
+
             try {
                 const response = await axios({
                     method: "POST",
@@ -73,8 +78,23 @@ const Login = () => {
                         // Update State
                         Dispatch({ type: "createStatus", payload: status })
 
-                        // Navigate
-                        Navigate("/", { replace: true })
+                        // Notification
+                        const notification = document.getElementById("notifB")
+                        notification.firstChild.innerHTML = "SUCCESS"
+                        notification.classList.add("showNotif")
+
+                        setTimeout(() => {
+                            // Show
+                            setDisplay(true)
+
+                            // Close Notification
+                            notification.classList.remove("showNotif")
+
+                            setTimeout(() => {
+                                // Navigate
+                                Navigate("/", { replace: true })
+                            }, 2000);
+                        }, 2000);
                     } else {
                         const status = {
                             active: false,
@@ -90,7 +110,21 @@ const Login = () => {
                 }, 2000);
 
             } catch (error) {
-                console.log(error.response.data.message);
+                // Show
+                setDisplay(true)
+
+                // Continue
+                const { data } = error.response
+
+                // Notification
+                const notification = document.getElementById("notifA")
+                notification.firstChild.innerHTML = data.message
+                notification.classList.add("showNotif")
+
+                setTimeout(() => {
+                    // Close Notification
+                    notification.classList.remove("showNotif")
+                }, 2000);
             }
         }
     };
@@ -158,14 +192,18 @@ const Login = () => {
                             </div>
                             <div className="d-flex justify-content-end mb-3">
                                 <div className="my-auto">Forgot password?</div>
-                                <button type="submit" className="btn btn-lg btn-primary text-white ms-4 px-5 px-lg-5 py-2 py-lg-3">Sign In</button>
+                                <button type="submit" className="btn btn-lg btn-primary text-white ms-4 px-5 px-lg-5 py-2 py-lg-3" style={{ display: display ? "block" : "none" }}>Sign In</button>
+                                <button type="button" className="btn btn-lg btn-primary text-white ms-4 px-5 px-lg-5 py-2 py-lg-3" style={{ display: display ? "none" : "block" }}>
+                                    {Spinner("#ffffff", "1.5rem", "50px")}
+                                </button>
                             </div>
                         </form>
                     </div>
                     <div className="d-lg-none text-center mt-4">
                         <div className="ln_1">
                             <div className="mb-3">Don't Have An Account?</div>
-                            <button type="button" className="btn btn-lg btn-primary w-100 text-white px-4 py-2">Create Account</button>
+                            <Link type="button" className="btn btn-lg btn-primary w-100 text-white px-4 py-2" to="/account/create">Create Account</Link>
+                            {/* <button type="button" className="btn btn-lg btn-primary w-100 text-white px-4 py-2">Create Account</button> */}
                         </div>
                     </div>
                 </div>

@@ -13,9 +13,10 @@ const deleteProduct = (data, callback) => {
             // Validate Data
             const id = typeof data.query.t === "string" && data.query.t.trim().length > 0 ? data.query.t.trim() : false;
             const collection = typeof data.query.c === "string" && data.query.c.trim().length > 0 ? data.query.c.trim() : false;
-            const images = typeof data.payload === "object" ? data.payload : false;
+            const images = typeof data.payload.images === "object" ? data.payload.images : false;
+            const misc = typeof data.payload.misc === "object" ? data.payload.misc : false;
 
-            if (id && collection && images) {
+            if (id && collection && images && misc) {
                 // delete images
                 deleteImages(images, async (err) => {
                     if (!err) {
@@ -25,21 +26,30 @@ const deleteProduct = (data, callback) => {
                             const sub_directory = directory.collection("products");
                             await sub_directory.deleteOne({ _id: new ObjectId(id) });
 
+                            if (misc.indexOf("trending") > -1) {
+                                const sub_directory_3 = directory.collection("trending");
+                                await sub_directory_3.deleteOne({ _id: new ObjectId(id) });
+                            }
+
+                            if (misc.indexOf("newArrival") > -1) {
+                                const sub_directory_4 = directory.collection("newArrivals");
+                                await sub_directory_4.deleteOne({ _id: new ObjectId(id) });
+                            }
+
                             // Return
                             callback(200, {}, "json");
                         } catch (error) {
                             // Return
-                            console.log(error);
-                            callback(502, { error: "Oops, Something Went Wrong, Try Again Later" }, "json");
+                            callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                         } finally {
                             client.close;
                         }
                     } else {
-                        callback(502, { error: "Oops, Something Went Wrong, Try Again Later" }, "json");
+                        callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                     }
                 })
             } else {
-                callback(400, { error: "Missing Required Fields" }, "json");
+                callback(400, { message: "Missing Required Fields" }, "json");
             }
 
             break;

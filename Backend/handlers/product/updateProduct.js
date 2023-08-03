@@ -1,4 +1,4 @@
-const { client, database } = require("../../lib/mongo");
+const { client, database, ObjectId } = require("../../lib/mongo");
 const { updateImages } = require("../../lib/file");
 
 // Update Product
@@ -17,15 +17,16 @@ const updateProduct = (data, callback) => {
             const sold = typeof data.payload.details.sold === "string" && data.payload.details.sold.trim().length > 0 ? data.payload.details.sold.trim() : false;
             const sex = typeof data.payload.details.sex === "string" && data.payload.details.sex.trim().length > 0 ? data.payload.details.sex.trim() : false;
             const sizes = typeof data.payload.details.sizes === "object" ? data.payload.details.sizes : false;
-            const quantity = typeof data.payload.details.quantity === "number" && data.payload.details.quantity > 0 ? data.payload.details.quantity : false;
+            const quantity = typeof data.payload.details.quantity === "string" && data.payload.details.quantity.trim().length > 0 > 0 ? data.payload.details.quantity : false;
             const id = typeof data.payload.id === "string" && data.payload.id.trim().length > 0 ? data.payload.id.trim() : false;
             const price = typeof data.payload.details.price === "string" && data.payload.details.price.trim().length > 0 ? data.payload.details.price.trim() : false;
             const colors = typeof data.payload.details.colors === "object" ? data.payload.details.colors : false;
+            const tags = typeof data.payload.details.tags === "string" && data.payload.details.tags.trim().length > 0 ? data.payload.details.tags.trim() : false;
             const category = typeof data.payload.details.category === "string" && data.payload.details.category.trim().length > 0 ? data.payload.details.category.trim() : false;
             const misc = typeof data.payload.details.misc === "object" ? data.payload.details.misc : false;
             const main = typeof data.payload.images.main === "string" && data.payload.images.main.trim().length > 0 ? data.payload.images.main.trim() : false;
 
-            if (title && brand && dColor && sold && sex && sizes && id && quantity && price && colors && category && misc) {
+            if (title && brand && dColor && sold && sex && sizes && id && quantity && tags && price && colors && category && misc) {
                 // Check Images
                 if (main) {
                     // Sav Images
@@ -53,6 +54,7 @@ const updateProduct = (data, callback) => {
                                 },
                                 price: price,
                                 colors: colors,
+                                tags: tags,
                                 category: category,
                                 misc: misc,
                                 images: file,
@@ -64,27 +66,37 @@ const updateProduct = (data, callback) => {
                                 const sub_directory = directory.collection("products");
                                 await sub_directory.replaceOne({ _id: new ObjectId(id) }, response, { upsert: true });
 
+                                if (misc.indexOf("trending") > -1) {
+                                    const sub_directory_3 = directory.collection("trending");
+                                    await sub_directory_3.replaceOne({ _id: new ObjectId(id) }, response, { upsert: true });
+                                }
+
+                                if (misc.indexOf("newArrival") > -1) {
+                                    const sub_directory_4 = directory.collection("newArrivals");
+                                    await sub_directory_4.replaceOne({ _id: new ObjectId(id) }, response, { upsert: true });
+                                }
+
                                 // Add id
-                                response.id = id
+                                response._id = id
 
                                 // Return
                                 callback(200, response, "json");
                             } catch (error) {
                                 // Return
                                 console.log(error);
-                                callback(502, { error: "Oops, Something Went Wrong, Try Again Later" }, "json");
+                                callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                             } finally {
                                 client.close;
                             }
                         } else {
-                            callback(400, { error: file.error }, "json");
+                            callback(400, { message: file.error }, "json");
                         }
                     });
                 } else {
-                    callback(400, { error: "Main Image Missing" }, "json");
+                    callback(400, { message: "Main Image Missing" }, "json");
                 }
             } else {
-                callback(400, { error: "Missing Required Fields" }, "json");
+                callback(400, { message: "Missing Required Fields" }, "json");
             }
 
             break;

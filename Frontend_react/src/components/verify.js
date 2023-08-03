@@ -3,11 +3,10 @@ import { Fragment, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom"
 import { store } from "./main";
-import { createUserData } from "./action";
 import { domain } from "./helpers";
 import axios from "axios";
 
-const Verify = () => {
+const Verify = ({ CreateUserData }) => {
     const Dispatch = useDispatch()
     const Navigate = useNavigate()
     const { user } = useSelector(state => state)
@@ -28,9 +27,6 @@ const Verify = () => {
                 },
             });
 
-            document.getElementById("code").classList.remove("is-invalid")
-            document.getElementById("code").classList.add("is-valid")
-
             // Update Store
             user.verified = true
             await set("user", user, store)
@@ -38,22 +34,45 @@ const Verify = () => {
             // Update State
             Dispatch({ type: "verify", payload: !user.verified })
 
+            // Notification
+            const notification = document.getElementById("notifB")
+            notification.firstChild.innerHTML = "SUCCESS"
+            notification.classList.add("showNotif")
+
             setTimeout(() => {
-                // Navigate
-                Navigate("/account/login", { replace: true })
+                // Close Notification
+                notification.classList.remove("showNotif")
+
+                setTimeout(() => {
+                    // Navigate
+                    Navigate("/account/login", { replace: true })
+                }, 2000);
             }, 2000);
 
         } catch (error) {
-            document.getElementById("code").classList.add("is-invalid")
-            console.log(error.response.data.message);
+            // Continue
+            const { data } = error.response
+
+            // Notification
+            const notification = document.getElementById("notifA")
+            notification.firstChild.innerHTML = data.message
+            notification.classList.add("showNotif")
+
+            setTimeout(() => {
+                // Close Notification
+                notification.classList.remove("showNotif")
+            }, 2000);
         }
     };
 
     useEffect(() => {
         if (Object.keys(user).length === 0) {
-            createUserData(Dispatch, store)
+            CreateUserData(Dispatch, store)
         }
-    }, [user, Dispatch])
+
+        return
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <Fragment>
@@ -94,9 +113,9 @@ const Verify = () => {
                                     <input type="email" className="form-control form-control-lg text-center" id="code" name="email" required />
                                     <div className="invalid-feedback">Invalid Verification Code.</div>
                                 </div>
-                                <div className="d-flex justify-content-end py-3">
+                                <div className="d-flex justify-content-between py-3">
                                     <div className="my-auto">Resend Code?</div>
-                                    <button type="submit" className="btn btn-lg btn-primary text-white ms-4 px-5 px-lg-5 py-2 py-lg-3">Verify</button>
+                                    <button type="submit" className="btn btn-lg btn-primary text-white ms-4 px-5 px-lg-5 py-2 py-lg-2">Verify</button>
                                 </div>
                             </form>
                         </div>

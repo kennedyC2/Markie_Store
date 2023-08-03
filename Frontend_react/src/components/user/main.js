@@ -1,19 +1,41 @@
 import { useCallback, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { FetchAppData } from "../action";
 import { useDispatch, useSelector } from "react-redux";
+import { store } from "../main";
 
-const User = () => {
-    const Dispatch = useDispatch()
-    const { appData } = useSelector(state => state)
+const User = ({ FetchAppData, CreateCart, CreateUserData, CreateWishlist, UpdateStatus }) => {
+    const dispatch = useDispatch()
+    const { appData, user, status, cart, wishlist } = useSelector(state => state)
 
-    // Load appData
     useEffect(() => {
+        // Load appData
         if (Object.keys(appData).length === 0) {
-            FetchAppData(Dispatch)
+            FetchAppData(dispatch)
         }
 
-    }, [appData, Dispatch])
+        // Load User Data
+        if (Object.keys(user).length === 0) {
+            CreateUserData(dispatch, store)
+        }
+
+        // Load User Status
+        if (Object.keys(status).length === 0) {
+            UpdateStatus(dispatch, store)
+        }
+
+        // Load User Cart
+        if (Object.keys(cart).length === 0) {
+            CreateCart(dispatch, store)
+        }
+
+        // Load User Wishlist
+        if (Object.keys(wishlist).length === 0) {
+            CreateWishlist(dispatch, store)
+        }
+
+        return
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const [selectedCatg, setCatg] = useState("")
     const [filter, setFilter] = useState({
@@ -22,6 +44,7 @@ const User = () => {
         sex: false,
         size: false
     })
+
     const { brand, colors, sex, sizes_1, sizes_2 } = appData
 
     const selectCatg = useCallback((str) => {
@@ -32,6 +55,7 @@ const User = () => {
         document.querySelectorAll("input[type=checkbox]:checked").forEach(each => {
             each.checked = false
         })
+
     }, [])
 
     return (
@@ -52,14 +76,20 @@ const User = () => {
                                         brand[selectedCatg].map((each, index) => {
                                             return (
                                                 <li key={index} onClick={e => {
-                                                    let selectedBd = document.querySelector("li.selectedBd")
+                                                    if (e.currentTarget.classList.contains("selectedBd")) {
+                                                        e.currentTarget.classList.remove("selectedBd")
+                                                        setFilter({ ...filter, brand: false })
+                                                    } else {
+                                                        let selectedBd = document.querySelector("li.selectedBd")
 
-                                                    if (selectedBd) {
-                                                        selectedBd.classList.remove("selectedBd")
+                                                        if (selectedBd) {
+                                                            selectedBd.classList.remove("selectedBd")
+                                                        }
+
+                                                        e.currentTarget.classList.add("selectedBd")
+
+                                                        setFilter({ ...filter, brand: each })
                                                     }
-
-                                                    e.currentTarget.classList.add("selectedBd")
-                                                    // setSelectedSize(each)
                                                 }}>{each}</li>
                                             )
                                         })
@@ -84,19 +114,28 @@ const User = () => {
                             <div className="accordion-body">
                                 {
                                     colors && Object.keys(colors).length > 0 && selectedCatg !== "" && colors[selectedCatg].length > 0 ? (
-                                        <ul className="c_list">
+                                        <div className="c_list">
                                             {colors[selectedCatg].map((each, index) => {
                                                 return (
-                                                    <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} onClick={e => {
-                                                        document.querySelectorAll("input[type=checkbox]:checked").forEach(g => {
-                                                            g.checked = false
-                                                        })
+                                                    <input key={index} className="form-check-input" type="checkbox" style={{ backgroundColor: each }} onClick={e => {
+                                                        if (e.currentTarget.classList.contains("cChecked")) {
+                                                            e.currentTarget.checked = false
+                                                            e.currentTarget.classList.remove("cChecked")
+                                                            setFilter({ ...filter, color: false })
+                                                        } else {
+                                                            document.querySelectorAll("input.cChecked").forEach(g => {
+                                                                g.classList.remove("cChecked")
+                                                                g.checked = false
+                                                            })
 
-                                                        e.currentTarget.checked = true
+                                                            e.currentTarget.checked = true
+                                                            e.currentTarget.classList.add("cChecked")
+                                                            setFilter({ ...filter, color: each })
+                                                        }
                                                     }} />
                                                 )
                                             })}
-                                        </ul>
+                                        </div>
                                     ) : (
                                         <div className="empty emptyS">
                                             <p>------- &nbsp;  no data &nbsp; -------</p>
@@ -122,7 +161,23 @@ const User = () => {
                                             return (
 
                                                 <div key={index} className="form-check py-1">
-                                                    <input className="form-check-input me-3" type="checkbox" value={each} id={each} />
+                                                    <input className="form-check-input me-3" type="checkbox" value={each} id={each} onClick={e => {
+                                                        if (e.currentTarget.classList.contains("sChecked")) {
+                                                            e.currentTarget.checked = false
+                                                            e.currentTarget.classList.remove("sChecked")
+                                                            setFilter({ ...filter, sex: false })
+                                                        } else {
+                                                            document.querySelectorAll("input.sChecked").forEach(u => {
+                                                                u.classList.remove("sChecked")
+                                                                u.checked = false
+                                                            })
+
+                                                            e.currentTarget.checked = true
+                                                            e.currentTarget.classList.add("sChecked")
+                                                            console.log(each)
+                                                            setFilter({ ...filter, sex: each })
+                                                        }
+                                                    }} />
                                                     <label className="form-check-label text-capitalize" htmlFor={each}>
                                                         {" "}
                                                         {each}
@@ -155,28 +210,41 @@ const User = () => {
                                             Object.entries(sizes_2).map(([key, value], index) => {
                                                 return (
                                                     <li key={index} onClick={e => {
-                                                        let selectedBd = document.querySelector("li.selectedBd")
+                                                        if (e.currentTarget.classList.contains("selectedSz")) {
+                                                            e.currentTarget.classList.remove("selectedSz")
+                                                            setFilter({ ...filter, size: false })
+                                                        } else {
+                                                            let selectedSz = document.querySelector("li.selectedSz")
 
-                                                        if (selectedBd) {
-                                                            selectedBd.classList.remove("selectedBd")
+                                                            if (selectedSz) {
+                                                                selectedSz.classList.remove("selectedSz")
+                                                            }
+
+                                                            e.currentTarget.classList.add("selectedSz")
+
+                                                            setFilter({ ...filter, size: value })
                                                         }
-
-                                                        e.currentTarget.classList.add("selectedBd")
                                                     }}>{value}</li>
                                                 )
                                             })
                                         ) : (
                                             Object.entries(sizes_1).map(([key, value], index) => {
                                                 return (
-
                                                     <li key={index} onClick={e => {
-                                                        let selectedBd = document.querySelector("li.selectedBd")
+                                                        if (e.currentTarget.classList.contains("selectedSz")) {
+                                                            e.currentTarget.classList.remove("selectedSz")
+                                                            setFilter({ ...filter, size: false })
+                                                        } else {
+                                                            let selectedSz = document.querySelector("li.selectedSz")
 
-                                                        if (selectedBd) {
-                                                            selectedBd.classList.remove("selectedBd")
+                                                            if (selectedSz) {
+                                                                selectedSz.classList.remove("selectedSz")
+                                                            }
+
+                                                            e.currentTarget.classList.add("selectedSz")
+
+                                                            setFilter({ ...filter, size: value })
                                                         }
-
-                                                        e.currentTarget.classList.add("selectedBd")
                                                     }}>{value}</li>
                                                 )
                                             })

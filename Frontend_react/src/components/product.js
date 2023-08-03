@@ -4,6 +4,7 @@ import pic1 from "../assets/images/pic 1.png";
 import { domain } from "./helpers";
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
+import { store } from "./main";
 
 // InitialState
 const InitialState = {
@@ -20,7 +21,7 @@ const InitialState = {
     "images": {}
 }
 
-const Product = () => {
+const Product = ({ FetchAppData, CreateUserData }) => {
     const Dispatch = useDispatch()
     const { appData, user } = useSelector(state => state)
     const [selectedSize, setSelectedSize] = useState("all")
@@ -33,23 +34,53 @@ const Product = () => {
         size: "",
         sex: ""
     })
-    const { collection, productID, page } = useParams()
-    const data = useSelector(state => state[collection])
+    const { collection, index, id } = useParams()
+    const col = useSelector(state => state[collection])
     const [target, setTarget] = useState(InitialState)
 
+    // Load appData
     useEffect(() => {
-        if (data && data[page]) {
-            let _data = data.filter((item) => item._id === productID)
-            _data[0]["order"] = 1
-            setTarget(_data[0])
+        if (Object.keys(appData).length === 0) {
+            FetchAppData(Dispatch)
+        }
+
+        if (Object.keys(user).length === 0) {
+            CreateUserData(Dispatch, store)
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    useEffect(() => {
+        if (collection === "newArrivals" || collection === "trending") {
+            if (col.data.length > 0) {
+                let _data = JSON.parse(JSON.stringify(col["data"][index]))
+                _data["order"] = 1
+                setTarget(_data)
+            } else {
+                // console.log(state.id)
+                (async () => {
+                    let { data } = await axios.get(domain + `products/${collection}/get?i=${id.replace("SRC-", "").toLowerCase()}&a=false&c=${collection}`);
+                    data["order"] = 1
+                    setTarget(data)
+                })()
+            }
+        }
+
+        if (col.length > 0) {
+            let _data = JSON.parse(JSON.stringify(col[index]))
+            _data["order"] = 1
+            setTarget(_data)
         } else {
             (async () => {
-                let response = await axios.get(domain + `products/get?i=${productID}&a=false&c=${collection}`);
-                response.data["order"] = 1
-                setTarget(response.data)
+                let { data } = await axios.get(domain + `products/get?i=${id.replace("SRC-", "").toLowerCase()}&a=false&c=products`);
+                data["order"] = 1
+                setTarget(data)
             })()
         }
-    }, [collection, data, productID, page])
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="product body m-auto pt-3">
@@ -103,9 +134,12 @@ const Product = () => {
                             </div>
                             <div className="pd_lft-2 col-md-5 col-lg-5 h-100">
                                 <div className="text-start px-1 pt-4">
-                                    <p className="text-uppercase">{target.title}</p>
-                                    <p className="mb-4">
+                                    <p className="text-uppercase mb-3">{target.title}</p>
+                                    <p className="text-capitalize mb-3">
                                         Brand: <span>{target.brand}</span>
+                                    </p>
+                                    <p className="text-capitalize mb-4">
+                                        Sex: <span>{target.sex}</span>
                                     </p>
                                     <p className="prc mb-4">&#x20A6; {new Intl.NumberFormat("en-US", {}).format(target.price)}</p>
 

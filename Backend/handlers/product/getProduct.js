@@ -12,22 +12,27 @@ const getProduct = async (data, callback) => {
             // Validate Data
             const id = typeof data.query.i === "string" && data.query.i.trim().length > 0 ? data.query.i.trim() : false;
             const collection = typeof data.query.c === "string" && data.query.c.trim().length > 0 ? data.query.c.trim() : false;
+            const category = typeof data.query.q === "string" && data.query.q.trim().length > 0 ? data.query.q.trim() : false;
             const all = typeof data.query.a === "string" && data.query.a.trim().length > 0 && data.query.a.trim() == "true" ? true : false;
 
-            if (id && collection) {
+            if (id) {
                 // Fetch
-                if (all) {
+                if (all && collection && category) {
                     try {
+                        const _data = []
                         const directory = client.db(database);
-                        const sub_directory = directory.collection("products");
-                        const data = await sub_directory.find({ category: collection }).toArray();
+                        const sub_directory = directory.collection(collection);
+                        const data = sub_directory.find({ category: category });
+
+                        for await (const each of data) {
+                            _data.push(each)
+                        }
 
                         // Return
-                        callback(200, data, "json");
+                        callback(200, _data, "json");
                     } catch (error) {
                         // Return
-                        console.log(error);
-                        callback(502, { error: "Oops, Something Went Wrong, Try Again Later" }, "json");
+                        callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                     } finally {
                         client.close;
                     }
@@ -41,14 +46,13 @@ const getProduct = async (data, callback) => {
                         callback(200, data, "json");
                     } catch (error) {
                         // Return
-                        console.log(error);
-                        callback(502, { error: "Oops, Something Went Wrong, Try Again Later" }, "json");
+                        callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                     } finally {
                         client.close;
                     }
                 }
             } else {
-                callback(400, { error: "Missing Required Fields" }, "json");
+                callback(400, { message: "Missing Required Fields" }, "json");
             }
 
             break;

@@ -66,7 +66,6 @@ const createUser = async (data, callback) => {
                     }
                 } catch (error) {
                     // Return
-                    console.log(error)
                     callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                 } finally {
                     client.close;

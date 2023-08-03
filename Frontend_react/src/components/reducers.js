@@ -351,6 +351,17 @@ const status = (state = {}, action) => {
     }
 };
 
+const search = (state = [], action) => {
+    // ============================
+    switch (action.type) {
+        case "createSearchData":
+            return [...action.payload];
+
+        default:
+            return state;
+    }
+};
+
 const pending = (state = [], action) => {
     // ============================
     switch (action.type) {
@@ -364,6 +375,76 @@ const pending = (state = [], action) => {
             return state.filter((item) => {
                 return item._id !== action.payload["_id"]
             })
+
+        default:
+            return state;
+    }
+};
+
+const trending = (state = { id: [], data: [] }, action) => {
+    // ============================
+    switch (action.type) {
+        case "createTrending":
+            return {
+                ...state,
+                id: action.payload.map(each => {
+                    return each["_id"]
+                }),
+                data: [...action.payload]
+            }
+
+        case "addToTrending":
+            return {
+                ...state,
+                id: [...state.id, ...action.payload["_id"]],
+                data: [...state.data, action.payload]
+            }
+
+        case "remove4rmTrending":
+            return {
+                ...state,
+                id: state["id"].filter(item => {
+                    return item !== action.payload["_id"]
+                }),
+                data: state["data"].filter((item) => {
+                    return item._id !== action.payload["_id"]
+                })
+            }
+
+        default:
+            return state;
+    }
+};
+
+const newArrivals = (state = { id: [], data: [] }, action) => {
+    // ============================
+    switch (action.type) {
+        case "createNewArrivals":
+            return {
+                ...state,
+                id: action.payload.map(each => {
+                    return each["_id"]
+                }),
+                data: [...action.payload]
+            }
+
+        case "addToNewArrivals":
+            return {
+                ...state,
+                id: [...state.id, ...action.payload["_id"]],
+                data: [...state.data, action.payload]
+            }
+
+        case "remove4rmNewArrivals":
+            return {
+                ...state,
+                id: state["id"].filter(item => {
+                    return item !== action.payload["_id"]
+                }),
+                data: state["data"].filter((item) => {
+                    return item._id !== action.payload["_id"]
+                })
+            }
 
         default:
             return state;
@@ -398,8 +479,11 @@ const rootReducer = {
     cart,
     wishlist,
     status,
+    search,
     pending,
-    completed
+    completed,
+    trending,
+    newArrivals
 };
 
 export default rootReducer;

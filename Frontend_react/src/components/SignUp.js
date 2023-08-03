@@ -3,18 +3,18 @@ import { domain } from "./helpers";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchAppData } from "./action";
 import { set } from "idb-keyval";
 import { store } from "./main";
+import { Spinner } from "./misc";
 
-const SignUp = () => {
+const SignUp = ({ FetchAppData }) => {
     const Dispatch = useDispatch()
     const Navigate = useNavigate()
     const { appData } = useSelector(state => state)
     let hasCharacter = /\W/
     let hasDigit = /\d/
 
-    const [data, setData] = useState({
+    const [_data, setData] = useState({
         firstname: "",
         lastname: "",
         email: "",
@@ -22,6 +22,8 @@ const SignUp = () => {
         password: "",
         delivery: "imo"
     });
+
+    const [display, setDisplay] = useState(true)
 
     const [passwordShown, passwordToggle] = useState(false)
 
@@ -33,7 +35,7 @@ const SignUp = () => {
         let password = false
         let delivery = false
 
-        if (data.firstname !== "" && data.firstname.length >= 3) {
+        if (_data.firstname !== "" && _data.firstname.length >= 3) {
             document.getElementById("firstname").classList.remove("is-invalid")
             document.getElementById("firstname").classList.add("is-valid")
             firstname = true
@@ -41,7 +43,7 @@ const SignUp = () => {
             document.getElementById("firstname").classList.add("is-invalid")
         }
 
-        if (data.lastname !== "" && data.lastname.length >= 3) {
+        if (_data.lastname !== "" && _data.lastname.length >= 3) {
             document.getElementById("lastname").classList.remove("is-invalid")
             document.getElementById("lastname").classList.add("is-valid")
             lastname = true
@@ -49,7 +51,7 @@ const SignUp = () => {
             document.getElementById("lastname").classList.add("is-invalid")
         }
 
-        if (data.email !== "" && data.email.length > 10 && data.email.includes("@")) {
+        if (_data.email !== "" && _data.email.length > 10 && _data.email.includes("@")) {
             document.getElementById("email").classList.remove("is-invalid")
             document.getElementById("email").classList.add("is-valid")
             email = true
@@ -57,7 +59,7 @@ const SignUp = () => {
             document.getElementById("email").classList.add("is-invalid")
         }
 
-        if (data.password !== "" && data.password.length >= 8 && hasCharacter.test(data.password) && hasDigit.test(data.password)) {
+        if (_data.password !== "" && _data.password.length >= 8 && hasCharacter.test(_data.password) && hasDigit.test(_data.password)) {
             document.getElementById("pass").classList.remove("is-invalid")
             document.getElementById("pass").classList.add("is-valid")
             password = true
@@ -65,7 +67,7 @@ const SignUp = () => {
             document.getElementById("pass").classList.add("is-invalid")
         }
 
-        if (data.delivery !== "") {
+        if (_data.delivery !== "") {
             document.getElementById("delivery").classList.remove("is-invalid")
             document.getElementById("delivery").classList.add("is-valid")
             delivery = true
@@ -74,6 +76,10 @@ const SignUp = () => {
         }
 
         if (firstname && lastname && email && password && delivery) {
+            // Hide
+            setDisplay(false)
+
+            // Continue
             try {
                 const response = await axios({
                     method: "POST",
@@ -81,24 +87,51 @@ const SignUp = () => {
                         "Content-Type": "application/json",
                     },
                     url: domain + "/account/create",
-                    data: data,
+                    data: _data,
                 });
 
-                const result = response.data;
+                const { data } = response;
 
                 // Update user
-                await set("user", result, store)
+                await set("user", data, store)
 
                 // Update State
-                Dispatch({ type: "createUserData", payload: result })
+                Dispatch({ type: "createUserData", payload: data })
+
+                // Notification
+                const notification = document.getElementById("notifB")
+                notification.firstChild.innerHTML = "SUCCESS"
+                notification.classList.add("showNotif")
 
                 setTimeout(() => {
-                    // Navigate
-                    Navigate("/account/verification", { replace: true })
+                    // Show
+                    setDisplay(true)
+
+                    // Close Notification
+                    notification.classList.remove("showNotif")
+
+                    setTimeout(() => {
+                        // Navigate
+                        Navigate("/account/verification", { replace: true })
+                    }, 2000);
                 }, 2000);
 
             } catch (error) {
-                console.log(error.response.data.message);
+                // Show
+                setDisplay(true)
+
+                // Continue
+                const { data } = error.response
+
+                // Notification
+                const notification = document.getElementById("notifA")
+                notification.firstChild.innerHTML = data.message
+                notification.classList.add("showNotif")
+
+                setTimeout(() => {
+                    // Close Notification
+                    notification.classList.remove("showNotif")
+                }, 2000);
             }
         }
     };
@@ -108,7 +141,8 @@ const SignUp = () => {
             FetchAppData(Dispatch)
         }
 
-    }, [appData, Dispatch])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <Fragment>
@@ -145,30 +179,30 @@ const SignUp = () => {
                             <div className="d-lg-flex justify-content-between">
                                 <div className="mb-4">
                                     <label htmlFor="firstname" className="form-label">Firstname: </label>
-                                    <input type="text" className="form-control form-control-lg" id="firstname" name="firstname" placeholder="John" onChange={(e) => setData({ ...data, firstname: e.target.value })} value={data.firstname} required />
-                                    <div className="invalid-feedback">{data.firstname === "" ? "Please enter a valid name" : (data.firstname.length < 3 ? "3 or more characters" : document.getElementById("firstname").classList.remove("is-invalid"))}</div>
+                                    <input type="text" className="form-control form-control-lg" id="firstname" name="firstname" placeholder="John" onChange={(e) => setData({ ..._data, firstname: e.target.value })} value={_data.firstname} required />
+                                    <div className="invalid-feedback">{_data.firstname === "" ? "Please enter a valid name" : (_data.firstname.length < 3 ? "3 or more characters" : document.getElementById("firstname").classList.remove("is-invalid"))}</div>
                                 </div>
                                 <div>
                                     <label htmlFor="lastname" className="form-label">Lastname: </label>
-                                    <input type="text" className="form-control form-control-lg" id="lastname" name="lastname" placeholder="Doe" value={data.lastname} onChange={(e) => setData({ ...data, lastname: e.target.value })} required />
-                                    <div className="invalid-feedback">{data.lastname === "" ? "Please enter a valid name" : (data.lastname.length < 3 ? "3 or more characters" : document.getElementById("lastname").classList.remove("is-invalid"))}</div>
+                                    <input type="text" className="form-control form-control-lg" id="lastname" name="lastname" placeholder="Doe" value={_data.lastname} onChange={(e) => setData({ ..._data, lastname: e.target.value })} required />
+                                    <div className="invalid-feedback">{_data.lastname === "" ? "Please enter a valid name" : (_data.lastname.length < 3 ? "3 or more characters" : document.getElementById("lastname").classList.remove("is-invalid"))}</div>
                                 </div>
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="email" className="form-label"> Email: </label>
-                                <input type="email" className="form-control form-control-lg" id="email" name="email" placeholder="someone@email.com" value={data.email.toLowerCase()} onChange={(e) => setData({ ...data, email: e.target.value })} required />
-                                <div className="invalid-feedback">{data.email === "" ? "Please enter a valid email" : (data.email.length < 10 ? "Please enter a valid email" : (!data.email.includes("@") ? "Please enter a valid email" : document.getElementById("email").classList.remove("is-invalid")))}</div>
+                                <input type="email" className="form-control form-control-lg" id="email" name="email" placeholder="someone@email.com" value={_data.email.toLowerCase()} onChange={(e) => setData({ ..._data, email: e.target.value })} required />
+                                <div className="invalid-feedback">{_data.email === "" ? "Please enter a valid email" : (_data.email.length < 10 ? "Please enter a valid email" : (!_data.email.includes("@") ? "Please enter a valid email" : document.getElementById("email").classList.remove("is-invalid")))}</div>
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="phone" className="form-label"> Phone: </label>
-                                <input type="number" className="form-control form-control-lg" id="phone" name="phone" placeholder="0814-094-8648" value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} required />
-                                <div className="invalid-feedback">{data.phone === "" ? "Please enter a valid phone number" : (data.email.length < 11 ? "Please enter a valid phone number" : document.getElementById("email").classList.remove("is-invalid"))}</div>
+                                <input type="number" className="form-control form-control-lg" id="phone" name="phone" placeholder="0814-094-8648" value={_data.phone} onChange={(e) => setData({ ..._data, phone: e.target.value })} required />
+                                <div className="invalid-feedback">{_data.phone === "" ? "Please enter a valid phone number" : (_data.email.length < 11 ? "Please enter a valid phone number" : document.getElementById("email").classList.remove("is-invalid"))}</div>
                             </div>
                             <div className="d-lg-flex justify-content-between">
-                                <div className="mb-5">
+                                <div className="mb-5 me-3">
                                     <label htmlFor="pass" className="form-label"> Password: </label>
                                     <div className="input-group has-validation">
-                                        <input type={passwordShown ? "text" : "password"} className="form-control form-control-lg" id="pass" name="password" placeholder="******************" onChange={(e) => setData({ ...data, password: e.target.value })} required />
+                                        <input type={passwordShown ? "text" : "password"} className="form-control form-control-lg" id="pass" name="password" placeholder="******************" onChange={(e) => setData({ ..._data, password: e.target.value })} required />
                                         <span className="input-group-text" onClick={e => passwordToggle(!passwordShown)}>
                                             {!passwordShown ?
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-eye" viewBox="0 0 16 16">
@@ -182,13 +216,13 @@ const SignUp = () => {
                                                 </svg>}
                                         </span>
                                         <div className="invalid-feedback">{
-                                            data.password === "" ? "Please enter a valid password" : (data.password.length < 8 ? "Minimum of 8 characters" : (!hasCharacter.test(data.password) ? "Must contain a special character" : (!hasDigit.test(data.password) ? "Must contain digits" : (document.getElementById("pass").classList.remove("is-invalid")))))
+                                            _data.password === "" ? "Please enter a valid password" : (_data.password.length < 8 ? "Minimum of 8 characters" : (!hasCharacter.test(_data.password) ? "Must contain a special character" : (!hasDigit.test(_data.password) ? "Must contain digits" : (document.getElementById("pass").classList.remove("is-invalid")))))
                                         }</div>
                                     </div>
                                 </div>
                                 <div className="mb-4">
                                     <label htmlFor="delivery" className="form-label"> State: </label>
-                                    <select className="form-select form-select-lg" id="delivery" aria-label="delivery" disabled={Object.keys(appData).length > 0 ? false : true} onChange={e => setData({ ...data, delivery: e.target.value })}>
+                                    <select className="form-select form-select-lg" id="delivery" aria-label="delivery" disabled={Object.keys(appData).length > 0 ? false : true} onChange={e => setData({ ..._data, delivery: e.target.value })}>
                                         {
                                             Object.keys(appData).length > 0 ? (
                                                 Object.keys(appData["delivery"]).map((item, index) => {
@@ -204,7 +238,10 @@ const SignUp = () => {
                                 </div>
                             </div>
                             <div className="d-flex justify-content-end mb-4">
-                                <button type="submit" className="btn btn-lg btn-primary text-white px-4 px-lg-5 py-lg-3">Create Account</button>
+                                <button type="submit" className="btn btn-lg btn-primary text-white px-4 px-lg-5 py-lg-3" style={{ display: display ? "block" : "none" }}>Create Account</button>
+                                <button type="button" className="btn btn-lg btn-primary text-white px-4 px-lg-5 py-lg-3" style={{ display: display ? "none" : "block" }}>
+                                    {Spinner("#ffffff", "1.5rem", "105px")}
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -212,6 +249,9 @@ const SignUp = () => {
                         <div className="d-flex justify-content-end ln_1">
                             <div className="my-auto">Already Have An Account?</div>
                             <button type="button" className="btn btn-lg btn-primary text-white ms-3 px-4 py-2">Sign In</button>
+                            <button type="button" className="btn btn-lg btn-primary text-white ms-3 px-4 py-2">
+                                <Spinner />
+                            </button>
                         </div>
                     </div>
                 </div>
