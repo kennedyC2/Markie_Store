@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Header_Cart_DSP, Header_Wishlist_DSP } from "./dsp";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { domain } from "./helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "idb-keyval";
@@ -20,6 +20,19 @@ const Header = () => {
         }
         return val
     }
+
+    useEffect(() => {
+        const menuCloseB = document.querySelectorAll("div#menulist.offcanvas > div.offcanvas-body > ul > li > a")
+
+        // Loop
+        menuCloseB.forEach(each => {
+            each.addEventListener("click", (e) => {
+                const m_canvas_close = document.querySelector("div#menulist.offcanvas > div.offcanvas-header button");
+                m_canvas_close.click();
+            })
+        })
+
+    }, [])
 
     return (
         <header>
@@ -64,7 +77,7 @@ const Header = () => {
                             <div className="d_search_bar">
                                 <div className="input-group">
                                     <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="Search_bar_d" defaultValue={state && state.q ? state.q : ""} onKeyDown={e => {
-                                        if (e.code === "Enter" && e.target.value !== "") {
+                                        if (e.key === "Enter" && e.target.value !== "") {
                                             // Fetch Data
                                             (async () => {
                                                 const response = await axios.get(domain + "products/search?i=marky&q=" + e.target.value);
@@ -212,7 +225,7 @@ const Header = () => {
                                             <div className="offcanvas-body py-0">
                                                 {/* Top */}
                                                 <div className="item_count text-start c-top px-4">
-                                                    <span className="me-1">{user["cart"] ? user["cart"].length : 0}</span>
+                                                    <span className="me-1">{cart && cart["id"] ? cart["id"].length : 0}</span>
                                                     <span>Item(s)</span>
                                                 </div>
                                                 {/* Scrollable Mid */}
@@ -249,21 +262,11 @@ const Header = () => {
                                                         }
                                                         </p>
                                                     </div>
-                                                    <div className="pt-1 pb-3">
-                                                        <div className="form-check text-start ps-4">
-                                                            <input className="form-check-input me-3" type="checkbox" value="" id="T&C" />
-                                                            <label className="form-check-label" htmlFor="T&C">
-                                                                {" "}
-                                                                I Agree With The Terms and Conditions{" "}
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <Link to="./cart" className="btn btn-md w-100 py-2 mb-3">
-                                                            CHECKOUT
-                                                        </Link>{" "}
-                                                        <br />
-                                                        <Link to="./cart" className="btn btn-md w-100 py-2">
+                                                    <div className="pt-3">
+                                                        <Link to="./cart" className="btn btn-md w-100 py-2" onClick={e => {
+                                                            const c_canvas_close = document.querySelector("div#cartlist.offcanvas > div.offcanvas-header button");
+                                                            c_canvas_close.click();
+                                                        }}>
                                                             VIEW CART
                                                         </Link>
                                                     </div>
@@ -288,7 +291,7 @@ const Header = () => {
                                             <div className="offcanvas-body py-0">
                                                 {/* Top */}
                                                 <div className="item_count text-start w-top px-4">
-                                                    <span>{user["wishlist"] ? user["wishlist"].length : 0}</span>
+                                                    <span>{wishlist && wishlist["id"] ? wishlist["id"].length : 0}</span>
                                                     <span> Item(s)</span>
                                                 </div>
                                                 {/* Scrollable Mid */}
@@ -314,7 +317,10 @@ const Header = () => {
                                                 {/* Bottom */}
                                                 <div className="w-btm px-4">
                                                     <div className="pt-3">
-                                                        <Link to="./wishlist" className="btn btn-md w-100 py-2">
+                                                        <Link to="./wishlist" className="btn btn-md w-100 py-2" onClick={e => {
+                                                            const w_canvas_close = document.querySelector("div#wishlist.offcanvas > div.offcanvas-header button");
+                                                            w_canvas_close.click();
+                                                        }}>
                                                             VIEW WISHLIST
                                                         </Link>
                                                     </div>

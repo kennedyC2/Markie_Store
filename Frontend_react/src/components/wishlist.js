@@ -9,17 +9,6 @@ const Wishlist = ({ CreateCart, CreateWishlist }) => {
     const { cart, wishlist } = useSelector(state => state)
 
     useEffect(() => {
-        const w_canvas = document.querySelector("div#wishlist.offcanvas");
-        const w_canvas_close = document.querySelector("div#wishlist.offcanvas > div.offcanvas-header button");
-
-        if (w_canvas.classList.contains("show")) {
-            w_canvas_close.click();
-        }
-
-        return;
-    });
-
-    useEffect(() => {
         // Load User Wishlist
         if (Object.keys(wishlist).length === 0) {
             CreateWishlist(Dispatch, store)

@@ -201,6 +201,7 @@ input[type="password"] {
 
 .ad1 > div {
     margin-bottom: 1rem;
+    height: 210px;
 }
 
 .lv_1 > div:first-child {
@@ -453,23 +454,8 @@ footer * {
 .wp_list button:not(.btn-close) {
     border-color: #adc0cf;
     color: #adc0cf !important;
-    font-size: 0.8rem !important;
+    font-size: 1rem !important;
     background-color: transparent;
-}
-
-.grid .btn:hover,
-.c-btm a:hover,
-.c-btm button:hover,
-.w-btm a:hover,
-.cp_list button:not(.btn-close):hover,
-.wp_list button:not(.btn-close):hover {
-    background-color: rgba(3, 0, 31, 0.8) !important;
-    color: #ffffff !important;
-    fill: #ffffff !important;
-}
-
-.grid .btn:hover svg {
-    fill: #ffffff !important;
 }
 
 .imgcont {
@@ -515,7 +501,7 @@ footer * {
 
 .empty {
     width: 100%;
-    min-height: 350px;
+    min-height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -527,6 +513,55 @@ footer * {
 
 .empty > p {
     color: #adc0cf !important;
+}
+
+.c-mid p,
+.w-mid p,
+.cp_list li p {
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+}
+
+.c-mid p:first-child,
+.w-mid p:first-child,
+.cp_list li p:first-child {
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+}
+
+.c-mid > div > div,
+.w-mid > div > div {
+    height: max-content;
+}
+
+.c-top,
+.w-top {
+    height: 5%;
+}
+
+.c-mid {
+    height: calc(100% - 150px);
+    overflow-y: auto;
+}
+
+.w-mid {
+    height: calc(100% - 110px);
+    overflow-y: auto;
+}
+
+.c-btm {
+    height: max-content;
+}
+
+.w-btm {
+    height: max-content;
+}
+
+.c-btm label,
+.w-btm label {
+    font-size: 0.85rem !important;
+    font-weight: 400 !important;
+    padding-top: 0.2rem;
 }
 
 .d_search_bar {
@@ -665,9 +700,9 @@ footer * {
     cursor: pointer;
 }
 
-.b_list li:hover {
-    background-color: rgba(3, 0, 31, 0.8);
-    color: #ffffff !important;
+.rgt {
+    width: 100%;
+    min-height: 700px;
 }
 
 .rgt .accordion-body {
@@ -1252,56 +1287,6 @@ footer * {
         margin-right: 0.65rem;
     }
 
-    .c-mid p,
-    .w-mid p,
-    .cp_list li p {
-        font-size: 0.9rem !important;
-        font-weight: 400 !important;
-    }
-
-    .c-mid p:first-child,
-    .w-mid p:first-child,
-    .cp_list li p:first-child {
-        font-size: 0.95rem !important;
-        font-weight: 500 !important;
-    }
-
-    .c-mid > div > div,
-    .w-mid > div > div {
-        border-bottom: 1.5px solid #ced4daba;
-        height: 8.75rem;
-    }
-
-    .c-top,
-    .w-top {
-        height: 5%;
-    }
-
-    .c-mid {
-        height: 65%;
-        overflow-y: auto;
-    }
-
-    .w-mid {
-        height: 84%;
-        overflow-y: auto;
-    }
-
-    .c-btm {
-        height: 30%;
-    }
-
-    .w-btm {
-        height: 10%;
-    }
-
-    .c-btm label,
-    .w-btm label {
-        font-size: 0.85rem !important;
-        font-weight: 400 !important;
-        padding-top: 0.2rem;
-    }
-
     .heading {
         font-size: 1.05rem !important;
     }
@@ -1535,6 +1520,26 @@ footer * {
         margin-bottom: 0.1rem;
     }
 
+    .grid .btn:hover,
+    .c-btm a:hover,
+    .c-btm button:hover,
+    .w-btm a:hover,
+    .cp_list button:not(.btn-close):hover,
+    .wp_list button:not(.btn-close):hover {
+        background-color: rgba(3, 0, 31, 0.8) !important;
+        color: #ffffff !important;
+        fill: #ffffff !important;
+    }
+
+    .grid .btn:hover svg {
+        fill: #ffffff !important;
+    }
+
+    .b_list li:hover {
+        background-color: rgba(3, 0, 31, 0.8);
+        color: #ffffff !important;
+    }
+
     .verify .lg_mid {
         width: 30%;
     }
@@ -1751,7 +1756,7 @@ footer * {
     }
 
     .empty {
-        min-height: 400px;
+        min-height: 500px;
     }
 
     .emptyS {
@@ -1798,12 +1803,12 @@ footer * {
     }
 
     .w-mid {
-        height: 84%;
+        height: calc(100% - 100px);
         overflow-y: auto;
     }
 
     .w-btm {
-        height: 10%;
+        height: max-content;
     }
 
     .wishlist .input-group > .form-control,
@@ -2067,7 +2072,7 @@ footer * {
 
     .box_1 {
         width: 25%;
-        height: fit-content;
+        height: max-content;
     }
 
     .box_2 {

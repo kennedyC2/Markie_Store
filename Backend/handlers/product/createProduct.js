@@ -54,7 +54,7 @@ const createProduct = (data, callback) => {
                                 },
                                 price: price,
                                 colors: colors,
-                                tags: tags,
+                                tags: tags.split(","),
                                 category: category,
                                 misc: misc,
                                 images: file,

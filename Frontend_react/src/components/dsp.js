@@ -8,7 +8,7 @@ import { Spinner } from "./misc"
 export const Header_Cart_DSP = (domain, index, item, cart, dispatch) => {
     return (
         <div key={item._id.toUpperCase() + "_" + index + "C"} className="d-flex w-100 justify-content-between py-4">
-            <div className="col-3 pe-2">
+            <div className="col-4 m-auto" style={{ height: "120px" }}>
                 <img src={domain + "image/" + item.images.main} className="d-block w-100 h-100" alt="..." />
             </div>
             <div className="col-5 text-start ps-2 m-auto">
@@ -39,7 +39,7 @@ export const Header_Cart_DSP = (domain, index, item, cart, dispatch) => {
 export const Header_Wishlist_DSP = (domain, index, item, wishlist, dispatch) => {
     return (
         <div key={item._id.toUpperCase() + "_" + index + "W"} className="d-flex w-100 justify-content-between py-4">
-            <div className="col-3 pe-2">
+            <div className="col-4 m-auto" style={{ height: "120px" }}>
                 <img src={domain + "image/" + item.images.main} className="d-block w-100 h-100" alt="..." />
             </div>
             <div className="col-5 text-start ps-2 m-auto">
@@ -71,12 +71,12 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
     return (
         <div key={item._id.toUpperCase() + "_" + index + "P"} className="card">
             <div className="imgcont">
-                <Link to={`/product/${collection}/${index}/SRC-${item._id.toUpperCase()}`} preventScrollReset={false} className="d-inline-block text-decoration-none">
+                <Link to={`/product/${collection}/${index}/src-${item._id.toLowerCase()}`} preventScrollReset={false} className="d-inline-block text-decoration-none">
                     <img src={domain + "image/" + item.images.main} width="100%" height="100%" className="card-img-top" alt={collection} />
                 </Link>
             </div>
             <div className="card-body">
-                <Link to={`/product/${collection}/${index}/SRC-${item._id.toUpperCase()}`} preventScrollReset={false} className="d-inline-block px-2 pb-3 text-decoration-none">
+                <Link to={`/product/${collection}/${index}/src-${item._id.toLowerCase()}`} preventScrollReset={false} className="d-inline-block px-2 pb-3 text-decoration-none">
                     <h5 className="card-title ps-1">{item.title}</h5>
                     <p className="card-text ps-1">&#x20A6; {new Intl.NumberFormat("en-US", {}).format(item.price)}</p>
                 </Link>
