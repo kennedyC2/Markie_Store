@@ -60,7 +60,7 @@ const Product = ({ FetchAppData, CreateUserData }) => {
             } else {
                 // console.log(state.id)
                 (async () => {
-                    let { data } = await axios.get(domain + `products/${collection}/get?i=${id.replace("SRC-", "").toLowerCase()}&a=false&c=${collection}`);
+                    let { data } = await axios.get(domain + `products/${collection}/get?i=${id.replace("src-", "").toLowerCase()}&a=false&c=${collection}`);
                     data["order"] = 1
                     setTarget(data)
                 })()
@@ -73,7 +73,7 @@ const Product = ({ FetchAppData, CreateUserData }) => {
             setTarget(_data)
         } else {
             (async () => {
-                let { data } = await axios.get(domain + `products/get?i=${id.replace("SRC-", "").toLowerCase()}&a=false&c=products`);
+                let { data } = await axios.get(domain + `products/get?i=${id.replace("src-", "").toLowerCase()}&a=false&c=products`);
                 data["order"] = 1
                 setTarget(data)
             })()
@@ -120,7 +120,7 @@ const Product = ({ FetchAppData, CreateUserData }) => {
                                         " "
                                     )}
                                 </div>
-                                <div id="item_dsp2" className="w-100 d-flex flex-nowrap mt-5">
+                                <div id="item_dsp2" className="w-100 d-flex flex-nowrap mt-4">
                                     <div className="item me-2">
                                         <img src={domain + "image/" + target.images.main} width="100%" height="100%" alt={collection} />
                                     </div>

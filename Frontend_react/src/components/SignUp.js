@@ -182,7 +182,7 @@ const SignUp = ({ FetchAppData }) => {
                                     <input type="text" className="form-control form-control-lg" id="firstname" name="firstname" placeholder="John" onChange={(e) => setData({ ..._data, firstname: e.target.value })} value={_data.firstname} required />
                                     <div className="invalid-feedback">{_data.firstname === "" ? "Please enter a valid name" : (_data.firstname.length < 3 ? "3 or more characters" : document.getElementById("firstname").classList.remove("is-invalid"))}</div>
                                 </div>
-                                <div>
+                                <div className="mb-4">
                                     <label htmlFor="lastname" className="form-label">Lastname: </label>
                                     <input type="text" className="form-control form-control-lg" id="lastname" name="lastname" placeholder="Doe" value={_data.lastname} onChange={(e) => setData({ ..._data, lastname: e.target.value })} required />
                                     <div className="invalid-feedback">{_data.lastname === "" ? "Please enter a valid name" : (_data.lastname.length < 3 ? "3 or more characters" : document.getElementById("lastname").classList.remove("is-invalid"))}</div>
@@ -199,7 +199,7 @@ const SignUp = ({ FetchAppData }) => {
                                 <div className="invalid-feedback">{_data.phone === "" ? "Please enter a valid phone number" : (_data.email.length < 11 ? "Please enter a valid phone number" : document.getElementById("email").classList.remove("is-invalid"))}</div>
                             </div>
                             <div className="d-lg-flex justify-content-between">
-                                <div className="mb-5 me-3">
+                                <div className="mb-4 me">
                                     <label htmlFor="pass" className="form-label"> Password: </label>
                                     <div className="input-group has-validation">
                                         <input type={passwordShown ? "text" : "password"} className="form-control form-control-lg" id="pass" name="password" placeholder="******************" onChange={(e) => setData({ ..._data, password: e.target.value })} required />
@@ -220,7 +220,7 @@ const SignUp = ({ FetchAppData }) => {
                                         }</div>
                                     </div>
                                 </div>
-                                <div className="mb-4">
+                                <div className="mb-5">
                                     <label htmlFor="delivery" className="form-label"> State: </label>
                                     <select className="form-select form-select-lg" id="delivery" aria-label="delivery" disabled={Object.keys(appData).length > 0 ? false : true} onChange={e => setData({ ..._data, delivery: e.target.value })}>
                                         {
@@ -246,17 +246,14 @@ const SignUp = ({ FetchAppData }) => {
                         </form>
                     </div>
                     <div className="d-lg-none px-2">
-                        <div className="d-flex justify-content-end ln_1">
-                            <div className="my-auto">Already Have An Account?</div>
-                            <button type="button" className="btn btn-lg btn-primary text-white ms-3 px-4 py-2">Sign In</button>
-                            <button type="button" className="btn btn-lg btn-primary text-white ms-3 px-4 py-2">
-                                <Spinner />
-                            </button>
+                        <div className="ln_1">
+                            <div className="mb-3 text-center">Already Have An Account?</div>
+                            <Link type="button" className="btn btn-lg btn-primary w-100 text-white px-4 py-2" to="/account/login">Sign In</Link>
                         </div>
                     </div>
                 </div>
             </div >
-            <div className="f-bottom align-bottom">
+            <div className="f-bottom align-bottom mt-5">
                 <div className="w_1200 py-3">© 2022, Markie Stores. All Rights Reserved</div>
             </div>
         </Fragment >

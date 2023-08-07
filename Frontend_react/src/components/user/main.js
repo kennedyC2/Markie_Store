@@ -266,7 +266,7 @@ const User = ({ FetchAppData, CreateCart, CreateUserData, CreateWishlist, Update
                     <h5 className="cartlistLabel heading">FILTERS</h5>
                     <button type="button" className="btn-close text-reset pe-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div className="offcanvas-body pt-1">
+                <div className="offcanvas-body pt-4">
                     <div className="accordion accordion-flush" id="m_filter">
                         {/* Brand Selector */}
                         <div className="accordion-item px-4">

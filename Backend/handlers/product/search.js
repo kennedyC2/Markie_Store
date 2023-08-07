@@ -12,7 +12,7 @@ const searchProduct = async (data, callback) => {
             // Validate Data
             const query = typeof data.query.q === "string" && data.query.q.trim().length > 0 ? data.query.q.trim() : false;
 
-            console.log(data.query.q)
+            // console.log(data.query.q)
             if (query) {
                 // Fetch
                 try {
@@ -29,7 +29,6 @@ const searchProduct = async (data, callback) => {
                     callback(200, _data, "json");
                 } catch (error) {
                     // Return
-                    console.log(error);
                     callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                 } finally {
                     client.close;

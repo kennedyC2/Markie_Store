@@ -49,13 +49,13 @@ const Cart = ({ FetchAppData, CreateUserData, CreateCart }) => {
     }, [])
 
     return (
-        <div className="cartlist body m-auto pt-3">
+        <div className="cartlist body m-auto pt-0">
             <div className="container w_1200">
                 <div>
-                    <p className="my-4 px-1 heading">My Cart List</p>
+                    <p className="mt-3 mb-2 px-1 heading">My Cart List</p>
                 </div>
-                <div className="mt-4 d-flex justify-content-between">
-                    <div className="col-lg-8 pt-2">
+                <div className="mt-2 d-flex justify-content-between">
+                    <div className="col-lg-8 pt-2 pb-4">
                         <div className="d-none d-lg-flex w-100 justify-content-between border border-1 rounded py-2 pe-2 text-uppercase">
                             <div className="ps-5 my-auto" style={{ width: "48.5%" }}>Product</div>
                             <div className="m-auto text-center ps-4" style={{ width: "15.5%" }}>PRICE</div>
@@ -143,7 +143,7 @@ const Cart = ({ FetchAppData, CreateUserData, CreateCart }) => {
                                                             <div className="d-none d-lg-block col-lg-3">
                                                                 <p className="px-2 py-1 m-auto">&#x20A6; {new Intl.NumberFormat("en-US", {}).format(item.price)}</p>
                                                             </div>
-                                                            <div className="col-lg-3">
+                                                            <div className="col-7 col-md-6 col-lg-3">
                                                                 <div className="input-group m-auto py-1">
                                                                     <span className="input-group-text" id="minus" onClick={e => {
                                                                         return Dispatch({ type: "decreaseCQuantity", payload: indexC })

@@ -199,11 +199,10 @@ const Login = () => {
                             </div>
                         </form>
                     </div>
-                    <div className="d-lg-none text-center mt-4">
+                    <div className="d-lg-none text-center mt-5">
                         <div className="ln_1">
                             <div className="mb-3">Don't Have An Account?</div>
                             <Link type="button" className="btn btn-lg btn-primary w-100 text-white px-4 py-2" to="/account/create">Create Account</Link>
-                            {/* <button type="button" className="btn btn-lg btn-primary w-100 text-white px-4 py-2">Create Account</button> */}
                         </div>
                     </div>
                 </div>

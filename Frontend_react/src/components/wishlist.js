@@ -23,10 +23,10 @@ const Wishlist = ({ CreateCart, CreateWishlist }) => {
     }, [])
 
     return (
-        <div className="wishlist body m-auto pt-3">
+        <div className="wishlist body m-auto pt-0">
             <div className="container w_1200">
                 <div>
-                    <p className="my-4 px-1 heading">My Wish List</p>
+                    <p className="mt mb-4 px-1 heading">My Wish List</p>
                 </div>
                 <div>
                     <div className="d-none d-lg-flex w-100 justify-content-between border border-1 rounded py-2 pe-2 text-uppercase">
@@ -46,7 +46,7 @@ const Wishlist = ({ CreateCart, CreateWishlist }) => {
                                                     <div className="col-5 col-md-4 col-lg-2 px-2">
                                                         <img src={domain + "image/" + item.images.main} className="d-block w-100 h-100" alt="..." />
                                                     </div>
-                                                    <div className="col-6 col-lg-9 d-flex">
+                                                    <div className="col-6 col-lg-9 ps-2 d-flex">
                                                         <div className="col-lg-4">
                                                             <p className="px-2 py-1 m-auto">{item.title}</p>
                                                             <p className="px-2 py-1 m-auto">Brand: {item.brand}</p>

@@ -7,9 +7,9 @@ import { set } from "idb-keyval";
 import { store } from "./main";
 import { History_DSP } from "./dsp";
 
-const Profile = ({ CreateUserData }) => {
+const Profile = ({ CreateUserData, CreateCart, CreateWishlist }) => {
     const Dispatch = useDispatch()
-    const { user, appData } = useSelector((state) => state);
+    const { user, appData, cart, wishlist } = useSelector((state) => state);
     const [passwordShown1, passwordToggle1] = useState(false)
     const [passwordShown2, passwordToggle2] = useState(false)
     const [passwordShown3, passwordToggle3] = useState(false)
@@ -27,6 +27,15 @@ const Profile = ({ CreateUserData }) => {
     useEffect(() => {
         if (Object.keys(user).length === 0) {
             CreateUserData(Dispatch, store)
+        }
+        // Load User Wishlist
+        if (Object.keys(wishlist).length === 0) {
+            CreateWishlist(Dispatch, store)
+        }
+
+        // Load User Cart
+        if (Object.keys(cart).length === 0) {
+            CreateCart(Dispatch, store)
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -88,9 +97,9 @@ const Profile = ({ CreateUserData }) => {
 
     return (
         <Fragment>
-            <div className="profile w_1200 m-auto d-flex justify-content-between py-5">
-                <div className="px-3">
-                    <div className="mb-5 py-3 px-4" style={{ border: "1px solid #adc0cf", borderRadius: "1rem" }}>
+            <div className="profile w_1200 m-auto d-lg-flex justify-content-between">
+                <div className="px-3 mb">
+                    <div className="mb-4 py-3 px-4" style={{ border: "1px solid #adc0cf", borderRadius: "1rem" }}>
                         <h2 className="py-2">Personal Details:</h2>
                         <p>Name: {user.firstname} {user.lastname}</p>
                         <p>Email: {user.email}</p>
@@ -106,7 +115,7 @@ const Profile = ({ CreateUserData }) => {
                             </a>
                         </span></p>
                     </div>
-                    <div className="py-3 px-4" style={{ border: "1px solid #adc0cf", borderRadius: "1rem" }}>
+                    <div className="py-4 px-4" style={{ border: "1px solid #adc0cf", borderRadius: "1rem" }}>
                         <h2 className="py-2">Cards:</h2>
                         {
                             user.cards && user.cards.length > 0 ? (
@@ -135,14 +144,14 @@ const Profile = ({ CreateUserData }) => {
                                     )
                                 })
                             ) : (
-                                <div className="empty emptyS w-50">
+                                <div className="empty emptyS w-100">
                                     <p>------- &nbsp;  no card yet &nbsp; -------</p>
                                 </div>
                             )
                         }
                     </div>
                 </div>
-                <div className="px-4 py-2">
+                <div className="px-4 mx-3 py-2">
                     <div style={{ height: "100%" }}>
                         <h2 className="py-3">History:</h2>
                         {

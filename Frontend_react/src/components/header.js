@@ -7,7 +7,7 @@ import { set } from "idb-keyval";
 import { store } from "./main";
 import axios from "axios";
 
-const Header = () => {
+const Header = ({ CreateCart, CreateWishlist }) => {
     const Dispatch = useDispatch()
     const Navigate = useNavigate()
     const { state } = useLocation()
@@ -32,6 +32,21 @@ const Header = () => {
             })
         })
 
+    }, [])
+
+    // Load User Data
+    useEffect(() => {
+        // Load User Wishlist
+        if (Object.keys(wishlist).length === 0) {
+            CreateWishlist(Dispatch, store)
+        }
+
+        // Load User Cart
+        if (Object.keys(cart).length === 0) {
+            CreateCart(Dispatch, store)
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
