@@ -119,7 +119,7 @@ const Footer = () => {
             </div>
             <div className="f-bottom opg mt-5">
                 {/* Payment Methods */}
-                <div className="w_1200 py-3">© 2022, Markie Stores. All Rights Reserved</div>
+                <div className="w_1200 p-3">© 2022, Markie Stores. All Rights Reserved</div>
             </div>
         </footer>
     );

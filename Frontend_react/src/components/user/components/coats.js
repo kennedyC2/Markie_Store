@@ -4,6 +4,7 @@ import { domain } from "../../helpers";
 import { useLocation, useOutletContext } from "react-router-dom";
 import { Product_DSP } from "../../dsp";
 import { sortData } from "../../filter";
+import { Spinner2 } from "../../misc";
 
 const Coats = ({ FetchData }) => {
     const [selectCatg, filter] = useOutletContext()
@@ -20,7 +21,7 @@ const Coats = ({ FetchData }) => {
     }, [selectCatg, collection]);
 
     useEffect(() => {
-        if (coats.length === 0) {
+        if (coats.fetched === false) {
             FetchData("products", "coats", Dispatch, "createCoats")
         }
 
@@ -29,7 +30,7 @@ const Coats = ({ FetchData }) => {
     }, []);
 
     // Data
-    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? coats : sortData(coats, filter.brand, filter.color, filter.sex, filter.size)
+    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? coats.data : sortData(coats.data, filter.brand, filter.color, filter.sex, filter.size)
 
     return (
         <Fragment>
@@ -42,22 +43,26 @@ const Coats = ({ FetchData }) => {
                 </button>
 
                 <Fragment>
-                    {data && data.length > 0 ?
-                        (
-                            <Fragment >
-                                <div className="grid">
-                                    {data.map((item, index) => {
-                                        return (
-                                            Product_DSP(domain, "coats", index, item, cart, wishlist, Dispatch)
-                                        )
-                                    })}
+                    {coats.fetched ? (
+                        data && data.length > 0 ?
+                            (
+                                <Fragment >
+                                    <div className="grid">
+                                        {data.map((item, index) => {
+                                            return (
+                                                Product_DSP(domain, "coats", index, item, cart, wishlist, Dispatch)
+                                            )
+                                        })}
+                                    </div>
+                                </Fragment>
+                            ) : (
+                                <div className="empty">
+                                    <p>------- &nbsp;  no data &nbsp; -------</p>
                                 </div>
-                            </Fragment>
-                        ) : (
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        )}
+                            )
+                    ) : (
+                        <Spinner2 />
+                    )}
                 </Fragment>
             </div>
         </Fragment>

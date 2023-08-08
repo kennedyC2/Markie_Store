@@ -91,7 +91,7 @@ const Product = ({ FetchAppData, CreateUserData }) => {
                     </div>
                     <div className="min-h-50 mt-4 d-flex justify-content-between">
                         <div className="col-lg-8 h-auto d-flex justify-content-between pt-2">
-                            <div className="pd_lft-1 col-md-5 col-lg-6">
+                            <div className="pd_lft-1 col-md-6 col-lg-6">
                                 {/* Carousel */}
                                 <div id="item_dsp1" className="carousel slide carousel-fade w-100" data-bs-ride="carousel">
                                     {target["images"]["main"] ? (
@@ -132,8 +132,8 @@ const Product = ({ FetchAppData, CreateUserData }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="pd_lft-2 col-md-5 col-lg-5 h-100">
-                                <div className="text-start px-1 pt-4">
+                            <div className="pd_lft-2 col-md-6 col-lg-5 h-100">
+                                <div className="text-start px-1">
                                     <p className="text-uppercase mb-3">{target.title}</p>
                                     <p className="text-capitalize mb-3">
                                         Brand: <span>{target.brand}</span>
@@ -223,7 +223,7 @@ const Product = ({ FetchAppData, CreateUserData }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4 px-1 pt-4">
+                        <div className="col-lg-4 px-1 pt-5">
                             <div className="text-uppercase pt-2 pb-3 border-bottom border-2">Summary</div>
                             <div className="d-flex justify-content-between my-4 border-bottom border-1 pb-3">
                                 <div className="col-5">Subtotal:</div>

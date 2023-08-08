@@ -200,7 +200,7 @@ input[type="password"] {
 
 .ad1 > div {
     margin-bottom: 1rem;
-    height: 210px;
+    height: max-content;
 }
 
 .lv_1 > div:first-child {
@@ -491,7 +491,7 @@ footer * {
 .wp_list button:not(.btn-close) {
     border-color: #adc0cf;
     color: #adc0cf !important;
-    font-size: 1rem !important;
+    font-size: 0.9rem !important;
     background-color: transparent;
 }
 
@@ -683,6 +683,9 @@ footer * {
 
 .ln_1 > div:nth-child(2) > div:nth-child(4) {
     flex-direction: row-reverse;
+    justify-content: flex-start !important;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .ln_1 > div:nth-child(2) > div:nth-child(4) > div {
@@ -814,7 +817,7 @@ footer * {
 }
 
 .pd_lft-2 .input-group {
-    width: 30%;
+    width: 120px;
 }
 
 .wp_list > li,
@@ -981,14 +984,40 @@ footer * {
     }
 
     .pd_lft-2 .input-group {
-        width: 40%;
+        width: 100%;
+    }
+
+    .pd_lft-1 {
+        height: max-content;
+    }
+
+    .pd_lft-2 {
+        padding-left: 3rem;
+    }
+
+    .pd_lft-2 > div {
+        padding-left: 2rem;
+        padding-top: 0;
+    }
+
+    .c-mid {
+        height: calc(100% - 185px);
+    }
+
+    .w-mid {
+        height: calc(100% - 145px);
+        overflow-y: auto;
     }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     * {
-        font-size: 0.95rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    header {
+        top: -80px;
     }
 
     .header_bottom {
@@ -1020,6 +1049,15 @@ footer * {
         font-size: 1rem !important;
     }
 
+    .c-mid {
+        height: calc(100% - 140px);
+    }
+
+    .w-mid {
+        height: calc(100% - 100px);
+        overflow-y: auto;
+    }
+
     #accessory_menu::after,
     #footwear_menu::after {
         display: none;
@@ -1044,8 +1082,8 @@ footer * {
 
     .ln_1 > div:nth-child(2) > div:nth-child(4) {
         flex-direction: row;
-        margin-top: auto;
-        margin-bottom: auto;
+        width: 100%;
+        justify-content: flex-end !important;
     }
 
     .d_search_bar {
@@ -1067,11 +1105,6 @@ footer * {
     .form-control {
         padding: 0.3rem 0.75rem;
         font-size: inherit !important;
-    }
-
-    .ln_1 > div:nth-child(2) {
-        justify-content: flex-end;
-        margin-bottom: 0;
     }
 
     .ln_1 > div:nth-child(2) > div:nth-child(3) > div {
@@ -1132,12 +1165,6 @@ footer * {
     .lft .accordion-header {
         padding-left: 0.2rem;
         padding-right: 0.2rem;
-    }
-
-    .rgt {
-        width: 74.5%;
-        padding-top: 1.3rem;
-        min-height: 600px;
     }
 
     .d_list {
@@ -1268,9 +1295,8 @@ footer * {
         margin: 0 0 0.5rem 0;
     }
 
-    .pd_lft-2 > div {
-        padding-left: 1.5rem;
-        padding-top: 1.5rem;
+    .pd_lft-2 {
+        padding-left: 0;
     }
 
     .pd_lft-2 p:nth-child(2),
@@ -1329,7 +1355,7 @@ footer * {
     .w-btm a,
     .cp_list button:not(.btn-close),
     .wp_list button:not(.btn-close) {
-        font-size: 0.9rem !important;
+        font-size: 0.7rem !important;
     }
 
     .f-top > div {
@@ -1418,6 +1444,7 @@ footer * {
     .cartlist .container > div:nth-child(2) .col-lg-4,
     .product .container > div > div:nth-child(2) .col-lg-4 {
         padding-left: 2rem !important;
+        padding-top: 0 !important;
     }
 
     .cp_list .col-lg-5,
@@ -1452,6 +1479,8 @@ footer * {
     .ln_1 > div:nth-child(2) {
         margin-top: auto;
         margin-bottom: auto;
+        justify-content: flex-end;
+        width: 45%;
     }
 
     .d_search_bar .form-control {
@@ -1476,6 +1505,12 @@ footer * {
     .product .grid,
     .category .grid {
         grid-template-columns: auto auto auto auto;
+    }
+
+    #dashboard .grid {
+        display: grid;
+        grid-template-columns: 23.3% 23.3% 23.3% 23.3%;
+        column-gap: 1rem;
     }
 
     .grid svg {
@@ -1521,16 +1556,13 @@ footer * {
     .lv_1 > div:first-child {
         height: 25rem;
     }
-}
 
-/* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1180px) {
-    * {
-        font-size: 0.95rem !important;
+    .ln_1 > div:nth-child(2) > div:nth-child(4) > div {
+        margin-left: 2rem;
     }
 
-    header {
-        top: -79px;
+    .ln_1 > div:nth-child(2) > div:nth-child(4) > div svg {
+        margin-right: 0.7rem !important;
     }
 
     .comn1 > button > svg {
@@ -1551,13 +1583,247 @@ footer * {
         padding: 0;
     }
 
-    .form-check-label {
-        margin-top: 0.2rem;
+    .sub_list {
+        max-height: 85vh;
+    }
+
+    .sub_list > div {
+        max-height: inherit;
+    }
+
+    #products-tab-pane > a:nth-child(3) {
+        position: fixed;
+        right: 40px;
+        bottom: 110px;
+        color: #fff !important;
+        box-shadow: 0px 5px 8px 3px rgba(70, 70, 70, 0.314);
+    }
+
+    #dashboard .sub_list > div > div:first-child {
+        width: 20%;
+        padding-right: 1rem;
+        max-height: inherit;
+        overflow-y: auto;
+    }
+
+    #products-tab-pane > a:nth-child(2),
+    #pending-tab-pane > a:nth-child(2),
+    #settled-tab-pane > a:nth-child(2) {
+        position: fixed;
+        right: 40px;
+        bottom: 30px;
+        padding: 1rem 1.07rem;
+        color: #fff !important;
+        box-shadow: 0px 5px 8px 3px rgba(70, 70, 70, 0.314);
+    }
+
+    .rgt {
+        width: 74.5%;
+        padding-top: 1rem;
+        min-height: 500px;
+    }
+
+    #dashboard .sub_list > div > div:nth-child(2) {
+        width: 78%;
+        max-height: inherit;
+        overflow-y: auto;
+    }
+
+    /* Dashboard */
+    #myTab {
+        padding-top: 10px;
+    }
+
+    #dashboard .nav-link {
+        padding: 0.6rem 3rem !important;
+    }
+
+    #tab3 .nav-link {
+        padding: 0.6rem 1rem !important;
+    }
+
+    #dashboard > .tab-content {
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    #dashboard .sub_list .nav-link {
+        text-align: left;
+        padding: 0.3rem 1rem !important;
+        margin-bottom: 0.3rem;
+    }
+
+    #dashboard .sub_list .nav-link:hover {
+        background-color: rgba(128, 128, 128, 0.258);
+    }
+
+    #dashboard .card,
+    .hMid .card {
+        border: 1px dotted #adc0cf;
+        /* width: calc(100% / 3); */
+    }
+
+    #dashboard .card img {
+        width: 100%;
+        height: 100%;
+        /* padding: 1rem; */
+    }
+
+    #dashboard .card-title {
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+    }
+
+    #dashboard .form-check-input:checked {
+        /* background-color: unset; */
+        border-color: unset !important;
     }
 
     .modal-body form {
         width: 97%;
         margin: auto;
+    }
+
+    #dashboard form div * {
+        font-weight: 400 !important;
+    }
+
+    #dashboard input[type="file"] {
+        display: none !important;
+    }
+
+    #dashboard .cont1 {
+        width: 100%;
+        height: 33rem;
+    }
+
+    #dashboard .cont2 {
+        width: 80%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    #dashboard .cont2 > div:first-child {
+        width: 100%;
+        height: 87%;
+        position: relative;
+    }
+
+    .reactEasyCrop_CropArea {
+        color: rgba(128, 128, 128, 0.25) !important;
+    }
+
+    #dashboard .cont2 > div:nth-child(2) {
+        width: 100%;
+    }
+
+    #dashboard .cont3 {
+        width: 17%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    #dashboard .cont4 {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #dashboard .cont3 > div {
+        width: 100%;
+        height: calc((100% / 3) - 0.5rem);
+        border: 1px solid #dee2e6;
+        position: relative;
+    }
+
+    #dashboard .cont4 > div {
+        /* width: 100%; */
+        width: calc((100% / 3) - 0.5rem);
+        border: 1px solid #dee2e6;
+        position: relative;
+    }
+
+    #dashboard .cont3 > div button {
+        width: 100%;
+        height: 100%;
+        color: gray !important;
+        opacity: 0.5;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .profile > div:nth-child(1) {
+        width: 65%;
+    }
+
+    .profile > div:nth-child(2) {
+        width: 32%;
+    }
+
+    #dashboard .cont3 > div img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #dashboard .cont3 > div button:hover {
+        opacity: 0.9;
+    }
+
+    .modalTwo,
+    .modalOne {
+        min-width: 850px !important;
+        height: 570px !important;
+    }
+
+    .modalThree {
+        min-width: 800px !important;
+    }
+
+    .modalFour {
+        min-width: 300px !important;
+    }
+
+    .fm1div > div {
+        width: 48%;
+    }
+
+    .fm3div > div {
+        width: 30%;
+    }
+
+    .ndiv > div {
+        width: 22%;
+    }
+
+    .box_1 {
+        width: 25%;
+        height: max-content;
+    }
+
+    .box_2 {
+        width: 70%;
+        flex-direction: row;
+        padding-left: 0;
+    }
+
+    .box_3 {
+        width: 5%;
+    }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1180px) {
+    * {
+        font-size: 0.95rem !important;
+    }
+
+    .form-check-label {
+        margin-top: 0.2rem;
     }
 
     .home .carousel-inner:not(.lv_1 .carousel-inner) .carousel-item .grid > div {
@@ -1625,6 +1891,10 @@ footer * {
         width: 40%;
     }
 
+    .pd_lft-2 .input-group {
+        width: 70%;
+    }
+
     .sg_mid,
     .lg_mid {
         height: calc(100vh - 174px);
@@ -1633,6 +1903,16 @@ footer * {
 
     .sg_mid > div:nth-child(2) {
         width: 46%;
+    }
+
+    .grid .btn,
+    .grid svg,
+    .c-btm a,
+    .c-btm button,
+    .w-btm a,
+    .cp_list button:not(.btn-close),
+    .wp_list button:not(.btn-close) {
+        font-size: 0.85rem !important;
     }
 
     .lg_mid > div:nth-child(2) > form > div {
@@ -1668,6 +1948,23 @@ footer * {
         width: 80%;
     }
 
+    .c-mid {
+        height: calc(100% - 160px);
+    }
+
+    .w-mid {
+        height: calc(100% - 115px);
+        overflow-y: auto;
+    }
+
+    #dashboard .cont2 {
+        height: 100%;
+    }
+
+    #dashboard .cont3 {
+        height: 100%;
+    }
+
     .d_search_bar .form-control {
         border-right: 0;
     }
@@ -1688,15 +1985,7 @@ footer * {
     }
 
     .ln_1 > div:nth-child(2) {
-        justify-content: flex-end;
-    }
-
-    .ln_1 > div:nth-child(2) > div:nth-child(4) > div {
-        margin-left: 2rem;
-    }
-
-    .ln_1 > div:nth-child(2) > div:nth-child(4) > div svg {
-        margin-right: 0.7rem !important;
+        width: 40%;
     }
 
     .ln_1 p {
@@ -1818,6 +2107,14 @@ footer * {
         position: relative;
     }
 
+    .sub_list {
+        max-height: 87vh;
+    }
+
+    .rgt {
+        min-height: 600px;
+    }
+
     #cartlistLabel,
     #wishlistLabel {
         font-size: 1.15rem !important;
@@ -1842,11 +2139,6 @@ footer * {
     .cp_list li p:first-child {
         font-size: 0.95rem !important;
         font-weight: 500 !important;
-    }
-
-    .w-mid {
-        height: calc(100% - 100px);
-        overflow-y: auto;
     }
 
     .w-btm {
@@ -1905,185 +2197,11 @@ footer * {
         padding: 0.7em 0.7em;
     }
 
-    /* Dashboard */
-    #myTab {
-        padding-top: 10px;
-    }
-
-    #dashboard .nav-link {
-        padding: 0.6rem 3rem !important;
-    }
-
-    #tab3 .nav-link {
-        padding: 0.6rem 1rem !important;
-    }
-
-    #dashboard > .tab-content {
-        max-width: 1200px;
-        margin: auto;
-    }
-
-    #dashboard .sub_list .nav-link {
-        text-align: left;
-        padding: 0.3rem 1rem !important;
-        margin-bottom: 0.3rem;
-    }
-
-    #dashboard .sub_list > div > div:first-child {
-        width: 20%;
-        padding-right: 1rem;
-        max-height: inherit;
-        overflow-y: auto;
-    }
-
-    #dashboard .sub_list > div > div:nth-child(2) {
-        width: 78%;
-        max-height: inherit;
-        overflow-y: auto;
-    }
-
-    #dashboard .sub_list .nav-link:hover {
-        background-color: rgba(128, 128, 128, 0.258);
-    }
-
-    #dashboard .card,
-    .hMid .card {
-        border: 1px dotted #adc0cf;
-        /* width: calc(100% / 3); */
-    }
-
-    #dashboard .card img {
-        width: 100%;
-        height: 100%;
-        /* padding: 1rem; */
-    }
-
-    #dashboard .card-title {
-        font-size: 0.95rem !important;
-        font-weight: 500 !important;
-    }
-
-    #dashboard .grid {
-        display: grid;
-        grid-template-columns: 23.3% 23.3% 23.3% 23.3%;
-        column-gap: 1rem;
-    }
-
-    #dashboard .form-check-input:checked {
-        /* background-color: unset; */
-        border-color: unset !important;
-    }
-
-    /* #dashboard .modal button {
-        color: #fff !important;
-    } */
-
-    #products-tab-pane > a:nth-child(3) {
-        position: fixed;
-        right: 40px;
-        bottom: 110px;
-        color: #fff !important;
-        box-shadow: 0px 5px 8px 3px rgba(70, 70, 70, 0.314);
-    }
-
-    #products-tab-pane > a:nth-child(2),
-    #pending-tab-pane > a:nth-child(2),
-    #settled-tab-pane > a:nth-child(2) {
-        position: fixed;
-        right: 40px;
-        bottom: 30px;
-        padding: 1rem 1.07rem;
-        color: #fff !important;
-        box-shadow: 0px 5px 8px 3px rgba(70, 70, 70, 0.314);
-    }
-
     .clr > input {
         width: 40px;
         height: 40px;
         border-radius: 50% !important;
         margin-right: 12px !important;
-    }
-
-    #dashboard form div * {
-        font-weight: 400 !important;
-    }
-
-    #dashboard input[type="file"] {
-        display: none !important;
-    }
-
-    #dashboard .cont1 {
-        width: 100%;
-        height: 33rem;
-    }
-
-    #dashboard .cont2 {
-        width: 80%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    #dashboard .cont2 > div:first-child {
-        width: 100%;
-        height: 87%;
-        position: relative;
-    }
-
-    .reactEasyCrop_CropArea {
-        color: rgba(128, 128, 128, 0.25) !important;
-    }
-
-    #dashboard .cont2 > div:nth-child(2) {
-        width: 100%;
-    }
-
-    #dashboard .cont3 {
-        width: 17%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    #dashboard .cont4 {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    #dashboard .cont3 > div {
-        width: 100%;
-        height: calc((100% / 3) - 0.5rem);
-        border: 1px solid #dee2e6;
-        position: relative;
-    }
-
-    #dashboard .cont4 > div {
-        /* width: 100%; */
-        width: calc((100% / 3) - 0.5rem);
-        border: 1px solid #dee2e6;
-        position: relative;
-    }
-
-    #dashboard .cont3 > div button {
-        width: 100%;
-        height: 100%;
-        color: gray !important;
-        opacity: 0.5;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-
-    #dashboard .cont3 > div img {
-        width: 100%;
-        height: 100%;
-    }
-
-    #dashboard .cont3 > div button:hover {
-        opacity: 0.9;
     }
 
     .modalTwo,
@@ -2098,33 +2216,6 @@ footer * {
 
     .modalFour {
         min-width: 300px !important;
-    }
-
-    .fm1div > div {
-        width: 48%;
-    }
-
-    .fm3div > div {
-        width: 30%;
-    }
-
-    .ndiv > div {
-        width: 22%;
-    }
-
-    .box_1 {
-        width: 25%;
-        height: max-content;
-    }
-
-    .box_2 {
-        width: 70%;
-        flex-direction: row;
-        padding-left: 0;
-    }
-
-    .box_3 {
-        width: 5%;
     }
 
     .inc {
@@ -2185,14 +2276,6 @@ footer * {
     .gg p,
     .gg button {
         font-size: 0.95rem !important;
-    }
-
-    .sub_list {
-        max-height: 87vh;
-    }
-
-    .sub_list > div {
-        max-height: inherit;
     }
 
     .hTop {

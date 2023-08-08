@@ -4,6 +4,7 @@ import { domain } from "../../helpers";
 import { useLocation, useOutletContext } from "react-router-dom";
 import { Product_DSP } from "../../dsp";
 import { sortData } from "../../filter";
+import { Spinner2 } from "../../misc";
 
 const ScrubCaps = ({ FetchData }) => {
     const [selectCatg, filter] = useOutletContext()
@@ -20,7 +21,7 @@ const ScrubCaps = ({ FetchData }) => {
     }, [selectCatg, collection]);
 
     useEffect(() => {
-        if (scrubCaps.length === 0) {
+        if (scrubCaps.fetched === false) {
             FetchData("products", "scrubCaps", Dispatch, "createCaps")
         }
 
@@ -29,7 +30,7 @@ const ScrubCaps = ({ FetchData }) => {
     }, []);
 
     // Data
-    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? scrubCaps : sortData(scrubCaps, filter.brand, filter.color, filter.sex, filter.size)
+    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? scrubCaps.data : sortData(scrubCaps.data, filter.brand, filter.color, filter.sex, filter.size)
 
     return (
         <Fragment>
@@ -42,22 +43,26 @@ const ScrubCaps = ({ FetchData }) => {
                 </button>
 
                 <Fragment>
-                    {data && data.length > 0 ?
-                        (
-                            <Fragment >
-                                <div className="grid">
-                                    {data.map((item, index) => {
-                                        return (
-                                            Product_DSP(domain, "scrubCaps", index, item, cart, wishlist, Dispatch)
-                                        )
-                                    })}
+                    {scrubCaps.fetched ? (
+                        data && data.length > 0 ?
+                            (
+                                <Fragment >
+                                    <div className="grid">
+                                        {data.map((item, index) => {
+                                            return (
+                                                Product_DSP(domain, "scrubCaps", index, item, cart, wishlist, Dispatch)
+                                            )
+                                        })}
+                                    </div>
+                                </Fragment>
+                            ) : (
+                                <div className="empty">
+                                    <p>------- &nbsp;  no data &nbsp; -------</p>
                                 </div>
-                            </Fragment>
-                        ) : (
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        )}
+                            )
+                    ) : (
+                        <Spinner2 />
+                    )}
                 </Fragment>
             </div>
         </Fragment>

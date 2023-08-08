@@ -4,6 +4,7 @@ import { domain } from "../../helpers";
 import { useLocation, useOutletContext } from "react-router-dom";
 import { Product_DSP } from "../../dsp";
 import { sortData } from "../../filter";
+import { Spinner2 } from "../../misc";
 
 const Shirts = ({ FetchData }) => {
     const [selectCatg, filter] = useOutletContext()
@@ -20,7 +21,7 @@ const Shirts = ({ FetchData }) => {
     }, [selectCatg, collection]);
 
     useEffect(() => {
-        if (shirts.length === 0) {
+        if (shirts.fetched === false) {
             FetchData("products", "shirts", Dispatch, "createShirts")
         }
 
@@ -29,7 +30,7 @@ const Shirts = ({ FetchData }) => {
     }, []);
 
     // Data
-    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? shirts : sortData(shirts, filter.brand, filter.color, filter.sex, filter.size)
+    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? shirts.data : sortData(shirts.data, filter.brand, filter.color, filter.sex, filter.size)
 
     return (
         <Fragment>
@@ -42,22 +43,26 @@ const Shirts = ({ FetchData }) => {
                 </button>
 
                 <Fragment>
-                    {data && data.length > 0 ?
-                        (
-                            <Fragment >
-                                <div className="grid">
-                                    {data.map((item, index) => {
-                                        return (
-                                            Product_DSP(domain, "shirts", index, item, cart, wishlist, Dispatch)
-                                        )
-                                    })}
+                    {shirts.fetched ? (
+                        data && data.length > 0 ?
+                            (
+                                <Fragment >
+                                    <div className="grid">
+                                        {data.map((item, index) => {
+                                            return (
+                                                Product_DSP(domain, "shirts", index, item, cart, wishlist, Dispatch)
+                                            )
+                                        })}
+                                    </div>
+                                </Fragment>
+                            ) : (
+                                <div className="empty">
+                                    <p>------- &nbsp;  no data &nbsp; -------</p>
                                 </div>
-                            </Fragment>
-                        ) : (
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        )}
+                            )
+                    ) : (
+                        <Spinner2 />
+                    )}
                 </Fragment>
             </div>
         </Fragment>

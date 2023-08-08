@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
 import { useOutletContext } from "react-router-dom";
+import { Spinner2 } from "../../misc";
 
 const AdminTorch = ({ FetchData }) => {
     const [setData, dKeys] = useOutletContext()
@@ -166,15 +167,15 @@ const AdminTorch = ({ FetchData }) => {
     };
 
     useEffect(() => {
-        if (penTorch.length === 0) {
+        if (penTorch.fetched === false) {
             FetchData("products", "penTorch", Dispatch, "createTorch")
         }
 
-        if (trending.data.length === 0) {
+        if (trending.fetched === false) {
             FetchData("trending", null, Dispatch, "createTrending", "TH")
         }
 
-        if (newArrivals.data.length === 0) {
+        if (newArrivals.fetched === false) {
             FetchData("newArrivals", null, Dispatch, "createNewArrivals", "TH")
         }
 
@@ -183,23 +184,27 @@ const AdminTorch = ({ FetchData }) => {
 
     return (
         <Fragment>
-            {penTorch && penTorch.length > 0 ?
-                <div className="w-100 grid">
-                    {
-                        penTorch.map((item, index) => {
-                            return (
-                                Admin_DSP(domain, index, item, updateState, deleteItem, addTN, display, trending.id, newArrivals.id)
-                            )
-                        })
-                    }
-                </div>
-                :
-                <Fragment>
-                    <div className="empty">
-                        <p>------- &nbsp;  no data &nbsp; -------</p>
+            {penTorch.fetched ? (
+                penTorch && penTorch.data.length > 0 ?
+                    <div className="w-100 grid">
+                        {
+                            penTorch.data.map((item, index) => {
+                                return (
+                                    Admin_DSP(domain, index, item, updateState, deleteItem, addTN, display, trending.id, newArrivals.id)
+                                )
+                            })
+                        }
                     </div>
-                </Fragment>
-            }
+                    :
+                    <Fragment>
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
+                    </Fragment>
+
+            ) : (
+                <Spinner2 />
+            )}
         </Fragment>
     );
 };

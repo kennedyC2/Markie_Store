@@ -5,6 +5,7 @@ import { domain } from "../../helpers";
 import { useParams } from "react-router-dom";
 import { Product_DSP } from "../../dsp";
 import { sortData } from "../../filter";
+import { Spinner2 } from "../../misc";
 
 const Search = () => {
     const { query } = useParams()
@@ -12,7 +13,7 @@ const Search = () => {
     const Dispatch = useDispatch()
 
     useEffect(() => {
-        if (search.length === 0) {
+        if (search.fetched === false) {
             (async () => {
                 const response = await axios.get(domain + "products/search?i=marky&q=" + query);
                 Dispatch({ type: "createSearchData", payload: response.data });
@@ -23,8 +24,6 @@ const Search = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log(search)
-
     const [filter, setFilter] = useState({
         brand: false,
         color: false,
@@ -34,7 +33,7 @@ const Search = () => {
 
     // Data
     const { appBrands, appColors, sex } = appData
-    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? search : (sortData(search, filter.brand, filter.color, filter.sex, filter.size))
+    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? search.data : (sortData(search.data, filter.brand, filter.color, filter.sex, filter.size))
 
     return (
         <Fragment>
@@ -350,22 +349,26 @@ const Search = () => {
                         </div>
 
                         <Fragment>
-                            {data && data.length > 0 ?
-                                (
-                                    <Fragment >
-                                        <div className="grid">
-                                            {data.map((item, index) => {
-                                                return (
-                                                    Product_DSP(domain, "scrubs", index, item, cart, wishlist, Dispatch)
-                                                )
-                                            })}
+                            {search.fetched ? (
+                                data && data.length > 0 ?
+                                    (
+                                        <Fragment >
+                                            <div className="grid">
+                                                {data.map((item, index) => {
+                                                    return (
+                                                        Product_DSP(domain, "scrubs", index, item, cart, wishlist, Dispatch)
+                                                    )
+                                                })}
+                                            </div>
+                                        </Fragment>
+                                    ) : (
+                                        <div className="empty">
+                                            <p>------- &nbsp;  no data &nbsp; -------</p>
                                         </div>
-                                    </Fragment>
-                                ) : (
-                                    <div className="empty">
-                                        <p>------- &nbsp;  no data &nbsp; -------</p>
-                                    </div>
-                                )}
+                                    )
+                            ) : (
+                                <Spinner2 />
+                            )}
                         </Fragment>
                     </div>
                 </div>

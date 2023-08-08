@@ -4,6 +4,7 @@ import { domain } from "../../helpers";
 import { useLocation, useOutletContext } from "react-router-dom";
 import { Product_DSP } from "../../dsp";
 import { sortData } from "../../filter";
+import { Spinner2 } from "../../misc";
 
 const Crocs = ({ FetchData }) => {
     const [selectCatg, filter] = useOutletContext()
@@ -21,7 +22,7 @@ const Crocs = ({ FetchData }) => {
 
     useEffect(() => {
         // Fetch Collection
-        if (crocs.length === 0) {
+        if (crocs.fetched === false) {
             FetchData("products", "crocs", Dispatch, "createCrocs")
         }
 
@@ -30,7 +31,7 @@ const Crocs = ({ FetchData }) => {
     }, []);
 
     // Data
-    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? crocs : sortData(crocs, filter.brand, filter.color, filter.sex, filter.size)
+    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? crocs.data : sortData(crocs.data, filter.brand, filter.color, filter.sex, filter.size)
 
     return (
         <Fragment>
@@ -43,22 +44,26 @@ const Crocs = ({ FetchData }) => {
                 </button>
 
                 <Fragment>
-                    {data && data.length > 0 ?
-                        (
-                            <Fragment >
-                                <div className="grid">
-                                    {data.map((item, index) => {
-                                        return (
-                                            Product_DSP(domain, "crocs", index, item, cart, wishlist, Dispatch)
-                                        )
-                                    })}
+                    {crocs.fetched ? (
+                        data && data.length > 0 ?
+                            (
+                                <Fragment >
+                                    <div className="grid">
+                                        {data.map((item, index) => {
+                                            return (
+                                                Product_DSP(domain, "crocs", index, item, cart, wishlist, Dispatch)
+                                            )
+                                        })}
+                                    </div>
+                                </Fragment>
+                            ) : (
+                                <div className="empty">
+                                    <p>------- &nbsp;  no data &nbsp; -------</p>
                                 </div>
-                            </Fragment>
-                        ) : (
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        )}
+                            )
+                    ) : (
+                        <Spinner2 />
+                    )}
                 </Fragment>
             </div>
         </Fragment>

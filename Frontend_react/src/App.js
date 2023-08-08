@@ -52,6 +52,7 @@ const App = () => {
     }, [])
 
     const FetchPendingOrders = useCallback(async (dispatch) => {
+        console.log("hello")
         let { data } = await axios({
             method: "get",
             headers: {
@@ -60,11 +61,13 @@ const App = () => {
             url: domain + "cart/pending",
             params: {}
         })
+        console.log("hello")
 
         return dispatch({ type: "createPendingOrders", payload: data })
     }, [])
 
     const FetchCompletedOrders = useCallback(async (dispatch) => {
+        console.log("hello")
         let { data } = await axios({
             method: "get",
             headers: {
@@ -173,8 +176,10 @@ const App = () => {
             const { data } = await axios.get(domain + "products/trending/get?i=marky&a=true&c=" + collection);
             return await dispatch({ type: type, payload: data });
         } else {
-            const { data } = await axios.get(domain + "products/get?i=marky&a=true&c=" + collection + "&q=" + category);
-            return await dispatch({ type: type, payload: data });
+            setTimeout(async () => {
+                const { data } = await axios.get(domain + "products/get?i=marky&a=true&c=" + collection + "&q=" + category);
+                return await dispatch({ type: type, payload: data });
+            }, 5000);
         }
     }, []);
 
@@ -225,7 +230,7 @@ const App = () => {
                         <Route path="/category/shirts" exact element={<Shirts FetchData={FetchData} />} />
                     </Route>
                 </Route>
-                <Route path="/admin" exact element={<Admin FetchPendingOrders={FetchPendingOrders} CreateUserData={CreateUserData} UpdateStatus={UpdateStatus} />}>
+                <Route path="/admin" exact element={<Admin FetchPendingOrders={FetchPendingOrders} FetchCompletedOrders={FetchCompletedOrders} CreateUserData={CreateUserData} UpdateStatus={UpdateStatus} />}>
                     <Route path="/admin/product/scrubs" exact element={<AdminScrubs FetchData={FetchData} />} />
                     <Route path="/admin/product/brooches" exact element={<AdminBrooches FetchData={FetchData} />} />
                     <Route path="/admin/product/cardHolders" exact element={<AdminCardHolder FetchData={FetchData} />} />

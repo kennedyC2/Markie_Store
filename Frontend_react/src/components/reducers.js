@@ -1,178 +1,322 @@
 // Reducers
-const scrubs = (state = [], action) => {
+const scrubs = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createScrubs":
-            return [...state, ...action.payload]
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "addScrub":
-            return [...state, action.payload];
+            return {
+                ...state,
+                data: [...state.data, ...action.payload],
+                fetched: true
+            }
 
         case "updateScrub":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "deleteScrub":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         default:
             return state;
     }
 };
 
-const coats = (state = [], action) => {
+const coats = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createCoats":
-            return [...state, ...action.payload]
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "addCoat":
-            return [...state, action.payload]
+            return {
+                ...state,
+                data: [...state.data, ...action.payload],
+                fetched: true
+            }
 
         case "updateCoat":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "deleteCoat":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         default:
             return state;
     }
 };
 
-const crocs = (state = [], action) => {
+const crocs = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createCrocs":
-            return [...state, ...action.payload]
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "addCroc":
-            return [...state, action.payload]
+            return {
+                ...state,
+                data: [...state.data, ...action.payload],
+                fetched: true
+            }
 
         case "updateCroc":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "deleteCroc":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         default:
             return state;
     }
 };
 
-const sneakers = (state = [], action) => {
+const sneakers = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createSneakers":
-            return [...state, ...action.payload]
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "addSneaker":
-            return [...state, action.payload]
+            return {
+                ...state,
+                data: [...state.data, ...action.payload],
+                fetched: true
+            }
 
         case "updateSneaker":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "deleteSneaker":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         default:
             return state;
     }
 };
 
-const penTorch = (state = [], action) => {
+const penTorch = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createTorch":
-            return [...state, ...action.payload]
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "addTorch":
-            return [...state, action.payload]
+            return {
+                ...state,
+                data: [...state.data, ...action.payload],
+                fetched: true
+            }
 
         case "updateTorch":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "deleteTorch":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         default:
             return state;
     }
 };
 
-const scrubCaps = (state = [], action) => {
+const scrubCaps = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createCaps":
-            return [...state, ...action.payload]
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "addCap":
-            return [...state, action.payload]
+            return {
+                ...state,
+                data: [...state.data, ...action.payload],
+                fetched: true
+            }
 
         case "updateCap":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "deleteCap":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         default:
             return state;
     }
 };
 
-const brooches = (state = [], action) => {
+const brooches = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createBrooches":
-            return [...state, ...action.payload]
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "addBrooch":
-            return [...state, action.payload]
+            return {
+                ...state,
+                data: [...state.data, ...action.payload],
+                fetched: true
+            }
 
         case "updateBrooch":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "deleteBrooch":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         default:
             return state;
     }
 };
 
-const cardHolders = (state = [], action) => {
+const cardHolders = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createCardHolders":
-            return [...state, ...action.payload]
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "addCardHolder":
-            return [...state, action.payload]
+            return {
+                ...state,
+                data: [...state.data, ...action.payload],
+                fetched: true
+            }
 
         case "updateCardHolder":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "deleteCardHolder":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         default:
             return state;
     }
 };
 
-const shirts = (state = [], action) => {
+const shirts = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createShirts":
-            return [...state, ...action.payload]
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "addShirt":
-            return [...state, action.payload]
+            return {
+                ...state,
+                data: [...state.data, ...action.payload],
+                fetched: true
+            }
 
         case "updateShirt":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         case "deleteShirt":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         default:
             return state;
@@ -351,11 +495,15 @@ const status = (state = {}, action) => {
     }
 };
 
-const search = (state = [], action) => {
+const search = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createSearchData":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            }
 
         default:
             return state;
@@ -381,7 +529,7 @@ const pending = (state = [], action) => {
     }
 };
 
-const trending = (state = { id: [], data: [] }, action) => {
+const trending = (state = { id: [], data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createTrending":
@@ -390,14 +538,16 @@ const trending = (state = { id: [], data: [] }, action) => {
                 id: action.payload.map(each => {
                     return each["_id"]
                 }),
-                data: [...action.payload]
+                data: [...action.payload],
+                fetched: true
             }
 
         case "addToTrending":
             return {
                 ...state,
                 id: [...state.id, ...action.payload["_id"]],
-                data: [...state.data, action.payload]
+                data: [...state.data, action.payload],
+                fetched: true
             }
 
         case "remove4rmTrending":
@@ -408,7 +558,8 @@ const trending = (state = { id: [], data: [] }, action) => {
                 }),
                 data: state["data"].filter((item) => {
                     return item._id !== action.payload["_id"]
-                })
+                }),
+                fetched: true
             }
 
         default:
@@ -416,7 +567,7 @@ const trending = (state = { id: [], data: [] }, action) => {
     }
 };
 
-const newArrivals = (state = { id: [], data: [] }, action) => {
+const newArrivals = (state = { id: [], data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createNewArrivals":
@@ -425,14 +576,16 @@ const newArrivals = (state = { id: [], data: [] }, action) => {
                 id: action.payload.map(each => {
                     return each["_id"]
                 }),
-                data: [...action.payload]
+                data: [...action.payload],
+                fetched: true
             }
 
         case "addToNewArrivals":
             return {
                 ...state,
                 id: [...state.id, ...action.payload["_id"]],
-                data: [...state.data, action.payload]
+                data: [...state.data, action.payload],
+                fetched: true
             }
 
         case "remove4rmNewArrivals":
@@ -443,7 +596,8 @@ const newArrivals = (state = { id: [], data: [] }, action) => {
                 }),
                 data: state["data"].filter((item) => {
                     return item._id !== action.payload["_id"]
-                })
+                }),
+                fetched: true
             }
 
         default:

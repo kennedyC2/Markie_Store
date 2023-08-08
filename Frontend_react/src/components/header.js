@@ -168,9 +168,9 @@ const Header = ({ CreateCart, CreateWishlist }) => {
 
                                 {/* LOGO Container */}
                                 <div className="my-auto d-lg-none">
-                                    <a className="text-decoration-none" href="/">
+                                    <Link className="text-decoration-none" to="/">
                                         <h3 className="my-auto">MARKIE</h3>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="d-flex">
                                     {/* Account Icon */}

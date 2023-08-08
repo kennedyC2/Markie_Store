@@ -1,13 +1,13 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import AdminList from "./component/list";
 import PendingOrders from "./component/pending"
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../main";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SettledList from "./component/settled";
 
-const Admin = ({ FetchPendingOrders, CreateUserData, UpdateStatus }) => {
-    const { user, status, pending } = useSelector(state => state)
+const Admin = ({ FetchPendingOrders, FetchCompletedOrders, CreateUserData, UpdateStatus }) => {
+    const { user, status, pending, completed } = useSelector(state => state)
     const Dispatch = useDispatch()
     const Navigate = useNavigate()
     useEffect(() => {
@@ -42,12 +42,19 @@ const Admin = ({ FetchPendingOrders, CreateUserData, UpdateStatus }) => {
         }
 
         // Load Admin Pending Orders
-        if (user.admin && Object.keys(pending).length === 0) {
+        if (user.admin && pending.length === 0) {
             FetchPendingOrders(Dispatch)
+        }
+
+        // Load Admin Pending Orders
+        if (user.admin && completed.length === 0) {
+            FetchCompletedOrders(Dispatch)
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    // console.log(FetchPendingOrders)
 
     // Validate User
     useEffect(() => {
@@ -60,48 +67,50 @@ const Admin = ({ FetchPendingOrders, CreateUserData, UpdateStatus }) => {
     })
 
     return (
-        <div className="ext_cnt min-vh-100" id="dashboard">
-            <ul className="nav nav-tabs" id="myTab" role="tablist">
-                {/* <li className="nav-item" role="presentation">
-                    <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
-                        Home
-                    </button>
-                </li> */}
-                <li className="nav-item" role="presentation">
-                    <button className="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products-tab-pane" type="button" role="tab" aria-controls="products-tab-pane" aria-selected="false">
-                        Products
-                    </button>
-                </li>
-                <li className="nav-item" role="presentation">
-                    <button className="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending-tab-pane" type="button" role="tab" aria-controls="pending-tab-pane" aria-selected="false">
-                        Pending Orders
-                    </button>
-                </li>
-                <li className="nav-item" role="presentation">
-                    <button className="nav-link" id="settled-tab" data-bs-toggle="tab" data-bs-target="#settled-tab-pane" type="button" role="tab" aria-controls="settled-tab-pane" aria-selected="false">
-                        Processed Orders
-                    </button>
-                </li>
-            </ul>
-            <div className="tab-content" id="myTabContent">
-                {/* <div className="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabIndex="0">
-                    Home
-                </div> */}
+        <Fragment>
+            <div className="ext_cnt min-vh-100 d-none d-lg-block" id="dashboard">
+                <ul className="nav nav-tabs" id="myTab" role="tablist">
+                    <li className="nav-item" role="presentation">
+                        <button className="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products-tab-pane" type="button" role="tab" aria-controls="products-tab-pane" aria-selected="false">
+                            Products
+                        </button>
+                    </li>
+                    <li className="nav-item" role="presentation">
+                        <button className="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending-tab-pane" type="button" role="tab" aria-controls="pending-tab-pane" aria-selected="false">
+                            Pending Orders
+                        </button>
+                    </li>
+                    <li className="nav-item" role="presentation">
+                        <button className="nav-link" id="settled-tab" data-bs-toggle="tab" data-bs-target="#settled-tab-pane" type="button" role="tab" aria-controls="settled-tab-pane" aria-selected="false">
+                            Processed Orders
+                        </button>
+                    </li>
+                </ul>
+                <div className="tab-content" id="myTabContent">
+                    {/* Product list */}
+                    <div className="tab-pane fade show active" id="products-tab-pane" role="tabpanel" aria-labelledby="products-tab" tabIndex="0">
+                        <AdminList />
+                    </div>
 
-                {/* Product list */}
-                <div className="tab-pane fade show active" id="products-tab-pane" role="tabpanel" aria-labelledby="products-tab" tabIndex="0">
-                    <AdminList />
-                </div>
+                    <div className="tab-pane fade" id="pending-tab-pane" role="tabpanel" aria-labelledby="pending-tab" tabIndex="0">
+                        <PendingOrders />
+                    </div>
 
-                <div className="tab-pane fade" id="pending-tab-pane" role="tabpanel" aria-labelledby="pending-tab" tabIndex="0">
-                    <PendingOrders />
-                </div>
-
-                <div className="tab-pane fade" id="settled-tab-pane" role="tabpanel" aria-labelledby="settled-tab" tabIndex="0">
-                    <SettledList />
+                    <div className="tab-pane fade" id="settled-tab-pane" role="tabpanel" aria-labelledby="settled-tab" tabIndex="0">
+                        <SettledList />
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <div className="empty d-flex justify-center-center align-items-center vh-50 d-lg-none" style={{ height: "80vh" }}>
+                <div className="px-3">
+                    <p className="text-center py-2" style={{ color: "#adc0cf", fontSize: "1.3rem" }}>&nbsp;  Please Visit This Page On A Desktop &nbsp;</p>
+                    <Link to="/" className="btn btn-md btn-primary w-100 py-2">
+                        RETURN TO HOMEPAGE
+                    </Link>
+                </div>
+            </div>
+        </Fragment>
     );
 };
 

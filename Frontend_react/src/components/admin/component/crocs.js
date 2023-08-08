@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
 import { useOutletContext } from "react-router-dom";
+import { Spinner2 } from "../../misc";
 
 const AdminCrocs = ({ FetchData }) => {
     const [setData, dKeys] = useOutletContext()
@@ -164,15 +165,15 @@ const AdminCrocs = ({ FetchData }) => {
     };
 
     useEffect(() => {
-        if (crocs.length === 0) {
+        if (crocs.fetched === false) {
             FetchData("products", "crocs", Dispatch, "createCrocs")
         }
 
-        if (trending.data.length === 0) {
+        if (trending.fetched === false) {
             FetchData("trending", null, Dispatch, "createTrending", "TH")
         }
 
-        if (newArrivals.data.length === 0) {
+        if (newArrivals.fetched === false) {
             FetchData("newArrivals", null, Dispatch, "createNewArrivals", "TH")
         }
 
@@ -181,23 +182,27 @@ const AdminCrocs = ({ FetchData }) => {
 
     return (
         <Fragment>
-            {crocs && crocs.length > 0 ?
-                <div className="w-100 grid">
-                    {
-                        crocs.map((item, index) => {
-                            return (
-                                Admin_DSP(domain, index, item, updateState, deleteItem, addTN, display, trending.id, newArrivals.id)
-                            )
-                        })
-                    }
-                </div>
-                :
-                <Fragment>
-                    <div className="empty">
-                        <p>------- &nbsp;  no data &nbsp; -------</p>
+            {crocs.fetched ? (
+                crocs && crocs.data.length > 0 ?
+                    <div className="w-100 grid">
+                        {
+                            crocs.data.map((item, index) => {
+                                return (
+                                    Admin_DSP(domain, index, item, updateState, deleteItem, addTN, display, trending.id, newArrivals.id)
+                                )
+                            })
+                        }
                     </div>
-                </Fragment>
-            }
+                    :
+                    <Fragment>
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
+                    </Fragment>
+
+            ) : (
+                <Spinner2 />
+            )}
         </Fragment>
     );
 };

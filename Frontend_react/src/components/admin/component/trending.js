@@ -3,9 +3,10 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP_TN } from "../../dsp";
+import { Spinner2 } from "../../misc";
 
 const AdminTrends = ({ FetchData }) => {
-    const { data } = useSelector((state) => state["trending"]);
+    const { data, fetched } = useSelector((state) => state["trending"]);
     const Dispatch = useDispatch();
 
     const deleteTN = async (e, item, trend) => {
@@ -62,32 +63,37 @@ const AdminTrends = ({ FetchData }) => {
     };
 
     useEffect(() => {
-        if (data.length === 0) {
+        if (fetched === false) {
             FetchData("trending", null, Dispatch, "createTrending", "TH")
         }
 
+        return
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <Fragment>
-            {data && data.length > 0 ?
-                <div className="w-100 grid">
-                    {
-                        data.map((item, index) => {
-                            return (
-                                Admin_DSP_TN(domain, index, item, deleteTN, true)
-                            )
-                        })
-                    }
-                </div>
-                :
-                <Fragment>
-                    <div className="empty">
-                        <p>------- &nbsp;  no data &nbsp; -------</p>
+            {fetched ? (
+                data && data.length > 0 ?
+                    <div className="w-100 grid">
+                        {
+                            data.map((item, index) => {
+                                return (
+                                    Admin_DSP_TN(domain, index, item, deleteTN, true)
+                                )
+                            })
+                        }
                     </div>
-                </Fragment>
-            }
+                    :
+                    <Fragment>
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
+                    </Fragment>
+
+            ) : (
+                <Spinner2 />
+            )}
         </Fragment>
     );
 };

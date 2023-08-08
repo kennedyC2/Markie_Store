@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
 import { useOutletContext } from "react-router-dom";
+import { Spinner2 } from "../../misc";
 
 const AdminBrooches = ({ FetchData }) => {
     const [setData, dKeys] = useOutletContext()
@@ -164,15 +165,15 @@ const AdminBrooches = ({ FetchData }) => {
     };
 
     useEffect(() => {
-        if (brooches.length === 0) {
+        if (brooches.fetched === false) {
             FetchData("products", "brooches", Dispatch, "createBrooches")
         }
 
-        if (trending.data.length === 0) {
+        if (trending.fetched === false) {
             FetchData("trending", null, Dispatch, "createTrending", "TH")
         }
 
-        if (newArrivals.data.length === 0) {
+        if (newArrivals.fetched === false) {
             FetchData("newArrivals", null, Dispatch, "createNewArrivals", "TH")
         }
 
@@ -181,23 +182,27 @@ const AdminBrooches = ({ FetchData }) => {
 
     return (
         <Fragment>
-            {brooches && brooches.length > 0 ?
-                <div className="w-100 grid">
-                    {
-                        brooches.map((item, index) => {
-                            return (
-                                Admin_DSP(domain, index, item, updateState, deleteItem, addTN, display, trending.id, newArrivals.id)
-                            )
-                        })
-                    }
-                </div>
-                :
-                <Fragment>
-                    <div className="empty">
-                        <p>------- &nbsp;  no data &nbsp; -------</p>
+            {brooches.fetched ? (
+                brooches && brooches.data.length > 0 ?
+                    <div className="w-100 grid">
+                        {
+                            brooches.data.map((item, index) => {
+                                return (
+                                    Admin_DSP(domain, index, item, updateState, deleteItem, addTN, display, trending.id, newArrivals.id)
+                                )
+                            })
+                        }
                     </div>
-                </Fragment>
-            }
+                    :
+                    <Fragment>
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
+                    </Fragment>
+
+            ) : (
+                <Spinner2 />
+            )}
         </Fragment>
     );
 };

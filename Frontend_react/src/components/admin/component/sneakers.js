@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
 import { useOutletContext } from "react-router-dom";
+import { Spinner2 } from "../../misc";
 
 const AdminSneakers = ({ FetchData }) => {
     const [setData, dKeys] = useOutletContext()
@@ -164,42 +165,44 @@ const AdminSneakers = ({ FetchData }) => {
     };
 
     useEffect(() => {
-        if (sneakers.length === 0) {
+        if (sneakers.fetched === false) {
             FetchData("products", "sneakers", Dispatch, "createSneakers")
         }
 
-        if (trending.data.length === 0) {
+        if (trending.fetched === false) {
             FetchData("trending", null, Dispatch, "createTrending", "TH")
         }
 
-        if (newArrivals.data.length === 0) {
+        if (newArrivals.fetched === false) {
             FetchData("newArrivals", null, Dispatch, "createNewArrivals", "TH")
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log(trending, newArrivals)
-
     return (
         <Fragment>
-            {sneakers && sneakers.length > 0 ?
-                <div className="w-100 grid">
-                    {
-                        sneakers.map((item, index) => {
-                            return (
-                                Admin_DSP(domain, index, item, updateState, deleteItem, addTN, display, trending.id, newArrivals.id)
-                            )
-                        })
-                    }
-                </div>
-                :
-                <Fragment>
-                    <div className="empty">
-                        <p>------- &nbsp;  no data &nbsp; -------</p>
+            {sneakers.fetched ? (
+                sneakers && sneakers.data.length > 0 ?
+                    <div className="w-100 grid">
+                        {
+                            sneakers.data.map((item, index) => {
+                                return (
+                                    Admin_DSP(domain, index, item, updateState, deleteItem, addTN, display, trending.id, newArrivals.id)
+                                )
+                            })
+                        }
                     </div>
-                </Fragment>
-            }
+                    :
+                    <Fragment>
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
+                    </Fragment>
+
+            ) : (
+                <Spinner2 />
+            )}
         </Fragment>
     );
 };

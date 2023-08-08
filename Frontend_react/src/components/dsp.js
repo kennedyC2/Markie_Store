@@ -150,7 +150,6 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
 }
 
 export const Admin_DSP = (domain, index, item, updateState, deleteItem, addTN, display, trending, newArrival) => {
-    console.log(trending, newArrival)
     return (
         <div key={item._id.toUpperCase() + "_" + index + "A"} className="card" id={item._id + "_" + index}>
             <img src={domain + "image/" + item.images.main} className="card-img-top" alt="crocs" width={"100%"} height={"100%"} />

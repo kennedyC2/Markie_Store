@@ -4,6 +4,7 @@ import { domain } from "../../helpers";
 import { useLocation, useOutletContext } from "react-router-dom";
 import { Product_DSP } from "../../dsp";
 import { sortData } from "../../filter";
+import { Spinner2 } from "../../misc";
 
 const PenTorch = ({ FetchData }) => {
     const [selectCatg, filter] = useOutletContext()
@@ -20,7 +21,7 @@ const PenTorch = ({ FetchData }) => {
     }, [selectCatg, collection]);
 
     useEffect(() => {
-        if (penTorch.length === 0) {
+        if (penTorch.fetched === false) {
             FetchData("products", "penTorch", Dispatch, "createTorch")
         }
 
@@ -29,7 +30,7 @@ const PenTorch = ({ FetchData }) => {
     }, []);
 
     // Data
-    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? penTorch : sortData(penTorch, filter.brand, filter.color, filter.sex, filter.size)
+    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? penTorch.data : sortData(penTorch.data, filter.brand, filter.color, filter.sex, filter.size)
 
     return (
         <Fragment>
@@ -42,22 +43,26 @@ const PenTorch = ({ FetchData }) => {
                 </button>
 
                 <Fragment>
-                    {data && data.length > 0 ?
-                        (
-                            <Fragment >
-                                <div className="grid">
-                                    {data.map((item, index) => {
-                                        return (
-                                            Product_DSP(domain, "penTorch", index, item, cart, wishlist, Dispatch)
-                                        )
-                                    })}
+                    {penTorch.fetched ? (
+                        data && data.length > 0 ?
+                            (
+                                <Fragment >
+                                    <div className="grid">
+                                        {data.map((item, index) => {
+                                            return (
+                                                Product_DSP(domain, "penTorch", index, item, cart, wishlist, Dispatch)
+                                            )
+                                        })}
+                                    </div>
+                                </Fragment>
+                            ) : (
+                                <div className="empty">
+                                    <p>------- &nbsp;  no data &nbsp; -------</p>
                                 </div>
-                            </Fragment>
-                        ) : (
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        )}
+                            )
+                    ) : (
+                        <Spinner2 />
+                    )}
                 </Fragment>
             </div>
         </Fragment>

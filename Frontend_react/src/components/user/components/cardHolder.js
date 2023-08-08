@@ -4,6 +4,7 @@ import { domain } from "../../helpers";
 import { useLocation, useOutletContext } from "react-router-dom";
 import { Product_DSP } from "../../dsp";
 import { sortData } from "../../filter";
+import { Spinner2 } from "../../misc";
 
 const CardHolders = ({ FetchData }) => {
     const [selectCatg, filter] = useOutletContext()
@@ -20,7 +21,7 @@ const CardHolders = ({ FetchData }) => {
     }, [selectCatg, collection]);
 
     useEffect(() => {
-        if (cardHolders.length === 0) {
+        if (cardHolders.fetched === false) {
             FetchData("products", "cardHolders", Dispatch, "createCardHolders")
         }
 
@@ -29,8 +30,9 @@ const CardHolders = ({ FetchData }) => {
     }, []);
 
     // Data
-    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? cardHolders : sortData(cardHolders, filter.brand, filter.color, filter.sex, filter.size)
+    const data = !filter.brand && !filter.color && !filter.sex && !filter.size ? cardHolders.data : sortData(cardHolders.data, filter.brand, filter.color, filter.sex, filter.size)
 
+    console.log(cardHolders)
     return (
         <Fragment>
             {/* Cards */}
@@ -42,22 +44,27 @@ const CardHolders = ({ FetchData }) => {
                 </button>
 
                 <Fragment>
-                    {data && data.length > 0 ?
-                        (
-                            <Fragment >
-                                <div className="grid">
-                                    {data.map((item, index) => {
-                                        return (
-                                            Product_DSP(domain, "cardHolders", index, item, cart, wishlist, Dispatch)
-                                        )
-                                    })}
+                    {cardHolders.fetched ? (
+                        data && data.length > 0 ?
+                            (
+                                <Fragment >
+                                    <div className="grid">
+                                        {data.map((item, index) => {
+                                            return (
+                                                Product_DSP(domain, "cardHolders", index, item, cart, wishlist, Dispatch)
+                                            )
+                                        })}
+                                    </div>
+                                </Fragment>
+                            ) : (
+
+                                <div className="empty">
+                                    <p>------- &nbsp;  no data &nbsp; -------</p>
                                 </div>
-                            </Fragment>
-                        ) : (
-                            <div className="empty">
-                                <p>------- &nbsp;  no data &nbsp; -------</p>
-                            </div>
-                        )}
+                            )
+                    ) : (
+                        <Spinner2 />
+                    )}
                 </Fragment>
             </div>
         </Fragment>
