@@ -32,29 +32,27 @@ const Admin = ({ FetchPendingOrders, FetchCompletedOrders, CreateUserData, Updat
 
     useEffect(() => {
         // Load User Data
-        if (Object.keys(user).length === 0) {
+        if (user && Object.keys(user).length === 0) {
             CreateUserData(Dispatch, store)
         }
 
         // Load User Status
-        if (Object.keys(status).length === 0) {
+        if (user && Object.keys(status).length === 0) {
             UpdateStatus(Dispatch, store)
         }
 
         // Load Admin Pending Orders
-        if (user.admin && pending.length === 0) {
+        if (user && pending.data.length === 0) {
             FetchPendingOrders(Dispatch)
         }
 
         // Load Admin Pending Orders
-        if (user.admin && completed.length === 0) {
+        if (user && completed.data.length === 0) {
             FetchCompletedOrders(Dispatch)
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    // console.log(FetchPendingOrders)
 
     // Validate User
     useEffect(() => {

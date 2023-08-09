@@ -17,47 +17,47 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
     // ======================================================================
 
     useEffect(() => {
-        if (coats.length === 0) {
+        if (coats.fetched === false) {
             FetchData("products", "coats", Dispatch, "createCoats")
         }
 
-        if (scrubs.length === 0) {
+        if (scrubs.fetched === false) {
             FetchData("products", "scrubs", Dispatch, "createScrubs")
         }
 
-        if (crocs.length === 0) {
+        if (crocs.fetched === false) {
             FetchData("products", "crocs", Dispatch, "createCrocs")
         }
 
-        if (sneakers.length === 0) {
+        if (sneakers.fetched === false) {
             FetchData("products", "sneakers", Dispatch, "createSneakers")
         }
 
-        if (penTorch.length === 0) {
+        if (penTorch.fetched === false) {
             FetchData("products", "penTorch", Dispatch, "createTorch")
         }
 
-        if (scrubCaps.length === 0) {
+        if (scrubCaps.fetched === false) {
             FetchData("products", "scrubCaps", Dispatch, "createCaps")
         }
 
-        if (brooches.length === 0) {
+        if (brooches.fetched === false) {
             FetchData("products", "brooches", Dispatch, "createBrooches")
         }
 
-        if (cardHolders.length === 0) {
+        if (cardHolders.fetched === false) {
             FetchData("products", "cardHolders", Dispatch, "createCardHolders")
         }
 
-        if (shirts.length === 0) {
+        if (shirts.fetched === false) {
             FetchData("products", "shirts", Dispatch, "createShirts")
         }
 
-        if (trending.data.length === 0) {
+        if (trending.fetched === false) {
             FetchData("trending", null, Dispatch, "createTrending", "TH")
         }
 
-        if (newArrivals.data.length === 0) {
+        if (newArrivals.fetched === false) {
             FetchData("newArrivals", null, Dispatch, "createNewArrivals", "TH")
         }
 
@@ -165,7 +165,7 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
 
                 {/* Cards */}
                 <Fragment>
-                    {trending && trending.data.length === 5 && newArrivals.data.length === 5 && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
+                    {trending && trending.data.length === 5 && newArrivals.data.length === 5 && coats.data.length >= 10 && crocs.data.length >= 10 && sneakers.data.length >= 10 && penTorch.data.length >= 10 && scrubCaps.data.length >= 10 && brooches.data.length >= 10 && cardHolders.data.length >= 10 && shirts.data.length >= 10 && scrubs.data.length >= 10 ?
                         (
                             <Fragment >
                                 <div id="trending" className="carousel slide m-auto" data-bs-ride="carousel">
@@ -208,7 +208,7 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
 
                 {/* Cards */}
                 <Fragment>
-                    {newArrivals && newArrivals.data.length === 5 && trending.data.length === 5 && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
+                    {newArrivals && newArrivals.data.length === 5 && trending.data.length === 5 && coats.data.length >= 10 && crocs.data.length >= 10 && sneakers.data.length >= 10 && penTorch.data.length >= 10 && scrubCaps.data.length >= 10 && brooches.data.length >= 10 && cardHolders.data.length >= 10 && shirts.data.length >= 10 && scrubs.data.length >= 10 ?
                         (
                             <Fragment >
                                 <div id="newArrival" className="carousel slide m-auto" data-bs-ride="carousel">
@@ -254,11 +254,11 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
 
                 {/* Cards */}
                 <Fragment>
-                    {scrubs && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
+                    {scrubs && coats.data.length >= 10 && crocs.data.length >= 10 && sneakers.data.length >= 10 && penTorch.data.length >= 10 && scrubCaps.data.length >= 10 && brooches.data.length >= 10 && cardHolders.data.length >= 10 && shirts.data.length >= 10 && scrubs.data.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {randomTrials_A(scrubs, "scrubs_H").map((item) => {
+                                    {randomTrials_A(scrubs.data, "scrubs_H").map((item) => {
                                         return (
                                             Product_DSP(domain, "scrubs", item.pos, item, cart, wishlist, Dispatch)
                                         )
@@ -283,11 +283,11 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
 
                 {/* Cards */}
                 <Fragment>
-                    {coats && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
+                    {coats && coats.data.length >= 10 && crocs.data.length >= 10 && sneakers.data.length >= 10 && penTorch.data.length >= 10 && scrubCaps.data.length >= 10 && brooches.data.length >= 10 && cardHolders.data.length >= 10 && shirts.data.length >= 10 && scrubs.data.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {randomTrials_A(coats, "coats_H").map((item) => {
+                                    {randomTrials_A(coats.data, "coats_H").map((item) => {
                                         return (
                                             Product_DSP(domain, "coats", item.pos, item, cart, wishlist, Dispatch)
                                         )
@@ -312,11 +312,11 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
 
                 {/* Cards */}
                 <Fragment>
-                    {crocs && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
+                    {crocs && coats.data.length >= 10 && crocs.data.length >= 10 && sneakers.data.length >= 10 && penTorch.data.length >= 10 && scrubCaps.data.length >= 10 && brooches.data.length >= 10 && cardHolders.data.length >= 10 && shirts.data.length >= 10 && scrubs.data.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {randomTrials_A(crocs, "crocs_H").map((item) => {
+                                    {randomTrials_A(crocs.data, "crocs_H").map((item) => {
                                         return (
                                             Product_DSP(domain, "crocs", item.pos, item, cart, wishlist, Dispatch)
                                         )
@@ -341,11 +341,11 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
 
                 {/* Cards */}
                 <Fragment>
-                    {brooches && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
+                    {brooches && coats.data.length >= 10 && crocs.data.length >= 10 && sneakers.data.length >= 10 && penTorch.data.length >= 10 && scrubCaps.data.length >= 10 && brooches.data.length >= 10 && cardHolders.data.length >= 10 && shirts.data.length >= 10 && scrubs.data.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {randomTrials_A(brooches, "brooches_H").map((item) => {
+                                    {randomTrials_A(brooches.data, "brooches_H").map((item) => {
                                         return (
                                             Product_DSP(domain, "brooches", item.pos, item, cart, wishlist, Dispatch)
                                         )
@@ -370,11 +370,11 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
 
                 {/* Cards */}
                 <Fragment>
-                    {sneakers && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
+                    {sneakers && coats.data.length >= 10 && crocs.data.length >= 10 && sneakers.data.length >= 10 && penTorch.data.length >= 10 && scrubCaps.data.length >= 10 && brooches.data.length >= 10 && cardHolders.data.length >= 10 && shirts.data.length >= 10 && scrubs.data.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {randomTrials_A(sneakers, "sneakers_H").map((item) => {
+                                    {randomTrials_A(sneakers.data, "sneakers_H").map((item) => {
                                         return (
                                             Product_DSP(domain, "sneakers", item.pos, item, cart, wishlist, Dispatch)
                                         )
@@ -399,11 +399,11 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
 
                 {/* Cards */}
                 <Fragment>
-                    {shirts && coats.length >= 10 && crocs.length >= 10 && sneakers.length >= 10 && penTorch.length >= 10 && scrubCaps.length >= 10 && brooches.length >= 10 && cardHolders.length >= 10 && shirts.length >= 10 && scrubs.length >= 10 ?
+                    {shirts && coats.data.length >= 10 && crocs.data.length >= 10 && sneakers.data.length >= 10 && penTorch.data.length >= 10 && scrubCaps.data.length >= 10 && brooches.data.length >= 10 && cardHolders.data.length >= 10 && shirts.data.length >= 10 && scrubs.data.length >= 10 ?
                         (
                             <Fragment >
                                 <div className="grid">
-                                    {randomTrials_A(shirts, "shirts_H").map((item) => {
+                                    {randomTrials_A(shirts.data, "shirts_H").map((item) => {
                                         return (
                                             Product_DSP(domain, "shirts", item.pos, item, cart, wishlist, Dispatch)
                                         )

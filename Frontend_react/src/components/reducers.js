@@ -510,19 +510,31 @@ const search = (state = { data: [], fetched: false }, action) => {
     }
 };
 
-const pending = (state = [], action) => {
+const pending = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createPendingOrders":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            };
 
         case "addToPending":
-            return [...state, ...action.payload]
+            return {
+                ...state,
+                data: [...state.data, ...action.payload],
+                fetched: true
+            }
 
         case "remove4rmPending":
-            return state.filter((item) => {
-                return item._id !== action.payload["_id"]
-            })
+            return {
+                ...state,
+                data: state.data.filter((item) => {
+                    return item._id !== action.payload["_id"]
+                }),
+                fetched: true
+            }
 
         default:
             return state;
@@ -605,11 +617,15 @@ const newArrivals = (state = { id: [], data: [], fetched: false }, action) => {
     }
 };
 
-const completed = (state = [], action) => {
+const completed = (state = { data: [], fetched: false }, action) => {
     // ============================
     switch (action.type) {
         case "createCompletedOrders":
-            return [...action.payload];
+            return {
+                ...state,
+                data: [...action.payload],
+                fetched: true
+            };
 
         default:
             return state;

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AdminPending_DSP } from "../../dsp";
 import { domain } from "../../helpers";
+import { Spinner2 } from "../../misc";
 
 const SettledList = () => {
     const Dispatch = useDispatch()
@@ -15,9 +16,9 @@ const SettledList = () => {
                 <div className="d-flex justify-content-between">
                     <div className="lft">
                         <ul className="d_list">
-                            {
-                                completed.length > 0 ? (
-                                    completed.map((each, index) => {
+                            {completed.fetched ? (
+                                completed.data.length > 0 ? (
+                                    completed.data.map((each, index) => {
                                         return (
                                             <li key={"cdc" + index} onClick={() => setTargetD(index)}>
                                                 <p className="my-0">{each._id.toUpperCase()}</p>
@@ -30,7 +31,9 @@ const SettledList = () => {
                                         <p>---- &nbsp;  no data &nbsp; ----</p>
                                     </div>
                                 )
-                            }
+                            ) : (
+                                <Spinner2 />
+                            )}
                         </ul>
                     </div>
                     <div className="rgt  px-3">
