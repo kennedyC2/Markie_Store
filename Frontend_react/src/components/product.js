@@ -93,7 +93,7 @@ const Product = ({ FetchAppData, CreateUserData }) => {
                         <div className="col-lg-8 h-auto d-flex justify-content-between pt-2">
                             <div className="pd_lft-1 col-md-6 col-lg-6">
                                 {/* Carousel */}
-                                <div id="item_dsp1" className="carousel slide carousel-fade w-100" data-bs-ride="carousel">
+                                <div id="item_dsp1" className="carousel carousel-dark slide w-100" data-bs-ride="carousel">
                                     {target["images"]["main"] ? (
                                         <Fragment>
                                             <div className="carousel-inner h-100">

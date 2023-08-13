@@ -6050,19 +6050,22 @@ fieldset:disabled .btn {
 .carousel-control-prev,
 .carousel-control-next {
     position: absolute;
-    top: 0;
+    top: calc(85% / 2);
     bottom: 0;
     z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 5%;
+    height: 14%;
     padding: 0;
-    color: #fff;
+    color: #000;
     text-align: center;
-    background: none;
+    background: #fff;
     border: 0;
-    opacity: 0.5;
+    opacity: 0.6;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     transition: opacity 0.15s ease;
 }
 @media (prefers-reduced-motion: reduce) {
