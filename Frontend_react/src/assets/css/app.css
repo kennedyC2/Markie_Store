@@ -46,7 +46,7 @@ select::-webkit-scrollbar-track {
 .carousel-control-prev,
 .carousel-control-next {
     width: 10.5%;
-    height: 11%;
+    height: 12%;
 }
 
 .carousel-control-prev {
@@ -132,6 +132,16 @@ header {
     width: 25px !important;
     height: 32px !important;
     padding: 0;
+}
+
+.home #trending .card-body div,
+.home #newArrival .card-body div {
+    display: none !important;
+}
+
+.home #trending .card-body a,
+.home #newArrival .card-body a {
+    padding: 0 !important;
 }
 
 input,
@@ -1095,7 +1105,7 @@ footer * {
     .carousel-control-prev,
     .carousel-control-next {
         width: 4%;
-        height: 11%;
+        height: 12%;
     }
 
     .carousel-control-prev {

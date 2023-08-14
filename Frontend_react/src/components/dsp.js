@@ -84,18 +84,19 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
                     <button type="button" className="btn col-9 shadow" onClick={async e => {
                         let i = cart.id.indexOf(item["_id"])
                         if (i > -1) {
-                            let _cart = [...cart.data]
-                            _cart.data[i]["order"]["quantity"] += 1
-
                             // Update Store
                             await set("cart", {
-                                id: cart.id,
-                                data: _cart,
+                                id: cart.id.filter(each => {
+                                    return each !== item._id
+                                }),
+                                data: cart.data.filter(each => {
+                                    return each._id !== item._id
+                                }),
                                 expiry: cart.expiry
                             }, store)
 
                             // Update State
-                            return dispatch({ type: "increaseQuantity", payload: i })
+                            return dispatch({ type: "remove4rmCart", payload: item })
                         }
 
                         // Update Store
@@ -108,7 +109,7 @@ export const Product_DSP = (domain, collection, index, item, cart, wishlist, dis
                         return dispatch({ type: "addToCart", payload: JSON.parse(JSON.stringify(item)) })
 
                     }}>
-                        ADD TO CART
+                        {cart.id && cart.id.indexOf(item._id) > -1 ? "ADDED" : "ADD TO CART"}
                     </button>
                     <button type="button" className="btn px-1 wl col-2 shadow" title="Add to wishlist" onClick={async e => {
                         let i = wishlist.id.indexOf(item["_id"])

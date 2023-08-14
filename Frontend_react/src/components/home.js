@@ -80,7 +80,8 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
     useEffect(() => {
         Populate("newArrival")
         Populate("trending")
-    })
+
+    });
 
     const randomTrials_A = useCallback((file, dir) => {
         // const dd = await get(dir, store)
@@ -126,7 +127,7 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
                             <button type="button" data-bs-target="#hm_banner" data-bs-slide-to="3" aria-label="Slide 4"></button>
                         </div>
                         <div className="carousel-inner h-100 w-100">
-                            <div className="carousel-item h-100 w-100 active" data-bs-interval="2000">
+                            <div className="carousel-item h-100 w-100 active" data-bs-interval="3000">
                                 <img src={scrub4} className="d-block w-100 h-100" alt="..." />
                             </div>
                             <div className="carousel-item h-100 w-100" data-bs-interval="2000">
@@ -170,11 +171,11 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
                         trending && trending.data.length === 5 ?
                             (
                                 <Fragment >
-                                    <div id="trending" className="carousel carousel-dark slide m-auto" data-bs-ride="carousel">
+                                    <div id="trending" className="carousel carousel-dark slide m-auto">
                                         <div className="carousel-inner w-100 h-100">
                                             {trending.data.map((item, index) => {
                                                 return (
-                                                    <div key={"TN" + index} className={`carousel-item ${index === 0 ? "active" : ""} w-100 h-100 c${index}`} data-bs-interval="2000">
+                                                    <div key={"TN" + index} className={`carousel-item ${index === 0 ? "active" : ""} w-100 h-100 c${index}`} data-bs-interval="3000">
                                                         <div className="grid">
                                                             {Product_DSP(domain, "trending", index, item, cart, wishlist, Dispatch)}
                                                         </div>
@@ -216,11 +217,11 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
                         newArrivals && newArrivals.data.length === 5 ?
                             (
                                 <Fragment >
-                                    <div id="newArrival" className="carousel carousel-dark slide m-auto" data-bs-ride="carousel">
+                                    <div id="newArrival" className="carousel carousel-dark slide m-auto">
                                         <div className="carousel-inner w-100 h-100">
                                             {newArrivals.data.map((item, index) => {
                                                 return (
-                                                    <div key={"NT" + index} className={`carousel-item ${index === 0 ? "active" : ""} w-100 h-100`} data-bs-interval="2000">
+                                                    <div key={"NT" + index} className={`carousel-item ${index === 0 ? "active" : ""} w-100 h-100`} data-bs-interval="3000">
                                                         <div className="grid">
                                                             {Product_DSP(domain, "newArrivals", index, item, cart, wishlist, Dispatch)}
                                                         </div>

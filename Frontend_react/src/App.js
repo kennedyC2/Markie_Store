@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import "./assets/css/app.css";
+import Carousel from 'bootstrap/js/dist/carousel';
 import Container from "./components/main";
 import Home from "./components/home";
 import Cart from "./components/cart";
@@ -179,12 +180,20 @@ const App = () => {
             setTimeout(async () => {
                 const { data } = await axios.get(domain + "products/get?i=marky&a=true&c=" + collection + "&q=" + category);
                 return await dispatch({ type: type, payload: data });
-            }, 5000);
+            }, 2000);
         }
     }, []);
 
     const Populate = useCallback((elem) => {
         let items = document.querySelectorAll("#" + elem + " .carousel-item");
+        let items_child = document.querySelectorAll("#" + elem + " .carousel-item .grid");
+        items_child.forEach(element => {
+            if (element.childNodes.length > 1) {
+                for (var i = 0; i < 4; i++) {
+                    element.removeChild(element.lastChild)
+                }
+            }
+        });
 
         items.forEach((el) => {
             const minPerSlide = 5;
@@ -199,8 +208,19 @@ const App = () => {
                 next = next.nextElementSibling;
             }
         });
-    }, []);
 
+        setTimeout(() => {
+            new Carousel(document.querySelector('#trending'), {
+                ride: "carousel",
+            })
+
+            new Carousel(document.querySelector('#newArrival'), {
+                ride: "carousel"
+            })
+        }, 5000);
+
+
+    }, []);
 
     return (
         <div className="ext_cnt w-100 min-vh-100">
