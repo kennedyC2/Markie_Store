@@ -5,6 +5,7 @@ import { domain } from "./helpers";
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import { store } from "./main";
+import { set } from "idb-keyval";
 
 // InitialState
 const InitialState = {
@@ -21,22 +22,13 @@ const InitialState = {
     "images": {}
 }
 
-const Product = ({ FetchAppData, CreateUserData }) => {
+const Product = ({ FetchAppData, CreateUserData, CreateCart }) => {
     const Dispatch = useDispatch()
-    const { appData, user } = useSelector(state => state)
-    const [selectedSize, setSelectedSize] = useState("all")
-    const [order, setOrder] = useState({
-        title: "",
-        brand: "",
-        category: "",
-        quantity: 1,
-        color: "",
-        size: "",
-        sex: ""
-    })
+    const { appData, user, cart } = useSelector(state => state)
     const { collection, index, id } = useParams()
     const col = useSelector(state => state[collection])
     const [target, setTarget] = useState(InitialState)
+    const [selectedSize, setSelectedSize] = useState(target.order && target.order.size !== "" ? target.order.size : "all")
 
     // Load appData
     useEffect(() => {
@@ -48,6 +40,11 @@ const Product = ({ FetchAppData, CreateUserData }) => {
             CreateUserData(Dispatch, store)
         }
 
+        // Load User Cart
+        if (Object.keys(cart).length === 0) {
+            CreateCart(Dispatch, store)
+        }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -55,13 +52,11 @@ const Product = ({ FetchAppData, CreateUserData }) => {
         if (collection === "newArrivals" || collection === "trending") {
             if (col.data.length > 0) {
                 let _data = JSON.parse(JSON.stringify(col["data"][index]))
-                _data["order"] = 1
                 setTarget(_data)
             } else {
                 // console.log(state.id)
                 (async () => {
                     let { data } = await axios.get(domain + `products/${collection}/get?i=${id.replace("src-", "").toLowerCase()}&a=false&c=${collection}`);
-                    data["order"] = 1
                     setTarget(data)
                 })()
             }
@@ -69,12 +64,10 @@ const Product = ({ FetchAppData, CreateUserData }) => {
 
         if (col.length > 0) {
             let _data = JSON.parse(JSON.stringify(col[index]))
-            _data["order"] = 1
             setTarget(_data)
         } else {
             (async () => {
                 let { data } = await axios.get(domain + `products/get?i=${id.replace("src-", "").toLowerCase()}&a=false&c=products`);
-                data["order"] = 1
                 setTarget(data)
             })()
         }
@@ -87,7 +80,7 @@ const Product = ({ FetchAppData, CreateUserData }) => {
             <div className="container w_1200">
                 <div>
                     <div>
-                        <p className="my-4 px-1 heading">{collection}</p>
+                        <p className="my-2 px-1 heading">{collection}</p>
                     </div>
                     <div className="min-h-50 mt-4 d-flex justify-content-between">
                         <div className="col-lg-8 h-auto d-flex justify-content-between pt-2">
@@ -150,19 +143,11 @@ const Product = ({ FetchAppData, CreateUserData }) => {
                                                 Object.keys(target["sizes"]).length > 0 ? (
                                                     Object.keys(target["sizes"]).map((each, index) => {
                                                         return (
-                                                            <li key={index} onClick={e => {
-                                                                let selectedSz = document.querySelector("li.selectedSz")
-
-                                                                if (selectedSz) {
-                                                                    selectedSz.classList.remove("selectedSz")
-                                                                }
-
-                                                                document.querySelectorAll("input[type=checkbox]:checked").forEach(each => {
-                                                                    each.checked = false
-                                                                })
-
-                                                                e.currentTarget.classList.add("selectedSz")
+                                                            <li key={index} className={each === target.order.size ? "selectedSz" : ""} onClick={e => {
                                                                 setSelectedSize(each)
+
+                                                                // Update
+                                                                setTarget({ ...target, order: { ...target.order, size: each } })
                                                             }}>{each}</li>
                                                         )
                                                     })
@@ -175,27 +160,53 @@ const Product = ({ FetchAppData, CreateUserData }) => {
                                         <p>Colour:</p>
                                         <ul className="c_list">
                                             {
-                                                Object.keys(target["colors"]).length > 0 ? (
+                                                Object.keys(target["sizes"]).length > 0 ? (
                                                     selectedSize === "all" ? (
-                                                        target["colors"].map((each, index) => {
+                                                        Object.keys(target["colors"]).map((each, index) => {
                                                             return (
-                                                                <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} />
+                                                                <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} disabled />
                                                             )
                                                         })
                                                     ) : (
-                                                        Object.keys(target["sizes"][selectedSize]).map((each, index) => {
-                                                            return (
-                                                                <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} onClick={e => {
-                                                                    document.querySelectorAll("input[type=checkbox]:checked").forEach(each => {
-                                                                        each.checked = false
-                                                                    })
+                                                        <form action="" method="get">
+                                                            {Object.keys(target["sizes"][selectedSize]).map((each, index) => {
+                                                                return (
+                                                                    <input key={index + selectedSize} className={`form-check-input A${target._id.toUpperCase() + "_" + index}${selectedSize}`} type="checkbox" style={{ backgroundColor: each }}
+                                                                        onChange={async e => {
+                                                                            document.querySelectorAll(`input.A${target._id.toUpperCase() + "_" + index}${selectedSize}`).forEach(each => {
+                                                                                each.checked = false
+                                                                            })
 
-                                                                    e.currentTarget.checked = true
-                                                                }} />
-                                                            )
-                                                        })
+                                                                            e.currentTarget.checked = true
+
+                                                                            // Update
+                                                                            setTarget({ ...target, order: { ...target.order, color: each } })
+
+                                                                        }} checked={target.order.color === each} />
+                                                                )
+                                                            })}
+                                                        </form>
                                                     )
-                                                ) : (" ")
+                                                ) : (
+                                                    <form action="" method="get">
+                                                        {Object.keys(target["colors"]).map((each, index) => {
+                                                            return (
+                                                                <input key={index + each} className={`form-check-input A${target._id.toUpperCase() + "_" + index}${each}`} type="checkbox" style={{ backgroundColor: each }}
+                                                                    onChange={async e => {
+                                                                        document.querySelectorAll(`input.A${target._id.toUpperCase() + "_" + index}${selectedSize}`).forEach(each => {
+                                                                            each.checked = false
+                                                                        })
+
+                                                                        e.currentTarget.checked = true
+
+                                                                        // Update Store
+                                                                        setTarget({ ...target, order: { ...target.order, color: each } })
+
+                                                                    }} checked={target.order.color === each} />
+                                                            )
+                                                        })}
+                                                    </form>
+                                                )
                                             }
                                         </ul>
                                     </div>
@@ -204,15 +215,15 @@ const Product = ({ FetchAppData, CreateUserData }) => {
                                         <p>Quantity:</p>
                                         <div className="input-group py-1">
                                             <span className="input-group-text" id="minus" onClick={e => {
-                                                setOrder({ ...order, quantity: order["quantity"] -= 1 })
+                                                setTarget({ ...target, order: { ...target.order, quantity: target.order.quantity -= 1 } })
                                             }}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-dash" viewBox="0 0 16 16">
                                                     <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
                                                 </svg>
                                             </span>
-                                            <input type="number" className="form-control inc text-center" placeholder="1" aria-label="Username" aria-describedby="basic-addon1" value={order["quantity"]} readOnly />
+                                            <input type="number" className="form-control inc text-center" placeholder="1" aria-label="Username" aria-describedby="basic-addon1" value={target.order ? target.order["quantity"] : 0} readOnly />
                                             <span className="input-group-text" id="plus" onClick={e => {
-                                                setOrder({ ...order, quantity: order["quantity"] += 1 })
+                                                setTarget({ ...target, order: { ...target.order, quantity: target.order.quantity += 1 } })
                                             }}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
                                                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
@@ -227,7 +238,7 @@ const Product = ({ FetchAppData, CreateUserData }) => {
                             <div className="text-uppercase pt-2 pb-3 border-bottom border-2">Summary</div>
                             <div className="d-flex justify-content-between my-4 border-bottom border-1 pb-3">
                                 <div className="col-5">Subtotal:</div>
-                                <div className="col-5 text-end">&#x20A6; {new Intl.NumberFormat("en-US", {}).format(parseInt(order["quantity"]) * parseInt(target["price"]))}</div>
+                                <div className="col-5 text-end">&#x20A6; {new Intl.NumberFormat("en-US", {}).format(parseInt(target.order ? target.order["quantity"] : 0) * parseInt(target["price"]))}</div>
                             </div>
                             <div className="my-4">
                                 <p className="mb-3">Location:</p>
@@ -259,7 +270,7 @@ const Product = ({ FetchAppData, CreateUserData }) => {
                             <div className="c-btm">
                                 <div className="w-100 d-flex justify-content-between border-bottom border-1 pb-2">
                                     <p>Total:</p>
-                                    <p>&#x20A6; {new Intl.NumberFormat("en-US", {}).format(appData && appData["delivery"] ? ((parseInt(order["quantity"]) * parseInt(target["price"])) + appData["delivery"][user["delivery"]]) : "")}</p>
+                                    <p>&#x20A6; {new Intl.NumberFormat("en-US", {}).format(appData && appData["delivery"] ? ((parseInt(target.order ? target.order["quantity"] : 0) * parseInt(target["price"])) + appData["delivery"][user["delivery"]]) : "")}</p>
                                 </div>
                                 <div className="pt-1 pb-3">
                                     <div className="form-check text-start ps-4 pt-4 pb-3">
@@ -271,7 +282,85 @@ const Product = ({ FetchAppData, CreateUserData }) => {
                                     </div>
                                 </div>
                                 <div>
-                                    <button type="button" className="btn btn-md w-100 py-2 mb-3">
+                                    <button type="button" className="btn btn-md w-100 py-2 mb-3" onClick={async e => {
+                                        let i = cart.id.indexOf(target["_id"])
+                                        if (i > -1) {
+                                            // Update Store
+                                            await set("cart", {
+                                                id: cart.id.filter(each => {
+                                                    return each !== target._id
+                                                }),
+                                                data: cart.data.filter(each => {
+                                                    return each._id !== target._id
+                                                }),
+                                                expiry: cart.expiry
+                                            }, store)
+
+                                            // Update State
+                                            return Dispatch({ type: "remove4rmCart", payload: target })
+                                        }
+
+                                        // Update Store
+                                        await set("cart", {
+                                            id: [...cart.id, target._id],
+                                            data: [...cart.data, target],
+                                            expiry: cart.expiry
+                                        }, store)
+
+                                        return Dispatch({ type: "addToCart", payload: JSON.parse(JSON.stringify(target)) })
+                                    }}>
+                                        {cart.id && cart.id.indexOf(target._id) > -1 ? "ADDED" : "ADD TO CART"}
+                                    </button>{" "}
+                                    <button type="button" className="btn btn-md w-100 py-2 mb-3" onClick={async e => {
+                                        const reqData = {
+                                            cart: target.order,
+                                            total: (parseInt(target.order["quantity"]) * parseInt(target["price"])) + appData["delivery"][user["delivery"]],
+                                            user: user._id,
+                                            email: user.email,
+                                            delivery: user.delivery
+                                        }
+
+                                        try {
+                                            const response = await axios({
+                                                method: "POST",
+                                                headers: {
+                                                    "Content-Type": "application/json",
+                                                },
+                                                url: domain + "cart/create",
+                                                data: reqData,
+                                            });
+
+                                            const result = response.data;
+
+                                            // Update Store
+                                            await set("user", {
+                                                _id: user._id,
+                                                firstname: user.firstname,
+                                                lastname: user.lastname,
+                                                email: user.email,
+                                                delivery: user.delivery,
+                                                verified: user.verified,
+                                                active: user.active,
+                                                admin: user.admin,
+                                                pending: [...user.pending, result._id],
+                                                history: [...user.history, result],
+                                                settled: user.settled,
+                                                cards: user.cards
+                                            }, store)
+
+                                            // Update Admin
+                                            if (user.admin) {
+                                                Dispatch({ type: "pending", payload: result })
+                                            }
+
+                                            // Update State
+                                            Dispatch({ type: "pending", payload: result._id })
+                                            Dispatch({ type: "history", payload: result })
+
+                                        } catch (error) {
+                                            console.log(error);
+                                        }
+                                    }}>
                                         CHECKOUT
                                     </button>{" "}
                                     <br />

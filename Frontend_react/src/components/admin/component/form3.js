@@ -16,14 +16,19 @@ const Form3 = ({ data, setData, appData }) => {
         }
 
         // Update Colors
-        if (data["details"]["colors"].indexOf(_color) < 0) {
-            setData({ ...data, ...data["details"]["colors"].push(_color) })
-        }
+        setData({ ...data, ...data["details"]["colors"][_color] = value })
 
         // Delete Empty Params
         if ((data["details"]["sizes"][_size].hasOwnProperty(_color) && data["details"]["sizes"][_size][_color] === "0") || (data["details"]["sizes"][_size].hasOwnProperty(_color) && data["details"]["sizes"][_size][_color] === "")) {
             delete data["details"]["sizes"][_size][_color]
-            data["details"]["colors"].pop()
+            delete data["details"]["colors"][_color]
+
+            // Update
+            setData(data)
+        }
+
+        if (data["details"]["colors"][_color] === 0 || data["details"]["colors"][_color] === "") {
+            delete data["details"]["colors"][_color]
 
             // Update
             setData(data)
@@ -32,6 +37,9 @@ const Form3 = ({ data, setData, appData }) => {
         // Delete Empty Objects
         if (Object.keys(data["details"]["sizes"][_size]).length === 0) {
             delete data["details"]["sizes"][_size]
+
+            // Update
+            setData(data)
         }
     }
 
@@ -46,7 +54,7 @@ const Form3 = ({ data, setData, appData }) => {
                                     return (
                                         <div key={index} className="input-group mb-3">
                                             <span className="input-group-text" id={`inputGroup-${key}`} style={{ backgroundColor: value, minWidth: "80px" }} ></span>
-                                            <input type="number" className="form-control" id={`c${key}`} aria-label={`${key}-color`} aria-describedby={`inputGroup-${key}`} min={0} value={data["details"]["colors"][key] ? data["details"]["colors"][key] : ""} onChange={e => setData({ ...data, ...data["details"]["colors"][e.target.id.replace("c", "")] = e.target.value })} />
+                                            <input type="number" className="form-control" id={`c${key}`} aria-label={`${key}-color`} aria-describedby={`inputGroup-${key}`} min={0} defaultValue={data["details"]["colors"][key] ? data["details"]["colors"][key] : ""} onChange={e => setData({ ...data, ...data["details"]["colors"][e.target.id.replace("c", "")] = e.target.value })} />
                                         </div>
                                     )
                                 })

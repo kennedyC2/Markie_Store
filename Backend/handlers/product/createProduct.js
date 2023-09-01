@@ -54,7 +54,7 @@ const createProduct = (data, callback) => {
                                 },
                                 price: price,
                                 colors: colors,
-                                tags: tags.split(","),
+                                tags: tags.split(", "),
                                 category: category,
                                 misc: misc,
                                 images: file,
@@ -69,7 +69,7 @@ const createProduct = (data, callback) => {
                                 const sub_directory_1 = directory.collection("products");
                                 await sub_directory_1.insertOne(response);
                                 const sub_directory_2 = directory.collection("misc");
-                                await sub_directory_2.updateOne({ _id: new ObjectId("64a317d76b65613a27902143") }, { $addToSet: { [target_1]: brand, [target_2]: { $each: colors }, appBrands: brand } });
+                                await sub_directory_2.updateOne({ _id: new ObjectId("64a317d76b65613a27902143") }, { $addToSet: { [target_1]: brand, [target_2]: { $each: Object.keys(colors) }, appBrands: brand } });
 
                                 if (misc.indexOf("trending") > -1) {
                                     const sub_directory_3 = directory.collection("trending");
@@ -84,6 +84,7 @@ const createProduct = (data, callback) => {
                                 // Return
                                 callback(200, response, "json");
                             } catch (error) {
+                                console.warn(error)
                                 // Return
                                 callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                             } finally {

@@ -10,9 +10,12 @@
 }
 
 body::-webkit-scrollbar,
-div::-webkit-scrollbar,
 select::-webkit-scrollbar {
     width: 1px;
+}
+
+div::-webkit-scrollbar {
+    width: 0;
 }
 
 body::-webkit-scrollbar-thumb,
@@ -443,11 +446,13 @@ footer * {
 }
 
 #item_dsp2 {
-    height: 18%;
+    height: auto;
 }
 
 #item_dsp2 .item {
     flex-basis: calc(100% / 5);
+    height: max-content;
+    border: 1px solid #adc0cf;
 }
 
 .pd_lft-2 p {
@@ -457,7 +462,7 @@ footer * {
 
 .pd_lft-2 > div {
     padding-left: 1.5rem;
-    padding-top: 1.5rem;
+    padding-top: 2.5rem;
 }
 
 .pd_lft-2 p:nth-child(2),
@@ -614,11 +619,6 @@ footer * {
 
 .profile .mb {
     margin-bottom: 1.5rem !important;
-}
-
-.wishlist .mt,
-.cart .mt {
-    margin-top: 1.5rem !important;
 }
 
 .prCard {
@@ -794,8 +794,8 @@ footer * {
 .c_list input[type="checkbox"] {
     margin-bottom: 0.7rem;
     margin-right: 0.2rem;
-    padding: 1.3rem;
-    border: 1px solid #dee2e6;
+    padding: 1.2rem;
+    border: 1px solid #000;
     border-radius: 50%;
 }
 
@@ -1343,14 +1343,6 @@ footer * {
         margin-bottom: 2%;
     }
 
-    #item_dsp2 {
-        height: 15%;
-    }
-
-    #item_dsp2 .item {
-        flex-basis: calc(100% / 5);
-    }
-
     .home {
         padding-top: 1.5rem;
     }
@@ -1416,7 +1408,7 @@ footer * {
     }
 
     .heading {
-        font-size: 1.05rem !important;
+        margin-top: 3rem !important;
     }
 
     .wishlist .input-group > .form-control,
@@ -2147,7 +2139,7 @@ footer * {
     .c-mid p,
     .w-mid p,
     .cp_list li p {
-        font-size: 0.9rem !important;
+        font-size: 1rem !important;
         font-weight: 400 !important;
     }
 
@@ -2266,11 +2258,6 @@ footer * {
 
     .profile .mb {
         margin-bottom: 0 !important;
-    }
-
-    .wishlist .mt,
-    .cart .mt {
-        margin-top: 0 !important;
     }
 
     .prCard {

@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import "./assets/css/app.css";
 import Carousel from 'bootstrap/js/dist/carousel';
-import Container from "./components/main";
+import Container, { store } from "./components/main";
 import Home from "./components/home";
 import Cart from "./components/cart";
 import Wishlist from "./components/wishlist";
@@ -53,7 +53,12 @@ const App = () => {
     }, [])
 
     const FetchPendingOrders = useCallback(async (dispatch) => {
-        console.log("hello")
+        const file = await get("pending", store)
+
+        if (file && file.data.length > 0 && file.expiry > Date.now()) {
+            return dispatch({ type: "createPendingOrders", payload: file.data })
+        }
+
         let { data } = await axios({
             method: "get",
             headers: {
@@ -62,13 +67,23 @@ const App = () => {
             url: domain + "cart/pending",
             params: {}
         })
-        console.log("hello")
+
+        // Save
+        set("pending", {
+            data: data,
+            expiry: Date.now() + (1000 * 60 * 60 * 2)
+        }, store)
 
         return dispatch({ type: "createPendingOrders", payload: data })
     }, [])
 
     const FetchCompletedOrders = useCallback(async (dispatch) => {
-        console.log("hello")
+        const file = await get("completed", store)
+
+        if (file && file.data.length > 0 && file.expiry > Date.now()) {
+            return dispatch({ type: "createCompletedOrders", payload: file.data })
+        }
+
         let { data } = await axios({
             method: "get",
             headers: {
@@ -77,6 +92,12 @@ const App = () => {
             url: domain + "cart/settled",
             params: {}
         })
+
+        // Save
+        set("completed", {
+            data: data,
+            expiry: Date.now() + (1000 * 60 * 60 * 2)
+        }, store)
 
         return dispatch({ type: "createCompletedOrders", payload: data })
     }, [])
@@ -174,13 +195,37 @@ const App = () => {
 
     const FetchData = useCallback(async (collection, category, dispatch, type, TH) => {
         if (TH) {
-            const { data } = await axios.get(domain + "products/trending/get?i=marky&a=true&c=" + collection);
+            const file = await get(collection, store)
+
+            if (file && file.data.length > 0 && file.expiry > Date.now()) {
+                return await dispatch({ type: type, payload: file.data });
+            }
+
+            const { data } = collection === "trending" ? await axios.get(domain + "products/trending/get?i=marky&a=true&c=" + collection) : await axios.get(domain + "products/newArrivals/get?i=marky&a=true&c=" + collection);
+
+            // Save
+            set(collection, {
+                data: data,
+                expiry: Date.now() + (1000 * 60 * 60 * 6)
+            }, store)
+
             return await dispatch({ type: type, payload: data });
         } else {
-            setTimeout(async () => {
-                const { data } = await axios.get(domain + "products/get?i=marky&a=true&c=" + collection + "&q=" + category);
-                return await dispatch({ type: type, payload: data });
-            }, 2000);
+            const file = await get(category, store)
+
+            if (file && file.data.length > 0 && file.expiry > Date.now()) {
+                return await dispatch({ type: type, payload: file.data });
+            }
+
+            const { data } = await axios.get(domain + "products/get?i=marky&a=true&c=" + collection + "&q=" + category);
+
+            // Save
+            set(category, {
+                data: data,
+                expiry: Date.now() + (1000 * 60 * 60 * 6)
+            }, store)
+
+            return await dispatch({ type: type, payload: data });
         }
     }, []);
 
@@ -236,7 +281,7 @@ const App = () => {
                     <Route path="/cart" exact element={<Cart FetchAppData={FetchAppData} CreateUserData={CreateUserData} CreateCart={CreateCart} />} />
                     <Route path="/wishlist" exact element={<Wishlist CreateCart={CreateCart} CreateWishlist={CreateWishlist} />} />
                     <Route path="/profile" exact element={<Profile CreateUserData={CreateUserData} CreateCart={CreateCart} CreateWishlist={CreateWishlist} />} />
-                    <Route path="/product/:collection/:index/:id" exact element={<Product FetchAppData={FetchAppData} CreateUserData={CreateUserData} />} />
+                    <Route path="/product/:collection/:index/:id" exact element={<Product FetchAppData={FetchAppData} CreateUserData={CreateUserData} CreateCart={CreateCart} />} />
                     <Route path="/products/search/:query" exact element={<Search />} />
                     <Route path="/category" element={<User FetchAppData={FetchAppData} FetchCompletedOrders={FetchCompletedOrders} FetchPendingOrders={FetchPendingOrders} CreateCart={CreateCart} CreateUserData={CreateUserData} CreateWishlist={CreateWishlist} UpdateStatus={UpdateStatus} />}>
                         <Route path="/category/scrubs" exact element={<Scrubs FetchData={FetchData} />} />

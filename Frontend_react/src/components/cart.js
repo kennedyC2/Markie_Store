@@ -76,45 +76,77 @@ const Cart = ({ FetchAppData, CreateUserData, CreateCart }) => {
                                                         </div>
                                                         <div className="box_2 d-flex justify-content-between">
                                                             <div className="col-lg-5">
-                                                                <p className="px-2 py-1 m-auto">{item.title}</p>
-                                                                <p className="px-2 py-1 m-auto">Brand: {item.brand}</p>
+                                                                <p className="px-2 py-1 m-auto">{item.title.toUpperCase()}</p>
+                                                                <p className="px-2 py-2 m-auto">Brand: {item.brand}</p>
                                                                 <p className="px-2 py-1 d-lg-none m-auto">&#x20A6; {new Intl.NumberFormat("en-US", {}).format(item.price)}</p>
-                                                                <p className="px-2 py-1 m-auto">Sizes:</p>
-                                                                <ul className="px-2 py-1 s_list">
-                                                                    {Object.keys(item["sizes"]).map((each, index) => {
-                                                                        return (
-                                                                            <li key={index} className={each === item.order.size ? "selectedSz" : ""} onClick={async e => {
-                                                                                selectedSize = each
-                                                                                // setVal(val += 1)
-
-                                                                                // Update Store
-                                                                                const newData = JSON.parse(JSON.stringify(cart.data))
-                                                                                newData[indexC].order.size = each
-                                                                                await set("cart", {
-                                                                                    data: newData,
-                                                                                    id: cart.id,
-                                                                                    expiry: cart.expiry
-                                                                                }, store)
-
-                                                                                // Update State
-                                                                                Dispatch({ type: "updateSize", payload: newData })
-                                                                            }}>{each}</li>
-                                                                        )
-                                                                    })}
-                                                                </ul>
-                                                                <p className="px-2 py-1 m-auto">Colors:</p>
-                                                                <div className="px-2 py-1 c_list">
-                                                                    {selectedSize === "all" ? (
-                                                                        item["colors"].map((each, index) => {
+                                                                <p className="px-2 py-1 m-auto" style={{ display: Object.keys(item["sizes"]).length > 0 ? "block" : "none" }}>Sizes:</p>
+                                                                <ul className="px-2 py-1 s_list" style={{ display: Object.keys(item["sizes"]).length > 0 ? "block" : "none" }}>
+                                                                    {Object.keys(item["sizes"]).length > 0 ? (
+                                                                        Object.keys(item["sizes"]).map((each, index) => {
                                                                             return (
-                                                                                <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} disabled />
+                                                                                <li key={index} className={each === item.order.size ? "selectedSz" : ""} onClick={async e => {
+                                                                                    selectedSize = each
+
+                                                                                    // Update Store
+                                                                                    const newData = JSON.parse(JSON.stringify(cart.data))
+                                                                                    newData[indexC].order.size = each
+                                                                                    await set("cart", {
+                                                                                        data: newData,
+                                                                                        id: cart.id,
+                                                                                        expiry: cart.expiry
+                                                                                    }, store)
+
+                                                                                    // Update State
+                                                                                    Dispatch({ type: "updateSize", payload: newData })
+                                                                                }}>{each}</li>
                                                                             )
                                                                         })
                                                                     ) : (
-                                                                        <form action="" method="get">
-                                                                            {Object.keys(item["sizes"][selectedSize]).map((each, index) => {
+                                                                        <li className="selectedSz"></li>
+                                                                    )}
+                                                                </ul>
+                                                                <p className="px-2 py-1 m-auto">Colors:</p>
+                                                                <div className="px-2 py-1 c_list">
+                                                                    {Object.keys(item["sizes"]).length > 0 ? (
+                                                                        selectedSize === "all" ? (
+                                                                            Object.keys(item["colors"]).map((each, index) => {
                                                                                 return (
-                                                                                    <input key={index + selectedSize} className={`form-check-input A${item._id.toUpperCase() + "_" + index}${selectedSize}`} type="checkbox" style={{ backgroundColor: each }}
+                                                                                    <input key={index} className="form-check-input" type="checkbox" id="checkboxNoLabel" style={{ backgroundColor: each }} disabled />
+                                                                                )
+                                                                            })
+                                                                        ) : (
+                                                                            <form action="" method="get">
+                                                                                {Object.keys(item["sizes"][selectedSize]).map((each, index) => {
+                                                                                    return (
+                                                                                        <input key={index + selectedSize} className={`form-check-input A${item._id.toUpperCase() + "_" + index}${selectedSize}`} type="checkbox" style={{ backgroundColor: each }}
+                                                                                            onChange={async e => {
+                                                                                                document.querySelectorAll(`input.A${item._id.toUpperCase() + "_" + index}${selectedSize}`).forEach(each => {
+                                                                                                    each.checked = false
+                                                                                                })
+
+                                                                                                e.currentTarget.checked = true
+
+                                                                                                // Update Store
+                                                                                                const newData = JSON.parse(JSON.stringify(cart.data))
+                                                                                                newData[indexC].order.color = each
+                                                                                                await set("cart", {
+                                                                                                    data: newData,
+                                                                                                    id: cart.id,
+                                                                                                    expiry: cart.expiry
+                                                                                                }, store)
+
+                                                                                                // Update State
+                                                                                                Dispatch({ type: "updateColor", payload: newData })
+                                                                                            }} checked={item.order.color === each} />
+                                                                                    )
+                                                                                })}
+                                                                            </form>
+                                                                        )
+                                                                    ) : (
+                                                                        <form action="" method="get">
+                                                                            {Object.keys(item["colors"]).map((each, index) => {
+                                                                                return (
+                                                                                    <input key={index + each} className={`form-check-input A${item._id.toUpperCase() + "_" + index}${each}`} type="checkbox" style={{ backgroundColor: each }}
                                                                                         onChange={async e => {
                                                                                             document.querySelectorAll(`input.A${item._id.toUpperCase() + "_" + index}${selectedSize}`).forEach(each => {
                                                                                                 each.checked = false

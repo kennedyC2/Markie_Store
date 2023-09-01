@@ -5,6 +5,8 @@ import { domain } from "../../helpers";
 import { Admin_DSP } from "../../dsp";
 import { useOutletContext } from "react-router-dom";
 import { Spinner2 } from "../../misc";
+import { set } from "idb-keyval";
+import { store } from "../../main";
 
 const AdminCaps = ({ FetchData }) => {
     const [setData, dKeys] = useOutletContext()
@@ -84,6 +86,12 @@ const AdminCaps = ({ FetchData }) => {
                 setTimeout(() => {
                     // Close Modal
                     e.target.previousSibling.click()
+
+                    // Save
+                    set(category.toLowerCase(), {
+                        data: updated,
+                        expiry: Date.now() + (1000 * 60 * 60 * 2)
+                    }, store)
 
                     // Update
                     Dispatch({ type: dKeys[category]["delete"], payload: updated })

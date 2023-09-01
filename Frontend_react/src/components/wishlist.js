@@ -26,9 +26,9 @@ const Wishlist = ({ CreateCart, CreateWishlist }) => {
         <div className="wishlist body m-auto pt-0">
             <div className="container w_1200">
                 <div>
-                    <p className="mt mb-4 px-1 heading">My Wish List</p>
+                    <p className="mt-3 mb-3 px-1 heading">My Wish List</p>
                 </div>
-                <div>
+                <div className="mt-3">
                     <div className="d-none d-lg-flex w-100 justify-content-between border border-1 rounded py-2 pe-2 text-uppercase">
                         <div className="ps-5 my-auto" style={{ width: "41.5%" }}>Product</div>
                         <div className="m-auto text-center ps-4" style={{ width: "26.5%" }}>PRICE</div>

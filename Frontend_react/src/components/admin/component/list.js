@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { FetchAppData } from "../../action";
 import { Link, Outlet } from "react-router-dom";
 import { Spinner } from "../../misc";
+import { store } from "../../main";
+import { set } from "idb-keyval";
 
 // InitialState
 const InitialState = {
@@ -20,7 +22,7 @@ const InitialState = {
         sold: "0",
         price: "",
         dColor: "",
-        colors: [],
+        colors: {},
         category: "coats",
         description: "",
         sizes: {},
@@ -120,11 +122,23 @@ const AdminList = () => {
             const result = response.data;
 
             if (data["item"] < 0) {
+                // Save
+                set(data.details.category.toLowerCase(), {
+                    data: [..._data[data.details.category.toLowerCase()], result],
+                    expiry: Date.now() + (1000 * 60 * 60 * 2)
+                }, store)
+
                 // Update State
                 Dispatch({ type: dKeys[data.details.category.toLowerCase()]["add"], payload: result })
             } else {
                 const newData = [..._data[data.details.category]]
                 newData[data["item"]] = result
+
+                // Save
+                set(data.details.category.toLowerCase(), {
+                    data: newData,
+                    expiry: Date.now() + (1000 * 60 * 60 * 2)
+                }, store)
 
                 // Update State
                 Dispatch({ type: dKeys[data.details.category.toLowerCase()]["update"], payload: newData })
@@ -251,7 +265,7 @@ const AdminList = () => {
                             <Form1 data={data} setData={setData} submit={submitForm} appData={_data.appData} />
                         </div>
                         <div className="modal-footer">
-                            <button className="btn btn-secondary px-4" data-bs-target={data.details.category === "penTorch" || data.details.category === "scrubCaps" || data.details.category === "cardHolders" || data.details.category === "brooches" ? "#staticBackdrop2" : "#staticBackdrop3"} data-bs-toggle="modal">
+                            <button className="btn btn-secondary px-4" data-bs-target="#staticBackdrop3" data-bs-toggle="modal">
                                 Next
                             </button>
                         </div>
@@ -294,7 +308,7 @@ const AdminList = () => {
                             <Form2 data={data} setData={setData} appData={_data.appData} />
                         </div>
                         <div className="modal-footer d-flex justify-content-between">
-                            <button className="btn btn-secondary px-4" data-bs-target={data.details.category === "penTorch" || data.details.category === "scrubCaps" || data.details.category === "cardHolders" || data.details.category === "brooches" ? "#staticBackdrop" : "#staticBackdrop3"} data-bs-toggle="modal">
+                            <button className="btn btn-secondary px-4" data-bs-target="#staticBackdrop3" data-bs-toggle="modal">
                                 Previous
                             </button>
                             <button type="button" className="btn btn-secondary  px-4" style={{ display: display ? "block" : "none" }} onClick={clickSubmit}>
