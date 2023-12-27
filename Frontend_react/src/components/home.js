@@ -198,7 +198,11 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
                                     <p>------- &nbsp;  no data &nbsp; -------</p>
                                 </div>
                             )) : (
-                        <Spinner2 />
+                        // <Spinner2 />
+
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
                     )}
                 </Fragment>
             </div>
@@ -245,7 +249,10 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
                                 </div>
                             )
                     ) : (
-                        <Spinner2 />
+                        // <Spinner2 />
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
                     )}
                 </Fragment>
             </div>
@@ -281,7 +288,10 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
                                 </div>
                             )
                     ) : (
-                        <Spinner2 />
+                        // <Spinner2 />
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
                     )}
                 </Fragment>
             </div>
@@ -314,7 +324,10 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
                                 </div>
                             )
                     ) : (
-                        <Spinner2 />
+                        // <Spinner2 />
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
                     )}
                 </Fragment>
             </div>
@@ -347,7 +360,10 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
                                 </div>
                             )
                     ) : (
-                        <Spinner2 />
+                        // <Spinner2 />
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
                     )}
                 </Fragment>
             </div>
@@ -380,7 +396,10 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
                                 </div>
                             )
                     ) : (
-                        <Spinner2 />
+                        // <Spinner2 />
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
                     )}
                 </Fragment>
             </div>
@@ -413,7 +432,10 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
                                 </div>
                             )
                     ) : (
-                        <Spinner2 />
+                        // <Spinner2 />
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
                     )}
                 </Fragment>
             </div>
@@ -446,7 +468,10 @@ const Home = ({ FetchData, CreateCart, CreateWishlist, Populate }) => {
                                 </div>
                             )
                     ) : (
-                        <Spinner2 />
+                        // <Spinner2 />
+                        <div className="empty">
+                            <p>------- &nbsp;  no data &nbsp; -------</p>
+                        </div>
                     )}
                 </Fragment>
             </div>

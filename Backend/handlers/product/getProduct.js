@@ -31,6 +31,7 @@ const getProduct = async (data, callback) => {
                         // Return
                         callback(200, _data, "json");
                     } catch (error) {
+                        console.log(error)
                         // Return
                         callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                     } finally {
@@ -45,6 +46,7 @@ const getProduct = async (data, callback) => {
                         // Return
                         callback(200, data, "json");
                     } catch (error) {
+                        console.log(error)
                         // Return
                         callback(502, { message: "Oops, Something Went Wrong, Try Again Later" }, "json");
                     } finally {

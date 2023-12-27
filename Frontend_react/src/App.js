@@ -254,15 +254,15 @@ const App = () => {
             }
         });
 
-        setTimeout(() => {
-            new Carousel(document.querySelector('#trending'), {
-                ride: "carousel",
-            })
+        // setTimeout(() => {
+        //     new Carousel(document.querySelector('#trending'), {
+        //         ride: "carousel",
+        //     })
 
-            new Carousel(document.querySelector('#newArrival'), {
-                ride: "carousel"
-            })
-        }, 5000);
+        //     new Carousel(document.querySelector('#newArrival'), {
+        //         ride: "carousel"
+        //     })
+        // }, 5000);
 
 
     }, []);

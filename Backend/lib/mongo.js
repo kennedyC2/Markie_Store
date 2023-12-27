@@ -4,9 +4,11 @@ const { MongoClient, ObjectId } = require("mongodb");
 // Server URL
 // const s_url = "mongodb+srv://NodeApp:C2FGwthfGr3hEzPM@test.v3cuzhq.mongodb.net/?retryWrites=true&w=majority";
 const s_url = "mongodb://localhost:27017/";
+// const s_url = "mongodb://host.docker.internal:27017/";
+// const s_url = "mongodb://mongodb:27017/";
 
 // Database
-const database = "makkie";
+const database = "Makkie";
 
 // Initialize
 const client = new MongoClient(s_url);
@@ -20,3 +22,14 @@ mongo["ObjectId"] = ObjectId
 
 
 module.exports = mongo;
+
+
+// Database: makkie
+// Collections:
+// users
+// products
+// trending
+// newArrivals
+// misc
+// history
+// pending
